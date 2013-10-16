@@ -1,0 +1,176 @@
+ONTOLOGY SOURCE REFERENCE
+Term Source Name	"OBI"	"e.g. OBI"	"JERM"	"EFO"	"CSP"	"ENVO"	"VariO"	"MS"	"OntoDM"	"CDAO"	"CHEBI"	"vivo"	"NCBITaxon"	"FIX"	"SWO"	""	
+Term Source File	""	""	"http://bioportal.bioontology.org/ontologies/50268"	"http://bioportal.bioontology.org/ontologies/50608"	"http://bioportal.bioontology.org/ontologies/44432"	"http://bioportal.bioontology.org/ontologies/50398"	"http://bioportal.bioontology.org/ontologies/50463"	"http://bioportal.bioontology.org/ontologies/50638"	"http://bioportal.bioontology.org/ontologies/47177"	"http://bioportal.bioontology.org/ontologies/50637"	"http://bioportal.bioontology.org/ontologies/50526"	"http://bioportal.bioontology.org/ontologies/47892"	"http://bioportal.bioontology.org/ontologies/47845"	"http://bioportal.bioontology.org/ontologies/44942"	"http://bioportal.bioontology.org/ontologies/50422"	""	
+Term Source Version	""	""	"50268"	"50608"	"44432"	"50398"	"50463"	"50638"	"47177"	"50637"	"50526"	"47892"	"47845"	"44942"	"50422"	""	
+Term Source Description	""	""	"SysMO JERM Ontology of Systems Biology for Micro-Organisms"	"Experimental Factor Ontology"	"Computer Retrieval of Information on Scientific Projects Thesaurus"	"Environment Ontology"	"Variation Ontology"	"Mass Spectrometry Ontology"	"Ontology of Core Data Mining Entities"	"Comparative Data Analysis Ontology"	"Chemical Entities of Biological Interest Ontology"	"VIVO Ontology for Researcher Discovery"	"National Center for Biotechnology Information (NCBI) Organismal Classification"	"Physico-Chemical Methods and Properties"	"Software Ontology"	""	
+INVESTIGATION
+Investigation Identifier	""
+Investigation Title	"Investigation"
+Investigation Description	""
+Investigation Submission Date	""
+Investigation Public Release Date	""
+Comment [Created with configuration]	""
+Comment [Last Opened With Configuration]	"MetaboLightsConfig20130507"
+Comment [Created With Configuration]	"C:Documents and SettingsarapitsaspDesktopISAcreatorMetaboLights_1.7ConfigurationsMetaboLightsConfig20130507"
+INVESTIGATION PUBLICATIONS
+Investigation PubMed ID	""
+Investigation Publication DOI	""
+Investigation Publication Author List	""
+Investigation Publication Title	""
+Investigation Publication Status	""
+Investigation Publication Status Term Accession Number	""
+Investigation Publication Status Term Source REF	""
+INVESTIGATION CONTACTS
+Investigation Person Last Name	""
+Investigation Person First Name	""
+Investigation Person Mid Initials	""
+Investigation Person Email	""
+Investigation Person Phone	""
+Investigation Person Fax	""
+Investigation Person Address	""
+Investigation Person Affiliation	""
+Investigation Person Roles	""
+Investigation Person Roles Term Accession Number	""
+Investigation Person Roles Term Source REF	""
+STUDY
+Study Identifier	"Wine_Storage"
+Study Title	"Metabolic changes during wine storage"
+Study Description	"Storage conditions and duration have a great influence on wine quality and nutritional value. Optimum temperature and humidity conditions may improve wine quality through aging while a wrong storage has a negative result. In order to evaluate the global effects of storage on wine composition, 20 red wines were stored under two conditions (optimum and domestic) for a period of 24 months and sampled every 6 months. The untargeted LC-MS analysis of the samples reveals various putative metabolites markers for the type and the length of the conservation (i.e. pigments, flavanols, pantothenic acid, etc)."
+Study Submission Date	""
+Study Public Release Date	""
+Study File Name	"s_Wine_Storage.txt"
+STUDY DESIGN DESCRIPTORS
+Study Design Type	"Metabolomics"	"metabolomic profiling"	"food quality/standard"	"food product"	"alcoholic beverage"	"Vitis vinifera"	"wine"	"Sangiovese"	"Storage"
+Study Design Type Term Accession Number	"JERMOntology:Metabolomics"	"efo:EFO_0000752"	"1179-2222"	"ENVO:00002002"	"0080-7263"	"obo:NCBITaxon_29760"	"ENVO:01000014"	""	""
+Study Design Type Term Source REF	"JERM"	"EFO"	"CSP"	"ENVO"	"CSP"	"EFO"	"ENVO"	""	""
+STUDY PUBLICATIONS
+Study PubMed ID	""
+Study Publication DOI	""
+Study Publication Author List	""
+Study Publication Title	""
+Study Publication Status	""
+Study Publication Status Term Accession Number	""
+Study Publication Status Term Source REF	""
+STUDY FACTORS
+Study Factor Name	"Storage type"	"Sample type"	"Storage time"
+Study Factor Type	"Storage conditions"	"Sample type"	"Storage Time"
+Study Factor Type Term Accession Number	""	""	""
+Study Factor Type Term Source REF	""	""	""
+STUDY ASSAYS
+Study Assay File Name	"a_wine_storage_metabolite profiling_mass spectrometry-5.txt"	"a_wine_storage_metabolite profiling_mass spectrometry-3.txt"	"a_wine_storage_metabolite profiling_mass spectrometry-1.txt"	"a_wine_storage_metabolite profiling_mass spectrometry.txt"	"a_wine_storage_metabolite profiling_mass spectrometry-4.txt"	"a_wine_storage_metabolite profiling_mass spectrometry-2.txt"
+Study Assay Measurement Type	"metabolite profiling"	"metabolite profiling"	"metabolite profiling"	"metabolite profiling"	"metabolite profiling"	"metabolite profiling"
+Study Assay Measurement Type Term Accession Number	"0000366"	"0000366"	"0000366"	"0000366"	"0000366"	"0000366"
+Study Assay Measurement Type Term Source REF	"OBI"	"OBI"	"OBI"	"OBI"	"OBI"	"OBI"
+Study Assay Technology Type	"mass spectrometry"	"mass spectrometry"	"mass spectrometry"	"mass spectrometry"	"mass spectrometry"	"mass spectrometry"
+Study Assay Technology Type Term Accession Number	""	""	""	""	""	""
+Study Assay Technology Type Term Source REF	"OBI"	"OBI"	"OBI"	"OBI"	"OBI"	"OBI"
+Study Assay Technology Platform	"Xevo TQ MS (Waters)"	"SYNAPT HDMS (Waters)"	"SYNAPT HDMS (Waters)"	"SYNAPT HDMS (Waters)"	"Xevo TQ MS (Waters)"	"SYNAPT HDMS (Waters)"
+STUDY PROTOCOLS
+Study Protocol Name	"Sample collection"	"Extraction"	"Chromatography M"	"Mass spectrometry M"	"Data transformation"	"Metabolite identification"	"Sample preparation M"	"Sequence M24"	"Data Alignment and normalization"	"Marker identification"	"Sequence Mtime"	"Sample preparation Pigments"	"Sample preparation Phenolics"	"Chromatography Pigments"	"Mass Spectrometry pigments"	"Chromatography Phenolics"	"Mass Spectrometry Phenolics"	"Chromatography"	"Mass spectrometry"
+Study Protocol Type	"Sample collection"	"Extraction"	"Chromatography"	"Mass spectrometry"	"Data transformation"	"Metabolite identification"	"sample preparation"	"sequence generator"	"AlignmentProcedure"	"biomarker"	"Sequence generation"	"sample preparation"	""	"Xevo TQ MS"	"Xevo TQ MS"	"Xevo TQ MS"	"Xevo TQ MS"	"Chromatography"	"Mass spectrometry"
+Study Protocol Type Term Accession Number	""	""	""	""	""	""	""	""	""	""	"edamontology:operation_0230"	"MS:1000831"	""	"MS:1001790"	"MS:1001790"	"MS:1001790"	"MS:1001790"	""	""
+Study Protocol Type Term Source REF	""	""	""	""	""	""	""	""	""	""	"SWO"	"MS"	""	"MS"	"MS"	"MS"	"MS"	""	""
+Study Protocol Description	"During the vintage 2009 twenty Vitis vinifera L. cv. Sangiovese grape samples from different areas of Montalcino (Tuscany - Italy) were collected, in order to cover the whole area of production of Brunello di Montalcino. From each selected vineyard, a total of ca. 80 kg of grapes was sampled in 20 kg boxes and sent in a refrigerated transport (4 °C) to the experimental winery at the Edmund Mach Foundation (Trentino - Italy) on the same day. The grapes from each zone were vinified separately and after the malolactic fermentation (March 2010) the young wine samples were filtered and bottled in 375 mL dark glass bottles (~20 bottles from each wine). 
+Two bottles from each wine was stored at 4 oC (references). The rest of the bottles from each wine were divided in two and stored in two different conditions: (i) One set was stored so to mimic the typical house/domestic wine conservation, with variable conditions during the year, in a room with no light but without control of the temperature or humidity (House) and (ii) The other set was stored in a cellar where the temperature (15-17 oC) and the humidity (~70%) was controlled, stable and optimum for red wine conservation (Cellar). Every 6 months four bottle from each wine (two from the house and two from the cellar conservation) was sampled and brought at 4 oC. 
+The final storage length was 24 months after the time zero which was bottling date. All samples were analyzed together in the end of the experiment. 
+"	""	"A Waters Acquity UPLC coupled via an electrospray ionization (ESI) interface to a Synapt HDMS QTOF MS (Waters, Manchester, UK) operating in W-mode and controlled by MassLynx 4.1 was used. The UPLC conditions were developed based in an in house previous published method (Arapitsas, Scholz, et al., 2012) and small changes were made in order to have a shorter chromatographic run and smaller back pressures. All samples were analysed on a reversed phase (RP) ACQUITY UPLC 1.8 µm 2.1 x 150 mm HSS T3 column (Waters) protected with an Acquity UPLC® BEH HSS T3 1.7 µm, 2.1 x 5 mm precolumn (Waters), at 40 oC and under a mobile phase flow rate of 0.28 mL/min. Water was used as weak eluting solvent (A) and methanol as strong elution solvent (B); formic acid 0.1% v/v was used as additive in both eluents. The multistep linear gradient used was as follows: 0-1 min, 100% A isocratic; 1-3 min, 100-90 % A linear; 3-18 min, 90-60 % A linear; 18-21 min, 60-0 % A linear; 21-25.5 min, 0 % A isocratic; 25.5-25.6 min, 0-100 % A linear; 25.6-28 min 100% isocratic. Injection volume was 10 µL, unless otherwise stated, and the samples were kept at 4 ºC throughout the analysis."	"A Waters Acquity UPLC coupled via an electrospray ionization (ESI) interface to a Synapt HDMS QTOF MS (Waters, Manchester, UK) operating in W-mode and controlled by MassLynx 4.1 was used. Mass spectrometric data were collected by different runs in positive and negative ESI mode over a mass range of 50 to 2000 amu with scan duration of 0.3 s in centroid mode. The transfer collision energy and trap collision energy were set at 6 V and 4 V. The source parameters were set as follows: capillary 3 kV for positive scan and 2.5 kV for negative scan, sampling cone 25 V, extraction cone 3V, source temperature 150 ºC, desolvation temperature 500 ºC, desolvation gas flow 1000 L/h and nebulizer gas 50 L/h. External calibration of the instrument was performed at the beginning of each batch of analysis by direct infusion of a sodium formate solution (10% formic acid/0.1 M NaOH/Acetonitrile at a ratio of 1/1/8) by controlling the mass accuracy from 40 to 2000 m/z (less than 5 ppm) and mass resolution (over 14000 FWHM). LockMass calibration was applied using a solution of leucine enkephaline (0.5 mg/L, m/z 556.2771 for positive and 554.2620 for negative ion mode) at 0.1 mL/min. "	"For the quality control of the analysis and the number of features determination the raw data was converted to CDF (Waters Databridge) format and then processed using XCMS for feature extraction, grouping and alignment. For peak picking, the matched Filter algorithm was used with a peak width estimate of 20 s. The signal to noise parameter was set to S/N = 6. Data extraction parameters were selected on the basis of the characteristics of chromatographic and mass spectrometric performance. "	"Peak annotation was performed manually by comparing retention times and mass spectra (mass difference less than 10 ppm and two ions) to those of the standard, when available. Tentative identification of the chromatographic peaks, without a standard, was made by using spectral features (mass difference less than 10 ppm of theoretical value at least one indicative fragment and the isotopic pattern), and literature information about chromatographic properties and mass spectra records from external database like HMDB, Kegg and MassBank and an internal database for the wine metabolome based in bibliography. "	"The UPLC-QTOF MS untargeted analyses were preformed within two months after the end of the experimental design and during this period wines were maintained at 4 oC so to block or slow down all possible reactions. Wines were uncorked under nitrogen atmosphere and an aliquot was transferred in a 15 mL amber vial (filled to its capacity). Then, always under nitrogen atmosphere, 3 quality control (QC) pool samples were prepared: (i) one pool sample by using 0.5 mL of each wine (QC), (ii) one pool sample by using 0.5 mL of each House conservation final point (24 months) wine (QCH) and, (iii) one pool sample by using 0.5 mL of each Cellar conservation final point (24 months) wine (QCC). 
+For the dilution test, the QC sample was diluted 1:1 and 1:2 with Milli-Q water. Following the dilution experiment results, 1 mL of each wine was diluted with 1 mL Milli-Q water (1:1 dilution) and then 20 μL of the internal standard mix was added. Finally every sample/QC was filtrated with 0.2 μm PTFE filters into a 2 mL autosampler amber vial (MS certificated) prior the LC/MS analysis.  The internal standard mix was 10 mg 3-indol proprionic acid and 17 mg 2,6-dihydroxy benzoic acid in 10 mL of MeOH:OH (1:1). For the blank the same procedure was followed but instead of wine 1 mL of Milli-Q water was used. The standard mix (STDMIX) was a mixture of trans-piceid (20 ppm), caffeic acid (50 ppm), catechin (5 ppm), malvidin 3-glucoside (5 ppm), quercetin 3-rutinoside (6 ppm), adenosine 2-monophosphate (45 ppm), malic acid (48 ppm), nicotinic acid (46 ppm), phenylalanine (42 ppm), and glucose (45 ppm) in MeOH:H2O (70:30). 
+"	"This experiment included all 40 wines (20 house + 20 cellar) of the final point (24 months), QCH, QCC, blank and STDMIX. The in-batch order of all samples analysed in this study was randomized by using the http://www.random.org/sequences/ site. This sample set was analyzed both in ESI + and ESI- mode. In the beginning of every batch first one blank, then one STDMIX and after four QCs (2 QCH and 2 QCC) were injected. After this system equilibration two QC (one QCH and one QCC) was injected every six samples. The order of the two QCs were inverted every six samples. Finally in the end of every batch one blank and one standard mix were injected."	"-- XCMS settings --
+     Instrument: Synapt-QTOF-RP
+     signal-to-noise threshold (sthresh): 4
+     minimum number of samples in which a feature should be present (minsamp): 1
+     maximum number of peaks per extracted ion chromatogram (max): 50
+     step size to use for profile generation (step): 0.05
+     minimum difference in m/z for peaks (mzdiff): 0.1
+
+
+-- Feature data set --
+     total features (xcmsPeakTable.txt): 9989
+     number of samples: 58
+       name          	features
+       A003_QC_H_RP_pos01	6222
+       A004_QC_C_RP_pos01	6280
+       A005_QC_H_RP_pos01	6265
+       A006_QC_C_RP_pos01	6403
+       A007_2401_H_RP_pos01	6135
+       A008_2402_H_RP_pos01	6513
+       A009_2402_C_RP_pos01	6498
+       A010_2419_C_RP_pos01	6412
+       A011_2410_C_RP_pos01	6526
+       A012_2420_C_RP_pos01	5989
+       A013_QC_H_RP_pos01	6433
+       A014_QC_C_RP_pos01	6492
+       A015_2406_C_RP_pos01	6189
+       A016_2410_H_RP_pos01	6466
+       A017_2405_C_RP_pos01	6588
+       A018_2418_C_RP_pos01	6150
+       A019_2417_C_RP_pos01	6271
+       A020_2414_H_RP_pos01	6284
+       A021_QC_C_RP_pos01	6561
+       A022_QC_H_RP_pos01	6477
+       A023_2401_C_RP_pos01	6328
+       A024_2404_C_RP_pos01	6355
+       A025_2417_H_RP_pos01	6427
+       A026_2408_H_RP_pos01	6210
+       A027_2415_C_RP_pos01	6269
+       A028_2418_H_RP_pos01	6004
+       A029_QC_H_RP_pos01	6405
+       A030_QC_C_RP_pos01	6483
+       A033_2412_H_RP_pos01	6367
+       A034_2403_H_RP_pos01	6706
+       A035_2409_C_RP_pos01	6258
+       A036_2413_H_RP_pos01	6416
+       A037_2406_H_RP_pos01	6147
+       A038_2408_C_RP_pos01	6189
+       A039_QC_C_RP_pos01	6489
+       A040_QC_H_RP_pos01	6359
+       A041_2405_H_RP_pos01	6536
+       A042_2420_H_RP_pos01	5891
+       A043_2416_C_RP_pos01	6501
+       A044_2404_H_RP_pos01	6208
+       A045_2416_H_RP_pos01	6334
+       A046_2419_H_RP_pos01	6258
+       A047_QC_H_RP_pos01	6272
+       A048_QC_C_RP_pos01	6424
+       A049_2403_C_RP_pos01	6634
+       A050_2411_H_RP_pos01	6656
+       A051_2413_C_RP_pos01	6630
+       A052_2412_C_RP_pos01	6325
+       A053_2409_H_RP_pos01	6029
+       A054_2407_H_RP_pos01	6931
+       A055_QC_C_RP_pos01	6387
+       A056_QC_H_RP_pos01	6354
+       A057_2415_H_RP_pos01	6011
+       A058_2414_C_RP_pos01	6238
+       A059_2411_C_RP_pos01	6838
+       A060_2407_C_RP_pos01	7052
+       A061_QC_H_RP_pos01	6365
+       A062_QC_C_RP_pos01	6444
+
+-- Coefficient of variation (QC-samples only) --
+     good features (%CV<25): 8892 (89%)
+     problematic features (%CV > 25): 1097 (11%)
+     total features: 9989
+
+"	"The statistical analysis of the aligned and normalized data was made by multivariate statistical analysis using EZInfo SIMCA-P version 12.0.0 (Umetrics, Umea, Sweden). Partial least-squares discrimination analysis (PLS-DA) and orthogonal partial least-squares discrimination analysis (OPLS-DA) were used to visualize discrimination between the various theses and find features contributing to these discriminations, based in t-test with Mann-Whitney U-test and the S-plot.    "	"For this sample set, five wines out from the twenty were randomly selected and their sample of the reference time point (2 months), the 6 months (both house and cellar), the 12 months (both house and cellar), the 18 months (both house and cellar) and the 24 months (both house and cellar) were all included. So, the the final sample set included the 45 wines, the QC, the blank and the STDMIX. Also this sample set was analyzed both in ESI + and ESI- mode. Again in the beginning of every batch first one blank, then one STDMIX and after four QCs were injected. After this system equilibration one QC was injected every six samples and in the end of every batch one blank and one standard mix were injected. "	"Sample preparation for the measurement of wine pigments was performed according to Arapitsas et al. (J. Agric Food Chem, 2012). Briefly, 25 mL of wine diluted 4 times with H2O, were applied to a C18-SPE cartridge (1 g, Waters), previously activated with MeOH (5 mL) and H2O (10 mL). The cartridge was washed with 6 mL of 0.3% aqueous HClO4 and then eluted with 10 mL of MeOH into a 100 mL flask. The elute was evaporated under reduced pressure at 30 oC, reconstituted in 1 mL of MeOH/H2O (1/1), filtered through 0.22 µm PTFE filters into a 2 mL autosampler amber MS certificated vial (Waters) and injected. "	"Wines were uncorked under nitrogen atmosphere, 5 mL were transferred in a 7 mL amber vial and 50 µL of IS were added (10mg/mL of o-coumaric acid). Then, always under nitrogen atmosphere,  an aliquot (~1.5 mL) of was filtered through 0.22 µm PTFE filters into a 2 mL autosampler amber MS certificated vial (Waters) and injected."	"the analysis of the samples studied was performed with an ACQUITY Ultra Performance Liquid Chromatographic System (Waters, MA, USA) coupled to a Xevo TQ MS System (Waters, UK) operating under MassLynx™ XS Software. All samples were analysed on a reverse phase (RP) Acquity UPLC® BEH C18 1.7 µm, 2.1 x 150 mm column (Waters), protected with an Acquity UPLC® BEH C18 1.7 µm, 2.1 x 5 mm precolumn (Waters), at 60 oC and under a mobile phase flow rate of 0.3 mL/min. Water was used as weak eluting solvent (A) and methanol as strong elution solvent (B); formic acid 5% v/v was used as additive in both eluents. The multistep linear gradient used was as follows: from 95 to 60% of A for the first 4 min, 60 to 45% A from 4 to 9 min, 45 to 5% A from 9 to 11 min, and an isocratic hold for 3 min in order to clean the column. The equilibration time was 4 min and the injection volume was 2 µL. All the samples were analysed in triplicate. The analyses were performed six months after the end of the experimental design and in between all wines were maintained at 4 oC. "	"The column eluent was directed to the mass spectrometer and analyte detection was performed by multiple reaction monitoring (MRM) using the MS/MS transitions shown in Arapitsas et al. (Arapitsas, Perenzoni, et al., 2012) Electrospray positive ionization mode (ESI) was applied for all compounds with the parameters in the source set as follows: capillary voltage at 0.5 kV, block and desolvation temperatures at 150 and 500 oC respectively. Desolvation gas flow was 1000 L/Hr and cone gas flow 20 L/Hr. LM resolutions were 2.55 and 2.80 for analyzer 1 and 2 respectively, while HM resolutions were 14.90 and 15.00 LM for analyzer 1 and 2 respectively. Ion energy for analyzer 2 was 1.0. The cone voltage, collision energy, MS/MS transition, the data processing and the quantification was performed as described in the paper of Arapitsas et al (Arapitsas et al J Agric Food Chem, 2012). "	"For the analysis of the non-anthocyanic phenols, the method described by Vrhovsek et al. was used with slight modifications (Vrhovsek et al. J Agric Food Chem, 2012). Briefly, the analysis of the samples studied was performed with an ACQUITY Ultra Performance Liquid Chromatographic System (Waters, MA, USA) coupled to a Xevo TQ MS System (Waters, UK) operating under MassLynx™ XS Software. All samples were analysed on a reverse phase (RP) Acquity UPLC® HSS T3 1.7 µm, 2.1 x 150 mm column (Waters), protected with an Acquity UPLC® HSS T3 1.7 µm, 2.1 x 5 mm precolumn (Waters), at 40 oC and under a mobile phase flow rate of 0.4 mL/min. Water was used as weak eluting solvent (A) and methanol as strong elution solvent (B); formic acid 0.1% v/v was used as additive in both eluents. The multistep linear gradient used was as follows: from 95 to 80% of A for the first 3 min, isocratic 80% for 1.3 min, 80 to 55% A from 4.3 to 9 min, 55 to 0% A from 9 to 11 min, and an isocratic hold for 2 min in order to clean the column. The equilibration time was 4 min and the injection volume was 10 µL. All the samples were analysed in triplicate. The analyses were performed 10 months after the end of the experimental design and in between all wines were maintained at 4 oC."	"The column eluent was directed to the mass spectrometer and analyte detection was performed by multiple reaction monitoring (MRM) using the MS/MS transitions shown in Vrhovsek et al. (Vrhovsek et al., 2012). Electrospray positive ionization mode (ESI) was applied for all compounds with the parameters in the source set as follows: capillary voltage at 3.5 kV, block and desolvation temperatures at 150 and 500 oC respectively. Desolvation gas flow was 800 L/Hr and cone gas flow 50 L/Hr. The cone voltage, collision energy, MS/MS transition, the data processing and the quantification was performed as described in the paper of Vrhovsek et al (J Agric Food Chem, 2012)."	""	""
+Study Protocol URI	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""
+Study Protocol Version	""	""	""	""	"netCDF"	"manual annotation; Internal database"	""	""	""	""	""	""	""	""	""	""	""	""	""
+Study Protocol Parameters Name	""	"Post Extraction;Derivatization"	"Chromatography Instrument;Column type;Column model"	"Scan polarity;Scan m/z range;Instrument;Mass analyzer;Ion source"	""	""	""	""	"XCMS"	""	""	""	""	"Chromatography Instrument;Column type;Column model"	"scan mode;scan mode;Scan polarity;Instrument;Mass analyzer;Ion source;scan mode;Scan polarity;Instrument;Mass analyzer;Ion source;scan mode;Scan polarity;Instrument;Mass analyzer;Ion source;scan mode;Scan polarity;Instrument;Mass analyzer;Ion source"	"Chromatography Instrument;Column type;Column model"	"scan mode;scan mode;Scan polarity;Instrument;Mass analyzer;Ion source;scan mode;Scan polarity;Instrument;Mass analyzer;Ion source;scan mode;Scan polarity;Instrument;Mass analyzer;Ion source;scan mode;Scan polarity;Instrument;Mass analyzer;Ion source"	"Chromatography Instrument;Column type;Column model"	"Scan polarity;Scan m/z range;Instrument;Mass analyzer;Ion source"
+Study Protocol Parameters Name Term Accession Number	""	";"	";;"	";;;;"	""	""	""	""	""	""	""	""	""	";;"	";;;;;;;;;;;;;;;;;;;;"	";;"	";;;;;;;;;;;;;;;;;;;;"	";;"	";;;;"
+Study Protocol Parameters Name Term Source REF	""	";"	";;"	";;;;"	""	""	""	""	""	""	""	""	""	";;"	";;;;;;;;;;;;;;;;;;;;"	";;"	";;;;;;;;;;;;;;;;;;;;"	";;"	";;;;"
+Study Protocol Components Name	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""
+Study Protocol Components Type	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""
+Study Protocol Components Type Term Accession Number	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""
+Study Protocol Components Type Term Source REF	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""	""
+STUDY CONTACTS
+Study Person Last Name	"Arapitsas"
+Study Person First Name	"Panagiotis"
+Study Person Mid Initials	""
+Study Person Email	"panagiotis.arapitsas@fmach.it"
+Study Person Phone	""
+Study Person Fax	""
+Study Person Address	""
+Study Person Affiliation	"Fondazione Edmund Mach"
+Study Person Roles	"us Postdoc"
+Study Person Roles Term Accession Number	"vivo:Postdoc"
+Study Person Roles Term Source REF	"vivo"
