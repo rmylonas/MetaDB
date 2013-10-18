@@ -35,6 +35,9 @@ class IsatabImporterImpl implements IsatabImporter {
 		importer.importFile(isatabDir)
 		Investigation isaInvestig = importer.getInvestigation()
 		List<FEMStudy> studyList = converter.convertInvestigation(isaInvestig)
+		
+		// add the filePath to all studies
+		studyList.each {it.iSATabFilePath = isatabDir}
 	}	
 	
 }
