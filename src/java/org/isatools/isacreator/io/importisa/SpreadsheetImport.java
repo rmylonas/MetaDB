@@ -100,7 +100,7 @@ public class SpreadsheetImport {
 
         // way of storing previously seen protocol to determine where the parameters are which associated with it.
         int previousProtocol = -1;
-        System.out.println("Reforming table definition...");
+ //       System.out.println("Reforming table definition...");
         // way of storing previously read characteristic, factor, or parameter to determine what type it is
         String previousCharFactParam = null;
         int expectedNextUnitLocation = -1;
@@ -113,10 +113,10 @@ public class SpreadsheetImport {
 
             String fieldAsLowercase = columnHeader.toLowerCase();
 
-            System.out.println("Column header is " + columnHeader);
+ //           System.out.println("Column header is " + columnHeader);
 
             if (expectedNextUnitLocation == positionInheaders) {
-                System.out.println("Expected a unit here, got a " + columnHeader);
+ //               System.out.println("Expected a unit here, got a " + columnHeader);
                 if (fieldAsLowercase.contains("unit")) {
                     // add two fields...one accepting string values and the unit, also accepting string values :o)
 
