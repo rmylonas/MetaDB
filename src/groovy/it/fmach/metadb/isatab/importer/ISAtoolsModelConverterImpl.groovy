@@ -21,8 +21,9 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 	static final def SAMPLE_ORGANISM = "Characteristics[Organism]"
 	static final def SAMPLE_ORGANISM_PART = "Characteristics[Organism part]"
 	static final def SAMPLE_SOURCE_NAME = "Source Name"
-	
-	
+	static final def RUN_MS_ASSAY_NAME = "MS Assay Name"
+	static final def RUN_RAW_FILE = "Raw Spectral Data File"
+	static final def RUN_DERIVED_FILE= "Derived Spectral Data File"
 	
 	@Override
 	public List<FEMStudy> convertInvestigation(Investigation iSAInvestigation) {
@@ -104,7 +105,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			def assay = new FEMAssay()
 			assay.name = k
 			assay.instrument = v.getAssayPlatform()
-			convertRunList(v)
+			assay.runs = convertRunList(v)
 			assayList << assay
 		}
 		
@@ -126,34 +127,43 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		}
 		
 		// parse the fields of interest
+		def tempList = []
+		
 		for(i in 1..nrRows){
 			def run = new FEMRun()
 			run.sampleName = assayMatrix[i][headerMap[SAMPLE_NAME]]
-
+			run.msAssayName = assayMatrix[i][headerMap[RUN_MS_ASSAY_NAME]]
+			run.rawSpectraFilePath = assayMatrix[i][headerMap[RUN_RAW_FILE]]
+			run.derivedSpectraFilePath = assayMatrix[i][headerMap[RUN_DERIVED_FILE]]
 			run.rowNumber = i
 						
 			// parse the protocols
-			def tempList = []
+			def tempMap = [:]
 			for(k in 0..nrColumns){
-				def tempMap = [:]
 				if(headerList[k] =~ /Protocol/){
+					// add the last protocol info
+					if(tempMap) tempList << tempMap
+					
+					// reset the Map and add a new one
+					tempMap = [:]
 					tempMap.protocolREF = assayMatrix[i][k]
 				}else{
-					def m = k =~ /Parameter Value\[(.+)\]/
+					def m = headerList[k] =~ /Parameter Value\[(.+)\]/
 					m.each {tempMap[it[1]] = assayMatrix[i][k]}
 				}
-				if(tempMap) tempList << tempMap
 			}
 			
-			// make a JSON text
+			// add the last Map
+			if(tempMap) tempList << tempMap
+			
+			
+			// make a JSON text and add it to the run
 			def builder = new groovy.json.JsonBuilder()
 			builder(tempList)
-			
-			println builder.toString()
+			run.protocols = builder.toString()
 			
 			runList.add(run)
 		}
-		
 		
 		return runList
 	}	

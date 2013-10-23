@@ -6,12 +6,11 @@ class FEMAssay {
 	String instrument
 	String description
 	
-	Date creationDate
-	
 	List runs
 	
 	static hasMany = [runs: FEMRun]
 		
     static constraints = {
+		description nullable: true
     }
 }

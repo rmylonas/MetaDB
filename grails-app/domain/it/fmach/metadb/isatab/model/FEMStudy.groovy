@@ -8,8 +8,7 @@ class FEMStudy {
 	String designDescriptors
 	String iSATabFilePath
 	
-	Date creationDate
-	Date lastModificationDate
+	Date dateCreated
 	
 	List samples
 	List assays

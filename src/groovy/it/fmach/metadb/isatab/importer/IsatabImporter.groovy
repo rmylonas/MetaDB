@@ -18,6 +18,6 @@ interface IsatabImporter {
 	 * @param isatabDir ISAtab directory containing all necessary files
 	 * @return returns a list Study objects, if parsing was successful
 	 */
-	List<FEMStudy> importIsatabFiles(String isatabDir)
+	FEMInvestigation importIsatabFiles(String isatabDir)
 	
 }

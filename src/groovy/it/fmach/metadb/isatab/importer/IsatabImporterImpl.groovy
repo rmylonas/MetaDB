@@ -4,6 +4,8 @@ import java.util.List;
 
 import it.fmach.metadb.isatab.model.FEMStudy;
 
+import org.isatools.errorreporter.model.ErrorMessage;
+import org.isatools.errorreporter.model.ISAFileErrorReport;
 import org.isatools.isacreator.io.importisa.ISAtabFilesImporter
 import org.isatools.isacreator.model.Investigation;
 
@@ -31,16 +33,34 @@ class IsatabImporterImpl implements IsatabImporter {
 	 * @param isatabDir ISAtab directory containing all necessary files
 	 * @return returns a list of Study objects, if parsing was successful
 	 */
-	List<FEMStudy> importIsatabFiles(String isatabDir){
+	FEMInvestigation importIsatabFiles(String isatabDir){
+		def investigation = new FEMInvestigation()
+		
 		importer.importFile(isatabDir)
 		
-		Investigation isaInvestig = importer.getInvestigation()
-		List<FEMStudy> studyList = converter.convertInvestigation(isaInvestig)
-
-		// add the filePath to all studies
-		studyList.each {it.iSATabFilePath = isatabDir}
+		// get the errors if there are any
+		def errorMap = [:]
 		
-		return studyList
+		for(ISAFileErrorReport error: importer.getMessages()){
+			def errorMessageList = []
+			for(ErrorMessage message : error.getMessages()){
+				errorMessageList << message.getMessage()
+			}
+			errorMap[error.getProblemSummary()] = errorMessageList
+		}
+		
+		if(errorMap){
+			investigation.errorMap = errorMap
+		}else{
+			Investigation isaInvestig = importer.getInvestigation()
+			List<FEMStudy> studyList = converter.convertInvestigation(isaInvestig)
+	
+			// add the filePath to all studies
+			studyList.each {it.iSATabFilePath = isatabDir}
+			investigation.studyList = studyList
+		}
+		
+		return investigation
 	}	
 	
 }

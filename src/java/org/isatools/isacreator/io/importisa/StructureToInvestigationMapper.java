@@ -86,7 +86,7 @@ public class StructureToInvestigationMapper {
             if (majorSection.contains("Investigation")) {
             	
                 investigation = processInvestigation(investigationStructure.get(majorSection));              
-                System.out.println(investigation.getInvestigationTitle());
+  //              System.out.println(investigation.getInvestigationTitle());
             }
 
             if (majorSection.contains("Study")) {
@@ -693,7 +693,7 @@ public class StructureToInvestigationMapper {
         for (OntologyTerm oo : ontologyTermsDefined) {
             if (!definedOntologySources.contains(oo.getOntologySource()) &&
                     !oo.getOntologySource().equals("")) {
-                System.out.println(oo.getUniqueId());
+ //               System.out.println(oo.getUniqueId());
                 if (!GeneralUtils.isValueURL(oo.getUniqueId())) {
                     missingOntologyObjects.add(oo.getOntologySource());
                 }

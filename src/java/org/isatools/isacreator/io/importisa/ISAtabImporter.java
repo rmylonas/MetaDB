@@ -232,7 +232,7 @@ public abstract class ISAtabImporter {
             Study study = investigation.getStudies().get(studyIdentifier);
 
 
-            System.out.println("Processing " + studyIdentifier);
+  //          System.out.println("Processing " + studyIdentifier);
 
             // here we process the study sample file
             TableReferenceObject studySampleReference = ConfigurationManager.selectTROForUserSelection(

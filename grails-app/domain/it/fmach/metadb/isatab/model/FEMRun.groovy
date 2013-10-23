@@ -5,12 +5,13 @@ class FEMRun {
 	Integer rowNumber
 	
 	String sampleName
-	String parameters
 	String protocols
 	String msAssayName
-	String rawSpectraFile
-	String processedSpectraFile
-	String status
+	String rawSpectraFilePath
+	String derivedSpectraFilePath
+	String status = "initialized"
+	
+	Date lastChange = new Date()
 
     static constraints = {
     }
