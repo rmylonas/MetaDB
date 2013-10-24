@@ -1,6 +1,3 @@
-
-
-
 package it.fmach.metadb.isatab.importer
 
 import it.fmach.metadb.isatab.model.FEMAssay;
@@ -13,10 +10,8 @@ import java.util.List;
 import org.junit.*
 
 class IsatabImporterImplTests {
-
 	
 	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"
-
 	
 	@Test
     void testImportIsatabFile() {
