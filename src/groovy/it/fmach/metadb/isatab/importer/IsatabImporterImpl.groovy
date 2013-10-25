@@ -3,6 +3,7 @@ package it.fmach.metadb.isatab.importer
 import java.util.List;
 
 import it.fmach.metadb.isatab.model.FEMStudy;
+import it.fmach.metadb.isatab.model.ISAParsingInfo;
 
 import org.isatools.errorreporter.model.ErrorMessage;
 import org.isatools.errorreporter.model.ISAFileErrorReport;
@@ -39,18 +40,27 @@ class IsatabImporterImpl implements IsatabImporter {
 		importer.importFile(isatabDir)
 		
 		// get the errors if there are any
-		def errorMap = [:]
+		def errorSet = []
 		
 		for(ISAFileErrorReport error: importer.getMessages()){
-			def errorMessageList = []
+			def errorMessage = ""
 			for(ErrorMessage message : error.getMessages()){
-				errorMessageList << message.getMessage()
+				errorMessage += message.getMessage()
 			}
-			errorMap[error.getProblemSummary()] = errorMessageList
+			errorSet.add(error.getProblemSummary() + ": " + errorMessage)
 		}
 		
-		if(errorMap){
-			investigation.errorMap = errorMap
+		ISAParsingInfo parsingInfo = new ISAParsingInfo()
+		
+		if(errorSet){
+			parsingInfo.success = false
+			parsingInfo.nrOfErrors = errorSet.size()
+			
+			// create JSON string of errors
+			def builder = new groovy.json.JsonBuilder()
+			builder(errorSet)
+			parsingInfo.errorMessage = builder.toString()
+			parsingInfo.status = "parsing failed"
 		}else{
 			Investigation isaInvestig = importer.getInvestigation()
 			List<FEMStudy> studyList = converter.convertInvestigation(isaInvestig)
@@ -58,9 +68,17 @@ class IsatabImporterImpl implements IsatabImporter {
 			// add the filePath to all studies
 			studyList.each {it.iSATabFilePath = isatabDir}
 			investigation.studyList = studyList
+			
+			// fill in log info
+			parsingInfo.success = true
+			parsingInfo.status = "parsed"
+			
 		}
 		
+		
+		investigation.isaParsingInfo = parsingInfo
 		return investigation
+		
 	}	
 	
 }

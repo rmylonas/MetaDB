@@ -35,7 +35,6 @@ public class ISAConfiguratorValidatorTest {
                 assertTrue(oneMessage.contains("fmt:Sample File file:s_Wine_Storage.txt"));
                 assertTrue(oneMessage.contains("study:Wine_Storage"));
                 assertTrue(oneMessage.contains("spectrometry-5.txt"));
-		      
 		    }
 		 
 		 @Test

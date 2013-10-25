@@ -4,6 +4,7 @@ import it.fmach.metadb.isatab.model.FEMAssay;
 import it.fmach.metadb.isatab.model.FEMRun;
 import it.fmach.metadb.isatab.model.FEMSample;
 import it.fmach.metadb.isatab.model.FEMStudy;
+import it.fmach.metadb.isatab.model.ISAParsingInfo;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ class IsatabImporterImplTests {
 		
         IsatabImporter importer = new IsatabImporterImpl(configDir)
 		FEMInvestigation investigation = importer.importIsatabFiles(isatabDir)
-		assertEquals(null, investigation.errorMap)
+		assertTrue(investigation.isaParsingInfo.success)
 		
 		List<FEMStudy> studyList = investigation.studyList 
 		
@@ -73,12 +74,11 @@ class IsatabImporterImplTests {
 		
         IsatabImporter importer = new IsatabImporterImpl(configDir)
 		FEMInvestigation investigation = importer.importIsatabFiles(isatabDir)
-		def errorMap = investigation.errorMap
 		
-		errorMap.each { k, v ->
-			assertEquals("1 problem found", k)
-			assertTrue(v[0].contains("file does not exist"))
-		}
+		def ISAParsingInfo parsingInfo = investigation.isaParsingInfo
+		assertFalse(parsingInfo.success)
+		assertEquals(1, parsingInfo.nrOfErrors)
+		assertTrue(parsingInfo.errorMessage.contains("file does not exist"))
 		
 	}
 	
