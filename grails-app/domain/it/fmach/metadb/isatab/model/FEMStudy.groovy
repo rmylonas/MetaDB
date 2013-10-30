@@ -23,4 +23,5 @@ class FEMStudy {
     static constraints = {
 		
     }
+	
 }

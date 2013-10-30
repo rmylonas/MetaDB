@@ -1,5 +1,4 @@
 package org.isatools.isatab.isaconfigurator;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,6 +25,11 @@ public class ISAConfiguratorValidatorTest {
                 GUIInvokerResult result = validator.validate(isatabParentDir);      
                 
                 Set<String> errorMessages = getValidatorReport(validator.getLog());
+                
+                for(String err: errorMessages){
+                	System.out.println(err);
+                }
+                
                 assertEquals("ERROR", result.name());
                 assertEquals(9, errorMessages.size());
                 
@@ -48,8 +52,14 @@ public class ISAConfiguratorValidatorTest {
                 GUIInvokerResult result = validator.validate(isatabParentDir);      
                 
                 Set<String> errorMessages = getValidatorReport(validator.getLog());
+                
+                for(String err: errorMessages){
+                	System.out.println(err);
+                }
+                
                 assertEquals("SUCCESS", result.name());
-                assertEquals(0, errorMessages.size());   
+                assertEquals(0, errorMessages.size());
+                
 		    }
 		 
 

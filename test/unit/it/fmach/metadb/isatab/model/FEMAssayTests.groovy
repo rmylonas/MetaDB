@@ -21,6 +21,7 @@ class FEMAssayTests {
 		def investigation = importer.importIsatabFiles(isatabDir)
 		
 		def assay = investigation.studyList.get(0).assays.get(0)
+		assay.accessCode = "UniqueCode"
 		
 		if (!assay.validate()){
 			assay.errors.allErrors.each {

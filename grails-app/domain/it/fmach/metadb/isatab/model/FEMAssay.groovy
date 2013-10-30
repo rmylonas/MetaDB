@@ -2,6 +2,9 @@ package it.fmach.metadb.isatab.model
 
 class FEMAssay {
 
+	// the unique accessCode, used for the booking system
+	String accessCode
+	
 	String name
 	String instrument
 	String description
@@ -12,5 +15,6 @@ class FEMAssay {
 		
     static constraints = {
 		description nullable: true
+		accessCode unique: true
     }
 }

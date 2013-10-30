@@ -17,7 +17,7 @@ grails.project.dependency.resolution = {
         // specify dependency exclusions here; for example, uncomment this to disable ehcache:
         // excludes 'ehcache'
     }
-    log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
     legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
 
@@ -46,25 +46,33 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
 
         // runtime 'mysql:mysql-connector-java:5.1.22'
-		
+				
+		// following imports are used for IsaTool code 'org.isatools.*'
 		compile "net.sourceforge.collections:collections-generic:4.01"
-		//		compile "org.apache.xmlbeans:xmlbeans-xpath:2.3.0"
 		compile "net.java.dev.fuse:fuse-core:0.4"
 		compile "net.sf.opencsv:opencsv:2.0"
 		compile "javatar:javatar:2.5"
 		compile "net.sf.opencsv:opencsv:1.7"
-		compile("org.isatools:import_layer:1.6.2"){
-			excludes "tar", "graph2tab", "pride-core", "cpdetector", "hsqldb",
-				"proteomics-common", "obo", "bbop", "oboedit", "org.geneontology",
-				"jcvsii", "log4j", "slf4j-log4j12", "hibernate"
-		}
+
+//		compile "commons-lang:commons-lang:2.6"
+//		compile "xerces:xerces:2.4.0"
+//		compile "log4j:log4j:1.2.17"		
+//		compile("org.isatools:import_layer:1.6.2"){
+//			excludes "tar", "graph2tab", "pride-core", "cpdetector", "hsqldb",
+//				"proteomics-common", "obo", "bbop", "oboedit", "org.geneontology",
+//				"jcvsii", "log4j", "slf4j-log4j12", "hibernate"
+//		}
+		
     }
 
     plugins {
         runtime ":hibernate:$grailsVersion"
+		
         runtime ":jquery:1.8.3"
         runtime ":resources:1.2"
-
+		
+		runtime ':spring-security-core:2.0-RC2'
+		
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
         //runtime ":cached-resources:1.0"
