@@ -1,6 +1,7 @@
 package it.fmach.metadb.isatab.importer
 
-import it.fmach.metadb.isatab.model.FEMAssay;
+import it.fmach.metadb.isatab.model.AccessCode;
+import it.fmach.metadb.isatab.model.FEMAssay
 import it.fmach.metadb.isatab.model.FEMRun;
 import it.fmach.metadb.isatab.model.FEMSample;
 import it.fmach.metadb.isatab.model.FEMStudy;
@@ -10,6 +11,9 @@ import java.util.List;
 
 import org.junit.*
 
+import grails.test.mixin.*
+
+@Mock([AccessCode])
 class IsatabImporterImplTests {
 	
 	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"

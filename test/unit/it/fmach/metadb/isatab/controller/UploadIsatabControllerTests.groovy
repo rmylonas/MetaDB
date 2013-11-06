@@ -2,6 +2,7 @@ package it.fmach.metadb.isatab.controller
 
 import it.fmach.metadb.isatab.model.FEMStudy
 import it.fmach.metadb.isatab.model.FEMAssay
+import it.fmach.metadb.isatab.model.AccessCode
 import grails.test.mixin.*
 
 import org.junit.*
@@ -10,7 +11,7 @@ import org.springframework.mock.web.MockMultipartFile
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@Mock( [ FEMStudy, FEMAssay ] )
+@Mock( [ FEMStudy, FEMAssay, AccessCode ] )
 @TestFor(UploadIsatabController)
 class UploadIsatabControllerTests {
 

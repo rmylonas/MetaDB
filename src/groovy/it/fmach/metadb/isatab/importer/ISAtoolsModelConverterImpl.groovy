@@ -1,13 +1,13 @@
 package it.fmach.metadb.isatab.importer
 
-import it.fmach.metadb.isatab.model.FEMAssay;
-import it.fmach.metadb.isatab.model.FEMRun;
-import it.fmach.metadb.isatab.model.FEMSample;
-import it.fmach.metadb.isatab.model.FEMStudy;
-
-import org.isatools.isacreator.model.Assay;
-import org.isatools.isacreator.model.Investigation;
-import org.isatools.isacreator.model.Study;
+import it.fmach.metadb.isatab.model.FEMAssay
+import it.fmach.metadb.isatab.model.FEMRun
+import it.fmach.metadb.isatab.model.FEMSample
+import it.fmach.metadb.isatab.model.FEMStudy
+import org.isatools.isacreator.model.Assay
+import org.isatools.isacreator.model.Investigation
+import org.isatools.isacreator.model.Study
+import it.fmach.metadb.isatab.importer.AccessCodeGenerator
 
 /**
  * @author mylonasr
@@ -15,7 +15,8 @@ import org.isatools.isacreator.model.Study;
  * Convert Objects from the isatools into our own Objects (typically from Investigation into our own Study)
  */
 class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
-
+	def accessCodeGenerator = new AccessCodeGenerator()
+	
 	// field-names which are parsed
 	static final def SAMPLE_NAME = "Sample Name"
 	static final def SAMPLE_ORGANISM = "Characteristics[Organism]"
@@ -106,6 +107,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			assay.name = k
 			assay.instrument = v.getAssayPlatform()
 			assay.runs = convertRunList(v)
+			assay.accessCode = accessCodeGenerator.getNewCode()
 			assayList << assay
 		}
 		

@@ -17,4 +17,5 @@ class AccessCodeServiceTests {
 		AccessCode ac = acService.getNewCode()
 		assert ac.code.length() >= 1
     }
+	
 }
