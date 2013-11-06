@@ -3,9 +3,9 @@ package it.fmach.metadb.isatab.model
 class FEMStudy {
 
 	String identifier
-	String title
-	String description
-	String designDescriptors
+	String title = ""
+	String description = ""
+	String designDescriptors = ""
 	String iSATabFilePath
 	
 	Date dateCreated
@@ -23,5 +23,9 @@ class FEMStudy {
     static constraints = {
 		
     }
+	
+	static mapping = {
+		description sqlType: 'text'
+	}
 	
 }

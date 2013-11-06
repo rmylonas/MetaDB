@@ -3,7 +3,7 @@ package it.fmach.metadb.isatab.model
 class FEMAssay {
 
 	// the unique accessCode, used for the booking system
-	String accessCode
+	AccessCode accessCode 
 	
 	String name
 	String instrument

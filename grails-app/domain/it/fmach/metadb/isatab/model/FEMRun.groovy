@@ -5,15 +5,19 @@ class FEMRun {
 	Integer rowNumber
 	
 	String sampleName
-	String protocols
-	String msAssayName
-	String rawSpectraFilePath
-	String derivedSpectraFilePath
+	String protocols = "{}"
+	String msAssayName = ""
+	String rawSpectraFilePath = ""
+	String derivedSpectraFilePath = ""
 	String status = "initialized"
 	
 	Date lastChange = new Date()
 
-    static constraints = {
+    static constraints = {		
     }
+	
+	static mapping = {
+		protocols sqlType: 'text'
+	}
 	
 }

@@ -20,4 +20,7 @@ interface IsatabImporter {
 	 */
 	FEMInvestigation importIsatabFiles(String isatabDir)
 	
+	
+	FEMInvestigation importIsatabZip(String isatabZipDir)
+	
 }

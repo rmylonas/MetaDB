@@ -96,6 +96,9 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'it.fmach.metadb.U
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'it.fmach.metadb.UserRole'
 grails.plugin.springsecurity.authority.className = 'it.fmach.metadb.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	// no security
+	'/**':                              ['permitAll'],
+	
 	'/':                              ['permitAll'],
 	'/index':                         ['permitAll'],
 	'/index.gsp':                     ['permitAll'],
@@ -105,3 +108,4 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':                ['permitAll']
 ]
 
+metadb.isatab.metabolConfigFile = "/home/mylonasr/workspaces/MetaDB/test/data/org/isatools/isacreator/io/importisa/MetaboLightsConfig20130507"

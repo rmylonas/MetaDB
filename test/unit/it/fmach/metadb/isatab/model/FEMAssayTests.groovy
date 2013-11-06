@@ -9,6 +9,7 @@ import org.junit.*
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
+@Mock([AccessCode])
 @TestFor(FEMAssay)
 class FEMAssayTests {
 	
@@ -21,7 +22,7 @@ class FEMAssayTests {
 		def investigation = importer.importIsatabFiles(isatabDir)
 		
 		def assay = investigation.studyList.get(0).assays.get(0)
-		assay.accessCode = "UniqueCode"
+		assay.accessCode = new AccessCode(code: "UniqueCode")
 		
 		if (!assay.validate()){
 			assay.errors.allErrors.each {

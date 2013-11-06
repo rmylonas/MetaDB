@@ -22,7 +22,8 @@ class IsatabImporterImplTests {
 		
         IsatabImporter importer = new IsatabImporterImpl(configDir)
 		FEMInvestigation investigation = importer.importIsatabFiles(isatabDir)
-		assertTrue(investigation.isaParsingInfo.success)
+		Boolean success = investigation.isaParsingInfo.success
+		assertTrue(success)
 		
 		List<FEMStudy> studyList = investigation.studyList 
 		
@@ -76,10 +77,28 @@ class IsatabImporterImplTests {
 		FEMInvestigation investigation = importer.importIsatabFiles(isatabDir)
 		
 		def ISAParsingInfo parsingInfo = investigation.isaParsingInfo
+		Boolean success = parsingInfo.success
 		assertFalse(parsingInfo.success)
 		assertEquals(1, parsingInfo.nrOfErrors)
 		assertTrue(parsingInfo.errorMessage.contains("file does not exist"))
 		
+	}
+	
+	
+	@Test
+	void testImportZip() {
+		
+		String configDir = rootDir + "MetaboLightsConfig20130507"
+		String isatabDir = rootDir + "winecellar_archive.zip"
+		
+		IsatabImporter importer = new IsatabImporterImpl(configDir)
+		FEMInvestigation investigation = importer.importIsatabZip(isatabDir)
+		
+		Boolean success = investigation.isaParsingInfo.success
+		assertTrue(success)
+		assertEquals(1, investigation.studyList.size)
+		assertEquals("Metabolic changes during wine storage", investigation.studyList[0].title)
+		assertEquals("a_wine_storage_metabolite profiling_mass spectrometry-5.txt", investigation.studyList[0].assays[0].name)
 	}
 	
 }

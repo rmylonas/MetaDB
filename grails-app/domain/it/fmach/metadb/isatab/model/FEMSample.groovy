@@ -5,10 +5,10 @@ class FEMSample {
 	Integer rowNumber
 	
 	String name
-	String sourceName
-	String organism
-	String organismPart
-	String factors	
+	String sourceName = ""
+	String organism = ""
+	String organismPart = ""
+	String factors = "{}"
 	
     static constraints = {
     }

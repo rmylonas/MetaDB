@@ -33,6 +33,7 @@ class FEMRunTests {
 		run.save(flush: true)
 		
 		def loadedRun = FEMRun.findBySampleName("0001_R")
-		assertTrue(loadedRun.protocols.contains("Phenolics"))
+		String protocols = loadedRun.protocols
+		assertTrue(protocols.contains("Phenolics"))
     }
 }
