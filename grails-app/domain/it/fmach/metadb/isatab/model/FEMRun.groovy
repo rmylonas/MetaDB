@@ -5,7 +5,7 @@ class FEMRun {
 	Integer rowNumber
 	
 	String sampleName
-	String protocols = "{}"
+	String protocolJSON = "{}"
 	String msAssayName = ""
 	String rawSpectraFilePath = ""
 	String derivedSpectraFilePath = ""
@@ -17,7 +17,7 @@ class FEMRun {
     }
 	
 	static mapping = {
-		protocols sqlType: 'text'
+		protocolJSON sqlType: 'text'
 	}
 	
 }

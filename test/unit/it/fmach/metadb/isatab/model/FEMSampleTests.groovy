@@ -26,7 +26,7 @@ class FEMSampleTests {
 			
 		def loadedSample = FEMSample.findByOrganismLike("%Vitis%")
 		String sampleName = loadedSample.name
-		assertEquals("QC_H", sampleName)
+		assert "QC_H" == sampleName
     }
 	
 	

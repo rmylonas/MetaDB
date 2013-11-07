@@ -8,8 +8,9 @@ class FEMSample {
 	String sourceName = ""
 	String organism = ""
 	String organismPart = ""
-	String factors = "{}"
+	String factorJSON = "{}"
 	
     static constraints = {
+		factorJSON sqlType: 'text'
     }
 }

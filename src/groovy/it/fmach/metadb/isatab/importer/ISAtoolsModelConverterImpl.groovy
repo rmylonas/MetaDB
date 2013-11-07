@@ -90,7 +90,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			factorMap.each{ tempMap[it.key] = sampleMatrix[i][it.value] }
 			builder(tempMap)
 			
-			sample.factors = builder.toString()
+			sample.factorJSON = builder.toString()
 			sampleList.add(sample)
 		}
 		
@@ -162,7 +162,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			// make a JSON text and add it to the run
 			def builder = new groovy.json.JsonBuilder()
 			builder(tempList)
-			run.protocols = builder.toString()
+			run.protocolJSON = builder.toString()
 			
 			runList.add(run)
 		}

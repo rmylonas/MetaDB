@@ -27,46 +27,46 @@ class IsatabImporterImplTests {
         IsatabImporter importer = new IsatabImporterImpl(configDir)
 		FEMInvestigation investigation = importer.importIsatabFiles(isatabDir)
 		Boolean success = investigation.isaParsingInfo.success
-		assertTrue(success)
+		assert success
 		
 		List<FEMStudy> studyList = investigation.studyList 
 		
 		// check study content
-		assertEquals(1, studyList.size())
+		assert 1 == studyList.size()
 		FEMStudy study = studyList.get(0)
-		assertEquals("Wine_Storage", study.identifier)
-		assertEquals("Metabolic changes during wine storage", study.title)
-		assertEquals(isatabDir, study.iSATabFilePath)
+		assert "Wine_Storage" == study.identifier
+		assert "Metabolic changes during wine storage" == study.title
+		assert isatabDir == study.iSATabFilePath
 		
 		// check sample content
-		assertEquals(224, study.samples.size())
+		assert 224 == study.samples.size()
 		
 		FEMSample sample_1 = study.samples.get(0)
-		assertEquals("QC_H", sample_1.name)
-		assertEquals(1, sample_1.rowNumber)
-		assertEquals("NCBITaxon:Vitis vinifera", sample_1.organism)
-		assertEquals("Wine", sample_1.organismPart)
-		assertTrue(sample_1.factors.contains("QC"))
+		assert "QC_H" == sample_1.name
+		assert 1 == sample_1.rowNumber
+		assert "NCBITaxon:Vitis vinifera" == sample_1.organism
+		assert "Wine" == sample_1.organismPart
+		assert sample_1.factorJSON.contains("QC")
 		
 		FEMSample sample_3 = study.samples.get(2)
-		assertEquals("2401_H", sample_3.name)
-		assertEquals(3, sample_3.rowNumber)
-		assertTrue(sample_3.factors.contains("House"))
+		assert "2401_H" == sample_3.name 
+		assert 3 == sample_3.rowNumber
+		assert sample_3.factorJSON.contains("House")
 		
 		// check assay content
-		assertEquals(6, study.assays.size)
+		assert 6 == study.assays.size
 		FEMAssay assay = study.assays.get(0)
-		assertEquals("a_wine_storage_metabolite profiling_mass spectrometry-5.txt", assay.name)
-		assertEquals("Xevo TQ MS (Waters)", assay.instrument)
+		assert "a_wine_storage_metabolite profiling_mass spectrometry-5.txt" == assay.name
+		assert "Xevo TQ MS (Waters)" == assay.instrument
 		
 		// check run content
-		assertEquals(90, assay.runs.size())
+		assert 90 == assay.runs.size()
 		FEMRun run = assay.runs.get(0)
-		assertTrue(run.protocols.contains("MS:ACQUITY UPLC"))
-		assertEquals("Q034_01_00_R_MRM", run.msAssayName)
-		assertEquals("0001_R", run.sampleName)
-		assertEquals("T:experimentsXevo_Stefania_Maggio2013.PROData", run.rawSpectraFilePath)
-		assertEquals("", run.derivedSpectraFilePath)
+		assert run.protocolJSON.contains("MS:ACQUITY UPLC")
+		assert "Q034_01_00_R_MRM" == run.msAssayName
+		assert "0001_R" == run.sampleName
+		assert "T:experimentsXevo_Stefania_Maggio2013.PROData" == run.rawSpectraFilePath
+		assert "" == run.derivedSpectraFilePath
 		
     }
 	
@@ -82,9 +82,9 @@ class IsatabImporterImplTests {
 		
 		def ISAParsingInfo parsingInfo = investigation.isaParsingInfo
 		Boolean success = parsingInfo.success
-		assertFalse(parsingInfo.success)
-		assertEquals(1, parsingInfo.nrOfErrors)
-		assertTrue(parsingInfo.errorMessage.contains("file does not exist"))
+		assert !parsingInfo.success
+		assert 1 == parsingInfo.nrOfErrors
+		assert parsingInfo.errorMessage.contains("file does not exist")
 		
 	}
 	
@@ -99,10 +99,10 @@ class IsatabImporterImplTests {
 		FEMInvestigation investigation = importer.importIsatabZip(isatabDir)
 		
 		Boolean success = investigation.isaParsingInfo.success
-		assertTrue(success)
-		assertEquals(1, investigation.studyList.size)
-		assertEquals("Metabolic changes during wine storage", investigation.studyList[0].title)
-		assertEquals("a_wine_storage_metabolite profiling_mass spectrometry-5.txt", investigation.studyList[0].assays[0].name)
+		assert success
+		assert 1 == investigation.studyList.size
+		assert "Metabolic changes during wine storage" == investigation.studyList[0].title
+		assert "a_wine_storage_metabolite profiling_mass spectrometry-5.txt" == investigation.studyList[0].assays[0].name
 	}
 	
 }
