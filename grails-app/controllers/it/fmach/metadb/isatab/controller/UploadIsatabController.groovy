@@ -72,7 +72,8 @@ class UploadIsatabController {
 			}
 		}
 		
-		println("inserted" + insertedAssays)
+		flash.message = insertedAssays + " assay(s) from " + insertedStudies + " studie(s) were succesfully inserted"
+		redirect(action: 'index')
 		
 	}
 	

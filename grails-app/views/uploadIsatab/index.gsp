@@ -19,6 +19,14 @@
   		</div>
 	</g:if>
 	
+	<!-- Show messages -->
+	<g:if test="${flash.message}">
+	  		<div class="alert alert-block alert-success">
+	  			<button type="button" class="close" data-dismiss="alert">&times;</button>
+	  			<strong>OK: </strong>${flash.message}
+	  		</div>
+	</g:if>
+	
 	<g:uploadForm action="upload" class="form-horizontal">
 	
 		<div class="control-group">
