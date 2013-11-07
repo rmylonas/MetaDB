@@ -1,5 +1,8 @@
 package it.fmach.metadb.isatab.model
 
+import java.util.Date;
+import java.util.List;
+
 class FEMAssay {
 
 	// the unique accessCode, used for the booking system
@@ -9,9 +12,12 @@ class FEMAssay {
 	String instrument
 	String description
 	
+	Date dateCreated
+	
+	List samples
 	List runs
 	
-	static hasMany = [runs: FEMRun]
+	static hasMany = [samples: FEMSample, runs: FEMRun]
 		
     static constraints = {
 		description nullable: true

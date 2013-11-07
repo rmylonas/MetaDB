@@ -34,7 +34,7 @@ class FEMStudyTests {
 		study.save(flush: true)		
 		def loadedStudy = FEMStudy.findByDescriptionLike("%red wine%")
 		
-		assertEquals("Metabolic changes during wine storage", loadedStudy.title)
+		assert "Metabolic changes during wine storage" == loadedStudy.title
     }
 	
 }

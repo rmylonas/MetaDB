@@ -23,6 +23,7 @@ class UploadIsatabController {
 		if (f.empty) {
 			flash.error = 'ISAtab file is empty'
 			redirect(action: 'index')
+			return
 		}else{
 			importFile = File.createTempFile("isatab_",".zip")		
 			f.transferTo(importFile)
@@ -36,17 +37,20 @@ class UploadIsatabController {
 				}else{
 					flash.error = 'Parsing Error: sorry, your ISAtab file could not be parsed'
 					redirect(action: 'index')
+					return
 				}				
 				
 			}catch(e){
 				e.printStackTrace()
 				flash.error = 'Exception occured: sorry, your ISAtab file could not be parsed'
 				redirect(action: 'index')
+				return
 			}
 		}
 		
 		session.investigation = investigation
 		redirect(action: 'parsing')
+		
 	}
 	
 	def parsing() { }
@@ -56,7 +60,7 @@ class UploadIsatabController {
 		def insertedAssays = 0
 		def insertedStudies = 0
 		
-		for(FEMStudy study: session.investigation.studyList){			
+		for(FEMStudy study: session.investigation.studyList){	
 			def iter = study.assays.iterator()
 			while(iter.hasNext()){
 				FEMAssay assay = iter.next()
@@ -72,7 +76,7 @@ class UploadIsatabController {
 			}
 		}
 		
-		flash.message = insertedAssays + " assay(s) from " + insertedStudies + " studie(s) were succesfully inserted"
+		flash.message = insertedAssays + " assay(s) from " + insertedStudies + " study were succesfully inserted"
 		redirect(action: 'index')
 		
 	}

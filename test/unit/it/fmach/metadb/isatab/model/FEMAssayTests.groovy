@@ -33,6 +33,6 @@ class FEMAssayTests {
 		assay.save(flush: true)
 		
 		def loadedAssay = FEMAssay.findByInstrumentLike("%Xevo%")
-		assertEquals("a_wine_storage_metabolite profiling_mass spectrometry-5.txt", loadedAssay.name)
+		assert "a_wine_storage_metabolite profiling_mass spectrometry-5.txt" == loadedAssay.name
     }
 }

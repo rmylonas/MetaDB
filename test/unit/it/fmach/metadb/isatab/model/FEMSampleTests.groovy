@@ -21,7 +21,7 @@ class FEMSampleTests {
 		IsatabImporter importer = new IsatabImporterImpl(configDir)
 		def investigation = importer.importIsatabFiles(isatabDir)
 		
-		def sample = investigation.studyList.get(0).samples.get(0)
+		def sample = investigation.studyList.get(0).assays.get(0).samples.get(0)
 		sample.save(flush: true)	
 			
 		def loadedSample = FEMSample.findByOrganismLike("%Vitis%")

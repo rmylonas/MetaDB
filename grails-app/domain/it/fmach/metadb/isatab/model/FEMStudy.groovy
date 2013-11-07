@@ -5,15 +5,14 @@ class FEMStudy {
 	String identifier
 	String title = ""
 	String description = ""
-	String designDescriptors = ""
+//	String designDescriptors = ""
 	String iSATabFilePath
 	
 	Date dateCreated
 	
-	List samples
 	List assays
 	
-	static hasMany = [samples: FEMSample, assays:FEMAssay]
+	static hasMany = [assays:FEMAssay]
 	
 	// List of Publications
 	// List of Factors

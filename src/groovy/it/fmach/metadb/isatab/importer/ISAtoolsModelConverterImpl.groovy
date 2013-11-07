@@ -49,12 +49,10 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 	private void convertStudy(Study iSAStudy, FEMStudy fEMStudy){
 		fEMStudy.title = iSAStudy.getStudyTitle()
 		fEMStudy.description = iSAStudy.getStudyDesc()
-		fEMStudy.designDescriptors = "TODO"
 		
 		List<FEMSample> sampleList = convertSampleList(iSAStudy)
-		fEMStudy.samples = sampleList
 		
-		List<FEMAssay> assayList = convertAssayList(iSAStudy)
+		List<FEMAssay> assayList = convertAssayList(iSAStudy, sampleList)
 		fEMStudy.assays = assayList
 	}
 	
@@ -98,7 +96,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 
 	}
 	
-	private List<FEMAssay> convertAssayList(Study iSAStudy){
+	private List<FEMAssay> convertAssayList(Study iSAStudy, List<FEMSample> sampleList){
 		List<FEMAssay> assayList = new ArrayList<FEMAssay>()		
 		def assayMap = iSAStudy.getAssays()
 		
@@ -108,6 +106,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			assay.instrument = v.getAssayPlatform()
 			assay.runs = convertRunList(v)
 			assay.accessCode = accessCodeGenerator.getNewCode()
+			assay.samples = sampleList
 			assayList << assay
 		}
 		
