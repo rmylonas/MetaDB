@@ -13,6 +13,8 @@ class FEMRun {
 	
 	Date lastChange = new Date()
 
+	FEMSample sample
+	
     static constraints = {		
     }
 	

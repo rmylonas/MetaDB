@@ -14,10 +14,9 @@ class FEMAssay {
 	
 	Date dateCreated
 	
-	List samples
 	List runs
 	
-	static hasMany = [samples: FEMSample, runs: FEMRun]
+	static hasMany = [runs: FEMRun]
 		
     static constraints = {
 		description nullable: true

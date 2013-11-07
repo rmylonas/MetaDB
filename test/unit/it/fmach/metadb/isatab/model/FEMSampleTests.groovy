@@ -21,12 +21,13 @@ class FEMSampleTests {
 		IsatabImporter importer = new IsatabImporterImpl(configDir)
 		def investigation = importer.importIsatabFiles(isatabDir)
 		
-		def sample = investigation.studyList.get(0).assays.get(0).samples.get(0)
+		def sample = investigation.studyList.get(0).assays.get(0).runs.get(0).sample
+		
 		sample.save(flush: true)	
 			
 		def loadedSample = FEMSample.findByOrganismLike("%Vitis%")
 		String sampleName = loadedSample.name
-		assert "QC_H" == sampleName
+		assert "0001_R" == sampleName
     }
 	
 	

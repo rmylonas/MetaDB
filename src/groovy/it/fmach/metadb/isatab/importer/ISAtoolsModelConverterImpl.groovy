@@ -50,14 +50,14 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		fEMStudy.title = iSAStudy.getStudyTitle()
 		fEMStudy.description = iSAStudy.getStudyDesc()
 		
-		List<FEMSample> sampleList = convertSampleList(iSAStudy)
+		 Map<String, FEMSample> sampleList = convertSampleList(iSAStudy)
 		
 		List<FEMAssay> assayList = convertAssayList(iSAStudy, sampleList)
 		fEMStudy.assays = assayList
 	}
 	
-	private List<FEMSample> convertSampleList(Study iSAStudy){
-		List<FEMSample> sampleList = []
+	private Map<String, FEMSample> convertSampleList(Study iSAStudy){
+		 Map<String, FEMSample> sampleList = [:]
 		Object[][] sampleMatrix = iSAStudy.getStudySampleDataMatrix()
 		
 		def headerMap = [:]
@@ -89,14 +89,14 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			builder(tempMap)
 			
 			sample.factorJSON = builder.toString()
-			sampleList.add(sample)
+			sampleList[sample.name] = sample
 		}
 		
 		return sampleList
 
 	}
 	
-	private List<FEMAssay> convertAssayList(Study iSAStudy, List<FEMSample> sampleList){
+	private List<FEMAssay> convertAssayList(Study iSAStudy, Map<String, FEMSample> sampleList){
 		List<FEMAssay> assayList = new ArrayList<FEMAssay>()		
 		def assayMap = iSAStudy.getAssays()
 		
@@ -104,16 +104,15 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			def assay = new FEMAssay()
 			assay.name = k
 			assay.instrument = v.getAssayPlatform()
-			assay.runs = convertRunList(v)
+			assay.runs = convertRunList(v, sampleList)
 			assay.accessCode = accessCodeGenerator.getNewCode()
-			assay.samples = sampleList
 			assayList << assay
 		}
 		
 		return assayList
 	}
 	
-	private List<FEMRun> convertRunList(Assay iSAAssay){
+	private List<FEMRun> convertRunList(Assay iSAAssay, Map<String, FEMSample> sampleList){
 		def runList = new ArrayList<FEMRun>()
 		Object[][] assayMatrix = iSAAssay.getAssayDataMatrix()
 		
@@ -133,6 +132,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		for(i in 1..nrRows){
 			def run = new FEMRun()
 			run.sampleName = assayMatrix[i][headerMap[SAMPLE_NAME]]
+			run.sample = sampleList[run.sampleName]
 			run.msAssayName = assayMatrix[i][headerMap[RUN_MS_ASSAY_NAME]]
 			run.rawSpectraFilePath = assayMatrix[i][headerMap[RUN_RAW_FILE]]
 			run.derivedSpectraFilePath = assayMatrix[i][headerMap[RUN_DERIVED_FILE]]

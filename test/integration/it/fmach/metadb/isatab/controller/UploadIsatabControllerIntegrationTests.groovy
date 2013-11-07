@@ -10,7 +10,10 @@ class UploadIsatabControllerIntegrationTests extends GroovyTestCase{
 	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"
 
 	void testUpload() {
-		println("before")
+		
+		fail "Implement me"	
+	
+/*		println("before")
 		def uc = new UploadIsatabController()
 		println("after")
 		// test the upload
@@ -22,7 +25,7 @@ class UploadIsatabControllerIntegrationTests extends GroovyTestCase{
 		uc.upload()
 		println("here 3")
 
-		assert uc.response.redirectedUrl == '/uploadIsatab/parsing'
+		assert uc.response.redirectedUrl == '/uploadIsatab/parsing'*/
 //		assert uc.flash.message == "ISAtab file was succesfully processed"
 //		
 //		// test the parsing
