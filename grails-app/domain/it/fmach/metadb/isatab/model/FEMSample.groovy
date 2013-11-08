@@ -1,8 +1,6 @@
 package it.fmach.metadb.isatab.model
 
 class FEMSample {
-
-	Integer rowNumber
 	
 	String name
 	String sourceName = ""
@@ -10,7 +8,10 @@ class FEMSample {
 	String organismPart = ""
 	String factorJSON = "{}"
 	
+	//static belongsTo = [fEMRun: FEMRun]
+	
     static constraints = {
 		factorJSON sqlType: 'text'
     }
+	
 }

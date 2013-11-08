@@ -30,6 +30,17 @@ class UploadIsatabControllerTests {
 		assert response.redirectedUrl == '/uploadIsatab/parsing'
 		assert flash.message == "ISAtab file was succesfully processed"
 		
+//		println("investigation: " + session.investigation)
+//		session.investigation.studyList.each{ study ->
+//			study.assays.each{ assay ->
+//				assay.runs.each{
+//					println it.sampleName
+//					println it.sample
+//				}
+//				
+//			}
+//		}
+		
 		// reset the response to continue testing
 		response.reset()
 		

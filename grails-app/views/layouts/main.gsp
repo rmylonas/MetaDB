@@ -43,6 +43,7 @@
 	         	  <li><a href="${createLink(uri: '/uploadIsatab')}">Upload</a></li>
 	         	  <li><a href="${createLink(uri: '/studies')}">Studies</a></li>
 	         	  <li><a href="${createLink(uri: '/assays')}">Assays</a></li>
+	         	  <li><a href="${createLink(uri: '/runs')}">Runs</a></li>
 	            </ul>
 	          </div><!--/.nav-collapse -->
 	        </div>

@@ -4,7 +4,7 @@ class FEMRun {
 	
 	Integer rowNumber
 	
-	String sampleName
+	//String sampleName
 	String protocolJSON = "{}"
 	String msAssayName = ""
 	String rawSpectraFilePath = ""
@@ -15,7 +15,9 @@ class FEMRun {
 
 	FEMSample sample
 	
-    static constraints = {		
+	static embedded = ['sample']
+	
+    static constraints = {
     }
 	
 	static mapping = {

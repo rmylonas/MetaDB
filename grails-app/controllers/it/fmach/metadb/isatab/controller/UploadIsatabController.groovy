@@ -69,7 +69,7 @@ class UploadIsatabController {
 			}
 			
 			// only insert study if there is at least one assay selected
-			if(study.assays.size() >= 1){
+			if(study.assays.size() >= 1){				
 				study.save(flush: true)
 				insertedAssays += study.assays.size()
 				insertedStudies ++

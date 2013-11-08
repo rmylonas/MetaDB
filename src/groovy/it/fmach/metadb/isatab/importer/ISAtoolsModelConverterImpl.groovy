@@ -80,7 +80,6 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			sample.sourceName = sampleMatrix[i][headerMap[SAMPLE_SOURCE_NAME]]
 			sample.organism = sampleMatrix[i][headerMap[SAMPLE_ORGANISM]]
 			sample.organismPart = sampleMatrix[i][headerMap[SAMPLE_ORGANISM_PART]]
-			sample.rowNumber = i
 			
 			// parse the factors and store them as a JSON string
 			def builder = new groovy.json.JsonBuilder()
@@ -131,8 +130,8 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		
 		for(i in 1..nrRows){
 			def run = new FEMRun()
-			run.sampleName = assayMatrix[i][headerMap[SAMPLE_NAME]]
-			run.sample = sampleList[run.sampleName]
+			def sampleName = assayMatrix[i][headerMap[SAMPLE_NAME]]
+			run.sample = sampleList[sampleName]
 			run.msAssayName = assayMatrix[i][headerMap[RUN_MS_ASSAY_NAME]]
 			run.rawSpectraFilePath = assayMatrix[i][headerMap[RUN_RAW_FILE]]
 			run.derivedSpectraFilePath = assayMatrix[i][headerMap[RUN_DERIVED_FILE]]
@@ -155,8 +154,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			}
 			
 			// add the last Map
-			if(tempMap) tempList << tempMap
-			
+			if(tempMap) tempList << tempMap	
 			
 			// make a JSON text and add it to the run
 			def builder = new groovy.json.JsonBuilder()

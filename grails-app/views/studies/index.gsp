@@ -21,8 +21,8 @@
             </tr>
           </thead>
           
+          <tbody>
           <g:each var="study" in="${flash.studies}">
-          	 <tbody>
             	<tr>
             		<g:each in="${study}">
             			<td><g:link controller='assays' params="${[id: it.id]}">${it.identifier}</g:link></td>
@@ -32,8 +32,8 @@
             			<td>${it.dateCreated}</td>
             		</g:each>  	
 	 			</tr>
-	 		</tbody>
 		  </g:each>
+		  </tbody>
         
 	  </table>
 	    
