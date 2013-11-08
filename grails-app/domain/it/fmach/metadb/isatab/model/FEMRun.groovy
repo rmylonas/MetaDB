@@ -10,6 +10,7 @@ class FEMRun {
 	String rawSpectraFilePath = ""
 	String derivedSpectraFilePath = ""
 	String status = "initialized"
+	String scanPolarity
 	
 	Date lastChange = new Date()
 

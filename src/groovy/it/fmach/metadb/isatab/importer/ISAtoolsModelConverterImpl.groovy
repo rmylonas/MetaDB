@@ -4,9 +4,13 @@ import it.fmach.metadb.isatab.model.FEMAssay
 import it.fmach.metadb.isatab.model.FEMRun
 import it.fmach.metadb.isatab.model.FEMSample
 import it.fmach.metadb.isatab.model.FEMStudy
+import it.fmach.metadb.isatab.model.Instrument
+import it.fmach.metadb.isatab.model.InstrumentPolarity;
+
 import org.isatools.isacreator.model.Assay
 import org.isatools.isacreator.model.Investigation
 import org.isatools.isacreator.model.Study
+
 import it.fmach.metadb.isatab.importer.AccessCodeGenerator
 
 /**
@@ -16,6 +20,8 @@ import it.fmach.metadb.isatab.importer.AccessCodeGenerator
  */
 class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 	def accessCodeGenerator = new AccessCodeGenerator()
+	def instrumentMap = [:]
+	def polarityMap = [:]
 	
 	// field-names which are parsed
 	static final def SAMPLE_NAME = "Sample Name"
@@ -25,6 +31,18 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 	static final def RUN_MS_ASSAY_NAME = "MS Assay Name"
 	static final def RUN_RAW_FILE = "Raw Spectral Data File"
 	static final def RUN_DERIVED_FILE= "Derived Spectral Data File"
+	static final def RUN_SCAN_POLARITY= "Parameter Value[Scan polarity]"
+	
+	ISAtoolsModelConverterImpl(){
+		// create map of available instruments and polarities
+		Instrument.list().each {inst->
+			instrumentMap[inst.metabolightsName] = inst
+		}
+		
+		InstrumentPolarity.list().each {
+			polarityMap[it.name] = it
+		}		
+	}
 	
 	@Override
 	public List<FEMStudy> convertInvestigation(Investigation iSAInvestigation) {
@@ -102,8 +120,22 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		assayMap.each{ k, v ->
 			def assay = new FEMAssay()
 			assay.name = k
-			assay.instrument = v.getAssayPlatform()
+			
+			// select the instrument
+			def instrument = this.instrumentMap[v.getAssayPlatform()]
+			if(instrument == null){throw new RuntimeException("instrument [" + v.getAssayPlatform() + "] is not available")}
+			assay.selectedInstrument = instrument
+			
 			assay.runs = convertRunList(v, sampleList)
+			
+			//select the polarity
+			def polarity = this.polarityMap[assay.runs[0].scanPolarity]
+			if(polarity == null){throw new RuntimeException("polarity [" + polarity + "] is not available")}
+			assay.selectedPolarity = polarity
+			
+			// and for the method we just take the first available
+			assay.selectedMethod = instrument.methods[0]
+			
 			assay.accessCode = accessCodeGenerator.getNewCode()
 			assayList << assay
 		}
@@ -135,6 +167,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			run.msAssayName = assayMatrix[i][headerMap[RUN_MS_ASSAY_NAME]]
 			run.rawSpectraFilePath = assayMatrix[i][headerMap[RUN_RAW_FILE]]
 			run.derivedSpectraFilePath = assayMatrix[i][headerMap[RUN_DERIVED_FILE]]
+			run.scanPolarity = assayMatrix[i][headerMap[RUN_SCAN_POLARITY]]
 			run.rowNumber = i
 						
 			// parse the protocols

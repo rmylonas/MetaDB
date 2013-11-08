@@ -9,12 +9,12 @@
  <div class="container">
  
     <h3>ISAtab content</h3>
-    
-    <h5>Select assays to insert</h5>
 		
 	<g:uploadForm action="insert" class="form-horizontal">
 	
-	  <g:each var="study" in="${session.investigation.studyList}">
+	 <h5>Select assays to insert</h5>
+	
+	  	<g:each var="study" in="${session.investigation.studyList}">
 		  <div class="row-fluid">
 		   	<div class="span4"><b>Study: </b>${study.title}</div>
 		  </div>
@@ -25,6 +25,11 @@
 	    		</div>
 	    	</g:each>
 	  	</g:each>
+
+ 		<h5>Additional parameters</h5>
+
+		
+		
 
 		<input class="btn btn-primary" type="submit" value="Insert">
 

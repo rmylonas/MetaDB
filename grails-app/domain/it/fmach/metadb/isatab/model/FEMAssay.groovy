@@ -9,17 +9,22 @@ class FEMAssay {
 	AccessCode accessCode 
 	
 	String name
-	String instrument
 	String description
-	
 	Date dateCreated
 	
-	List runs
+	Instrument selectedInstrument
+	InstrumentMethod selectedMethod
+	InstrumentPolarity selectedMode
 	
-	static hasMany = [runs: FEMRun]
+	List runs
+	List randomizedRuns
+	
+	static hasMany = [runs: FEMRun, randomizedRuns: FEMRun]
 		
     static constraints = {
 		description nullable: true
 		accessCode unique: true
+		randomizedRuns nullable: true
     }
+	
 }
