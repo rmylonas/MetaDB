@@ -25,8 +25,8 @@
             	<tr>
             		<g:each in="${assay}">
             			<td><g:link controller='runs' params="${[id: it.id]}">${it.accessCode.code}</g:link></td>
-            			<td>${it.name}</td>
-            			<td>${it.instrument}</td>
+            			<td>${it.shortName}</td>
+            			<td>${it.instrument.name}</td>
             			<td>${it.description}</td>
             		</g:each>
 	 			</tr>	 		

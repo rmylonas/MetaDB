@@ -4,12 +4,13 @@ package it.fmach.metadb.isatab.model
 import grails.test.mixin.*
 import it.fmach.metadb.isatab.importer.IsatabImporter
 import it.fmach.metadb.isatab.importer.IsatabImporterImpl
+import it.fmach.metadb.isatab.testHelper.InstrumentCreator
 import org.junit.*
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@Mock([AccessCode])
+@Mock([AccessCode, Instrument])
 @TestFor(FEMAssay)
 class FEMAssayTests {
 	
@@ -18,6 +19,10 @@ class FEMAssayTests {
 	String isatabDir = rootDir + "Wine_Storage"
 
     void testSaveAndLoadAssay() {
+		// create instruments
+		def creator = new InstrumentCreator()
+		creator.createInstrument()
+		
        	IsatabImporter importer = new IsatabImporterImpl(configDir)
 		def investigation = importer.importIsatabFiles(isatabDir)
 		
@@ -32,7 +37,13 @@ class FEMAssayTests {
 		
 		assay.save(flush: true)
 		
-		def loadedAssay = FEMAssay.findByInstrumentLike("%Xevo%")
+		def loadedAssay = FEMAssay.findByName("a_wine_storage_metabolite profiling_mass spectrometry-5.txt")
 		assert "a_wine_storage_metabolite profiling_mass spectrometry-5.txt" == loadedAssay.name
+		
+		// why does this not work?
+		def instrument = Instrument.findByMetabolightsNameLike("%Xevo%")
+		def loadedAssay2 = FEMAssay.findByInstrument(instrument)
+		assert loadedAssay2
+		
     }
 }

@@ -1,5 +1,6 @@
 package it.fmach.metadb.isatab.importer
 
+import it.fmach.metadb.isatab.instrument.Polarity;
 import it.fmach.metadb.isatab.model.AccessCode;
 import it.fmach.metadb.isatab.model.FEMAssay
 import it.fmach.metadb.isatab.model.FEMRun;
@@ -7,8 +8,8 @@ import it.fmach.metadb.isatab.model.FEMSample;
 import it.fmach.metadb.isatab.model.FEMStudy;
 import it.fmach.metadb.isatab.model.ISAParsingInfo;
 import it.fmach.metadb.isatab.model.Instrument;
-import it.fmach.metadb.isatab.model.InstrumentPolarity;
 import it.fmach.metadb.isatab.model.InstrumentMethod;
+import it.fmach.metadb.isatab.testHelper.InstrumentCreator
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import org.junit.*
 
 import grails.test.mixin.*
 
-@Mock([AccessCode, Instrument, InstrumentPolarity])
+@Mock([AccessCode, Instrument])
 class IsatabImporterImplTests {
 
 	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"
@@ -24,7 +25,9 @@ class IsatabImporterImplTests {
 	@Test
 	void testImportIsatabFile() {
 
-		createInstrument().save(flush: true)
+		// create instruments
+		def creator = new InstrumentCreator()
+		creator.createInstrument()
 
 		String configDir = rootDir + "MetaboLightsConfig20130507"
 		String isatabDir = rootDir + "Wine_Storage"
@@ -47,7 +50,8 @@ class IsatabImporterImplTests {
 		assert 6 == study.assays.size
 		FEMAssay assay = study.assays.get(0)
 		assert "a_wine_storage_metabolite profiling_mass spectrometry-5.txt" == assay.name
-		assert "Xevo TQ MS (Waters)" == assay.instrument
+		assert "wine_storage-5" == assay.shortName
+		assert "Xevo TQ MS (Waters)" == assay.instrument.metabolightsName
 
 		//		// check sample content
 		//		assert 224 == assay.samples.size()
@@ -69,7 +73,7 @@ class IsatabImporterImplTests {
 		FEMRun run = assay.runs.get(0)
 		assert run.protocolJSON.contains("MS:ACQUITY UPLC")
 		assert "Q034_01_00_R_MRM" == run.msAssayName
-		assert "0001_R" == run.sampleName
+		assert "0001_R" == run.sample.name
 		assert "T:experimentsXevo_Stefania_Maggio2013.PROData" == run.rawSpectraFilePath
 		assert "" == run.derivedSpectraFilePath
 
@@ -102,6 +106,10 @@ class IsatabImporterImplTests {
 
 	@Test
 	void testImportZip() {
+		
+		// create instruments
+		def creator = new InstrumentCreator()
+		creator.createInstrument()
 
 		String configDir = rootDir + "MetaboLightsConfig20130507"
 		String isatabDir = rootDir + "winecellar_archive.zip"
@@ -114,33 +122,6 @@ class IsatabImporterImplTests {
 		assert 1 == investigation.studyList.size
 		assert "Metabolic changes during wine storage" == investigation.studyList[0].title
 		assert "a_wine_storage_metabolite profiling_mass spectrometry-5.txt" == investigation.studyList[0].assays[0].name
-	}
-
-	Instrument createInstrument(){
-		def pos = new InstrumentPolarity(
-				name: 'alternating',
-				tag: 'RP_pos',
-				startPattern: '1.blank-1.STDmix-4.QC',
-				repeatPattern: '6.sample-1.QC',
-				endPattern: '1.STDmix-1.blank'
-				)
-
-		def neg = new InstrumentPolarity(
-				name: 'negative',
-				tag: 'RP_neg',
-				startPattern: '1.blank-1.STDmix-4.QC',
-				repeatPattern: '6.sample-1.QC',
-				endPattern: '1.STDmix-1.blank'
-				)
-
-		def polarities = [pos, neg]
-
-
-		def methods = [new InstrumentMethod(name: 'untargeted', polarities: polarities)]
-
-		new Instrument(name: "Xevo", metabolightsName: "Xevo TQ MS (Waters)", methods: methods).save(failOnError: true)
-		new Instrument(name: "Synapt", metabolightsName: "SYNAPT HDMS (Waters)", methods: methods).save(failOnError: true)
-
 	}
 
 }

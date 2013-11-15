@@ -9,12 +9,13 @@ class FEMAssay {
 	AccessCode accessCode 
 	
 	String name
+	String shortName
 	String description
 	Date dateCreated
 	
-	Instrument selectedInstrument
+	Instrument instrument
 	InstrumentMethod selectedMethod
-	InstrumentPolarity selectedMode
+	String instrumentPolarity
 	
 	List runs
 	List randomizedRuns

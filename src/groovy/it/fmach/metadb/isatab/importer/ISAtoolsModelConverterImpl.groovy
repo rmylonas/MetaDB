@@ -5,7 +5,6 @@ import it.fmach.metadb.isatab.model.FEMRun
 import it.fmach.metadb.isatab.model.FEMSample
 import it.fmach.metadb.isatab.model.FEMStudy
 import it.fmach.metadb.isatab.model.Instrument
-import it.fmach.metadb.isatab.model.InstrumentPolarity;
 
 import org.isatools.isacreator.model.Assay
 import org.isatools.isacreator.model.Investigation
@@ -21,7 +20,6 @@ import it.fmach.metadb.isatab.importer.AccessCodeGenerator
 class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 	def accessCodeGenerator = new AccessCodeGenerator()
 	def instrumentMap = [:]
-	def polarityMap = [:]
 	
 	// field-names which are parsed
 	static final def SAMPLE_NAME = "Sample Name"
@@ -39,9 +37,6 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			instrumentMap[inst.metabolightsName] = inst
 		}
 		
-		InstrumentPolarity.list().each {
-			polarityMap[it.name] = it
-		}		
 	}
 	
 	@Override
@@ -120,18 +115,19 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		assayMap.each{ k, v ->
 			def assay = new FEMAssay()
 			assay.name = k
+			assay.shortName = createShortAssayName(k)
 			
 			// select the instrument
 			def instrument = this.instrumentMap[v.getAssayPlatform()]
 			if(instrument == null){throw new RuntimeException("instrument [" + v.getAssayPlatform() + "] is not available")}
-			assay.selectedInstrument = instrument
+			assay.instrument = instrument
 			
 			assay.runs = convertRunList(v, sampleList)
 			
 			//select the polarity
-			def polarity = this.polarityMap[assay.runs[0].scanPolarity]
-			if(polarity == null){throw new RuntimeException("polarity [" + polarity + "] is not available")}
-			assay.selectedPolarity = polarity
+			def polarity = assay.runs[0].scanPolarity
+			if(polarity == null){throw new RuntimeException("polarity [" + polarity + "] has to be defined")}
+			assay.instrumentPolarity = polarity
 			
 			// and for the method we just take the first available
 			assay.selectedMethod = instrument.methods[0]
@@ -141,6 +137,18 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		}
 		
 		return assayList
+	}
+	
+	private String createShortAssayName(String name){
+		def matcher = name =~ /a_(.+)_metabolite profiling_mass spectrometry-?(.*)\.txt/
+		
+		// return the complete name, if there is a matcher
+		if(! matcher) return name
+		
+		def end = (matcher[0][2] != '')?("-" + matcher[0][2]):('')
+		def shortName = matcher[0][1] + end
+		
+		return shortName
 	}
 	
 	private List<FEMRun> convertRunList(Assay iSAAssay, Map<String, FEMSample> sampleList){

@@ -4,6 +4,7 @@ package it.fmach.metadb.isatab.model
 import it.fmach.metadb.isatab.importer.FEMInvestigation
 import it.fmach.metadb.isatab.importer.IsatabImporter
 import it.fmach.metadb.isatab.importer.IsatabImporterImpl
+import it.fmach.metadb.isatab.testHelper.InstrumentCreator
 import it.fmach.metadb.isatab.validator.IsatabValidator
 import it.fmach.metadb.isatab.validator.IsatabValidatorImpl
 import org.junit.Test
@@ -15,7 +16,7 @@ import org.junit.*
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@Mock([AccessCode])
+@Mock([AccessCode, Instrument])
 @TestFor(ISAParsingInfo)
 class ISAParsingInfoTests {
 
@@ -24,7 +25,11 @@ class ISAParsingInfoTests {
 	
 	@Test
     void testIsaParsingWithLoadingError() {
-				
+		
+		// create instruments
+		def creator = new InstrumentCreator()
+		creator.createInstrument()
+		
 		String isatabDir = rootDir + "Empty"
 		
         def importer = new IsatabImporterImpl(configDir)
@@ -44,7 +49,10 @@ class ISAParsingInfoTests {
 	
 	@Test
 	void testIsaParsingWithVerificationError() {
-				
+		// create instruments
+		def creator = new InstrumentCreator()
+		creator.createInstrument()
+		
 		String isatabDir = rootDir + "Invalid_Wine_Storage"
 		
 		def importer = new IsatabImporterImpl(configDir)

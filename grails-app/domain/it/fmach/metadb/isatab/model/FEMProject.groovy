@@ -1,13 +1,11 @@
 package it.fmach.metadb.isatab.model
 
-class Group {
+class FEMProject {
 
 	String name
 	String description
 	
-	List projects
-	
-	def hasMany = [projects: Project]
+//	static belongsTo = [fEMGroup: FEMGroup]
 	
     static constraints = {
 		description nullable: true

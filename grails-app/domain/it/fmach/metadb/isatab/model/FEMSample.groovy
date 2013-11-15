@@ -8,7 +8,7 @@ class FEMSample {
 	String organismPart = ""
 	String factorJSON = "{}"
 	
-	//static belongsTo = [fEMRun: FEMRun]
+//	static belongsTo = [fEMRun: FEMRun]
 	
     static constraints = {
 		factorJSON sqlType: 'text'

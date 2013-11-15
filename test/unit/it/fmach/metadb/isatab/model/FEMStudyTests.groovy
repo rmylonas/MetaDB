@@ -4,6 +4,7 @@ package it.fmach.metadb.isatab.model
 import it.fmach.metadb.isatab.importer.IsatabImporter;
 import it.fmach.metadb.isatab.importer.IsatabImporterImpl;
 import it.fmach.metadb.isatab.model.FEMStudy;
+import it.fmach.metadb.isatab.testHelper.InstrumentCreator
 import grails.test.mixin.*
 
 import org.junit.*
@@ -11,7 +12,7 @@ import org.junit.*
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@Mock([AccessCode])
+@Mock([AccessCode, Instrument])
 @TestFor(FEMStudy)
 class FEMStudyTests {
 	
@@ -21,6 +22,10 @@ class FEMStudyTests {
 
     void testSaveAndLoadStudy() {
 
+		// create instruments
+		def creator = new InstrumentCreator()
+		creator.createInstrument()
+		
 		IsatabImporter importer = new IsatabImporterImpl(configDir)
 		def investigation = importer.importIsatabFiles(isatabDir)
 		def study = investigation.studyList.get(0)

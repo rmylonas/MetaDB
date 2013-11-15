@@ -7,11 +7,16 @@ class Instrument {
 	String bookingSystemName
 	
 	List methods
-	static hasMany = [methods: InstrumentMethod]
+	List polarities
+	static hasMany = [methods: InstrumentMethod, polarities: String]
 
     static constraints = {
 		bookingSystemName nullable: true
 		name unique: true
 		metabolightsName unique: true
     }
+	
+	static mapping = {
+		methods lazy: false
+	}
 }

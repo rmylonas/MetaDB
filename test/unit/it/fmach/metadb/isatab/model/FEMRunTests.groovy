@@ -8,10 +8,11 @@ import org.junit.*
 
 import it.fmach.metadb.isatab.importer.IsatabImporter
 import it.fmach.metadb.isatab.importer.IsatabImporterImpl
+import it.fmach.metadb.isatab.testHelper.InstrumentCreator
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@Mock([AccessCode])
+@Mock([AccessCode, Instrument, FEMSample])
 @TestFor(FEMRun)
 class FEMRunTests {
 
@@ -20,6 +21,10 @@ class FEMRunTests {
 	String isatabDir = rootDir + "Wine_Storage"
 	
     void testSaveAndLoadRun() {
+		// create instruments
+		def creator = new InstrumentCreator()
+		creator.createInstrument()
+		
         IsatabImporter importer = new IsatabImporterImpl(configDir)
 		def investigation = importer.importIsatabFiles(isatabDir)
 		
@@ -33,7 +38,10 @@ class FEMRunTests {
 		
 		run.save(flush: true)
 		
-		def loadedRun = FEMRun.findBySampleName("0001_R")
+//		def sample = FEMSample.findByName("0001_R")
+//		println("here: "+sample)
+//		def loadedRun = FEMRun.findBySample(sample)
+		def loadedRun = FEMRun.list().get(0)
 		String protocols = loadedRun.protocolJSON
 		assert protocols.contains("Phenolics")
     }

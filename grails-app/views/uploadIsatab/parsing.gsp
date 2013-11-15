@@ -12,24 +12,27 @@
 		
 	<g:uploadForm action="insert" class="form-horizontal">
 	
-	 <h5>Select assays to insert</h5>
+	 <h4>Select assays</h4>
 	
 	  	<g:each var="study" in="${session.investigation.studyList}">
 		  <div class="row-fluid">
-		   	<div class="span4"><b>Study: </b>${study.title}</div>
+		   	<div class="span4">Study: <strong>${study.title}</strong></div>
 		  </div>
 	    	<g:each var="assay" in="${study.assays}">
 	    		<div class="row-fluid">
-	    			<div class="span5 offset1">${assay.name}</div>
-	    			<div class="span1"><g:checkBox name="${assay.name}" value="${true}" /></div>
+	    			<div class="span1 offset1"><g:checkBox name="${assay.name}" value="${true}" /></div>
+	    			<div class="span1">
+						<g:select name="method" optionValue="name" from="${assay.instrument.methods}" optionKey="id"/>
+	    			</div>
+	    			<div class="span2">${assay.shortName}</div>
+	    			<div class="span1"><strong>${assay.instrument.name}</strong></div>
+	    			<div class="span1">${assay.instrumentPolarity}</div>
 	    		</div>
 	    	</g:each>
 	  	</g:each>
 
- 		<h5>Additional parameters</h5>
-
-		
-		
+ 		<h4>Additional parameters</h4>
+				
 
 		<input class="btn btn-primary" type="submit" value="Insert">
 

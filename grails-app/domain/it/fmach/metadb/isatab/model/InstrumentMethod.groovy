@@ -4,10 +4,10 @@ class InstrumentMethod {
 
 	String name
 	String description
-	
-	List polarities
-	
-	static hasMany = [polarities: InstrumentPolarity]
+	String tag
+	String startPattern
+	String repeatPattern
+	String endPattern
 	
     static constraints = {
 		description nullable: true
