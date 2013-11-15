@@ -53,12 +53,6 @@ class UploadIsatabController {
 		
 		session.investigation = investigation
 		
-		def assay = investigation.studyList.get(0).assays.get(1)
-		def instrumentMethods = assay.instrument.methods
-		assay.instrument.methods.get(1).attach()
-//		println("methods: " + instrumentMethods)
-//		println(instrumentMethods.get(0).name)
-		
 		redirect(action: 'parsing')
 		
 	}
@@ -74,16 +68,7 @@ class UploadIsatabController {
 			def iter = study.assays.iterator()
 			while(iter.hasNext()){
 				FEMAssay assay = iter.next()
-				
-//				FEMSample sample = assay.runs.get(0).sample
-//				FEMRun run = assay.runs.get(0)
-//				println("sample: " + sample)
-//				
-//				run.save(flush: true)
-				// sample.save(flush: true)
-				
-				
-								
+												
 				// remove the entries which weren't selected
 				if(params[assay.name] != "on") iter.remove()
 			}
