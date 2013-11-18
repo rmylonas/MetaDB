@@ -7,7 +7,7 @@
 <body>
 
  <div class="container">
-    <h3>Available studies</h3>
+    <h3>Studies</h3>
 
 	  <table class="table table-striped">
 	  

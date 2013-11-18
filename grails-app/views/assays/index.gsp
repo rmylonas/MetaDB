@@ -7,7 +7,7 @@
 <body>
 
  <div class="container">
-    <h3>Available Assays ${(id?"from Study"+id:'')}</h3>
+    <h3>Assays ${(id?"from Study"+id:'')}</h3>
 
 	  <table class="table table-striped">
 	  

@@ -13,7 +13,7 @@
       
     <!-- Show errors -->
     <g:if test="${flash.error}">
-  		<div class="alert alert-block alert-error">
+  		<div class="alert alert-block alert-danger">
   			<button type="button" class="close" data-dismiss="alert">&times;</button>
   			<strong>Error: </strong>${flash.error}
   		</div>
@@ -27,43 +27,37 @@
 	  		</div>
 	</g:if>
 	
-	<g:uploadForm action="upload" class="form-horizontal">
+
 	
-		<div class="control-group">
-	    	<label class="control-label" for="isaTabInput">ISAtab file</label>
-	    	<div class="controls">
-				<input name="isaTabFile" type="file" style="display:none">
-				<div class="input-append">
-					<input id="isaTabInput" class="input-large" type="text">
-					<a class="btn" onclick="$('input[name=isaTabFile]').click();">Browse</a>
+	<g:uploadForm action="upload" role="form">
+		<div class="col-xs-4">
+			<div class="form-group">
+		    	<label for="isaTabInput">ISAtab file</label>
+				<input name="isaTabFile" class="form-control" type="file" style="display:none">
+				
+				<div class="input-group">	
+					<input id="isaTabInput" class="form-control" type="text">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" onclick="$('input[name=isaTabFile]').click();">Browse</button>
+					</span>
 				</div>
+				
+			</div> <!-- /form-group -->
+			
+			<div class="form-group">
+				<button class="btn btn-primary" type="submit">Upload</button>
 			</div>
-		</div>
-		
-		<div class="control-group">
-			<div class="controls">
-				<input class="btn btn-primary" type="submit" value="Upload">
-			</div>
-		</div>
+			
+		</div> <!-- /col-xs-3 -->
 		
     </g:uploadForm>
-    
-    <g:if test="${flash.parsedFiles}">
-  		<h5>Processed files:</h5>
-	</g:if>
-    
-    <ul>
-	    <g:each in="${flash.parsedFiles}">
-	    	<li><a href="download?filepath=${it.filepath}&filename=${it.name}">${it.name}</a></li>
-		</g:each>
-	</ul>
 
 </div> <!-- /container -->
 
 
     <script type="text/javascript">
 		$('input[name=isaTabFile]').change(function() {
-		$('#isaTabInput').val($(this).val());
+			$('#isaTabInput').val($(this).val());
 		});
 	</script>
 

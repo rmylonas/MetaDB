@@ -16,17 +16,17 @@
 	
 	  	<g:each var="study" in="${session.investigation.studyList}">
 		  <div class="row">
-		   	<div class="span4">Study: <strong>${study.title}</strong></div>
+		   	<div class="col-md-4">Study: <strong>${study.title}</strong></div>
 		  </div>
 	    	<g:each var="assay" in="${study.assays}">
 	    		<div class="row">
 	    			<div class="col-md-1 col-md-offset-1"><g:checkBox name="${assay.name}" value="${true}" /></div>
-	    			<div class="col-md-4">
-						<g:select class="selectpicker" data-style="btn-info" name="method" optionValue="name" from="${assay.instrument.methods}" optionKey="id"/>
+	    			<div class="col-md-2">
+						<g:select class="form-control input-sm" name="method" optionValue="name" from="${assay.instrument.methods}" optionKey="id"/>
 	    			</div>
 	    			<div class="col-md-2">${assay.shortName}</div>
-	    			<div class="col-md-1"><strong>${assay.instrument.name}</strong></div>
-	    			<div class="col-md-1">${assay.instrumentPolarity}</div>
+	    			<div class="col-md-2">${assay.instrument.name}</div>
+	    			<div class="col-md-2">${assay.instrumentPolarity}</div>
 	    		</div>
 	    	</g:each>
 	  	</g:each>
