@@ -1,10 +1,12 @@
 package it.fmach.metadb.isatab.testHelper
 
 import it.fmach.metadb.isatab.instrument.Polarity;
+import it.fmach.metadb.isatab.model.FEMGroup
+import it.fmach.metadb.isatab.model.FEMProject
 import it.fmach.metadb.isatab.model.Instrument
 import it.fmach.metadb.isatab.model.InstrumentMethod
 
-class InstrumentCreator {
+class TestDbSetup {
 
 	void createInstrument(){
 		
@@ -46,5 +48,14 @@ class InstrumentCreator {
 
 			
 	}
+	
+	void createGroups(){
+		List fulvioProjects = [new FEMProject(name: 'Wine cellar'), new FEMProject(name: 'Nomacorc') ]
+		List urskaProjects = [new FEMProject(name: 'Ager melo')]
+			
+		def fulvioGroup = new FEMGroup(name: "Fulvio", projects:fulvioProjects).save(failOnError: true)
+		def urskaGroup = new FEMGroup(name: "Urska", projects:urskaProjects).save(failOnError: true)
+	}
+	
 	
 }

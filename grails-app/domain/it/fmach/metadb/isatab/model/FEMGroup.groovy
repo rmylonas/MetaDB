@@ -11,6 +11,7 @@ class FEMGroup {
 	
     static constraints = {
 		description nullable: true
+		projects nullable: true
 		name unique: true
     }
 	

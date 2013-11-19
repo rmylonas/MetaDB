@@ -11,7 +11,11 @@ import org.junit.*
 @TestFor(InstrumentMethod)
 class InstrumentMethodTests {
 
-    void testSomething() {
-       fail "Implement me"
+    void testSaveAndLoad() {
+       def instr = new InstrumentMethod(name: 'positive RP', tag: 'rp_pos', startPattern: '1.QC-1.STDmix', repeatPattern: '1.sample-1.QC', endPattern: '3.QC')
+	   instr.save()
+	   
+	   def loadedInstr = InstrumentMethod.findByName('positive RP')
+	   assert 'rp_pos' == loadedInstr.tag
     }
 }

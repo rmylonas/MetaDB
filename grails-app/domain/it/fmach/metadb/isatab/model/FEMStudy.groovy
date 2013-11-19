@@ -12,6 +12,9 @@ class FEMStudy {
 	
 	List assays
 	
+	FEMProject project
+	FEMGroup group
+	
 	static hasMany = [assays:FEMAssay]
 	
 	// List of Publications
@@ -20,7 +23,8 @@ class FEMStudy {
 	// List of Contacts
 	
     static constraints = {
-		
+		group nullable: true
+		project nullable: true
     }
 	
 	static mapping = {

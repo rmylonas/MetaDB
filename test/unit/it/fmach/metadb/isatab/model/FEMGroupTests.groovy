@@ -11,7 +11,11 @@ import org.junit.*
 @TestFor(FEMGroup)
 class FEMGroupTests {
 
-    void testSomething() {
-       fail "Implement me"
+    void testSaveAndLoad() {
+		FEMGroup group = new FEMGroup(name: 'Fulvio', description: 'ok')
+		group.save(flush: true)
+		
+		def loadedGroup = FEMGroup.findByName('Fulvio')
+		assert "ok" == loadedGroup.description	   
     }
 }

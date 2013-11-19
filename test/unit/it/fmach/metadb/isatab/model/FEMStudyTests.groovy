@@ -4,7 +4,7 @@ package it.fmach.metadb.isatab.model
 import it.fmach.metadb.isatab.importer.IsatabImporter;
 import it.fmach.metadb.isatab.importer.IsatabImporterImpl;
 import it.fmach.metadb.isatab.model.FEMStudy;
-import it.fmach.metadb.isatab.testHelper.InstrumentCreator
+import it.fmach.metadb.isatab.testHelper.TestDbSetup
 import grails.test.mixin.*
 
 import org.junit.*
@@ -23,7 +23,7 @@ class FEMStudyTests {
     void testSaveAndLoadStudy() {
 
 		// create instruments
-		def creator = new InstrumentCreator()
+		def creator = new TestDbSetup()
 		creator.createInstrument()
 		
 		IsatabImporter importer = new IsatabImporterImpl(configDir)

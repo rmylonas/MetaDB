@@ -9,7 +9,7 @@ import it.fmach.metadb.isatab.model.FEMStudy;
 import it.fmach.metadb.isatab.model.ISAParsingInfo;
 import it.fmach.metadb.isatab.model.Instrument;
 import it.fmach.metadb.isatab.model.InstrumentMethod;
-import it.fmach.metadb.isatab.testHelper.InstrumentCreator
+import it.fmach.metadb.isatab.testHelper.TestDbSetup
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ class IsatabImporterImplTests {
 	void testImportIsatabFile() {
 
 		// create instruments
-		def creator = new InstrumentCreator()
+		def creator = new TestDbSetup()
 		creator.createInstrument()
 
 		String configDir = rootDir + "MetaboLightsConfig20130507"
@@ -108,7 +108,7 @@ class IsatabImporterImplTests {
 	void testImportZip() {
 		
 		// create instruments
-		def creator = new InstrumentCreator()
+		def creator = new TestDbSetup()
 		creator.createInstrument()
 
 		String configDir = rootDir + "MetaboLightsConfig20130507"

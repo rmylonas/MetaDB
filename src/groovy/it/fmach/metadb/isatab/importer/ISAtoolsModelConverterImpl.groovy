@@ -130,7 +130,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			assay.instrumentPolarity = polarity
 			
 			// and for the method we just take the first available
-			assay.selectedMethod = instrument.methods[0]
+			assay.method = instrument.methods[0]
 			
 			assay.accessCode = accessCodeGenerator.getNewCode()
 			assayList << assay

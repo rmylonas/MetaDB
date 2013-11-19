@@ -4,7 +4,7 @@ package it.fmach.metadb.isatab.model
 import it.fmach.metadb.isatab.importer.FEMInvestigation
 import it.fmach.metadb.isatab.importer.IsatabImporter
 import it.fmach.metadb.isatab.importer.IsatabImporterImpl
-import it.fmach.metadb.isatab.testHelper.InstrumentCreator
+import it.fmach.metadb.isatab.testHelper.TestDbSetup
 import it.fmach.metadb.isatab.validator.IsatabValidator
 import it.fmach.metadb.isatab.validator.IsatabValidatorImpl
 import org.junit.Test
@@ -27,7 +27,7 @@ class ISAParsingInfoTests {
     void testIsaParsingWithLoadingError() {
 		
 		// create instruments
-		def creator = new InstrumentCreator()
+		def creator = new TestDbSetup()
 		creator.createInstrument()
 		
 		String isatabDir = rootDir + "Empty"
@@ -40,17 +40,17 @@ class ISAParsingInfoTests {
 		// load domain from the DB
 		def loadedParsingInfo = ISAParsingInfo.findBySuccess(false)
 		
-		assertFalse(loadedParsingInfo.success)
-		assertEquals(1, loadedParsingInfo.nrOfErrors)
-		assertTrue(loadedParsingInfo.errorMessage.contains("file does not exist"))
-		assertEquals("parsing failed", loadedParsingInfo.status)
+		assert ! loadedParsingInfo.success
+		assert 1 == loadedParsingInfo.nrOfErrors
+		assert loadedParsingInfo.errorMessage.contains("file does not exist")
+		assert "parsing failed" == loadedParsingInfo.status
 			
     }
 	
 	@Test
 	void testIsaParsingWithVerificationError() {
 		// create instruments
-		def creator = new InstrumentCreator()
+		def creator = new TestDbSetup()
 		creator.createInstrument()
 		
 		String isatabDir = rootDir + "Invalid_Wine_Storage"
@@ -59,24 +59,24 @@ class ISAParsingInfoTests {
 		def investigation = importer.importIsatabFiles(isatabDir)
 		def parsingInfo = investigation.isaParsingInfo
 		
-		assertEquals("parsed", parsingInfo.status)
-		assertTrue(parsingInfo.success)
+		assert "parsed" == parsingInfo.status
+		assert parsingInfo.success
 		
 		IsatabValidator validator = new IsatabValidatorImpl(configDir)
 		parsingInfo = validator.validateIsatabFile(isatabDir)
 		
-		assertEquals("validation failed", parsingInfo.status)
-		assertFalse(parsingInfo.success)
+		assert "validation failed" == parsingInfo.status
+		assert ! parsingInfo.success
 		
 		parsingInfo.save(flush: true)
 		
 		// load domain from the DB
 		def loadedParsingInfo = ISAParsingInfo.findBySuccess(false)
 		
-		assertFalse(loadedParsingInfo.success)
-		assertEquals(9, loadedParsingInfo.nrOfErrors)
-		assertTrue(loadedParsingInfo.errorMessage.contains("2405_C is a Sample Name"))
-		assertEquals("validation failed", loadedParsingInfo.status)
+		assert ! loadedParsingInfo.success
+		assert 9 == loadedParsingInfo.nrOfErrors
+		assert loadedParsingInfo.errorMessage.contains("2405_C is a Sample Name")
+		assert "validation failed" == loadedParsingInfo.status
 			
 	}
 	

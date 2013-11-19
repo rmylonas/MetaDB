@@ -5,10 +5,12 @@ import it.fmach.metadb.isatab.importer.FEMInvestigation;
 import it.fmach.metadb.isatab.importer.IsatabImporter
 import it.fmach.metadb.isatab.importer.IsatabImporterImpl
 import it.fmach.metadb.isatab.model.FEMGroup;
+import it.fmach.metadb.isatab.model.FEMProject;
 import it.fmach.metadb.isatab.model.FEMRun
 import it.fmach.metadb.isatab.model.FEMSample
 import it.fmach.metadb.isatab.model.FEMStudy
 import it.fmach.metadb.isatab.model.FEMAssay
+import it.fmach.metadb.isatab.model.InstrumentMethod;
 
 class UploadIsatabController {
 	
@@ -59,7 +61,6 @@ class UploadIsatabController {
 		session.projects = session.groups.get(0).projects
 		
 		redirect(action: 'parsing')
-		
 	}
 	
 	def parsing() { }
@@ -69,17 +70,25 @@ class UploadIsatabController {
 		def insertedAssays = 0
 		def insertedStudies = 0
 		
-		for(FEMStudy study: session.investigation.studyList){	
+		for(FEMStudy study: session.investigation.studyList){
+			// assign selected group and project
+			study.project = FEMProject.get(params["project"])
+			study.group = FEMGroup.get(params["group"])
+			
 			def iter = study.assays.iterator()
 			while(iter.hasNext()){
 				FEMAssay assay = iter.next()
 												
 				// remove the entries which weren't selected
-				if(params[assay.name] != "on") iter.remove()
+				if(params[assay.name + "_cb"] != "on") iter.remove()
+				
+				// set instrument method
+				assay.method = InstrumentMethod.get(params[assay.name + "_me"])
 			}
 			
 			// only insert study if there is at least one assay selected
 			if(study.assays.size() >= 1){
+				println "here"
 				studyService.saveStudy(study)
 				insertedAssays += study.assays.size()
 				insertedStudies ++
@@ -88,7 +97,6 @@ class UploadIsatabController {
 		
 		flash.message = insertedAssays + " assay(s) from " + insertedStudies + " study were succesfully inserted"
 		redirect(action: 'index')
-		
 	}
 	
 	// AJAX method

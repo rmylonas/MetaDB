@@ -14,7 +14,7 @@ class FEMAssay {
 	Date dateCreated
 	
 	Instrument instrument
-	InstrumentMethod selectedMethod
+	InstrumentMethod method
 	String instrumentPolarity
 	
 	List runs

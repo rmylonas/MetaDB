@@ -8,7 +8,7 @@ import org.junit.*
 
 import it.fmach.metadb.isatab.importer.IsatabImporter
 import it.fmach.metadb.isatab.importer.IsatabImporterImpl
-import it.fmach.metadb.isatab.testHelper.InstrumentCreator
+import it.fmach.metadb.isatab.testHelper.TestDbSetup
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
@@ -22,7 +22,7 @@ class FEMRunTests {
 	
     void testSaveAndLoadRun() {
 		// create instruments
-		def creator = new InstrumentCreator()
+		def creator = new TestDbSetup()
 		creator.createInstrument()
 		
         IsatabImporter importer = new IsatabImporterImpl(configDir)

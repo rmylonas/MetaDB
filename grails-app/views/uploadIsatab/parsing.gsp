@@ -34,9 +34,9 @@
 		  </div>
 	    	<g:each var="assay" in="${study.assays}">
 	    		<div class="row">
-	    			<div class="col-md-1 col-md-offset-1"><g:checkBox name="${assay.name}" value="${true}" /></div>
+	    			<div class="col-md-1 col-md-offset-1"><g:checkBox name="${assay.name + '_cb'}" value="${true}" /></div>
 	    			<div class="col-md-2">
-						<g:select class="form-control input-sm" name="method" optionValue="name" from="${assay.instrument.methods}" optionKey="id"/>
+						<g:select class="form-control input-sm" name="${assay.name + '_me'}" optionValue="name" from="${assay.instrument.methods}" optionKey="id"/>
 	    			</div>
 	    			<div class="col-md-2">${assay.shortName}</div>
 	    			<div class="col-md-2">${assay.instrument.name}</div>
