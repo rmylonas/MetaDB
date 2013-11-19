@@ -1,8 +1,10 @@
 package it.fmach.metadb.isatab.controller
 
+import grails.converters.JSON;
 import it.fmach.metadb.isatab.importer.FEMInvestigation;
 import it.fmach.metadb.isatab.importer.IsatabImporter
 import it.fmach.metadb.isatab.importer.IsatabImporterImpl
+import it.fmach.metadb.isatab.model.FEMGroup;
 import it.fmach.metadb.isatab.model.FEMRun
 import it.fmach.metadb.isatab.model.FEMSample
 import it.fmach.metadb.isatab.model.FEMStudy
@@ -52,6 +54,9 @@ class UploadIsatabController {
 		}
 		
 		session.investigation = investigation
+		session.groups = FEMGroup.list()
+		// get the projects of first group by default and update using availableProjects (AJAX)
+		session.projects = session.groups.get(0).projects
 		
 		redirect(action: 'parsing')
 		
@@ -84,6 +89,12 @@ class UploadIsatabController {
 		flash.message = insertedAssays + " assay(s) from " + insertedStudies + " study were succesfully inserted"
 		redirect(action: 'index')
 		
+	}
+	
+	// AJAX method
+	def ajaxProjects(){
+		def group = FEMGroup.get(params.groupId)
+		render group.projects as JSON
 	}
 	
 }

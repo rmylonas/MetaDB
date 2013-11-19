@@ -13,4 +13,8 @@ class FEMGroup {
 		description nullable: true
 		name unique: true
     }
+	
+	static mapping = {
+		projects lazy: false
+	}
 }
