@@ -31,7 +31,7 @@ class TestDomainCreator {
 		def j = 0
 		for(i in 0..2){
 			assayList.add(new FEMAssay(accessCode: accessCodeGenerator.getNewCode(), name: "name_"+i, shortName: "short_"+i, 
-				instrument: Instrument.get(1), method: InstrumentMethod.get(1), 
+				instrument: Instrument.get(1), method: this.createMethod(), 
 				instrumentPolarity: 'positive', runs: runList[j..(j+3)]))
 			j += 4
 		}
@@ -40,6 +40,18 @@ class TestDomainCreator {
 		def study = new FEMStudy(identifier: 'study_id', iSATabFilePath: '/path', assays: assayList)
 		
 		return study
+		
+	}
+	
+	
+	InstrumentMethod createMethod(){
+		def xevoMethod = new InstrumentMethod(name: 'untargeted RP',
+				tag: 'xev_tar_RP',
+				startPattern: '5.blank-1.STDmix-2.QC',
+				repeatPattern: '3.sample-1.QC',
+				endPattern: '1.STDmix-5.blank')
+		
+		return xevoMethod
 		
 	}
 	
