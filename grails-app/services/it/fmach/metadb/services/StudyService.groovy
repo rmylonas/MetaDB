@@ -10,14 +10,27 @@ class StudyService {
 		def alreadySaved = [:]
 		
 		study.assays.each{ assay ->
+			
+			// save the runs
 			assay.runs.each{ run ->
+				if(alreadySaved[run.sample] == null){
+					run.sample.save(flush: true, failOnError: true)			
+					alreadySaved[run.sample] = true
+				}
+				run.save(flush: true, failOnError: true)
+			}
+			
+			// save randomizedRuns
+			assay.randomizedRuns.each{ run ->
 				if(alreadySaved[run.sample] == null){
 					run.sample.save(flush: true, failOnError: true)
 					alreadySaved[run.sample] = true
 				}
 				run.save(flush: true, failOnError: true)
 			}
+			
 			assay.save(flush: true, failOnError: true)
+
 		}
 		
 		// then the rest

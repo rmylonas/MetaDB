@@ -30,11 +30,11 @@ class RunRandomization {
 	def deepCopier = new DeepCopier()
 
 	FEMAssay randomizeAssay(FEMAssay assay){
-		assay.randomizedRuns = this.randomizeRuns(assay.runs, assay.method, assay.accessCode.code)
+		assay.randomizedRuns = this.randomizeRuns(assay.runs, assay.method, assay.accessCode.code, assay.instrumentPolarity)
 		return assay
 	}
 	
-	List<FEMRun> randomizeRuns(List<FEMRun> runs, InstrumentMethod method, String prefix){
+	List<FEMRun> randomizeRuns(List<FEMRun> runs, InstrumentMethod method, String prefix, String instrumentPolarity){
 		def randRuns = []
 		
 		// create new Samples for QC and STDmix
@@ -58,20 +58,26 @@ class RunRandomization {
 		randRuns = randRuns + this.createPatternSet(method.endPattern, sampleMap)
 		
 		// add prefix, suffix and numeration
-		randRuns = this.addInformation(prefix, method.tag, randRuns)
+		randRuns = this.addInformation(prefix, method.tag, randRuns, instrumentPolarity)
 		
 		return randRuns
 	}
 	
-	private List<FEMRun> addInformation(String prefix, String suffix, List<FEMRun> runList){
+	private List<FEMRun> addInformation(String prefix, String suffix, List<FEMRun> runList, String instrumentPolarity){
 		
-		for(i in 1..runList.size){
-			def name = prefix + '_' + sprintf('%03d', i) + "_" + runList[i-1].msAssayName.trim() + "_" + suffix
-			runList[i-1].msAssayName = name
+		for(i in 0..(runList.size-1)){
+			// change the assay name
+			def name = prefix + '_' + sprintf('%03d', i+1) + "_" + runList[i].msAssayName.trim() + "_" + suffix
+			runList[i].msAssayName = name
+			
+			// set correct rowNumber
+			runList[i].rowNumber = i
+			
+			// set instrumentPolarity
+			runList[i].scanPolarity = instrumentPolarity
 		}
 		
-		return runList
-		
+		return runList	
 	}
 	
 	private List<FEMRun> createPatternSet(String pattern, List<FEMRun> runs, Map<String, FEMSample> sampleMap){

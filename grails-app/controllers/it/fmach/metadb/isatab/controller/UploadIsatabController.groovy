@@ -11,10 +11,12 @@ import it.fmach.metadb.isatab.model.FEMSample
 import it.fmach.metadb.isatab.model.FEMStudy
 import it.fmach.metadb.isatab.model.FEMAssay
 import it.fmach.metadb.isatab.model.InstrumentMethod;
+import it.fmach.metadb.randomization.RunRandomization
 
 class UploadIsatabController {
 	
 	def studyService
+	def runRandomization = new RunRandomization()
 
     def index() { }
 	
@@ -80,15 +82,20 @@ class UploadIsatabController {
 				FEMAssay assay = iter.next()
 												
 				// remove the entries which weren't selected
-				if(params[assay.name + "_cb"] != "on") iter.remove()
+				if(params[assay.name + "_cb"] != "on"){
+					iter.remove()
+					next
+				}
 				
 				// set instrument method
 				assay.method = InstrumentMethod.get(params[assay.name + "_me"])
+				
+				// randomize the runs as described in the method
+				runRandomization.randomizeAssay(assay)
 			}
 			
 			// only insert study if there is at least one assay selected
 			if(study.assays.size() >= 1){
-				println "here"
 				studyService.saveStudy(study)
 				insertedAssays += study.assays.size()
 				insertedStudies ++
