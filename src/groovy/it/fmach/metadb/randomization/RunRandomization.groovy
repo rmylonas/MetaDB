@@ -75,6 +75,9 @@ class RunRandomization {
 			
 			// set instrumentPolarity
 			runList[i].scanPolarity = instrumentPolarity
+			
+			// set the status to "randomized"
+			runList[i].status = "randomized"
 		}
 		
 		return runList	

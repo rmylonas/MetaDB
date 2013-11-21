@@ -11,7 +11,7 @@ class RunsController {
 		// if a assay id is provided we load only the concerning runs
 		if(assayId){
 			def assay = FEMAssay.get(assayId.toLong())
-			flash.runs = assay.runs
+			flash.runs = assay.randomizedRuns
 		}else{
 			flash.runs = FEMRun.list()
 		}

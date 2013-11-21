@@ -26,6 +26,13 @@ class IsatabImporterImpl implements IsatabImporter {
 	 * @param configDir Directory containing xml files describing valid ISAtab structures (https://github.com/ISA-tools/ISAconfigurator)
 	 */
 	def IsatabImporterImpl(String configDir){
+		// check if configDir is valid, otherwise throw a runtime error
+		def folder = new File(configDir)
+		if( !folder.exists() ) {
+			throw new RuntimeException("the ISAtab configuration folder [" + configDir + "] does not exist")	
+		}
+		  
+		
 		importer = new ISAtabFilesImporter(configDir)
 		converter = new ISAtoolsModelConverterImpl()
 	}

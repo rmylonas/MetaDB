@@ -52,38 +52,14 @@
             <li><a href="${createLink(uri: '/uploadIsatab')}">Upload</a></li>
 	        <li><a href="${createLink(uri: '/studies')}">Studies</a></li>
 	        <li><a href="${createLink(uri: '/assays')}">Assays</a></li>
-	        <li><a href="${createLink(uri: '/runs')}">Runs</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
-    </div><%--
-	
-	
-	
-		<div class="navbar navbar-default" role="navigation">
-			<div class="container">
-	        <div class="navbar-header">
-	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	            <span class="sr-only">Toggle navigation</span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </button>
-	          <a class="navbar-brand" href="${createLink(uri: '/')}">MetaDB</a>
-	          <div class="collapse navbar-collapse">
-	            <ul class="nav navbar-nav">
-	         	  <li><a href="${createLink(uri: '/uploadIsatab')}">Upload</a></li>
-	         	  <li><a href="${createLink(uri: '/studies')}">Studies</a></li>
-	         	  <li><a href="${createLink(uri: '/assays')}">Assays</a></li>
-	         	  <li><a href="${createLink(uri: '/runs')}">Runs</a></li>
-	            </ul>
-	          </div><!--/.nav-collapse -->
-	        </div>
-	        </div>
-   	 	</div>
+    </div>
    	 	
-		--%><g:layoutBody/>
+		<g:layoutBody/>
 		
 		<r:layoutResources />
+		
 	</body>
 </html>

@@ -108,4 +108,4 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':                ['permitAll']
 ]
 
-metadb.isatab.metabolConfigFile = "/home/mylonasr/workspaces/MetaDB/test/data/org/isatools/isacreator/io/importisa/MetaboLightsConfig20130507"
+metadb.isatab.metabolConfigFile = "/home/mylonasr/MetaDB_conf/MetaboLightsConfig20130507"

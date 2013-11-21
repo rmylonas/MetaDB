@@ -16,7 +16,8 @@
               <th>Access code</th>
               <th>Name</th>
               <th>Instrument</th>
-              <th>Description</th>   
+              <th>Method</th>
+              <th>Polarity</th>   
             </tr>
           </thead>
           
@@ -27,7 +28,8 @@
             			<td><g:link controller='runs' params="${[id: it.id]}">${it.accessCode.code}</g:link></td>
             			<td>${it.shortName}</td>
             			<td>${it.instrument.name}</td>
-            			<td>${it.description}</td>
+            			<td>${it.method.name}</td>
+            			<td>${it.instrumentPolarity}</td>
             		</g:each>
 	 			</tr>	 		
 		  </g:each>

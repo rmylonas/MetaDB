@@ -17,7 +17,6 @@
               <th>Assay name</th>
               <th>Status</th>
               <th>Sample name</th>
-              <th>Organism</th>
             </tr>
           </thead>
           
@@ -30,7 +29,6 @@
             			<td>${it.msAssayName}</td>
             			<td>${it.status}</td>
             			<td>${it.sample.name}</td>
-            			<td>${it.sample.organism}</td>
             		</g:each>  	
 	 			</tr>
 		  </g:each>
