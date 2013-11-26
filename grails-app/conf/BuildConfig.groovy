@@ -85,3 +85,9 @@ grails.project.dependency.resolution = {
         compile ':cache:1.0.1'
     }
 }
+
+// copy additional resources
+grails.war.resources = { stagingDir, args ->
+	copy(file: "resources/defaults/investigationStructure.xml",
+		 tofile: "${stagingDir}/WEB-INF/classes/defaults/investigationStructure.xml")
+}

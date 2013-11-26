@@ -77,4 +77,38 @@ class TestDomainCreator {
 		
 	}
 	
+	
+	
+	FEMAssay createRandomizedRunsQCFirst(){
+		def accessCodeGenerator = new AccessCodeGenerator()
+		
+		// create runs
+		def runList = []
+		
+		// a QC first
+		runList.add(new FEMRun(msAssayName: "QC_1",
+									rowNumber: 1,
+									scanPolarity: "positive",
+									sample: new FEMSample(name: "QC_1",
+															factorJSON: '{}')
+									))
+		
+		// and then the others
+		for(i in 2..12){
+			runList.add(new FEMRun(msAssayName: "run_"+i,
+									rowNumber: i,
+									scanPolarity: "positive",
+									sample: new FEMSample(name: "Sample_"+i,
+															factorJSON: '{"Bottling Type":"O2","Bottling time":"5","Wine":"Muller Thurgau  "}')
+									))
+		}
+		
+		// create assay
+		def assay = new FEMAssay(accessCode: accessCodeGenerator.getNewCode(), name: "randomized_assay", shortName: "shortname",
+			instrument: Instrument.get(1), method: this.createMethod(),
+			instrumentPolarity: 'positive', randomizedRuns: runList)
+	}
+	
+
+	
 }

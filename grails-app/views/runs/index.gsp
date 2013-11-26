@@ -7,7 +7,24 @@
 <body>
 
  <div class="container">
-    <h3>Runs ${(id?"from Assay"+id:'')}</h3>
+ 
+     <!-- Show errors -->
+    <g:if test="${flash.error}">
+  		<div class="alert alert-block alert-error">
+  			<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>Error: </strong>${flash.error}
+  		</div>
+	</g:if>
+	
+ 	<div class="row">
+ 		<div class="col-md-4">
+    		<h3>Runs ${(id?"from Assay"+id:'')}</h3>
+    	</div>
+    	<div class="col-md-3 col-md-offset-5">
+   		 	<g:link action="downloadCsv" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span>  CSV file</g:link>
+		</div>
+	</div> <!-- row -->
+
 
 	  <table class="table table-striped">
 	  

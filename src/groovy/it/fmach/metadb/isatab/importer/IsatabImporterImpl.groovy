@@ -29,9 +29,8 @@ class IsatabImporterImpl implements IsatabImporter {
 		// check if configDir is valid, otherwise throw a runtime error
 		def folder = new File(configDir)
 		if( !folder.exists() ) {
-			throw new RuntimeException("the ISAtab configuration folder [" + configDir + "] does not exist")	
+			throw new RuntimeException("the ISAtab configuration folder [" + configDir + "] cannot be read")	
 		}
-		  
 		
 		importer = new ISAtabFilesImporter(configDir)
 		converter = new ISAtoolsModelConverterImpl()
