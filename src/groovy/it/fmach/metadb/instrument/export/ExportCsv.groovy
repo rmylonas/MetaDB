@@ -14,7 +14,7 @@ class ExportCsv {
 		// throw an exception if there is no selected assay
 		if(! assay) throw new RuntimeException("Missing assay ")
 		
-		def sep = ","
+		def sep = "\t"
 		def csv = new StringBuffer()
 		
 		// the header
@@ -28,7 +28,7 @@ class ExportCsv {
 		}
 		
 		def factorList = parseFactor(assay.randomizedRuns.get(k).sample.factorJSON)
-		header << (factorList[0]).join(",")
+		header << (factorList[0]).join(sep)
 		
 		// for the samples, which do not have any factors (QC, blank and STDmix)
 		def emptyFactorList = [null, Collections.nCopies(factorList[0].size(), '') ] 
@@ -41,12 +41,12 @@ class ExportCsv {
 			def line = []
 			line << run.msAssayName
 			line << run.sample.name
-			line << run.sample.name + "_" + i++
+			line << (run.sample.name ==~ /blank|QC|STDmix/ ? '' : run.sample.name + "_" + sprintf('%03d', i++))
 			
 			// try to parse the factors, but if there empty (null) we take the emptyFactorList
 			def factors = parseFactor(run.sample.factorJSON)
 			if(! factors) factors = emptyFactorList
-			line << factors[1].join(",")
+			line << factors[1].join(sep)
 			
 			csv << line.join(sep) << "\n"
 		}

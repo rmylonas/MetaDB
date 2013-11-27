@@ -1,4 +1,4 @@
-package it.fmach.metadb.instrument
+package it.fmach.metadb.instrument.export
 
 import it.fmach.metadb.instrument.export.ExportCsv
 import it.fmach.metadb.isatab.testHelper.TestDomainCreator
@@ -26,6 +26,9 @@ class ExportCsvTest {
 		def lines = csvString.split("\n")
 		assert 13 == lines.size()
 		
+		def entries = lines.getAt(1).split("\t")
+		assert 6 == entries.size()
+		assert "Sample_1_001" == entries[2]
 	}
 	
 	@Test
@@ -40,6 +43,10 @@ class ExportCsvTest {
 		def lines = csvString.split("\n")
 		assert 13 == lines.size()
 		
+		def entries = lines.getAt(1).split("\t")
+		assert 2 == entries.size()
+		
+		assert "QC" == entries[1]
 	}
 
 }

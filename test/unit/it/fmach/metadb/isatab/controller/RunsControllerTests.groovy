@@ -25,7 +25,8 @@ class RunsControllerTests {
 		def study = creator.createStudy()
 		study.save(flush: true)
 		   
+		params['id'] = 1
 		controller.index()
-		assert 12 == flash.runs.size()
+		assert 4 == flash.runs.size()
     }
 }

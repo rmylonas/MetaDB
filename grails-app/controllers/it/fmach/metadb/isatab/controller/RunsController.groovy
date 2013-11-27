@@ -39,4 +39,7 @@ class RunsController {
 		response.outputStream << csvString
 		response.outputStream.flush()
 	}
+	
+	def assayNames() {}
+	
 }

@@ -1,4 +1,4 @@
-package it.fmach.metadb.randomization
+package it.fmach.metadb.workflow.randomization
 
 import grails.test.mixin.*
 import it.fmach.metadb.isatab.model.FEMAssay
@@ -8,6 +8,8 @@ import it.fmach.metadb.isatab.model.InstrumentMethod
 import it.fmach.metadb.isatab.model.Instrument
 import it.fmach.metadb.isatab.model.AccessCode
 import it.fmach.metadb.isatab.testHelper.TestDomainCreator
+import it.fmach.metadb.workflow.randomization.RunRandomization;
+
 import org.junit.*
 
 @Mock([FEMStudy, FEMAssay, FEMRun, InstrumentMethod, Instrument, AccessCode])

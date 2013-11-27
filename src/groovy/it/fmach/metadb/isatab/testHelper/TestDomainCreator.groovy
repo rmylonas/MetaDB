@@ -32,7 +32,7 @@ class TestDomainCreator {
 		for(i in 0..2){
 			assayList.add(new FEMAssay(accessCode: accessCodeGenerator.getNewCode(), name: "name_"+i, shortName: "short_"+i, 
 				instrument: Instrument.get(1), method: this.createMethod(), 
-				instrumentPolarity: 'positive', runs: runList[j..(j+3)]))
+				instrumentPolarity: 'positive', runs: runList[j..(j+3)], randomizedRuns: runList[j..(j+3)]))
 			j += 4
 		}
 		
@@ -89,13 +89,13 @@ class TestDomainCreator {
 		runList.add(new FEMRun(msAssayName: "QC_1",
 									rowNumber: 1,
 									scanPolarity: "positive",
-									sample: new FEMSample(name: "QC_1",
+									sample: new FEMSample(name: "QC",
 															factorJSON: '{}')
 									))
 		
 		// and then the others
 		for(i in 2..12){
-			runList.add(new FEMRun(msAssayName: "run_"+i,
+			runList.add(new FEMRun(msAssayName: "AA_Sample_" + i + "_" + i,
 									rowNumber: i,
 									scanPolarity: "positive",
 									sample: new FEMSample(name: "Sample_"+i,

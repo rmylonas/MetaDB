@@ -123,5 +123,31 @@ class IsatabImporterImplTests {
 		assert "Metabolic changes during wine storage" == investigation.studyList[0].title
 		assert "a_wine_storage_metabolite profiling_mass spectrometry-5.txt" == investigation.studyList[0].assays[0].name
 	}
+	
+	@Test
+	void testImportNomacorcZip() {
+		// create instruments
+		def creator = new TestDbSetup()
+		creator.createInstrument()
+
+		String configDir = rootDir + "MetaboLightsConfig20130507"
+		String isatabDir = rootDir + "nomacorc.zip"
+
+		IsatabImporter importer = new IsatabImporterImpl(configDir)
+		FEMInvestigation investigation = importer.importIsatabZip(isatabDir)
+
+		Boolean success = investigation.isaParsingInfo.success
+		assert success
+		
+		assert 1 == investigation.studyList.size()
+		
+		def study = investigation.studyList.get(0)
+		assert "Nomacorc" == study.identifier
+		assert 2 == study.assays.size()
+		
+		def assay = study.assays.get(0)
+		assert "a_nomacorc_metabolite profiling_mass spectrometry.txt" == assay.name
+		assert 85 == assay.runs.size()
+	}
 
 }

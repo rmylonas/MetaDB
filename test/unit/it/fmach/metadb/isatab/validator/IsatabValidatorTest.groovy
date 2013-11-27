@@ -1,4 +1,3 @@
-
 package it.fmach.metadb.isatab.validator
 
 import it.fmach.metadb.isatab.importer.FEMInvestigation;

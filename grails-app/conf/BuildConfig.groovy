@@ -86,7 +86,7 @@ grails.project.dependency.resolution = {
     }
 }
 
-// copy additional resources
+// copy additional resources to the classpath
 grails.war.resources = { stagingDir, args ->
 	copy(file: "resources/defaults/investigationStructure.xml",
 		 tofile: "${stagingDir}/WEB-INF/classes/defaults/investigationStructure.xml")

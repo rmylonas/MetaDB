@@ -19,6 +19,7 @@ class FEMAssay {
 	
 	List runs
 	List randomizedRuns
+	List acquiredRuns
 	
 	static hasMany = [runs: FEMRun, randomizedRuns: FEMRun]
 		
@@ -26,6 +27,7 @@ class FEMAssay {
 		description nullable: true
 		accessCode unique: true
 		randomizedRuns nullable: true
+		acquiredRuns nullable:true
     }
 	
 }

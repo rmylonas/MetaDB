@@ -20,7 +20,10 @@
  		<div class="col-md-4">
     		<h3>Runs ${(id?"from Assay"+id:'')}</h3>
     	</div>
-    	<div class="col-md-3 col-md-offset-5">
+    	<div class="col-md-2 col-md-offset-4">
+   		 	<g:link action="assayNames" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>  Assay names</g:link>
+		</div>
+    	<div class="col-md-2">
    		 	<g:link action="downloadCsv" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span>  CSV file</g:link>
 		</div>
 	</div> <!-- row -->

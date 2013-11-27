@@ -11,7 +11,7 @@ import it.fmach.metadb.isatab.model.FEMSample
 import it.fmach.metadb.isatab.model.FEMStudy
 import it.fmach.metadb.isatab.model.FEMAssay
 import it.fmach.metadb.isatab.model.InstrumentMethod;
-import it.fmach.metadb.randomization.RunRandomization
+import it.fmach.metadb.workflow.randomization.RunRandomization;
 
 class UploadIsatabController {
 	
@@ -72,38 +72,46 @@ class UploadIsatabController {
 		def insertedAssays = 0
 		def insertedStudies = 0
 		
-		for(FEMStudy study: session.investigation.studyList){
-			// assign selected group and project
-			study.project = FEMProject.get(params["project"])
-			study.group = FEMGroup.get(params["group"])
-			
-			def iter = study.assays.iterator()
-			while(iter.hasNext()){
-				FEMAssay assay = iter.next()
-												
-				// remove the entries which weren't selected
-				if(params[assay.name + "_cb"] != "on"){
-					iter.remove()
-					next
+		try{
+		
+			for(FEMStudy study: session.investigation.studyList){
+				// assign selected group and project
+				study.project = FEMProject.get(params["project"])
+				study.group = FEMGroup.get(params["group"])
+				
+				def iter = study.assays.iterator()
+				while(iter.hasNext()){
+					FEMAssay assay = iter.next()
+													
+					// remove the entries which weren't selected
+					if(params[assay.name + "_cb"] != "on"){
+						iter.remove()
+						next
+					}
+					
+					// set instrument method
+					assay.method = InstrumentMethod.get(params[assay.name + "_me"])
+					
+					// randomize the runs as described in the method
+					runRandomization.randomizeAssay(assay)
 				}
 				
-				// set instrument method
-				assay.method = InstrumentMethod.get(params[assay.name + "_me"])
-				
-				// randomize the runs as described in the method
-				runRandomization.randomizeAssay(assay)
+				// only insert study if there is at least one assay selected
+				if(study.assays.size() >= 1){
+					studyService.saveStudy(study)
+					insertedAssays += study.assays.size()
+					insertedStudies ++
+				}
 			}
-			
-			// only insert study if there is at least one assay selected
-			if(study.assays.size() >= 1){
-				studyService.saveStudy(study)
-				insertedAssays += study.assays.size()
-				insertedStudies ++
-			}
+		}catch(Exception e){
+			e.printStackTrace()
+			flash.error = e.getMessage()
 		}
 		
-		flash.message = insertedAssays + " assay(s) from " + insertedStudies + " study were succesfully inserted"
+		// return a success message, if there is no error
+		if(! flash.error) flash.message = insertedAssays + " assay(s) from " + insertedStudies + " study were succesfully inserted"
 		redirect(action: 'index')
+					
 	}
 	
 	// AJAX method

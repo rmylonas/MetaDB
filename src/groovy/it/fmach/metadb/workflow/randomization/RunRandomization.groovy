@@ -1,4 +1,4 @@
-package it.fmach.metadb.randomization
+package it.fmach.metadb.workflow.randomization
 
 import java.util.List;
 
