@@ -10,15 +10,23 @@
  
      <!-- Show errors -->
     <g:if test="${flash.error}">
-  		<div class="alert alert-block alert-error">
+  		<div class="alert alert-block alert-danger">
   			<button type="button" class="close" data-dismiss="alert">&times;</button>
   			<strong>Error: </strong>${flash.error}
   		</div>
 	</g:if>
 	
+	<!-- Show warning -->
+    <g:if test="${flash.warning}">
+  		<div class="alert alert-block alert-warning">
+  			<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>Warning: </strong>${flash.warning}
+  		</div>
+	</g:if>
+	
  	<div class="row">
  		<div class="col-md-4">
-    		<h3>Runs ${(id?"from Assay"+id:'')}</h3>
+    		<h3>Runs <em>${session.assay.shortName}</em></h3>
     	</div>
     	<div class="col-md-2 col-md-offset-4">
    		 	<g:link action="assayNames" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>  Assay names</g:link>

@@ -17,6 +17,9 @@ class AcquiredNamesInserter {
 	 * @param assay
 	 * @return [listOfMissingNames, listOfNonMappedNames]
 	 */
+	
+	def assayNamePatter = ~/(.+?)_(\d+)_(.+)/
+	
 	def addAcquiredAssayNames(FEMAssay assay, List<String> assayNames){
 		def acquiredRuns = []
 		def missingNames = []
@@ -33,16 +36,17 @@ class AcquiredNamesInserter {
 		def i = 0
 		assayNames.each{ name ->
 			// separate the last _int part
-			def matcher = name =~ /(.+)_(\d+)/
-			def idName = matcher ? matcher[0][1] : null
+			def matcher = name =~ assayNamePatter
+			def idName = matcher ? matcher[0][3] : null
 			// def number = matcher[0][2]
 			
 			// if it is a QC, stdMix or blank, we just add a run with this name
-			if(idName =~ /QC|STDmix|blank/){
+			def nameMatcher = idName =~ /(QC|STDmix|blank)_.*/
+			if(nameMatcher){
 				acquiredRuns.add(
 					new FEMRun(msAssayName: name, 
 							rowNumber: i, scanPolarity: assay.instrumentPolarity, 
-							status: 'acquired', sample: qualitySampleMap[idName])
+							status: 'acquired', sample: qualitySampleMap[nameMatcher[0][1]])
 				)
 			// if it's a sample
 			}else{
@@ -64,13 +68,19 @@ class AcquiredNamesInserter {
 		
 		// add acquiredRuns
 		assay.acquiredRuns = acquiredRuns
+		assay.status = "acquired"
 		
 		// add missing names
 		runNameMap.each {name, run ->
 			missingNames << name
 		}
 		
+		if(missingNames.size() == 0 && namesNotFound == 0){
+			return null
+		}
+		
 		return [missingNames, namesNotFound]
+		
 	}
 	
 	
@@ -90,8 +100,8 @@ class AcquiredNamesInserter {
 					break
 					
 				default:
-					def matcher = run.msAssayName =~ /(.+)_(\d+)/
-					def idName = matcher[0][1]
+					def matcher = run.msAssayName =~ assayNamePatter
+					def idName = matcher ? matcher[0][3] : null
 					runNameMap[idName] = run
 			}
 		}

@@ -31,6 +31,7 @@ class RunRandomization {
 
 	FEMAssay randomizeAssay(FEMAssay assay){
 		assay.randomizedRuns = this.randomizeRuns(assay.runs, assay.method, assay.accessCode.code, assay.instrumentPolarity)
+		assay.status = "randomized"
 		return assay
 	}
 	

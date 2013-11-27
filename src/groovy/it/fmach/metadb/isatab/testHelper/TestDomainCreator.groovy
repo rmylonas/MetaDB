@@ -85,8 +85,11 @@ class TestDomainCreator {
 		// create runs
 		def runList = []
 		
+		def tag = "_tag"
+		def pre = "AA_"
+		
 		// a QC first
-		runList.add(new FEMRun(msAssayName: "QC_1",
+		runList.add(new FEMRun(msAssayName: "AA_001_QC_tag",
 									rowNumber: 1,
 									scanPolarity: "positive",
 									sample: new FEMSample(name: "QC",
@@ -95,10 +98,10 @@ class TestDomainCreator {
 		
 		// and then the others
 		for(i in 2..12){
-			runList.add(new FEMRun(msAssayName: "AA_Sample_" + i + "_" + i,
+			runList.add(new FEMRun(msAssayName: pre + sprintf("%d3", i) + "_Sample_" + (i-1) + tag,
 									rowNumber: i,
 									scanPolarity: "positive",
-									sample: new FEMSample(name: "Sample_"+i,
+									sample: new FEMSample(name: "Sample_"+ (i-1),
 															factorJSON: '{"Bottling Type":"O2","Bottling time":"5","Wine":"Muller Thurgau  "}')
 									))
 		}

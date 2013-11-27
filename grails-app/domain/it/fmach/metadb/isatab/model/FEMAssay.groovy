@@ -12,6 +12,7 @@ class FEMAssay {
 	String shortName
 	String description
 	Date dateCreated
+	String status = "initialized"
 	
 	Instrument instrument
 	InstrumentMethod method
@@ -29,5 +30,10 @@ class FEMAssay {
 		randomizedRuns nullable: true
 		acquiredRuns nullable:true
     }
+	
+/*	static mapping = {
+		acquiredRuns lazy: false
+		randomizedRuns lazy: false
+	}*/
 	
 }
