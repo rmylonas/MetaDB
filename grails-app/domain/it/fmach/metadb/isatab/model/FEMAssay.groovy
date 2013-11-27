@@ -13,6 +13,7 @@ class FEMAssay {
 	String description
 	Date dateCreated
 	String status = "initialized"
+	String workDir
 	
 	Instrument instrument
 	InstrumentMethod method
@@ -28,7 +29,8 @@ class FEMAssay {
 		description nullable: true
 		accessCode unique: true
 		randomizedRuns nullable: true
-		acquiredRuns nullable:true
+		acquiredRuns nullable: true
+		workDir nullable: true
     }
 	
 /*	static mapping = {

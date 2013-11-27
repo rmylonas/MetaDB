@@ -1,9 +1,9 @@
 package it.fmach.metadb.isatab.importer
 
 import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
+
+import it.fmach.metadb.helper.UnZipper
 import it.fmach.metadb.isatab.model.FEMStudy;
 import it.fmach.metadb.isatab.model.ISAParsingInfo;
 
@@ -18,6 +18,8 @@ import org.isatools.isacreator.model.Investigation;
  *	import isatab files
  */
 class IsatabImporterImpl implements IsatabImporter {
+	
+	def unzipper = new UnZipper()
 	
 	private ISAtabFilesImporter importer
 	private ISAtoolsModelConverter converter
@@ -96,49 +98,8 @@ class IsatabImporterImpl implements IsatabImporter {
 			tempDir.mkdir()
 			// tempDir.deleteOnExit()
 			
-			this.unzip(isatabZipDir, tempDir.getAbsolutePath())	
+			unzipper.unzip(isatabZipDir, tempDir.getAbsolutePath())	
 			return this.importIsatabFiles(tempDir.getAbsolutePath())
-	}
-	
-	
-	private unzip(String zipFile, String extractionDir){
-		byte[] buffer = new byte[1024];
-		
-			   //throw an exception if extractionDir does not exist
-			   File folder = new File(extractionDir);
-			   if(!folder.exists()){
-				   throw new RuntimeException("extraction folder does not exist: [" + extractionDir + "]")
-			   }
-		
-			   //get the zip file content
-			   ZipInputStream zis =
-				   new ZipInputStream(new FileInputStream(zipFile));
-			   //get the zipped file list entry
-			   ZipEntry ze = zis.getNextEntry();
-		
-			   while(ze!=null){
-		
-				  String fileName = ze.getName();
-				  File newFile = new File(extractionDir + File.separator + fileName);
-		
-				   //create all non exists folders
-				   //else you will hit FileNotFoundException for compressed folder
-				   new File(newFile.getParent()).mkdirs();
-		
-				   FileOutputStream fos = new FileOutputStream(newFile);
-		
-				   int len;
-				   while ((len = zis.read(buffer)) > 0) {
-					  fos.write(buffer, 0, len);
-				   }
-		
-				   fos.close();
-				   ze = zis.getNextEntry();
-			   }
-		
-			   zis.closeEntry();
-			   zis.close();
-		
 	}
 	
 }

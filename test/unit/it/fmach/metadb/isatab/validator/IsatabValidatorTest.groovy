@@ -21,9 +21,9 @@ class IsatabValidatorTest {
 		IsatabValidator validator = new IsatabValidatorImpl(configDir)
 		ISAParsingInfo parsingInfo = validator.validateIsatabFile(isatabParentDir)
 		
-		assertTrue(parsingInfo.success)
-		assertEquals(0, parsingInfo.nrOfErrors)
-		assertEquals("validated", parsingInfo.status)
+		assert parsingInfo.success
+		assert 0 == parsingInfo.nrOfErrors
+		assert "validated" == parsingInfo.status
 		
 	}
 	
@@ -36,9 +36,9 @@ class IsatabValidatorTest {
 		IsatabValidator validator = new IsatabValidatorImpl(configDir)
 		ISAParsingInfo parsingInfo = validator.validateIsatabFile(isatabParentDir)
 		
-		assertFalse(parsingInfo.success)
-		assertEquals(9, parsingInfo.nrOfErrors)
-		assertEquals("validation failed", parsingInfo.status)
+		assert ! parsingInfo.success
+		assert 9 == parsingInfo.nrOfErrors
+		assert "validation failed" == parsingInfo.status
 		println(parsingInfo.errorMessage)
 		
 	}

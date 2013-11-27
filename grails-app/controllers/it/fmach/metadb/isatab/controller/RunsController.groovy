@@ -102,4 +102,42 @@ class RunsController {
 		render(view: "index")
 	}
 	
+	
+	def chooseExtracted(){}
+	
+	def uploadExtracted(){
+		// upload the file
+		def f = request.getFile('extractedFile')
+		
+		if (f.empty) {
+			flash.error = 'Uploaded zip file is empty'
+			redirect(action: 'index')
+			return
+		}else{
+			importFile = File.createTempFile("extracted_",".zip")
+			f.transferTo(importFile)
+			
+			// and process it
+			try{
+				investigation = importer.importIsatabZip(importFile.absolutePath)
+				
+				if(investigation.isaParsingInfo.success){
+					flash.message = ('ISAtab file was succesfully processed')
+				}else{
+					flash.error = 'Parsing Error: sorry, your ISAtab file could not be parsed'
+					redirect(action: 'index')
+					return
+				}
+				
+			}catch(e){
+				e.printStackTrace()
+				flash.error = 'Exception occured: sorry, your ZIP file could not be added'
+				redirect(action: 'index')
+				return
+			}
+		}
+		
+		redirect(action: 'index')
+	}	
+	
 }

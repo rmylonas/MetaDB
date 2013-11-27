@@ -28,11 +28,17 @@
  		<div class="col-md-4">
     		<h3>Runs <em>${session.assay.shortName}</em></h3>
     	</div>
-    	<div class="col-md-2 col-md-offset-4">
-   		 	<g:link action="assayNames" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>  Assay names</g:link>
+ 
+     	<div class="col-md-2 col-md-offset-4">
+   		 	<g:link action="chooseExtracted" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>  Extracted files</g:link>
 		</div>
+    	
+    	<div class="col-md-2 col-md-offset-4">
+   		 	<g:link action="assayNames" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>  Assay names</g:link>
+		</div>
+		
     	<div class="col-md-2">
-   		 	<g:link action="downloadCsv" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span>  CSV file</g:link>
+   		 	<g:link action="downloadCsv" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-down"></span>  CSV file</g:link>
 		</div>
 	</div> <!-- row -->
 
