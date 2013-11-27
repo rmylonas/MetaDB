@@ -17,7 +17,7 @@ class FEMRun {
 
 	FEMSample sample
 	
-	//static embedded = ['sample']
+	// static belongsTo = [fEMAssay: FEMAssay]
 	
     static constraints = {
     }

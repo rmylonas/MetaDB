@@ -57,6 +57,7 @@ class AcquiredNamesInserter {
 					// change the status and msAssayName
 					run.status = "acquired"
 					run.msAssayName = name
+					run.rowNumber = i
 					
 					acquiredRuns << run
 					runNameMap.remove(idName)
@@ -64,6 +65,8 @@ class AcquiredNamesInserter {
 					namesNotFound << name
 				}
 			}
+			
+			i++
 		}
 		
 		// add acquiredRuns

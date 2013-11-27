@@ -30,7 +30,7 @@ class TestDomainCreator {
 		def assayList = []
 		def j = 0
 		for(i in 0..2){
-			assayList.add(new FEMAssay(accessCode: accessCodeGenerator.getNewCode(), name: "name_"+i, shortName: "short_"+i, 
+			assayList.add(new FEMAssay(status: "randomized", accessCode: accessCodeGenerator.getNewCode(), name: "name_"+i, shortName: "short_"+i, 
 				instrument: Instrument.get(1), method: this.createMethod(), 
 				instrumentPolarity: 'positive', runs: runList[j..(j+3)], randomizedRuns: runList[j..(j+3)]))
 			j += 4

@@ -22,7 +22,7 @@ class FEMAssay {
 	List randomizedRuns
 	List acquiredRuns
 	
-	static hasMany = [runs: FEMRun, randomizedRuns: FEMRun]
+	static hasMany = [runs: FEMRun, randomizedRuns: FEMRun, acquiredRuns: FEMRun]
 		
     static constraints = {
 		description nullable: true
@@ -33,7 +33,7 @@ class FEMAssay {
 	
 /*	static mapping = {
 		acquiredRuns lazy: false
-		randomizedRuns lazy: false
+		// randomizedRuns lazy: false
 	}*/
 	
 }

@@ -12,7 +12,7 @@ import it.fmach.metadb.isatab.testHelper.TestDbSetup
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@Mock([AccessCode, Instrument, FEMSample])
+@Mock([AccessCode, Instrument, FEMSample, FEMAssay])
 @TestFor(FEMRun)
 class FEMRunTests {
 
@@ -28,7 +28,9 @@ class FEMRunTests {
         IsatabImporter importer = new IsatabImporterImpl(configDir)
 		def investigation = importer.importIsatabFiles(isatabDir)
 		
-		def run = investigation.studyList.get(0).assays.get(0).runs.get(0)
+		def assay = investigation.studyList.get(0)assays.get(0)
+		def run = assay.runs.get(0)
+		assay.save(flush: true, failOnError: true)
 		
 		if (!run.validate()){
 			run.errors.allErrors.each {
@@ -36,11 +38,13 @@ class FEMRunTests {
 			}
 		}
 		
-		run.save(flush: true)
+		// assay.save(flush: true)
+		run.save(flush: true, failOnError: true)
 		
 //		def sample = FEMSample.findByName("0001_R")
 //		println("here: "+sample)
 //		def loadedRun = FEMRun.findBySample(sample)
+		
 		def loadedRun = FEMRun.list().get(0)
 		String protocols = loadedRun.protocolJSON
 		assert protocols.contains("Phenolics")
