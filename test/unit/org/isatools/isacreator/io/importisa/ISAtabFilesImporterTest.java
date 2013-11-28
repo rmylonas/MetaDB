@@ -2,6 +2,9 @@ package org.isatools.isacreator.io.importisa;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.isatools.errorreporter.model.ErrorMessage;
 import org.isatools.errorreporter.model.ISAFileErrorReport;
 import org.isatools.isacreator.model.Assay;

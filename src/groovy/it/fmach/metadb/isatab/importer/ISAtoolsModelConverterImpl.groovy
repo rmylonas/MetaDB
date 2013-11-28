@@ -21,6 +21,8 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 	def accessCodeGenerator = new AccessCodeGenerator()
 	def instrumentMap = [:]
 	
+	String workDir
+	
 	// field-names which are parsed
 	static final def SAMPLE_NAME = "Sample Name"
 	static final def SAMPLE_ORGANISM = "Characteristics[Organism]"
@@ -31,12 +33,13 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 	static final def RUN_DERIVED_FILE= "Derived Spectral Data File"
 	static final def RUN_SCAN_POLARITY= "Parameter Value[Scan polarity]"
 	
-	ISAtoolsModelConverterImpl(){
+	ISAtoolsModelConverterImpl(String workDir){
 		// create map of available instruments and polarities
 		Instrument.list().each {inst->
 			instrumentMap[inst.metabolightsName] = inst
 		}
 		
+		this.workDir = workDir		
 	}
 	
 	@Override
@@ -123,6 +126,9 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			assay.instrument = instrument
 			
 			assay.runs = convertRunList(v, sampleList)
+			
+			// set the workDir of this assay
+			assay.workDir = this.workDir + "/" + assay.shortName
 			
 			//select the polarity
 			def polarity = assay.runs[0].scanPolarity

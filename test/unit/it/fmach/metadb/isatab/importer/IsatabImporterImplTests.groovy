@@ -11,6 +11,8 @@ import it.fmach.metadb.isatab.model.Instrument;
 import it.fmach.metadb.isatab.model.InstrumentMethod;
 import it.fmach.metadb.isatab.testHelper.TestDbSetup
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.junit.*
@@ -31,8 +33,12 @@ class IsatabImporterImplTests {
 
 		String configDir = rootDir + "MetaboLightsConfig20130507"
 		String isatabDir = rootDir + "Wine_Storage"
+		
+		def workDir = File.createTempFile("test_workdir", "")
+		workDir.delete();
+		workDir.mkdir();
 
-		IsatabImporter importer = new IsatabImporterImpl(configDir)
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath())
 		FEMInvestigation investigation = importer.importIsatabFiles(isatabDir)
 		Boolean success = investigation.isaParsingInfo.success
 		assert success
@@ -91,8 +97,12 @@ class IsatabImporterImplTests {
 
 		String configDir = rootDir + "MetaboLightsConfig20130507"
 		String isatabDir = rootDir + "Empty"
+		
+		def workDir = File.createTempFile("test_workdir", "")
+		workDir.delete();
+		workDir.mkdir();
 
-		IsatabImporter importer = new IsatabImporterImpl(configDir)
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath())
 		FEMInvestigation investigation = importer.importIsatabFiles(isatabDir)
 
 		def ISAParsingInfo parsingInfo = investigation.isaParsingInfo
@@ -114,7 +124,11 @@ class IsatabImporterImplTests {
 		String configDir = rootDir + "MetaboLightsConfig20130507"
 		String isatabDir = rootDir + "winecellar_archive.zip"
 
-		IsatabImporter importer = new IsatabImporterImpl(configDir)
+		def workDir = File.createTempFile("test_workdir", "")
+		workDir.delete();
+		workDir.mkdir();
+		
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath())
 		FEMInvestigation investigation = importer.importIsatabZip(isatabDir)
 
 		Boolean success = investigation.isaParsingInfo.success
@@ -133,7 +147,11 @@ class IsatabImporterImplTests {
 		String configDir = rootDir + "MetaboLightsConfig20130507"
 		String isatabDir = rootDir + "nomacorc.zip"
 
-		IsatabImporter importer = new IsatabImporterImpl(configDir)
+		def workDir = File.createTempFile("test_workdir", "")
+		workDir.delete();
+		workDir.mkdir();
+
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath())
 		FEMInvestigation investigation = importer.importIsatabZip(isatabDir)
 
 		Boolean success = investigation.isaParsingInfo.success

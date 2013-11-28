@@ -25,7 +25,11 @@ class FEMRunTests {
 		def creator = new TestDbSetup()
 		creator.createInstrument()
 		
-        IsatabImporter importer = new IsatabImporterImpl(configDir)
+		def workDir = File.createTempFile("test_workdir", "")
+		workDir.delete();
+		workDir.mkdir();
+
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath())
 		def investigation = importer.importIsatabFiles(isatabDir)
 		
 		def assay = investigation.studyList.get(0)assays.get(0)

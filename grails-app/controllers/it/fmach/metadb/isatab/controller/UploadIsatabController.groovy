@@ -21,7 +21,7 @@ class UploadIsatabController {
     def index() { }
 	
 	def upload() {
-		IsatabImporter importer = new IsatabImporterImpl(grailsApplication.config.metadb.isatab.metabolConfigFile)
+		IsatabImporter importer = new IsatabImporterImpl(grailsApplication.config.metadb.isatab.metabolConfigFile, grailsApplication.config.metadb.dataPath)
 		
 		def importFile
 		FEMInvestigation investigation

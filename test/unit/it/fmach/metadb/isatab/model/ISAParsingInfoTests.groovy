@@ -32,7 +32,11 @@ class ISAParsingInfoTests {
 		
 		String isatabDir = rootDir + "Empty"
 		
-        def importer = new IsatabImporterImpl(configDir)
+		def workDir = File.createTempFile("test_workdir", "")
+		workDir.delete();
+		workDir.mkdir();
+
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath())
 		def investigation = importer.importIsatabFiles(isatabDir)
 		def parsingInfo = investigation.isaParsingInfo
 		parsingInfo.save(flush: true)
@@ -55,7 +59,11 @@ class ISAParsingInfoTests {
 		
 		String isatabDir = rootDir + "Invalid_Wine_Storage"
 		
-		def importer = new IsatabImporterImpl(configDir)
+		def workDir = File.createTempFile("test_workdir", "")
+		workDir.delete();
+		workDir.mkdir();
+
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath())
 		def investigation = importer.importIsatabFiles(isatabDir)
 		def parsingInfo = investigation.isaParsingInfo
 		
