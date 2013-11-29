@@ -31,7 +31,7 @@ class RunsController {
 					flash.runs = assay.randomizedRuns
 					break
 				
-				case "acquired":
+				default:
 					flash.runs = assay.acquiredRuns
 			}
 			render(view: "index")
@@ -118,6 +118,8 @@ class RunsController {
 		def assay = session.assay
 		assay.attach()
 		
+		def nrFilesAdded
+		
 		// upload the file
 		def f = request.getFile('extractedFile')
 		
@@ -131,15 +133,18 @@ class RunsController {
 			
 			// and process it
 			try{
-				def missingNames = extractedFileInserter.addExtractedFilesZip(assay, importFile.absolutePath)
+				def info = extractedFileInserter.addExtractedFilesZip(assay, importFile.absolutePath)
 				
 				// flash a warning, if names were missing
-				if(missingNames){
-				def missingN = missingNames[0]
-				def notFoundN = missingNames[1]
+
+				def missingN = info[0]
+				def notFoundN = info[1]
+				nrFilesAdded = info[2]
+				
+				flash.warning = ''
 				
 				if(missingN){
-					flash.warning = "Following files were missing: <ul>"
+					flash.warning += "Following files were missing: <ul>"
 					
 					missingN.each{
 						flash.warning += "<li>" + it + "</it>"
@@ -157,9 +162,7 @@ class RunsController {
 					
 					flash.warning += "</ul>"
 				}
-				
-			}
-				
+									
 			}catch(e){
 				e.printStackTrace()
 				flash.error = 'Exception occured: sorry, your ZIP file could not be added'
@@ -168,7 +171,7 @@ class RunsController {
 			}
 		}
 		
-		flash.message = 'Extracted files were added'
+		flash.message = nrFilesAdded + ' extracted files were added'
 		redirect(action: 'index')
 	}	
 	

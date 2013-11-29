@@ -34,12 +34,13 @@ class ExtractedFileInserterTest {
 		assay.workDir = tmpFile.getAbsolutePath()
 		
 		// add the raw files
-		def missing = inserter.addExtractedFilesZip(assay, rootDir + "extracted.zip")
+		def info = inserter.addExtractedFilesZip(assay, rootDir + "extracted.zip")
 		
-		assert assay.acquiredRuns.size()-3 == missing[0].size()
-		assert "pipo.CDF" == missing[1][0]
+		assert assay.acquiredRuns.size()-3 == info[0].size()
+		assert "pipo.CDF" == info[1][0]
 		assert assay.acquiredRuns.get(0).derivedSpectraFilePath.contains("AA_001_QC_tag_01.CDF")
 		assert "extracted" == assay.acquiredRuns.get(1).status
+		assert 3 == info[2]
 		
 		// the assay status should still be "acquired", since not all files were added
 		assert "acquired" == assay.status
@@ -61,12 +62,15 @@ class ExtractedFileInserterTest {
 		def extractedFiles = ["AA_001_QC_tag_01.CDF", "AA_23_Sample_1_tag_01.CDF", "AA_33_Sample_2_tag_01.CDF", "pipo.CDF"]
 		
 		// add the raw files	
-		def missing = inserter.addExtractedFiles(assay, extractedFiles)
+		def info = inserter.addExtractedFiles(assay, extractedFiles)
 		
-		assert assay.acquiredRuns.size()-3 == missing[0].size()
-		assert "pipo.CDF" == missing[1][0]
+		assert assay.acquiredRuns.size()-3 == info[0].size()
+		assert "pipo.CDF" == info[1][0]
 		assert "AA_001_QC_tag_01.CDF" == assay.acquiredRuns.get(0).derivedSpectraFilePath
 		assert "extracted" == assay.acquiredRuns.get(1).status
+		assert 3 == info[2]
+		
+		// and control the number of files added
 		
 		// the assay status should still be "acquired", since not all files were added
 		assert "acquired" == assay.status

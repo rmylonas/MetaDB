@@ -32,7 +32,7 @@
 			</div> <!-- /form-group -->
 			
 			<div class="form-group">
-				<button class="btn btn-primary" type="submit">Upload</button>
+				<button class="btn btn-primary" type="submit" data-loading-text="Uploading...">Upload</button>
 			</div>
 			
 		</div> <!-- /col-xs-3 -->

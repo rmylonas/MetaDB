@@ -11,7 +11,9 @@ class ExtractedFileInserter {
 	
 	def addExtractedFilesZip(FEMAssay assay, String zipFilePath){
 		
-		// create the directory
+		// create the directories
+		File workDir = new File(assay.workDir)
+		workDir.mkdir()
 		File extractedFileDir = new File(assay.workDir + "/extractedFiles")
 		extractedFileDir.mkdir()
 		
@@ -34,6 +36,7 @@ class ExtractedFileInserter {
 		
 		def missingFiles = []
 		def namesNotFound = []
+		def nrFilesAdded = 0
 		
 		// create a map of all assay names
 		def assayNameMap = [:]
@@ -62,7 +65,11 @@ class ExtractedFileInserter {
 		
 		// list of missing files
 		assayNameMap.each{ k, v ->
-			if(! v) missingFiles << k
+			if(! v){
+				missingFiles << k
+			}else{
+				nrFilesAdded ++
+			}
 		}
 		
 		// if all runs are status "extracted", the assay gets "extracted"
@@ -77,7 +84,7 @@ class ExtractedFileInserter {
 		
 		// return missing files and names if necessary
 		if(missingFiles || namesNotFound){
-			return [missingFiles, namesNotFound]
+			return [missingFiles, namesNotFound, nrFilesAdded]
 		}
 		
 		return null
