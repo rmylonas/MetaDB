@@ -9,7 +9,6 @@
 
     <!-- Le styles -->
     <link href="${resource(dir: 'css', file: 'bootstrap.css')}" rel="stylesheet">
-    <link href="${resource(dir: 'css', file: 'bootstrap-select.css')}" rel="stylesheet">
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -20,12 +19,6 @@
     --%>
     <script src="${resource(dir: 'js', file: 'jquery.js')}"></script>
     <script src="${resource(dir: 'js', file: 'bootstrap.js')}"></script>
-    <%--
-    <script src="${resource(dir: 'js', file: 'bootstrap-select.js')}"></script>
-    --%>
-    <script src="${resource(dir: 'js', file: 'button.js')}"></script>
-    <script src="${resource(dir: 'js', file: 'tooltip.js')}"></script>
-    <script src="${resource(dir: 'js', file: 'popover.js')}"></script>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>

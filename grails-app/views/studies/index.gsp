@@ -27,7 +27,12 @@
             		<g:each in="${study}">
             			<td><g:link controller='assays' params="${[id: it.id]}">${it.identifier}</g:link></td>
             			<td>${it.title}</td>
-            			<td>${it.description}</td>
+            			<td>${it.description.substring(0,(it.description.size() < 50)?(it.description.size()):(50))}
+            				  <g:if test="${it.description.size() >= 50}">
+            				  	...
+            				  	<button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-resize-full"></span></button>
+            				  </g:if>
+            			</td>
             			<td>${it.iSATabFilePath}</td>
             			<td>${it.dateCreated}</td>
             		</g:each>  	
