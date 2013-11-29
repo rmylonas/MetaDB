@@ -20,7 +20,12 @@
     --%>
     <script src="${resource(dir: 'js', file: 'jquery.js')}"></script>
     <script src="${resource(dir: 'js', file: 'bootstrap.js')}"></script>
+    <%--
     <script src="${resource(dir: 'js', file: 'bootstrap-select.js')}"></script>
+    --%>
+    <script src="${resource(dir: 'js', file: 'button.js')}"></script>
+    <script src="${resource(dir: 'js', file: 'tooltip.js')}"></script>
+    <script src="${resource(dir: 'js', file: 'popover.js')}"></script>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>

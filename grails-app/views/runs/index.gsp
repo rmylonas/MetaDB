@@ -6,7 +6,7 @@
 </head>
 <body>
 
- <div class="container">
+<div class="container">
  
      <!-- Show errors -->
     <g:if test="${flash.error}">
@@ -46,7 +46,7 @@
 		</div>
  
  		<!-- if the assay status is acquired, we can add the extracted files -->
- 		 		<g:if test="${session.assay.status == 'acquired' || session.assay.status == 'extracted'}">
+ 		 <g:if test="${session.assay.status == 'acquired' || session.assay.status == 'extracted'}">
 	     	<div class="col-md-2">
 	   		 	<g:link action="chooseExtracted" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-up"></span>  Extracted files</g:link>
 			</div>
@@ -54,8 +54,8 @@
  		
  		<!-- if the assay status is extracted, we can submit to MetaMS -->
  		<g:if test="${session.assay.status == 'extracted'}">
-	     	<div class="col-md-2">
-	   		 	<a href="#" class="btn btn-primary" data-toggle="popover" data-content="Nono, not yet.." role="button">MetaMS</a>
+ 			<div class="col-md-2">
+	   		 	<a href="#" id="metams-button" class="btn btn-primary" data-toggle="popover" data-content="Nono, not yet.." role="button">MetaMS</a> 			
 			</div>
 		</g:if>		
 
@@ -90,6 +90,12 @@
 	  </table>
 	    
 </div> <!-- /container -->
+
+<script>
+$(function() {
+	$('#metams-button').popover();
+});
+</script>
 
 </body>
 </html>
