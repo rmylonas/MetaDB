@@ -6,12 +6,6 @@
 </head>
 <body>
 
-    <script type="text/javascript">
-		$('input[name=extractedFile]').change(function() {
-			$('#extractedInput').val($(this).val());
-		});
-	</script>
-
  <div class="container">
  
      <!-- Show errors -->
@@ -22,7 +16,7 @@
   		</div>
 	</g:if>
 	
-	 <g:uploadForm action="upload" role="form">
+	 <g:uploadForm action="uploadExtracted" role="form">
 		<div class="col-xs-4">
 			<div class="form-group">
 		    	<label for="extractedInput">ZIP file containing extracted spectra files</label>
@@ -46,6 +40,12 @@
     </g:uploadForm>
 	    
 </div> <!-- /container -->
+
+    <script type="text/javascript">
+		$('input[name=extractedFile]').change(function() {
+			$('#extractedInput').val($(this).val());
+		});
+	</script>
 
 </body>
 </html>

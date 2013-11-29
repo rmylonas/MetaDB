@@ -4,10 +4,13 @@ import it.fmach.metadb.instrument.export.ExportCsv
 import it.fmach.metadb.isatab.model.FEMAssay
 import it.fmach.metadb.isatab.model.FEMRun
 import it.fmach.metadb.workflow.acquisition.AcquiredNamesInserter
+import it.fmach.metadb.workflow.extraction.ExtractedFileInserter
+
 
 class RunsController {
 	
 	def acquiredNamesInserter = new AcquiredNamesInserter()
+	def extractedFileInserter = new ExtractedFileInserter()
 	
     def index() { 
 		String assayId = params['id']
@@ -20,13 +23,16 @@ class RunsController {
 		
 		// if no assayId is given, we'll check if there is already an assay loaded
 		if(session.assay){
-			switch(session.assay.status){
+			def assay = session.assay
+			assay.attach()
+			
+			switch(assay.status){
 				case "randomized":
-					flash.runs = session.assay.randomizedRuns
+					flash.runs = assay.randomizedRuns
 					break
 				
 				case "acquired":
-					flash.runs = session.assay.acquiredRuns
+					flash.runs = assay.acquiredRuns
 			}
 			render(view: "index")
 		}
@@ -57,7 +63,9 @@ class RunsController {
 			List<String> assayNameList = assayNames.split("\n")
 			
 			// reload the assay (to get the whole structure)
-			def assay = FEMAssay.get(session.assay.id)
+			def assay = session.assay
+			assay.attach()
+			//def assay = FEMAssay.get(session.assay.id)
 			
 			// add acquiredRuns to assay
 			def missingNames = acquiredNamesInserter.addAcquiredAssayNames(assay, assayNameList)
@@ -106,6 +114,10 @@ class RunsController {
 	def chooseExtracted(){}
 	
 	def uploadExtracted(){
+		// attach the assay
+		def assay = session.assay
+		assay.attach()
+		
 		// upload the file
 		def f = request.getFile('extractedFile')
 		
@@ -114,20 +126,39 @@ class RunsController {
 			redirect(action: 'index')
 			return
 		}else{
-			importFile = File.createTempFile("extracted_",".zip")
+			def importFile = File.createTempFile("extracted_",".zip")
 			f.transferTo(importFile)
 			
 			// and process it
 			try{
-				investigation = importer.importIsatabZip(importFile.absolutePath)
+				def missingNames = extractedFileInserter.addExtractedFilesZip(assay, importFile.absolutePath)
 				
-				if(investigation.isaParsingInfo.success){
-					flash.message = ('ISAtab file was succesfully processed')
-				}else{
-					flash.error = 'Parsing Error: sorry, your ISAtab file could not be parsed'
-					redirect(action: 'index')
-					return
+				// flash a warning, if names were missing
+				if(missingNames){
+				def missingN = missingNames[0]
+				def notFoundN = missingNames[1]
+				
+				if(missingN){
+					flash.warning = "Following files were missing: <ul>"
+					
+					missingN.each{
+						flash.warning += "<li>" + it + "</it>"
+					}
+					
+					flash.warning += "</ul>"
 				}
+				
+				if(notFoundN){
+					flash.warning += "Following names were not found in database: <ul>"
+					
+					notFoundN.each{
+						flash.warning += "<li>" + it + "</it>"
+					}
+					
+					flash.warning += "</ul>"
+				}
+				
+			}
 				
 			}catch(e){
 				e.printStackTrace()
@@ -137,6 +168,7 @@ class RunsController {
 			}
 		}
 		
+		flash.message = 'Extracted files were added'
 		redirect(action: 'index')
 	}	
 	

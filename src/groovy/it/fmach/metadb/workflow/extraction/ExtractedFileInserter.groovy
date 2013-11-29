@@ -3,6 +3,7 @@ package it.fmach.metadb.workflow.extraction
 import it.fmach.metadb.helper.UnZipper
 import it.fmach.metadb.isatab.model.FEMAssay
 
+
 class ExtractedFileInserter {
 
 	def unzipper = new UnZipper()

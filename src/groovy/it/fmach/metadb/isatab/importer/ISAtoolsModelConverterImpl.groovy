@@ -52,7 +52,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		for(String studyName : studyMap.keySet()){
 			FEMStudy fEMStudy = new FEMStudy()
 			
-			fEMStudy.identifier = studyName
+			fEMStudy.identifier = studyName.trim()
 			convertStudy(studyMap.get(studyName), fEMStudy)
 	
 			studyList.add(fEMStudy)
@@ -63,8 +63,8 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 	}
 	
 	private void convertStudy(Study iSAStudy, FEMStudy fEMStudy){
-		fEMStudy.title = iSAStudy.getStudyTitle()
-		fEMStudy.description = iSAStudy.getStudyDesc()
+		fEMStudy.title = iSAStudy.getStudyTitle().trim()
+		fEMStudy.description = iSAStudy.getStudyDesc().trim()
 		
 		 Map<String, FEMSample> sampleList = convertSampleList(iSAStudy)
 		
@@ -92,10 +92,10 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		// parse the fields of interest
 		for(i in 1..nrRows){
 			FEMSample sample = new FEMSample()
-			sample.name = sampleMatrix[i][headerMap[SAMPLE_NAME]]
-			sample.sourceName = sampleMatrix[i][headerMap[SAMPLE_SOURCE_NAME]]
-			sample.organism = sampleMatrix[i][headerMap[SAMPLE_ORGANISM]]
-			sample.organismPart = sampleMatrix[i][headerMap[SAMPLE_ORGANISM_PART]]
+			sample.name = sampleMatrix[i][headerMap[SAMPLE_NAME]].trim()
+			sample.sourceName = sampleMatrix[i][headerMap[SAMPLE_SOURCE_NAME]].trim()
+			sample.organism = sampleMatrix[i][headerMap[SAMPLE_ORGANISM]].trim()
+			sample.organismPart = sampleMatrix[i][headerMap[SAMPLE_ORGANISM_PART]].trim()
 			
 			// parse the factors and store them as a JSON string
 			def builder = new groovy.json.JsonBuilder()
@@ -117,7 +117,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		
 		assayMap.each{ k, v ->
 			def assay = new FEMAssay()
-			assay.name = k
+			assay.name = k.trim()
 			assay.shortName = createShortAssayName(k)
 			
 			// select the instrument
@@ -176,12 +176,12 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		
 		for(i in 1..nrRows){
 			def run = new FEMRun()
-			def sampleName = assayMatrix[i][headerMap[SAMPLE_NAME]]
+			def sampleName = assayMatrix[i][headerMap[SAMPLE_NAME]].trim()
 			run.sample = sampleList[sampleName]
-			run.msAssayName = assayMatrix[i][headerMap[RUN_MS_ASSAY_NAME]]
-			run.rawSpectraFilePath = assayMatrix[i][headerMap[RUN_RAW_FILE]]
-			run.derivedSpectraFilePath = assayMatrix[i][headerMap[RUN_DERIVED_FILE]]
-			run.scanPolarity = assayMatrix[i][headerMap[RUN_SCAN_POLARITY]]
+			run.msAssayName = assayMatrix[i][headerMap[RUN_MS_ASSAY_NAME]].trim()
+			run.rawSpectraFilePath = assayMatrix[i][headerMap[RUN_RAW_FILE]].trim()
+			run.derivedSpectraFilePath = assayMatrix[i][headerMap[RUN_DERIVED_FILE]].trim()
+			run.scanPolarity = assayMatrix[i][headerMap[RUN_SCAN_POLARITY]].trim()
 			run.rowNumber = i
 						
 			// parse the protocols

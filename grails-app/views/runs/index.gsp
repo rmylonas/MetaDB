@@ -24,16 +24,24 @@
   		</div>
 	</g:if>
 	
+		<!-- Show message -->
+    <g:if test="${flash.message}">
+  		<div class="alert alert-block alert-success">
+  			<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>Warning: </strong>${flash.message}
+  		</div>
+	</g:if>
+	
  	<div class="row">
  		<div class="col-md-4">
     		<h3>Runs <em>${session.assay.shortName}</em></h3>
     	</div>
  
-     	<div class="col-md-2 col-md-offset-4">
-   		 	<g:link action="chooseExtracted" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>  Extracted files</g:link>
+     	<div class="col-md-2 col-md-offset-2">
+   		 	<g:link action="chooseExtracted" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-up"></span>  Extracted files</g:link>
 		</div>
     	
-    	<div class="col-md-2 col-md-offset-4">
+    	<div class="col-md-2">
    		 	<g:link action="assayNames" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>  Assay names</g:link>
 		</div>
 		
