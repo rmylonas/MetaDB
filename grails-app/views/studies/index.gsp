@@ -17,6 +17,8 @@
               <th>Title</th>
               <th>Description</th>
               <th>Filename</th>
+              <th>Group</th>
+              <th>Project</th>
               <th>Creation date</th>
             </tr>
           </thead>
@@ -32,7 +34,9 @@
             				  	...
               				  </g:if>
             			</td>
-            			<td>${it.iSATabFilePath}</td>
+            			<td>${it.originalFilename}</td>
+            			<td>${it.group.name}</td>
+            			<td>${it.project.name}</td>
             			<td>${it.dateCreated}</td>
             		</g:each>  	
 	 			</tr>

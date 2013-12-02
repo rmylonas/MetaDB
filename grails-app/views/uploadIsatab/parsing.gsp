@@ -64,7 +64,7 @@
 			</div> <!-- form-group -->
 			
 			<div class="form-group">
-				<input class="btn btn-primary" type="submit" value="Insert">
+				<input onclick="$(this).button('loading')" data-loading-text="Inserting.." class="btn btn-primary" type="submit" value="Insert">
 			</div>
 	  	</div> <!-- col-md-4 -->
 	  	

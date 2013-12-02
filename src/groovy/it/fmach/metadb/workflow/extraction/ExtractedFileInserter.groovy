@@ -87,7 +87,7 @@ class ExtractedFileInserter {
 			return [missingFiles, namesNotFound, nrFilesAdded]
 		}
 		
-		return null
+		return [null, null, nrFilesAdded]
 	}
 	
 }

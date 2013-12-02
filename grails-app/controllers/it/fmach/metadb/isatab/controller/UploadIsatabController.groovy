@@ -28,6 +28,7 @@ class UploadIsatabController {
 		
 		// upload the file
 		def f = request.getFile('isaTabFile')
+		def originalFilename = f.getOriginalFilename()
 		
 		if (f.empty) {
 			flash.error = 'ISAtab file is empty'
@@ -55,6 +56,14 @@ class UploadIsatabController {
 				redirect(action: 'index')
 				return
 			}
+		}
+		
+		// set the original filenames
+		investigation.studyList.each{
+			it.originalFilename = originalFilename
+			
+			// copy isatab files to the right place
+			this.copyIsatabFile(it)
 		}
 		
 		session.investigation = investigation
@@ -118,6 +127,17 @@ class UploadIsatabController {
 	def ajaxProjects(){
 		def group = FEMGroup.get(params.groupId)
 		render group.projects as JSON
+	}
+	
+	
+	private def copyIsatabFile(FEMStudy study){
+		// move temp directory to right place
+		File workDir = new File(study.workDir)
+		workDir.mkdir()
+		File tempIsatabDir = new File(study.iSATabFilePath)
+		File newIsatabDir = new File(study.workDir + "/" + "isatab")
+		
+		tempIsatabDir.renameTo(newIsatabDir)
 	}
 	
 }

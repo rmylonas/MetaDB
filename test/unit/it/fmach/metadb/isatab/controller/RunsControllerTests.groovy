@@ -23,7 +23,7 @@ class RunsControllerTests {
 		// create a test study
 		def creator = new TestDomainCreator()
 		def study = creator.createStudy()
-		study.save(flush: true)
+		study.save(flush: true, failOnError: true)
 		   
 		params['id'] = 1
 		controller.index()

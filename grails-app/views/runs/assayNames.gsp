@@ -26,7 +26,7 @@
 				
 		<div class="control-group">
 			<div class="controls">
-				<input class="btn btn-primary" type="submit" value="Upload">
+				<input onclick="$(this).button('loading')" data-loading-text="Uploading.." class="btn btn-primary" type="submit" value="Upload">
 			</div>
 		</div>
     </g:uploadForm>

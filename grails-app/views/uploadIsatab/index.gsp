@@ -45,7 +45,7 @@
 			</div> <!-- /form-group -->
 			
 			<div class="form-group">
-				<button class="btn btn-primary" type="submit">Upload</button>
+				<button onclick="$(this).button('loading')" data-loading-text="Uploading.." class="btn btn-primary" type="submit">Upload</button>
 			</div>
 			
 		</div> <!-- /col-xs-3 -->

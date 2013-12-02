@@ -34,11 +34,11 @@ class FEMStudyTests {
 		def investigation = importer.importIsatabFiles(isatabDir)
 		def study = investigation.studyList.get(0)
 		
-//		if (!study.validate()){
-//			study.errors.allErrors.each {
-//				println it
-//			}
-//		}
+		if (!study.validate()){
+			study.errors.allErrors.each {
+				println it
+			}
+		}
 		
 		study.save(flush: true)		
 		def loadedStudy = FEMStudy.findByDescriptionLike("%red wine%")

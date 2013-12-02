@@ -7,6 +7,8 @@ class FEMStudy {
 	String description = ""
 //	String designDescriptors = ""
 	String iSATabFilePath
+	String originalFilename = ""
+	String workDir
 	
 	Date dateCreated
 	
@@ -25,6 +27,7 @@ class FEMStudy {
     static constraints = {
 		group nullable: true
 		project nullable: true
+		workDir nullable: true
     }
 	
 	static mapping = {
