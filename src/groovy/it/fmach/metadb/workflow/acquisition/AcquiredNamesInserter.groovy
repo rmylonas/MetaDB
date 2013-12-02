@@ -29,6 +29,7 @@ class AcquiredNamesInserter {
 		// QC, STDmix and blank we only take ones and separately (in qualitySamples)
 		def runNameMap = [:]
 		def qualitySampleMap = [:]
+		def runFound = [:]
 		
 		this.prepareRunNameMaps(assay.randomizedRuns, runNameMap, qualitySampleMap)
 		
@@ -52,15 +53,33 @@ class AcquiredNamesInserter {
 			}else{
 				// if we can map the name
 				if(runNameMap[idName]){
-					FEMRun run = deepCopier.deepCopy(runNameMap[idName])
 					
-					// change the status and msAssayName
-					run.status = "acquired"
-					run.msAssayName = name.trim()
-					run.rowNumber = i
-					
-					acquiredRuns << run
-					runNameMap.remove(idName)
+					// if a run with same name is already added, we add it in "additionalRuns"
+					if(runFound[idName]){
+						FEMRun alreadyFound = runFound[idName]
+						
+						// prepare and add the additional run
+						FEMRun additionalRun = deepCopier.deepCopy(alreadyFound)
+						additionalRun.status = "acquired"
+						additionalRun.msAssayName = name.trim()
+						
+						if(alreadyFound.additionalRuns){
+							alreadyFound.additionalRuns << additionalRun
+						}else{
+							alreadyFound.additionalRuns = [additionalRun]
+						} 
+					}else{
+						FEMRun run = deepCopier.deepCopy(runNameMap[idName])
+						
+						// change the status and msAssayName
+						run.status = "acquired"
+						run.msAssayName = name.trim()
+						run.rowNumber = i
+						
+						acquiredRuns << run
+						runFound[idName] = run
+	//					runNameMap.remove(idName)
+					}
 				}else{
 					namesNotFound << name
 				}
@@ -75,7 +94,7 @@ class AcquiredNamesInserter {
 		
 		// add missing names
 		runNameMap.each {name, run ->
-			missingNames << name
+			if(! runFound[name]) missingNames << name
 		}
 		
 		if(missingNames.size() == 0 && namesNotFound == 0){

@@ -46,18 +46,14 @@
 		</div>
  
  		<!-- if the assay status is acquired, we can add the extracted files -->
- 		 <g:if test="${session.assay.status == 'acquired' || session.assay.status == 'extracted'}">
-	     	<div class="col-md-2">
-	   		 	<g:link action="chooseExtracted" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-up"></span>  Extracted files</g:link>
-			</div>
-		</g:if>
+     	<div class="col-md-2">
+   		 	<g:link action="chooseExtracted" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-up"></span>  Extracted files</g:link>
+		</div>
  		
  		<!-- if the assay status is extracted, we can submit to MetaMS -->
- 		<g:if test="${session.assay.status == 'extracted'}">
- 			<div class="col-md-2">
-	   		 	<a href="#" id="metams-button" class="btn btn-primary" data-toggle="popover" data-content="Nono, not yet.." role="button">MetaMS</a> 			
-			</div>
-		</g:if>		
+		<div class="col-md-2">
+   		 	<a href="#" id="metams-button" class="btn btn-primary" data-toggle="popover" data-content="Nono, not yet.." role="button">MetaMS</a> 			
+		</div>
 
 	</div> <!-- row -->
 
@@ -68,6 +64,7 @@
             <tr>
               <th>Row nr</th>
               <th>Assay name</th>
+              <th>Additional</th>
               <th>Status</th>
               <th>Sample name</th>
             </tr>
@@ -75,15 +72,24 @@
           
           <tbody>
           <g:each var="run" in="${flash.runs}">
-
-            	<tr>
-            		<g:each in="${run}">
-            			<td>${it.rowNumber}</td>
-            			<td>${it.msAssayName}</td>
-            			<td>${it.status}</td>
-            			<td>${it.sample.name}</td>
-            		</g:each>  	
-	 			</tr>
+            	<tr>	
+            			<td>${run.rowNumber}</td>
+            			<td>${run.msAssayName}</td>
+            			<td></td>
+            			<td>${run.status}</td>
+            			<td>${run.sample.name}</td>
+				</tr>
+	 			
+	 			<g:each var="additional" in="${run.additionalRuns}">
+		 			<tr>	
+	            			<td>${additional.rowNumber}</td>
+	            			<td>${additional.msAssayName}</td>
+	            			<td>*</td>
+	            			<td>${additional.status}</td>
+	            			<td>${additional.sample.name}</td>
+					</tr>
+	 			</g:each>
+	 			
 		  </g:each>
 		  </tbody>
         

@@ -17,9 +17,14 @@ class FEMRun {
 
 	FEMSample sample
 	
+	List additionalRuns
+	
+	static hasMany = [additionalRuns: FEMRun]
+	
 	// static belongsTo = [fEMAssay: FEMAssay]
 	
     static constraints = {
+		additionalRuns nullable: true
     }
 	
 	static mapping = {
