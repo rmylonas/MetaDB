@@ -28,6 +28,12 @@ import it.fmach.metadb.isatab.model.InstrumentMethod;
 class RunRandomization {
 	
 	def deepCopier = new DeepCopier()
+	
+	FEMAssay noRandomization(FEMAssay assay){
+		assay.randomizedRuns = assay.runs
+		assay.status = "randomized"
+		return assay
+	}
 
 	FEMAssay randomizeAssay(FEMAssay assay){
 		assay.randomizedRuns = this.randomizeRuns(assay.runs, assay.method, assay.accessCode.code, assay.instrumentPolarity)

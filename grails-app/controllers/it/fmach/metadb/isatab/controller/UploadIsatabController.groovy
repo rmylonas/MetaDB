@@ -102,7 +102,11 @@ class UploadIsatabController {
 					assay.method = InstrumentMethod.get(params[assay.name + "_me"])
 					
 					// randomize the runs as described in the method
-					runRandomization.randomizeAssay(assay)
+					if(assay.method.randomization){
+						runRandomization.randomizeAssay(assay)
+					}else{
+						runRandomization.noRandomization(assay)
+					}
 				}
 				
 				// only insert study if there is at least one assay selected

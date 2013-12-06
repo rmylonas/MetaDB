@@ -17,12 +17,17 @@ class BootStrap {
 						tag: 'syn_untar_RP', 
 						startPattern: '1.blank-1.STDmix-4.QC', 
 						repeatPattern: '6.sample-1.QC', 
-						endPattern: '1.STDmix-1.blank'),
+						endPattern: '1.STDmix-1.blank',
+						randomization: true),
 					new InstrumentMethod(name: 'targeted RP',
 						tag: 'syn_tar_RP',
 						startPattern: '1.blank-1.STDmix-4.QC',
 						repeatPattern: '6.sample-1.QC',
-						endPattern: '1.STDmix-1.blank')
+						endPattern: '1.STDmix-1.blank',
+						randomization: true),
+					new InstrumentMethod(name: 'Method development',
+						tag: 'syn_md_RP',
+						randomization: false)
 				]
 			new Instrument(name: "Synapt", metabolightsName: "SYNAPT HDMS (Waters)", methods: synaptMethods, polarities: polarities).save(failOnError: true)
 			
