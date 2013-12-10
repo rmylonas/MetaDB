@@ -102,5 +102,47 @@ class AcquiredNamesInserterTest {
 		assert assay.randomizedRuns.get(1).sample == run_3.sample
 		
 	}
+	
+	@Test
+	public void testAddAcquiredAssayNamesWitoutUnderscore() {
+		
+		def creator = new TestDomainCreator()
+		def assay = creator.createRandomizedRunsQCFirst()
+		
+		// check a QC run
+		def assayNames = ["AA001_QC_tag", "AA002_QC_tag", "AA003_Sample_1_tag", "AA004_Sample_2_tag",
+			"AA005_Sample_3_tag", "AA006_Sample_4_tag", "AA007_QC_tag", "AA008_Sample_5_tag",
+			"AA009_Sample_6_tag", "AA010_Sample_7_tag", "AA011_Sample_8_tag", "AA012_Sample_9_tag", "Pipo"]
+		
+		def missingNames = insert.addAcquiredAssayNames(assay, assayNames)
+		
+		def qcRun = assay.acquiredRuns[0]
+		def qcRun_2 = assay.acquiredRuns[1]
+		def run_3 = assay.acquiredRuns[2]
+		def run_8 = assay.acquiredRuns[7]
+		
+		assert "AA001_QC_tag" == qcRun.msAssayName
+		assert "AA002_QC_tag" == qcRun_2.msAssayName
+		assert "AA003_Sample_1_tag" == run_3.msAssayName
+		assert "AA008_Sample_5_tag" == run_8.msAssayName
+		
+		assert 2 == missingNames[0].size()
+		assert 1 == missingNames[1].size()
+		assert 12 == assay.acquiredRuns.size()
+		
+		// QC sample should be the same
+		assert qcRun.sample == qcRun_2.sample
+		
+		// other samples different
+		assert 	run_3.sample != qcRun.sample
+		assert run_8.sample != run_3.sample
+		assert "Sample_1" == run_3.sample.name
+		
+		// samples from randomizedRuns and acquiredRuns should be the same
+		assert assay.randomizedRuns.get(0).sample == qcRun.sample
+		assert assay.randomizedRuns.get(1).sample == run_3.sample
+		
+	}
+	
 
 }

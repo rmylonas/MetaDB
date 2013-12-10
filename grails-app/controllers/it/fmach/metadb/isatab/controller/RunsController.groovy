@@ -9,6 +9,7 @@ import it.fmach.metadb.workflow.extraction.ExtractedFileInserter
 
 class RunsController {
 	
+	def assayService
 	def acquiredNamesInserter = new AcquiredNamesInserter()
 	def extractedFileInserter = new ExtractedFileInserter()
 	
@@ -62,10 +63,12 @@ class RunsController {
 			def assayNames = params["assayNames"]
 			List<String> assayNameList = assayNames.split("\n")
 			
-			// reload the assay (to get the whole structure)
+			// re-attach the assay (to get the whole structure)
 			def assay = session.assay
 			assay.attach()
-			//def assay = FEMAssay.get(session.assay.id)
+			
+			// clean existing acquiredRuns (we replace all entries)		
+			assayService.cleanAcquisitionRuns(assay)
 			
 			// add acquiredRuns to assay
 			def missingNames = acquiredNamesInserter.addAcquiredAssayNames(assay, assayNameList)
@@ -97,8 +100,8 @@ class RunsController {
 				
 			}
 			
-			// update the assay			
-			assay.save(flush: true)
+			// update the assay
+			assayService.saveAssayWithAcquisitions(assay)
 			
 			// set the runs into flash
 			flash.runs = assay.acquiredRuns

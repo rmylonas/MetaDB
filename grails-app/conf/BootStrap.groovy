@@ -36,7 +36,11 @@ class BootStrap {
 					tag: 'xev_tar_RP',
 					startPattern: '5.blank-1.STDmix-2.QC',
 					repeatPattern: '3.sample-1.QC',
-					endPattern: '1.STDmix-5.blank'),
+					endPattern: '1.STDmix-5.blank',
+					randomization: true),
+				new InstrumentMethod(name: 'Method development',
+					tag: 'xev_tar_RP',
+					randomization: false)
 			]	
 			new Instrument(name: "Xevo", metabolightsName: "Xevo TQ MS (Waters)", methods: xevoMethods, polarities: polarities).save(failOnError: true)	
 			
@@ -45,7 +49,11 @@ class BootStrap {
 					tag: 'tsq_tar_RP',
 					startPattern: '5.blank-1.STDmix-2.QC',
 					repeatPattern: '3.sample-1.QC',
-					endPattern: '1.STDmix-5.blank'),
+					endPattern: '1.STDmix-5.blank',
+					randomization: true),
+				new InstrumentMethod(name: 'Method development',
+					tag: 'xev_tar_RP',
+					randomization: false)
 			]
 			new Instrument(name: "TSQ", metabolightsName: "TSQ Quantum Ultra (Thermo Scientific)", methods: tsqMethods, polarities: polarities).save(failOnError: true)
 			

@@ -31,6 +31,12 @@ class RunRandomization {
 	
 	FEMAssay noRandomization(FEMAssay assay){
 		assay.randomizedRuns = assay.runs
+		
+		// set the status of every run to "randomized"
+		assay.runs.each{
+			it.status = "randomized"
+		}
+		
 		assay.status = "randomized"
 		return assay
 	}

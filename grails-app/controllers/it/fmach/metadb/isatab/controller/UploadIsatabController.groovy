@@ -95,7 +95,7 @@ class UploadIsatabController {
 					// remove the entries which weren't selected
 					if(params[assay.name + "_cb"] != "on"){
 						iter.remove()
-						next
+						continue
 					}
 					
 					// set instrument method

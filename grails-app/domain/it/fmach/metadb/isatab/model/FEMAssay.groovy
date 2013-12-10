@@ -33,6 +33,10 @@ class FEMAssay {
 		workDir nullable: true
     }
 	
+//	static mapping = {
+//		acquiredRuns cascade: "all-delete-orphan"
+//	}
+	
 /*	static mapping = {
 		acquiredRuns lazy: false
 		// randomizedRuns lazy: false

@@ -12,7 +12,7 @@ import org.junit.*
 class InstrumentMethodTests {
 
     void testSaveAndLoad() {
-       def instr = new InstrumentMethod(name: 'positive RP', tag: 'rp_pos', startPattern: '1.QC-1.STDmix', repeatPattern: '1.sample-1.QC', endPattern: '3.QC')
+       def instr = new InstrumentMethod(name: 'positive RP', tag: 'rp_pos', startPattern: '1.QC-1.STDmix', repeatPattern: '1.sample-1.QC', endPattern: '3.QC', randomization: true)
 	   instr.save()
 	   
 	   def loadedInstr = InstrumentMethod.findByName('positive RP')

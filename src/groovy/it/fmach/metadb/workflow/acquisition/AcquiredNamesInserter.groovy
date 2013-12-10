@@ -18,7 +18,7 @@ class AcquiredNamesInserter {
 	 * @return [listOfMissingNames, listOfNonMappedNames]
 	 */
 	
-	def assayNamePattern = ~/(.+?)_(\d+)_(.+)/
+	def assayNamePattern = ~/(.+?)_?(\d+)_(.+)/
 	
 	def addAcquiredAssayNames(FEMAssay assay, List<String> assayNames){
 		def acquiredRuns = []
@@ -34,7 +34,7 @@ class AcquiredNamesInserter {
 		this.prepareRunNameMaps(assay.randomizedRuns, runNameMap, qualitySampleMap)
 		
 		// look at all the assayNames
-		def i = 0
+		def i = 1
 		assayNames.each{ name ->
 			// separate the last _int part
 			def matcher = name =~ assayNamePattern
@@ -42,12 +42,13 @@ class AcquiredNamesInserter {
 			// def number = matcher[0][2]
 			
 			// if it is a QC, stdMix or blank, we just add a run with this name
-			def nameMatcher = idName =~ /(QC|STDmix|blank)_.*/
+			def nameMatcher = idName =~ /(?i)(QC|STDmix|blank)_.*/
 			if(nameMatcher){
+				def lcName = (nameMatcher[0][1]).toLowerCase()									
 				acquiredRuns.add(
 					new FEMRun(msAssayName: name.trim(), 
 							rowNumber: i, scanPolarity: assay.instrumentPolarity, 
-							status: 'acquired', sample: qualitySampleMap[nameMatcher[0][1]])
+							status: 'acquired', sample: qualitySampleMap[lcName])
 				)
 			// if it's a sample
 			}else{
@@ -108,13 +109,14 @@ class AcquiredNamesInserter {
 	
 	private def prepareRunNameMaps(def runList, def runNameMap, def qualitySampleMap){
 		runList.each{ run ->
-			switch (run.sample.name){
-				case 'QC':
-					if(! qualitySampleMap['QC']) qualitySampleMap['QC'] = run.sample
+			def lcSampleName = run.sample.name.toLowerCase()
+			switch (lcSampleName){
+				case 'qc':
+					if(! qualitySampleMap['qc']) qualitySampleMap['qc'] = run.sample
 					break
 					
-				case 'STDmix':
-					if(! qualitySampleMap['STDmix']) qualitySampleMap['STDmix'] = run.sample
+				case 'stdmix':
+					if(! qualitySampleMap['stdmix']) qualitySampleMap['stdmix'] = run.sample
 					break
 				
 				case 'blank':
