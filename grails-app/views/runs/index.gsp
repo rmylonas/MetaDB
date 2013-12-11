@@ -52,7 +52,7 @@
  		
  		<!-- if the assay status is extracted, we can submit to MetaMS -->
 		<div class="col-md-2">
-   		 	<a href="#" id="metams-button" class="btn btn-primary" data-toggle="popover" data-content="Nono, not yet.." role="button">MetaMS</a> 			
+   		 	<g:link controller="metaMS" action="runMetaMS" class="btn btn-primary">MetaMS</g:link>			
 		</div>
 
 	</div> <!-- row -->
@@ -62,9 +62,10 @@
 	  
 	  	<thead>
             <tr>
+              <th>Selected</th>
               <th>Row nr</th>
               <th>Assay name</th>
-              <th>Additional</th>
+              <th>Additional acquisition</th>
               <th>Status</th>
               <th>Sample name</th>
             </tr>
@@ -73,6 +74,7 @@
           <tbody>
           <g:each var="run" in="${flash.runs}">
             	<tr>	
+            			<td><g:checkBox name="${run.msAssayName}" value="${true}" /></td>
             			<td>${run.rowNumber}</td>
             			<td>${run.msAssayName}</td>
             			<td></td>
@@ -82,9 +84,10 @@
 	 			
 	 			<g:each var="additional" in="${run.additionalRuns}">
 		 			<tr>	
+		 					<td><g:checkBox name="${additional.msAssayName}" value="${true}" /></td>
 	            			<td>${additional.rowNumber}</td>
 	            			<td>${additional.msAssayName}</td>
-	            			<td>*</td>
+	            			<td><span class="glyphicon glyphicon-ok"></span></td>
 	            			<td>${additional.status}</td>
 	            			<td>${additional.sample.name}</td>
 					</tr>
