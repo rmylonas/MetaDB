@@ -110,3 +110,4 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
 metadb.isatab.metabolConfigFile = "/home/mylonasr/MetaDB/conf/MetaboLightsConfig20130507"
 metadb.dataPath = "/home/mylonasr/MetaDB/data"
+metadb.conf.metams = "/home/mylonasr/MetaDB/conf/metaMS"
