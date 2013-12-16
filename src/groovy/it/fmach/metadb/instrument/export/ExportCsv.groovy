@@ -23,7 +23,7 @@ class ExportCsv {
 		// parse the factor names from first entry which is not blank, QC or STDmix
 		def sampleName = 'QC'
 		def k = 0
-		while(sampleName =~ /blank|QC|STDmix/){
+		while(sampleName =~ /(?i)blank|QC|STDmix/){
 			sampleName = assay.randomizedRuns.get(k++).sample.name
 		}
 		
@@ -41,7 +41,7 @@ class ExportCsv {
 			def line = []
 			line << run.msAssayName
 			line << run.sample.name
-			line << (run.sample.name ==~ /blank|QC|STDmix/ ? '' : run.sample.name + "_" + sprintf('%03d', i++))
+			line << (run.sample.name ==~ /(?i)blank|QC|STDmix/ ? '' : run.sample.name + "_" + sprintf('%03d', i++))
 			
 			// try to parse the factors, but if there empty (null) we take the emptyFactorList
 			def factors = parseFactor(run.sample.factorJSON)
@@ -70,7 +70,8 @@ class ExportCsv {
 		groups.each{
 			def entry = it.split(":")
 			names << entry[0]
-			vals << entry[1]
+			def valToAdd = (entry.size() > 1) ? (entry[1]) : ('')
+			vals << valToAdd
 		}
 		
 		return [names, vals]

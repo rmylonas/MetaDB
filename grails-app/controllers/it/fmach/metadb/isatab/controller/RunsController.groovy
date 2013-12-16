@@ -45,6 +45,9 @@ class RunsController {
 			flash.error = "No assay is selected"	
 		}
 		
+		// re-attach the assay object to the session
+		assay.attach()
+		
 		def exporter = new ExportCsv()
 		def csvString = exporter.exportRandomizedRuns(assay)
 		

@@ -7,10 +7,6 @@ import it.fmach.metadb.helper.UnZipper
 import it.fmach.metadb.isatab.model.FEMStudy;
 import it.fmach.metadb.isatab.model.ISAParsingInfo;
 
-import org.isatools.errorreporter.model.ErrorMessage;
-import org.isatools.errorreporter.model.ISAFileErrorReport;
-import org.isatools.isacreator.io.importisa.ISAtabFilesImporter
-import org.isatools.isacreator.model.Investigation;
 
 /**
  * @author mylonasr
@@ -21,7 +17,7 @@ class IsatabImporterImpl implements IsatabImporter {
 	
 	def unzipper = new UnZipper()
 	
-	private ISAtabFilesImporter importer
+	//private ISAtabFilesImporter importer
 	private ISAtoolsModelConverter converter
 	private String workDir
 	
@@ -36,8 +32,8 @@ class IsatabImporterImpl implements IsatabImporter {
 		}
 		
 		this.workDir = workDir
-		importer = new ISAtabFilesImporter(configDir)
-		converter = new ISAtoolsModelConverterImpl(workDir)
+//		importer = new ISAtabFilesImporter(configDir)
+//		converter = new ISAtoolsModelConverterImpl(workDir)
 	}
 	
 	/**
@@ -47,49 +43,50 @@ class IsatabImporterImpl implements IsatabImporter {
 	 * @return returns a list of Study objects, if parsing was successful
 	 */
 	FEMInvestigation importIsatabFiles(String isatabDir){
-		def investigation = new FEMInvestigation()
-		
-		importer.importFile(isatabDir)
-		
-		// get the errors if there are any
-		def errorSet = []
-		
-		for(ISAFileErrorReport error: importer.getMessages()){
-			def errorMessage = ""
-			for(ErrorMessage message : error.getMessages()){
-				errorMessage += message.getMessage()
-			}
-			errorSet.add(error.getProblemSummary() + ": " + errorMessage)
-		}
-		
-		ISAParsingInfo parsingInfo = new ISAParsingInfo()
-		
-		if(errorSet){
-			parsingInfo.success = false
-			parsingInfo.nrOfErrors = errorSet.size()
-			
-			// create JSON string of errors
-			def builder = new groovy.json.JsonBuilder()
-			builder(errorSet)
-			parsingInfo.errorMessage = builder.toString()
-			parsingInfo.status = "parsing failed"
-		}else{
-			Investigation isaInvestig = importer.getInvestigation()
-			List<FEMStudy> studyList = converter.convertInvestigation(isaInvestig)
-	
-			// add the filePath to all studies
-			studyList.each {it.iSATabFilePath = isatabDir}
-			investigation.studyList = studyList
-			
-			// fill in log info
-			parsingInfo.success = true
-			parsingInfo.status = "parsed"
-			
-		}
-				
-		investigation.isaParsingInfo = parsingInfo
-		return investigation
-		
+//		def investigation = new FEMInvestigation()
+//		
+//		importer.importFile(isatabDir)
+//		
+//		// get the errors if there are any
+//		def errorSet = []
+//		
+//		for(ISAFileErrorReport error: importer.getMessages()){
+//			def errorMessage = ""
+//			for(ErrorMessage message : error.getMessages()){
+//				errorMessage += message.getMessage()
+//			}
+//			errorSet.add(error.getProblemSummary() + ": " + errorMessage)
+//		}
+//		
+//		ISAParsingInfo parsingInfo = new ISAParsingInfo()
+//		
+//		if(errorSet){
+//			parsingInfo.success = false
+//			parsingInfo.nrOfErrors = errorSet.size()
+//			
+//			// create JSON string of errors
+//			def builder = new groovy.json.JsonBuilder()
+//			builder(errorSet)
+//			parsingInfo.errorMessage = builder.toString()
+//			parsingInfo.status = "parsing failed"
+//		}else{
+//			Investigation isaInvestig = importer.getInvestigation()
+//			List<FEMStudy> studyList = converter.convertInvestigation(isaInvestig)
+//	
+//			// add the filePath to all studies
+//			studyList.each {it.iSATabFilePath = isatabDir}
+//			investigation.studyList = studyList
+//			
+//			// fill in log info
+//			parsingInfo.success = true
+//			parsingInfo.status = "parsed"
+//			
+//		}
+//				
+//		investigation.isaParsingInfo = parsingInfo
+//		return investigation
+//		
+		return null
 	}	
 
 	@Override

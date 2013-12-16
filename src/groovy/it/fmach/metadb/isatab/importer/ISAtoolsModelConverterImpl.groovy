@@ -6,9 +6,7 @@ import it.fmach.metadb.isatab.model.FEMSample
 import it.fmach.metadb.isatab.model.FEMStudy
 import it.fmach.metadb.isatab.model.Instrument
 
-import org.isatools.isacreator.model.Assay
-import org.isatools.isacreator.model.Investigation
-import org.isatools.isacreator.model.Study
+
 
 import it.fmach.metadb.isatab.importer.AccessCodeGenerator
 
@@ -17,7 +15,7 @@ import it.fmach.metadb.isatab.importer.AccessCodeGenerator
  *
  * Convert Objects from the isatools into our own Objects (typically from Investigation into our own Study)
  */
-class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
+class ISAtoolsModelConverterImpl {
 	def accessCodeGenerator = new AccessCodeGenerator()
 	def instrumentMap = [:]
 	
@@ -42,179 +40,6 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		this.workDir = workDir		
 	}
 	
-	@Override
-	public List<FEMStudy> convertInvestigation(Investigation iSAInvestigation) {
 		
-		List<FEMStudy> studyList = new ArrayList<FEMStudy>() 
 		
-		// loop through all studies
-		Map<String, Study> studyMap = iSAInvestigation.getStudies()
-		for(String studyName : studyMap.keySet()){
-			FEMStudy fEMStudy = new FEMStudy()
-			
-			fEMStudy.identifier = studyName.trim()
-			convertStudy(studyMap.get(studyName), fEMStudy)
-	
-			studyList.add(fEMStudy)
-		}
-		
-		return studyList
-		
-	}
-	
-	private void convertStudy(Study iSAStudy, FEMStudy fEMStudy){
-		fEMStudy.title = iSAStudy.getStudyTitle().trim()
-		fEMStudy.description = iSAStudy.getStudyDesc().trim()
-		
-		// set the workingDir
-		fEMStudy.workDir = this.workDir + "/" + fEMStudy.identifier
-		
-		 Map<String, FEMSample> sampleList = convertSampleList(iSAStudy)
-		
-		List<FEMAssay> assayList = convertAssayList(iSAStudy, sampleList)
-		fEMStudy.assays = assayList
-	}
-	
-	private Map<String, FEMSample> convertSampleList(Study iSAStudy){
-		 Map<String, FEMSample> sampleList = [:]
-		Object[][] sampleMatrix = iSAStudy.getStudySampleDataMatrix()
-		
-		def headerMap = [:]
-		def factorMap = [:]
-		def nrColumns = sampleMatrix[0].length -1
-		def nrRows = sampleMatrix.length - 1
-		
-		// parse the header
-		for(i in 0..nrColumns){
-			headerMap[sampleMatrix[0][i]] = i
-			def m = sampleMatrix[0][i] =~ /Factor.*\[(.+)\]/
-			m.each{factorMap[it[1]] = i}
-			
-		}
-		
-		// parse the fields of interest
-		for(i in 1..nrRows){
-			FEMSample sample = new FEMSample()
-			sample.name = sampleMatrix[i][headerMap[SAMPLE_NAME]].trim()
-			sample.sourceName = sampleMatrix[i][headerMap[SAMPLE_SOURCE_NAME]].trim()
-			sample.organism = sampleMatrix[i][headerMap[SAMPLE_ORGANISM]].trim()
-			sample.organismPart = sampleMatrix[i][headerMap[SAMPLE_ORGANISM_PART]].trim()
-			
-			// parse the factors and store them as a JSON string
-			def builder = new groovy.json.JsonBuilder()
-			def tempMap = [:]
-			factorMap.each{ tempMap[it.key] = sampleMatrix[i][it.value] }
-			builder(tempMap)
-			
-			sample.factorJSON = builder.toString()
-			sampleList[sample.name] = sample
-		}
-		
-		return sampleList
-
-	}
-	
-	private List<FEMAssay> convertAssayList(Study iSAStudy, Map<String, FEMSample> sampleList){
-		List<FEMAssay> assayList = new ArrayList<FEMAssay>()		
-		def assayMap = iSAStudy.getAssays()
-		
-		assayMap.each{ k, v ->
-			def assay = new FEMAssay()
-			assay.name = k.trim()
-			assay.shortName = createShortAssayName(k)
-			
-			// select the instrument
-			def instrument = this.instrumentMap[v.getAssayPlatform()]
-			if(instrument == null){throw new RuntimeException("instrument [" + v.getAssayPlatform() + "] is not available")}
-			assay.instrument = instrument
-			
-			assay.runs = convertRunList(v, sampleList)
-			
-			// set the workDir of this assay
-			assay.workDir = this.workDir + "/" + iSAStudy.getStudyTitle().trim() + "/" + assay.shortName
-			
-			//select the polarity
-			def polarity = assay.runs[0].scanPolarity
-			if(polarity == null){throw new RuntimeException("polarity [" + polarity + "] has to be defined")}
-			assay.instrumentPolarity = polarity
-			
-			// and for the method we just take the first available
-			assay.method = instrument.methods[0]
-			
-			assay.accessCode = accessCodeGenerator.getNewCode()
-			assayList << assay
-		}
-		
-		return assayList
-	}
-	
-	private String createShortAssayName(String name){
-		def matcher = name =~ /a_(.+)_metabolite profiling_mass spectrometry-?(.*)\.txt/
-		
-		// return the complete name, if there is a matcher
-		if(! matcher) return name
-		
-		def end = (matcher[0][2] != '')?("-" + matcher[0][2]):('')
-		def shortName = matcher[0][1] + end
-		
-		return shortName
-	}
-	
-	private List<FEMRun> convertRunList(Assay iSAAssay, Map<String, FEMSample> sampleList){
-		def runList = new ArrayList<FEMRun>()
-		Object[][] assayMatrix = iSAAssay.getAssayDataMatrix()
-		
-		def headerMap = [:]
-		def headerList = assayMatrix[0]
-		def nrColumns = assayMatrix[0].length -1
-		def nrRows = assayMatrix.length - 1
-		
-		// parse the header
-		for(i in 0..nrColumns){
-			headerMap[assayMatrix[0][i]] = i
-		}
-		
-		// parse the fields of interest
-		def tempList = []
-		
-		for(i in 1..nrRows){
-			def run = new FEMRun()
-			def sampleName = assayMatrix[i][headerMap[SAMPLE_NAME]].trim()
-			run.sample = sampleList[sampleName]
-			run.msAssayName = assayMatrix[i][headerMap[RUN_MS_ASSAY_NAME]].trim()
-			run.rawSpectraFilePath = assayMatrix[i][headerMap[RUN_RAW_FILE]].trim()
-			run.derivedSpectraFilePath = assayMatrix[i][headerMap[RUN_DERIVED_FILE]].trim()
-			run.scanPolarity = assayMatrix[i][headerMap[RUN_SCAN_POLARITY]].trim()
-			run.rowNumber = i
-						
-			// parse the protocols
-			def tempMap = [:]
-			for(k in 0..nrColumns){
-				if(headerList[k] =~ /Protocol/){
-					// add the last protocol info
-					if(tempMap) tempList << tempMap
-					
-					// reset the Map and add a new one
-					tempMap = [:]
-					tempMap.protocolREF = assayMatrix[i][k]
-				}else{
-					def m = headerList[k] =~ /Parameter Value\[(.+)\]/
-					m.each {tempMap[it[1]] = assayMatrix[i][k]}
-				}
-			}
-			
-			// add the last Map
-			if(tempMap) tempList << tempMap	
-			
-			// make a JSON text and add it to the run
-			def builder = new groovy.json.JsonBuilder()
-			builder(tempList)
-			run.protocolJSON = builder.toString()
-			
-			runList.add(run)
-		}
-		
-		return runList
-	}	
-
 }

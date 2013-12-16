@@ -6,6 +6,25 @@
 </head>
 <body>
 
+<script>
+// select all runs
+function selectAll() {
+	$('#runTable').find('input[type=checkbox]').each(function(){ this.checked='checked'});
+}
+
+// de-select all runs
+function selectNone() {
+	$('#runTable').find('input[type=checkbox]').each(function(){ this.checked=''});
+}
+
+// submit runs
+function startMetaMs(){
+	$('[name="runForm"]').submit();
+}
+
+</script>
+
+
 <div class="container">
  
      <!-- Show errors -->
@@ -52,11 +71,15 @@
  		
  		<!-- if the assay status is extracted, we can submit to MetaMS -->
 		<div class="col-md-2">
-   		 	<g:link controller="metaMS" action="runMetaMS" class="btn btn-primary">MetaMS</g:link>			
+   		 	<button class="btn btn-primary" onClick="startMetaMs()" >MetaMS</button>			
 		</div>
 
 	</div> <!-- row -->
-
+	
+	<div class="row">
+		<button class="btn btn-default" onClick="selectAll()">select all</button>
+		<button class="btn btn-default" onClick="selectNone()">select none</button>
+	</div>
 
 	  <table class="table table-striped">
 	  
@@ -71,10 +94,12 @@
             </tr>
           </thead>
           
-          <tbody>
+          <g:form name="runForm" controller="metaMS" action="runMetaMS">
+          
+          <tbody id="runTable">
           <g:each var="run" in="${flash.runs}">
             	<tr>	
-            			<td><g:checkBox name="${run.msAssayName}" value="${true}" /></td>
+            			<td><g:checkBox name="runSelection" value="${run.msAssayName}" checked="true" /></td>
             			<td>${run.rowNumber}</td>
             			<td>${run.msAssayName}</td>
             			<td></td>
@@ -84,7 +109,7 @@
 	 			
 	 			<g:each var="additional" in="${run.additionalRuns}">
 		 			<tr>	
-		 					<td><g:checkBox name="${additional.msAssayName}" value="${true}" /></td>
+		 					<td><g:checkBox name="runSelection" value="${additional.msAssayName}" checked="true" /></td>
 	            			<td>${additional.rowNumber}</td>
 	            			<td>${additional.msAssayName}</td>
 	            			<td><span class="glyphicon glyphicon-ok"></span></td>
@@ -95,6 +120,8 @@
 	 			
 		  </g:each>
 		  </tbody>
+		  
+		  </g:form>
         
 	  </table>
 	    
