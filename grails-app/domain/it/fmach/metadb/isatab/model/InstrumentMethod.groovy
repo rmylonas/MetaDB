@@ -8,8 +8,11 @@ class InstrumentMethod {
 	String startPattern
 	String repeatPattern
 	String endPattern
+	MetaMsDb metaMsDb
 	
 	Boolean randomization
+	
+	static belongsTo = [instrument:Instrument]
 	
     static constraints = {
 		description nullable: true

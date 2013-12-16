@@ -15,7 +15,9 @@ import org.junit.*
 class InstrumentTests {
 
     void testSaveAndLoad() {
-       def instr = new Instrument(name: 'Xevo', metabolightsName: 'Xevo Metabolights')
+       def instr = new Instrument(name: 'Xevo', 
+		   metabolightsName: 'Xevo Metabolights',
+		   chromatography: "LC")
 	   instr.save()
 	   
 	   def loadedInstr = Instrument.findByName('Xevo')
