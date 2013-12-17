@@ -14,8 +14,9 @@ import it.fmach.metadb.isatab.model.InstrumentMethod
 import it.fmach.metadb.isatab.model.Instrument
 import it.fmach.metadb.isatab.model.AccessCode
 import it.fmach.metadb.isatab.model.MetaMsSubmission
+import it.fmach.metadb.isatab.model.MetaMsDb
 
-@Mock([FEMStudy, FEMAssay, FEMRun, InstrumentMethod, Instrument, AccessCode, MetaMsSubmission])
+@Mock([FEMStudy, FEMAssay, FEMRun, InstrumentMethod, Instrument, AccessCode, MetaMsSubmission, MetaMsDb])
 class MetaMsRunnerTest {
 	
 	static String metaMsConfDir = "resources/conf/metaMS"
@@ -41,7 +42,7 @@ class MetaMsRunnerTest {
 		
 		println(workDir)
 		
-		runner.runMetaMs(workDir, assay, selectedMsAssayNames, null, null, null)
+		runner.runMetaMs(workDir, assay, selectedMsAssayNames, "1.2", "10.5")
 		
 		// make sure metams is done
 		Thread.sleep(500)
@@ -53,6 +54,37 @@ class MetaMsRunnerTest {
 		assert 2 == metaMsSubmission.selectedRuns.size()
 		
 	}
+	
+	
+	@Test
+	public void constructCommandTest(){
+		def runner = new MetaMsRunner(metaMsConfDir)
+		runner.workDir = "/some/path"
+		
+		def creator = new TestDomainCreator()
+		def assay = creator.createExtractedRuns()
+
+		def command = runner.constructCommand(assay, null, null)
+		assert "Rscript resources/conf/metaMS/runMetaMS.R -i LC -p negative -f null -s some/path -o /some/path" == command
+		
+		def commandWithRt = runner.constructCommand(assay, "1.234", "8.875")
+		
+		assert commandWithRt.contains("-m 1.234 -x 8.875")
+	}
+	
+	
+	@Test
+	public void getInstrumentChromatographyTest() {
+		def runner = new MetaMsRunner(metaMsConfDir)
+		
+		def creator = new TestDomainCreator()
+		def assay = creator.createExtractedRuns()
+		
+		def chrom = runner.getInstrumentChromatography(assay)
+		
+		assert "LC" == chrom
+	}
+	
 	
 	@Test
 	public void selectAcquiredRunsTest() {

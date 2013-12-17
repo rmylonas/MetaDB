@@ -11,7 +11,6 @@ class Instrument {
 	List polarities
 	static hasMany = [methods: InstrumentMethod, polarities: String]
 	
-	
     static constraints = {
 		bookingSystemName nullable: true
 		name unique: true

@@ -29,7 +29,11 @@ class BootStrap {
 						tag: 'syn_md_RP',
 						randomization: false)
 				]
-			new Instrument(name: "Synapt", metabolightsName: "SYNAPT HDMS (Waters)", methods: synaptMethods, polarities: polarities).save(failOnError: true)
+			new Instrument(name: "Synapt", 
+							metabolightsName: "SYNAPT HDMS (Waters)", 
+							methods: synaptMethods, 
+							polarities: polarities,
+							chromatography: "LC").save(flush: true, failOnError: true)
 			
 			def xevoMethods = [
 				new InstrumentMethod(name: 'untargeted RP',
@@ -42,7 +46,11 @@ class BootStrap {
 					tag: 'xev_tar_RP',
 					randomization: false)
 			]	
-			new Instrument(name: "Xevo", metabolightsName: "Xevo TQ MS (Waters)", methods: xevoMethods, polarities: polarities).save(failOnError: true)	
+			new Instrument(name: "Xevo", 
+							metabolightsName: "Xevo TQ MS (Waters)", 
+							methods: xevoMethods, 
+							polarities: polarities,
+							chromatography: "LC").save(flush: true, failOnError: true)	
 			
 			def tsqMethods = [
 				new InstrumentMethod(name: 'targeted RP',
@@ -55,7 +63,11 @@ class BootStrap {
 					tag: 'xev_tar_RP',
 					randomization: false)
 			]
-			new Instrument(name: "TSQ", metabolightsName: "TSQ Quantum Ultra (Thermo Scientific)", methods: tsqMethods, polarities: polarities).save(failOnError: true)
+			new Instrument(name: "TSQ", 
+				metabolightsName: "TSQ Quantum Ultra (Thermo Scientific)", 
+				methods: tsqMethods, 
+				polarities: polarities, 
+				chromatography: "GC").save(flush: true, failOnError: true)
 			
 		}
 		
@@ -64,8 +76,8 @@ class BootStrap {
 			List fulvioProjects = [new FEMProject(name: 'Wine cellar'), new FEMProject(name: 'Nomacorc') ]
 			List urskaProjects = [new FEMProject(name: 'Ager melo')]
 				
-			def fulvioGroup = new FEMGroup(name: "Fulvio", projects:fulvioProjects).save(failOnError: true)
-			def urskaGroup = new FEMGroup(name: "Urska", projects:urskaProjects).save(failOnError: true)
+			def fulvioGroup = new FEMGroup(name: "Fulvio", projects:fulvioProjects).save(flush: true, failOnError: true)
+			def urskaGroup = new FEMGroup(name: "Urska", projects:urskaProjects).save(flush: true, failOnError: true)
 			
 		}
     }

@@ -3,6 +3,7 @@ package it.fmach.metadb.workflow.metams
 import it.fmach.metadb.isatab.model.FEMAssay
 import it.fmach.metadb.isatab.model.FEMRun
 import it.fmach.metadb.isatab.model.InstrumentMethod
+import it.fmach.metadb.isatab.model.Instrument
 import it.fmach.metadb.isatab.model.MetaMsDb
 import it.fmach.metadb.isatab.model.MetaMsSubmission
 
@@ -10,29 +11,35 @@ import it.fmach.metadb.isatab.model.MetaMsSubmission
 class MetaMsRunner {
 	
 	String metaMsDir
+	String workDir
 	
 	private String fileListPath
+
 	
 	def MetaMsRunner(String metaMsDir){
 		this.metaMsDir = metaMsDir
 	}
 	
-	def runMetaMs(String workDir, FEMAssay assay, List<String> selectedMsAssayNames, InstrumentMethod method, Double rtMin, Double rtMax){
+	def runMetaMs(String workDir, FEMAssay assay, List<String> selectedMsAssayNames, String rtMin, String rtMax){
 				
+		this.workDir = workDir
+		
 		def selectedRuns = selectAcquiredRuns(assay, selectedMsAssayNames)
 		
 		// prepare the fileList used by runMetaMS.R
-		this.fileListPath = workDir + "/fileList.csv"
-		prepareFileList(selectedRuns)
-		
-		// create and save this metaMsSubmission
-		def metaMsSubmission = new MetaMsSubmission(workDir: workDir, status: "running", selectedRuns: selectedRuns)
-		metaMsSubmission.save(flush: true)
+		this.fileListPath = this.workDir + "/fileList.csv"
+		this.prepareFileList(selectedRuns)
 		
 		// construct the command
-		def command = 'Rscript ' + this.metaMsDir + '/runMetaMS.R '
-		command += ""
+		def command = constructCommand(assay, rtMin, rtMax)
 		
+		// create and save this metaMsSubmission
+		def metaMsSubmission = new MetaMsSubmission(workDir: this.workDir, 
+													status: "running", 
+													selectedRuns: selectedRuns,
+													command: command)
+		
+		metaMsSubmission.save(flush: true, failOnError: true)
 		
 		// we execute the script in a separate thread
 		Thread.start{
@@ -40,8 +47,8 @@ class MetaMsRunner {
 			proc.waitFor()
 			
 			// write stdout and stderr
-			new File(workDir + "/stdout.log").withWriter{ it << proc.in.text }
-			new File(workDir + "/stderr.log").withWriter{ it << proc.err.text }
+			new File(this.workDir + "/stdout.log").withWriter{ it << proc.in.text }
+			new File(this.workDir + "/stderr.log").withWriter{ it << proc.err.text }
 			
 			// save the right status once we're finished
 			def status = (proc.exitValue() == 0) ? ("done") : ("failed")
@@ -50,6 +57,49 @@ class MetaMsRunner {
 		}
 
 	}
+	
+	
+	def constructCommand(FEMAssay assay, String minRt, String maxRt){
+		// call the rscript
+		def command = 'Rscript ' + this.metaMsDir + '/runMetaMS.R'
+		
+		// instrument parameter (GC or LC)
+		command += " -i " + this.getInstrumentChromatography(assay)
+		
+		// provide polarity (only if we're in LC mode and if it's negative)
+		// the point is that MetaMS only handles pos and neg, but there is also "alternating"
+		if(assay.instrumentPolarity == "negative") command += " -p " + assay.instrumentPolarity
+		
+		// add the fileList
+		command += " -f " + this.fileListPath
+		
+		// add the database if not null
+		if(assay.method.metaMsDb) command += " -d " + assay.method.metaMsDb
+		
+		// add the instrument settings (throw exception if not available)
+		if(! assay.method.metaMsParameterFile) throw new RuntimeException("missing metaMsParameterFile information in assay method")
+		command += " -s " + assay.method.metaMsParameterFile
+		
+		// output to workdir
+		command += " -o " + this.workDir
+		
+		// set minRt and maxRt if available
+		if(minRt && maxRt) command += " -m " + minRt + " -x " + maxRt
+		
+		return command
+	}
+	
+	
+	def getInstrumentChromatography(FEMAssay assay){		
+		// throw an exception if it's neither GC or LC
+		if(! assay.instrument.chromatography =~ /[GC|LC]/){
+			 throw new RuntimeException("illagel instrument chromatography [" + instrument.get(0).chromatography
+				 + "]: should be GC or LC")
+		}
+		
+		return assay.instrument.chromatography
+	}
+	
 	
 	def prepareFileList(List<FEMRun> selectedRuns){
 		new File(this.fileListPath).withWriter { out ->

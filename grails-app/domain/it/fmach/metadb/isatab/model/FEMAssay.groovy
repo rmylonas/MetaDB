@@ -31,6 +31,7 @@ class FEMAssay {
 		randomizedRuns nullable: true
 		acquiredRuns nullable: true
 		workDir nullable: true
+		instrumentPolarity nullable: true
     }
 	
 //	static mapping = {

@@ -23,8 +23,8 @@ class StudyServiceTests {
 
     void testSaveStudy() {
 		// create instrument and methods
-		def deSetup = new TestDbSetup()
-		deSetup.createInstrument()		
+		// def deSetup = new TestDbSetup()
+		// deSetup.createInstrument()		
 		
 		// create a test study
 		def creator = new TestDomainCreator()

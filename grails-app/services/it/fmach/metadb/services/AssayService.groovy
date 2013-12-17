@@ -12,11 +12,13 @@ class AssayService {
 		l.each { run ->
 			
 			// don't forget to delete the additional runs as well!
-			def m = []
-			m += run.additionalRuns
-			m.each { additional ->
-				run.removeFromAdditionalRuns(additional)
-				additional.delete(flush: true)
+			if(run.additionalRuns){
+				def m = []
+				m += run.additionalRuns
+				m.each { additional ->
+					run.removeFromAdditionalRuns(additional)
+					additional.delete(flush: true)
+				}
 			}
 			
 			// and then we delete the runs

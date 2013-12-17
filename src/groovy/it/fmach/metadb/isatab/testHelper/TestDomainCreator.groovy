@@ -20,19 +20,33 @@ class TestDomainCreator {
 	FEMStudy createStudy(){
 		def accessCodeGenerator = new AccessCodeGenerator()
 		
+		def method = this.createMethod()
+		
 		// create runs
 		def runList = []
 		for(i in 1..12){
-			runList.add(new FEMRun(msAssayName: "assay_"+i, rowNumber: i, scanPolarity: "positive", sample: new FEMSample(name: "Sample_"+i)))
+			runList.add(new FEMRun(msAssayName: "assay_"+i, 
+									rowNumber: i, 
+									scanPolarity: "positive", 
+									sample: new FEMSample(name: "Sample_"+i)
+									)
+			)
 		}
 		
 		// create assays
 		def assayList = []
 		def j = 0
 		for(i in 0..2){
-			assayList.add(new FEMAssay(status: "randomized", accessCode: accessCodeGenerator.getNewCode(), name: "name_"+i, shortName: "short_"+i, 
-				instrument: Instrument.get(1), method: this.createMethod(), 
-				instrumentPolarity: 'positive', runs: runList[j..(j+3)], randomizedRuns: runList[j..(j+3)]))
+			assayList.add(new FEMAssay(status: "randomized", 
+										accessCode: accessCodeGenerator.getNewCode(), 
+										name: "name_"+i, 
+										shortName: "short_"+i,
+										method: method, 
+										instrumentPolarity: 'positive', 
+										runs: runList[j..(j+3)], 
+										randomizedRuns: runList[j..(j+3)],
+										instrument: this.createInstrument())
+							)
 			j += 4
 		}
 		
@@ -42,8 +56,6 @@ class TestDomainCreator {
 		return study
 		
 	}
-	
-	
 	
 	FEMAssay createRandomizedRuns(){
 		def accessCodeGenerator = new AccessCodeGenerator()
@@ -60,20 +72,49 @@ class TestDomainCreator {
 		}
 		
 		// create assay
-		def assay = new FEMAssay(accessCode: accessCodeGenerator.getNewCode(), name: "randomized_assay", shortName: "shortname",
-			instrument: Instrument.get(1), method: this.createMethod(),
-			instrumentPolarity: 'positive', randomizedRuns: runList)
+		def assay = new FEMAssay(accessCode: accessCodeGenerator.getNewCode(),
+			name: "randomized_assay",
+			shortName: "shortname",
+			method: this.createMethod(),
+			instrumentPolarity: 'positive',
+			randomizedRuns: runList)
 	}
 	
 	
 	InstrumentMethod createMethod(){
+		
 		def xevoMethod = new InstrumentMethod(name: 'untargeted RP',
 				tag: 'xev_tar_RP',
 				startPattern: '5.blank-1.STDmix-2.QC',
 				repeatPattern: '3.sample-1.QC',
-				endPattern: '1.STDmix-5.blank')
+				endPattern: '1.STDmix-5.blank',
+				randomization: true,
+				metaMsParameterFile: 'some/path'
+				)
+	
 		
 		return xevoMethod
+		
+	}
+	
+	
+	Instrument createInstrument(){
+		
+		def xevoMethod = new InstrumentMethod(name: 'untargeted RP',
+				tag: 'xev_tar_RP',
+				startPattern: '5.blank-1.STDmix-2.QC',
+				repeatPattern: '3.sample-1.QC',
+				endPattern: '1.STDmix-5.blank',
+				randomization: true,
+				metaMsParameterFile: 'some/path'
+				)
+		
+		def instr = new Instrument(name: 'Xevo',
+			metabolightsName: 'Xevo Metabolights',
+			chromatography: "LC",
+			methods: [xevoMethod])
+		
+		return instr
 		
 	}
 	
@@ -107,9 +148,12 @@ class TestDomainCreator {
 		}
 		
 		// create assay
-		def assay = new FEMAssay(accessCode: accessCodeGenerator.getNewCode(), name: "randomized_assay", shortName: "shortname",
-			instrument: Instrument.get(1), method: this.createMethod(),
-			instrumentPolarity: 'positive', randomizedRuns: runList)
+		def assay = new FEMAssay(accessCode: accessCodeGenerator.getNewCode(), 
+			name: "randomized_assay", 
+			shortName: "shortname",
+			method: this.createMethod(),
+			instrumentPolarity: 'positive', 
+			randomizedRuns: runList)
 	}
 	
 	
@@ -122,16 +166,20 @@ class TestDomainCreator {
 			runList.add(new FEMRun(msAssayName: "run_"+i,
 									rowNumber: i,
 									status: 'extracted',
-									scanPolarity: "positive",
+									scanPolarity: "negative",
 									sample: new FEMSample(name: "Sample_"+i,
 															factorJSON: '{"Bottling Type":"O2","Bottling time":"5","Wine":"Muller Thurgau  "}')
 									))
 		}
 		
 		// create assay
-		def assay = new FEMAssay(accessCode: accessCodeGenerator.getNewCode(), name: "randomized_assay", shortName: "shortname",
-			instrument: Instrument.get(1), method: this.createMethod(),
-			instrumentPolarity: 'positive', acquiredRuns: runList)
+		def assay = new FEMAssay(accessCode: accessCodeGenerator.getNewCode(), 
+			name: "randomized_assay", 
+			shortName: "shortname",
+			method: this.createMethod(),
+			instrumentPolarity: 'negative', 
+			acquiredRuns: runList,
+			instrument: this.createInstrument())
 	}
 
 	

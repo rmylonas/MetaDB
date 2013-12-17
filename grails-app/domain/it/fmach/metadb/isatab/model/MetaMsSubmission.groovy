@@ -6,6 +6,7 @@ class MetaMsSubmission {
  
 	String workDir
 	String status
+	String command
 	
 	List selectedRuns
 	MetaMsDb metaMsDb
@@ -15,6 +16,6 @@ class MetaMsSubmission {
 	Date dateCreated
 	
     static constraints = {
-		
+		metaMsDb nullable: true
     }
 }

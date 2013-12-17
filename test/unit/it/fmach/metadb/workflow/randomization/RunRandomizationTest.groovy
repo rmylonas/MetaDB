@@ -21,7 +21,6 @@ class RunRandomizationTest {
 		// create a test study
 		def creator = new TestDomainCreator()
 		def study = creator.createStudy()
-		def method = creator.createMethod()
 		
 		def rand = new RunRandomization()
 		def randomizedAssay = rand.randomizeAssay(study.assays.get(0))
