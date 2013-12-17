@@ -1,5 +1,6 @@
 package it.fmach.metadb.workflow.extraction
 
+import org.apache.commons.lang.StringUtils;
 import it.fmach.metadb.helper.UnZipper
 import it.fmach.metadb.isatab.model.FEMAssay
 
@@ -51,7 +52,7 @@ class ExtractedFileInserter {
 			
 			// look if we find the right name
 			for(def run: assay.acquiredRuns){
-				if(filename.contains(run.msAssayName)){
+				if(StringUtils.containsIgnoreCase(filename, run.msAssayName)){
 					run.derivedSpectraFilePath = path
 					run.status = "extracted"
 					assayNameMap[run.msAssayName] = true

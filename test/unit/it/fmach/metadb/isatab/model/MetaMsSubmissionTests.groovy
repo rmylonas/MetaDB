@@ -1,9 +1,7 @@
 package it.fmach.metadb.isatab.model
 
-
-
-import java.util.List;
-
+import java.util.List
+import org.apache.commons.lang.StringUtils
 import grails.test.mixin.*
 
 import org.junit.*
@@ -14,7 +12,8 @@ import org.junit.*
 @TestFor(MetaMsSubmission)
 class MetaMsSubmissionTests {
 
-       void testInsertAndLoad() {
+   void testInsertAndLoad() {  
+	   
        new MetaMsSubmission(workDir: '/some/path', 
 		   					status: 'done', 
 							command: 'Rscript command', 
