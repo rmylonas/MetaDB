@@ -28,8 +28,6 @@ class MetaMsRunner {
 		this.metaMsDbDir = metaMsDbDir
 		this.metaMsSettingsDir = metaMsSettingsDir
 	}
-
-
 	
 	/**
 	 * 
@@ -44,7 +42,7 @@ class MetaMsRunner {
 	 */
 	def runMetaMs(FEMAssay assay, List<String> selectedMsAssayNames, String rtMin, String rtMax){
 
-		this.workDir = workDir
+		this.workDir = createWorkDir(assay)
 
 		def selectedRuns = selectAcquiredRuns(assay, selectedMsAssayNames)
 
@@ -57,11 +55,11 @@ class MetaMsRunner {
 
 		// create and save this metaMsSubmission
 		def submissionName = this.currentMetaMsSubmissionName(assay)
-		def metaMsSubmission = new MetaMsSubmission(workDir: createWorkDir(assay),
-		status: "running",
-		selectedRuns: selectedRuns,
-		command: command,
-		name: submissionName)
+		def metaMsSubmission = new MetaMsSubmission(workDir: this.workDir,
+													status: "running",
+													selectedRuns: selectedRuns,
+													command: command,
+													name: submissionName)
 
 		metaMsSubmission.save(flush: true, failOnError: true)
 
@@ -75,12 +73,15 @@ class MetaMsRunner {
 			new File(this.workDir + "/stderr.log").withWriter{ it << proc.err.text }
 
 			// save the right status once we're finished
+			metaMsSubmission.refresh()
 			def status = (proc.exitValue() == 0) ? ("done") : ("failed")
 			metaMsSubmission.status = status
 			metaMsSubmission.save(flush: true)
 
 			// and add the submission to the current assay and save it
+			assay.refresh()
 			assay.addToMetaMsSubmissions(metaMsSubmission)
+			assay.save(flush: true)
 		}
 
 	}

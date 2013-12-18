@@ -94,7 +94,7 @@ function startMetaMs(){
             </tr>
           </thead>
           
-          <g:form name="runForm" controller="metaMS" action="runMetaMS">
+          <g:form name="runForm" controller="metaMS" action="metaMsSubmission">
           
           <tbody id="runTable">
           <g:each var="run" in="${flash.runs}">

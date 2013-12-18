@@ -39,10 +39,12 @@ class MetaMsRunnerTest {
 		tmpFile.delete()
 		tmpFile.mkdir()
 		assay.workDir = tmpFile.getAbsolutePath()
+		assay.save(flash: true, failOnError: true)
 		
 		runner.runMetaMs(assay, selectedMsAssayNames, "1.2", "10.5")
 		
 		// make sure metams is done
+		assay.refresh()
 		Thread.sleep(500)
 		
 		def metaMsSubmission = MetaMsSubmission.get(1)
@@ -75,6 +77,7 @@ class MetaMsRunnerTest {
 		tmpFile.delete()
 		tmpFile.mkdir()
 		assay.workDir = tmpFile.getAbsolutePath()
+		assay.save(flash: true, failOnError: true)
 		
 		// run the first time
 		runner.runMetaMs(assay, selectedMsAssayNames, "1.2", "10.5")
@@ -83,12 +86,14 @@ class MetaMsRunnerTest {
 		Thread.sleep(500)
 		
 		// run the second time (without retention time restrictions)
+		assay.refresh()
 		runner.runMetaMs(assay, selectedMsAssayNames, null, null)
 		
 		// make sure metams is done
 		Thread.sleep(500)
 		
 		// check assay has two metaMsSubmission entries
+		assay.refresh()
 		assert 2 == assay.metaMsSubmissions.size()
 		
 		// check the names

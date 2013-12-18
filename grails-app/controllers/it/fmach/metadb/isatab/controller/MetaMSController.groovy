@@ -11,9 +11,12 @@ class MetaMSController {
 	
 	def metaMsSubmission() {
 		
-		def runSelection = params.list('runSelection')
+		def runSelection = flash.runsSelection
 		
-		
+		// in case we were not redericted from runMetaMS
+		if(! flash.runsSelection){
+			runSelection = params.list('runSelection')
+		}
 		
 		flash.runSelection = runSelection
 		flash.message = runSelection.size().toString() + " runs were selected"
@@ -21,7 +24,22 @@ class MetaMSController {
 	}
 	
 	
-	def runMetaMs(){
+	def runMetaMS(){
+		
+		def minRt = params['minRt']
+		def maxRt = params['maxRt']
+		def runSelection = flash.runSelection		
+		
+		// check if RT's are valid
+		if(minRt || maxRt){
+			if(! (maxRt.isDouble() && minRt.isDouble())){
+				flash.error = "invalid retention times [" + minRt + "] and/or [" + maxRt + "]"
+				flash.runsSelection = runSelection
+				redirect(action: 'metaMsSubmission')
+				return
+			}
+		}
+	
 		def metaMsDir = grailsApplication.config.metadb.isatab.metabolConfigFile
 		def metaMsDbDir = grailsApplication.config.metadb.conf.metams.script
 		def metaMsSettingsDir = grailsApplication.config.metadb.conf.metams.databases
@@ -35,6 +53,9 @@ class MetaMSController {
 		
 		// re-attach the assay object to the session
 		assay.attach()
+		
+		// start runner
+		runner
 		
 	}
 	
