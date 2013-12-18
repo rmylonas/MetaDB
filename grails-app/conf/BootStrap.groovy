@@ -18,7 +18,8 @@ class BootStrap {
 						startPattern: '1.blank-1.STDmix-4.QC', 
 						repeatPattern: '6.sample-1.QC', 
 						endPattern: '1.STDmix-1.blank',
-						randomization: true),
+						randomization: true,
+						metaMsParameterFile: 'Synapt.QTOF.RP.RData'),
 					new InstrumentMethod(name: 'targeted RP',
 						tag: 'syn_tar_RP',
 						startPattern: '1.blank-1.STDmix-4.QC',
@@ -27,7 +28,8 @@ class BootStrap {
 						randomization: true),
 					new InstrumentMethod(name: 'Method development',
 						tag: 'syn_md_RP',
-						randomization: false)
+						randomization: false,
+						metaMsParameterFile: 'Synapt.QTOF.RP.RData')
 				]
 			new Instrument(name: "Synapt", 
 							metabolightsName: "SYNAPT HDMS (Waters)", 

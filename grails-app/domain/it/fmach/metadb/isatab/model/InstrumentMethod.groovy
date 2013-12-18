@@ -9,7 +9,7 @@ class InstrumentMethod {
 	String repeatPattern
 	String endPattern
 	
-	// 
+	// models used in MetaMS submission
 	MetaMsDb metaMsDb
 	String metaMsParameterFile
 	

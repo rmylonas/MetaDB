@@ -4,6 +4,7 @@ import java.util.Date;
 
 class MetaMsSubmission {
  
+	String name
 	String workDir
 	String status
 	String command

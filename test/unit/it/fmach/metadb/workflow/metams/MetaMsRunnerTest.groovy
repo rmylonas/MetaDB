@@ -38,11 +38,9 @@ class MetaMsRunnerTest {
 		File tmpFile = File.createTempFile("test_metams_", Long.toString(System.nanoTime()))
 		tmpFile.delete()
 		tmpFile.mkdir()
-		String workDir = tmpFile.getAbsolutePath()
+		assay.workDir = tmpFile.getAbsolutePath()
 		
-		println(workDir)
-		
-		runner.runMetaMs(workDir, assay, selectedMsAssayNames, "1.2", "10.5")
+		runner.runMetaMs(assay, selectedMsAssayNames, "1.2", "10.5")
 		
 		// make sure metams is done
 		Thread.sleep(500)
@@ -53,8 +51,55 @@ class MetaMsRunnerTest {
 		assert "failed"	== metaMsSubmission.status
 		assert 2 == metaMsSubmission.selectedRuns.size()
 		
+		// check assay was saved correctly
+		assert assay.workDir + "/pipeline/1" == assay.metaMsSubmissions.get(0).workDir
+		
 	}
 	
+	
+	@Test
+	public void runMetaMs2submissionsTest() {
+		def runner = new MetaMsRunner(metaMsConfDir)
+		
+		def creator = new TestDomainCreator()
+		def assay = creator.createExtractedRuns()
+		
+//		assay.acquiredRuns.each{
+//			println(it.msAssayName)
+//		}
+		
+		def selectedMsAssayNames = ['run_2', 'run_3']
+		
+		// create temporary workdir
+		File tmpFile = File.createTempFile("test_metams_", Long.toString(System.nanoTime()))
+		tmpFile.delete()
+		tmpFile.mkdir()
+		assay.workDir = tmpFile.getAbsolutePath()
+		
+		// run the first time
+		runner.runMetaMs(assay, selectedMsAssayNames, "1.2", "10.5")
+		
+		// make sure metams is done
+		Thread.sleep(500)
+		
+		// run the second time (without retention time restrictions)
+		runner.runMetaMs(assay, selectedMsAssayNames, null, null)
+		
+		// make sure metams is done
+		Thread.sleep(500)
+		
+		// check assay has two metaMsSubmission entries
+		assert 2 == assay.metaMsSubmissions.size()
+		
+		// check the names
+		assert "1" == assay.metaMsSubmissions.get(0).name
+		assert "2" == assay.metaMsSubmissions.get(1).name
+		
+		// check the paths
+		assert assay.workDir + "/pipeline/1" == assay.metaMsSubmissions.get(0).workDir
+		assert assay.workDir + "/pipeline/2" == assay.metaMsSubmissions.get(1).workDir
+		
+	}
 	
 	@Test
 	public void constructCommandTest(){
@@ -99,5 +144,28 @@ class MetaMsRunnerTest {
 		
 		assert 2 == selectedRuns.size()
 	}
+	
+	
+	@Test
+	public void createWorkDirTest() {
+		def runner = new MetaMsRunner(metaMsConfDir)
+		
+		def creator = new TestDomainCreator()
+		def assay = creator.createExtractedRuns()
+		
+		// create temporary workdir
+		File tmpFile = File.createTempFile("test_metams_", Long.toString(System.nanoTime()))
+		tmpFile.delete()
+		tmpFile.mkdir()
+		assay.workDir = tmpFile.getAbsolutePath()
+		
+		def workDir = runner.createWorkDir(assay)
+		
+		assert assay.workDir + "/pipeline/1" == workDir
+	}
+	
+	
+	
+	
 }
 

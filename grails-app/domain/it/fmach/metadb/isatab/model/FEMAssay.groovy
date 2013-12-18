@@ -22,8 +22,9 @@ class FEMAssay {
 	List runs
 	List randomizedRuns
 	List acquiredRuns
+	List metaMsSubmissions
 	
-	static hasMany = [runs: FEMRun, randomizedRuns: FEMRun, acquiredRuns: FEMRun]
+	static hasMany = [runs: FEMRun, randomizedRuns: FEMRun, acquiredRuns: FEMRun, metaMsSubmissions: MetaMsSubmission]
 		
     static constraints = {
 		description nullable: true
@@ -32,6 +33,7 @@ class FEMAssay {
 		acquiredRuns nullable: true
 		workDir nullable: true
 		instrumentPolarity nullable: true
+		metaMsSubmissions nullable: true
     }
 	
 //	static mapping = {
