@@ -1,5 +1,7 @@
 package it.fmach.metadb.workflow.metams
 
+import org.springframework.transaction.annotation.Transactional;
+
 import it.fmach.metadb.isatab.model.FEMAssay
 import it.fmach.metadb.isatab.model.FEMRun
 import it.fmach.metadb.isatab.model.InstrumentMethod
@@ -41,27 +43,31 @@ class MetaMsRunner {
 	 * @return
 	 */
 	def runMetaMs(FEMAssay assay, List<String> selectedMsAssayNames, String rtMin, String rtMax){
-
 		this.workDir = createWorkDir(assay)
-
+		
 		def selectedRuns = selectAcquiredRuns(assay, selectedMsAssayNames)
 
 		// prepare the fileList used by runMetaMS.R
 		this.fileListPath = this.workDir + "/fileList.csv"
 		this.prepareFileList(selectedRuns)
-
-		// construct the command
+		
+		// construct the command and save it in a file
 		def command = constructCommand(assay, rtMin, rtMax)
+		new File(this.workDir + "/command.sh").withWriter{ it << command }
 
 		// create and save this metaMsSubmission
 		def submissionName = this.currentMetaMsSubmissionName(assay)
 		def metaMsSubmission = new MetaMsSubmission(workDir: this.workDir,
 													status: "running",
 													selectedRuns: selectedRuns,
-													command: command,
+													command: '',
 													name: submissionName)
 
 		metaMsSubmission.save(flush: true, failOnError: true)
+		assay.addToMetaMsSubmissions(metaMsSubmission)
+		assay.save(flush: true, failOnError: true)
+		metaMsSubmission.discard()
+		def submissionId = metaMsSubmission.id
 
 		// we execute the script in a separate thread
 		Thread.start{
@@ -73,15 +79,15 @@ class MetaMsRunner {
 			new File(this.workDir + "/stderr.log").withWriter{ it << proc.err.text }
 
 			// save the right status once we're finished
-			metaMsSubmission.refresh()
+			//metaMsSubmission.refresh()
+			def reloadedSubmission = MetaMsSubmission.get(submissionId)
 			def status = (proc.exitValue() == 0) ? ("done") : ("failed")
-			metaMsSubmission.status = status
-			metaMsSubmission.save(flush: true)
-
-			// and add the submission to the current assay and save it
-			assay.refresh()
-			assay.addToMetaMsSubmissions(metaMsSubmission)
-			assay.save(flush: true)
+			reloadedSubmission.status = status
+			
+			MetaMsSubmission.withTransaction {	
+				reloadedSubmission.save(flush: true)
+			}
+			
 		}
 
 	}
@@ -124,11 +130,11 @@ class MetaMsRunner {
 		command += " -f " + this.fileListPath
 
 		// add the database if not null
-		if(assay.method.metaMsDb) command += " -d " + assay.method.metaMsDb
+		if(assay.method.metaMsDb) command += " -d " + this.metaMsDbDir + "/" + assay.method.metaMsDb
 
-		// add the instrument settings (throw exception if not available)
+		// add the instrument settings (throw exception if not available)		
 		if(! assay.method.metaMsParameterFile) throw new RuntimeException("missing metaMsParameterFile information in assay method")
-		command += " -s " + assay.method.metaMsParameterFile
+		command += " -s " + this.metaMsSettingsDir + "/" + assay.method.metaMsParameterFile
 
 		// output to workdir
 		command += " -o " + this.workDir
@@ -154,7 +160,7 @@ class MetaMsRunner {
 	def prepareFileList(List<FEMRun> selectedRuns){
 		new File(this.fileListPath).withWriter { out ->
 			selectedRuns.each() { run ->
-				out.writeLine(run.msAssayName)
+				out.writeLine(run.derivedSpectraFilePath)
 			}
 		}
 	}

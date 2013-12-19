@@ -4,9 +4,18 @@ import it.fmach.metadb.workflow.metams.MetaMsRunner
 
 class MetaMSController {
 
-    def index() { 
+    def index() {
 		
-
+		def assay = session.assay
+		if(assay == null){
+			flash.error = "No assay is selected"
+		}
+		
+		// re-attach the assay object to the session
+		assay.refresh()
+		
+		flash.metaMsSubmissions = assay.metaMsSubmissions
+		
 	}
 	
 	def metaMsSubmission() {
@@ -40,9 +49,9 @@ class MetaMSController {
 			}
 		}
 	
-		def metaMsDir = grailsApplication.config.metadb.isatab.metabolConfigFile
-		def metaMsDbDir = grailsApplication.config.metadb.conf.metams.script
-		def metaMsSettingsDir = grailsApplication.config.metadb.conf.metams.databases
+		def metaMsDir = grailsApplication.config.metadb.conf.metams.script
+		def metaMsDbDir = grailsApplication.config.metadb.conf.metams.databases
+		def metaMsSettingsDir = grailsApplication.config.metadb.conf.metams.instrumentSettings
 		
 		def runner = new MetaMsRunner(metaMsDir, metaMsDbDir, metaMsSettingsDir)
 		
@@ -55,8 +64,11 @@ class MetaMSController {
 		assay.attach()
 		
 		// start runner
-		runner
+		runner.runMetaMs(assay, runSelection, minRt, maxRt)
 		
+		flash.message = "started runMetaMS"
+		
+		redirect(action: 'index')
 	}
 	
 }

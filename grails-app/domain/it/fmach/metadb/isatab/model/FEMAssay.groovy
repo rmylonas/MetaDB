@@ -40,9 +40,10 @@ class FEMAssay {
 //		acquiredRuns cascade: "all-delete-orphan"
 //	}
 	
-/*	static mapping = {
-		acquiredRuns lazy: false
+	static mapping = {
+		metaMsSubmissions lazy: false
+		// acquiredRuns lazy: false
 		// randomizedRuns lazy: false
-	}*/
+	}
 	
 }

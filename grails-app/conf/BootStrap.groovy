@@ -5,7 +5,7 @@ import it.fmach.metadb.isatab.model.FEMGroup
 import it.fmach.metadb.isatab.model.FEMProject
 
 class BootStrap {
-
+	
     def init = { servletContext ->
 		// create the instruments
 		if (!Instrument.count()) {

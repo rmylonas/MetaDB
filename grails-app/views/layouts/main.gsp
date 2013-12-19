@@ -48,6 +48,7 @@
           <ul class="nav navbar-nav">
             <li><a href="${createLink(uri: '/uploadIsatab')}">Upload</a></li>
 	        <li><a href="${createLink(uri: '/studies')}">Studies</a></li>
+	        <li><a href="${createLink(uri: '/metaMS')}">MetaMS</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
