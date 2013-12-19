@@ -77,8 +77,11 @@ function startMetaMs(){
 	</div> <!-- row -->
 	
 	<div class="row">
-		<button class="btn btn-default" onClick="selectAll()">select all</button>
-		<button class="btn btn-default" onClick="selectNone()">select none</button>
+		Select
+		<div class="btn-group">
+			<button class="btn btn-default btn-xs" onClick="selectAll()">all</button>
+			<button class="btn btn-default btn-xs" onClick="selectNone()">none</button>
+		</div>
 	</div>
 
 	  <table class="table table-striped">
@@ -98,7 +101,12 @@ function startMetaMs(){
           
           <tbody id="runTable">
           <g:each var="run" in="${flash.runs}">
-            	<tr>	
+          		<g:if test="${run.status == 'extracted'}">
+            		<tr class="success">
+               </g:if>
+               <g:else>
+            		<tr>
+               </g:else>
             			<td><g:checkBox name="runSelection" value="${run.msAssayName}" checked="true" /></td>
             			<td>${run.rowNumber}</td>
             			<td>${run.msAssayName}</td>
@@ -108,7 +116,12 @@ function startMetaMs(){
 				</tr>
 	 			
 	 			<g:each var="additional" in="${run.additionalRuns}">
-		 			<tr>	
+		 			<g:if test="${additional.status == 'extracted'}">
+            			<tr class="success">
+	               	</g:if>
+	               	<g:else>
+	            		<tr>
+	               	</g:else>	
 		 					<td><g:checkBox name="runSelection" value="${additional.msAssayName}" checked="true" /></td>
 	            			<td>${additional.rowNumber}</td>
 	            			<td>${additional.msAssayName}</td>
@@ -126,12 +139,6 @@ function startMetaMs(){
 	  </table>
 	    
 </div> <!-- /container -->
-
-<script>
-$(function() {
-	$('#metams-button').popover();
-});
-</script>
 
 </body>
 </html>
