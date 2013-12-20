@@ -36,7 +36,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
-		mavenRepo "http://frog.oerc.ox.ac.uk/nexus-2.1.2/content/repositories/releases/"
+		mavenRepo "http://frog.oerc.ox.ac.uk:8080/nexus-2.1.2/content/repositories/releases/"
 		mavenRepo "http://www.mvnrepository.com/"
 		mavenRepo "https://m2proxy.atlassian.com/repository/public"
 		mavenRepo "http://download.java.net/maven/2/"
@@ -71,7 +71,7 @@ grails.project.dependency.resolution = {
         runtime ":jquery:1.8.3"
         runtime ":resources:1.2"
 		
-		runtime ':spring-security-core:2.0-RC2'
+		// runtime ':spring-security-core:2.0-RC2'
 		
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
