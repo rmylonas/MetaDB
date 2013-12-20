@@ -101,32 +101,42 @@ function startMetaMs(){
           
           <tbody id="runTable">
           <g:each var="run" in="${flash.runs}">
-          		<g:if test="${run.status == 'extracted'}">
-            		<tr class="success">
-               </g:if>
-               <g:else>
             		<tr>
-               </g:else>
             			<td><g:checkBox name="runSelection" value="${run.msAssayName}" checked="true" /></td>
             			<td>${run.rowNumber}</td>
             			<td>${run.msAssayName}</td>
             			<td></td>
-            			<td>${run.status}</td>
+            			
+            			<!-- color the status -->
+            			<td>
+            			<g:if test="${run.status == 'extracted'}">
+            				<span class="label label-success">${run.status}</span>
+	               		</g:if>
+	               		<g:else>
+	               			<span class="label label-info">${run.status}</span>
+	               		</g:else>
+            			</td>
+            			
             			<td>${run.sample.name}</td>
 				</tr>
 	 			
 	 			<g:each var="additional" in="${run.additionalRuns}">
-		 			<g:if test="${additional.status == 'extracted'}">
-            			<tr class="success">
-	               	</g:if>
-	               	<g:else>
 	            		<tr>
-	               	</g:else>	
 		 					<td><g:checkBox name="runSelection" value="${additional.msAssayName}" checked="true" /></td>
 	            			<td>${additional.rowNumber}</td>
 	            			<td>${additional.msAssayName}</td>
 	            			<td><span class="glyphicon glyphicon-ok"></span></td>
-	            			<td>${additional.status}</td>
+	            			
+	            			<!-- color status -->
+	            			<td>
+	            			<g:if test="${additional.status == 'extracted'}">
+            				<span class="label label-success">${additional.status}</span>
+		               		</g:if>
+		               		<g:else>
+		               			<span class="label label-info">${additional.status}</span>
+		               		</g:else>
+	            			</td>
+	            	
 	            			<td>${additional.sample.name}</td>
 					</tr>
 	 			</g:each>

@@ -40,21 +40,23 @@
           </thead>
           
           <tbody id="submissionTable">
-          <g:each var="submission" in="${flash.metaMsSubmissions}">
-          
-          	<!-- put the corresponding color to the status -->
-          	   <g:if test="${submission.status == 'failed'}">      	
-            		<tr class="danger">
-               </g:if>
-                <g:if test="${submission.status == 'running'}">      	
-            		<tr class="warning">
-               </g:if>	
-                <g:if test="${submission.status == 'done'}">
-            		<tr class="success">
-               </g:if>	
-               			
+          <g:each var="submission" in="${flash.metaMsSubmissions}">          	
+               		<tr>	
             			<td>${submission.name}</td>
-            			<td>${submission.status}</td>
+            			
+            			<!-- put the corresponding color to the status -->
+            			<td>
+	            			<g:if test="${submission.status == 'failed'}">
+            					<span class="label label-danger">${submission.status}</span>
+		               		</g:if>
+		               		<g:if test="${submission.status == 'running'}">
+		               			<span class="label label-info">${submission.status}</span>
+		               		</g:if>
+		               		<g:if test="${submission.status == 'done'}">
+		               			<span class="label label-success">${submission.status}</span>
+		               		</g:if>
+	            		</td>
+            		
             			<td>${submission.selectedRuns.size()}</td>
             			<td>${submission.workDir}</td>
             			
