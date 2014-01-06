@@ -47,4 +47,14 @@ class PcaController {
 		flash.plotFileList = plotFileList
 	}
 	
+	def displayPca = {
+		
+		println(params)
+		
+		def img = new FileInputStream(params.file)
+		response.contentType = 'image/png'
+		response.outputStream << img
+		response.outputStream.flush()
+	}
+	
 }
