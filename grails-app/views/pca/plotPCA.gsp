@@ -27,7 +27,7 @@
 	</g:if>
 	
 	<g:each in="${flash.plotFileList}">
-		<img src="${createLink(controller: 'pca', action: 'displayPca', params='[file: ${it}]')}"/>
+		<img src="${createLink(controller: 'pca', action: 'displayPca', params:[file: it])}"/>
 	</g:each>
 	
 </div> <!-- /container -->
