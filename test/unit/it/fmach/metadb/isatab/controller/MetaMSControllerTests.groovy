@@ -11,7 +11,8 @@ import org.junit.*
 @TestFor(MetaMSController)
 class MetaMSControllerTests {
 
-    void testSomething() {
-       fail "Implement me"
+    void testIndex() {
+       controller.index()
+	   assert "No assay is selected" == flash.error
     }
 }

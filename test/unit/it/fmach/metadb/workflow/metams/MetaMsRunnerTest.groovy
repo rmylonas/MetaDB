@@ -88,7 +88,6 @@ class MetaMsRunnerTest {
 		Thread.sleep(500)
 		
 		// run the second time (without retention time restrictions)
-		assay.refresh()
 		runner.runMetaMs(assay, selectedMsAssayNames, null, null)
 		
 		// make sure metams is done

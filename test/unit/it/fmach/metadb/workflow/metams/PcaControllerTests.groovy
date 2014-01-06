@@ -13,7 +13,8 @@ import org.junit.*
 @TestFor(PcaController)
 class PcaControllerTests {
 
-    void testSomething() {
-       fail "Implement me"
+    void testIndex() {
+		controller.index()
+		assert "No assay is selected" == flash.error
     }
 }

@@ -10,7 +10,6 @@ class AssayService {
 		l += assay.acquiredRuns
 		
 		l.each { run ->
-			
 			// don't forget to delete the additional runs as well!
 			if(run.additionalRuns){
 				def m = []

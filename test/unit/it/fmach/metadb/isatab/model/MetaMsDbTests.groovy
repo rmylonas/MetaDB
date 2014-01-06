@@ -3,6 +3,7 @@ package it.fmach.metadb.isatab.model
 
 
 import grails.test.mixin.*
+
 import org.junit.*
 
 /**
@@ -11,7 +12,10 @@ import org.junit.*
 @TestFor(MetaMsDb)
 class MetaMsDbTests {
 
-    void testSomething() {
-       fail "Implement me"
+    void testSaveAndLoad() {
+		new MetaMsDb(name: "database", rDataPath: "/some/path.RData").save(flush: true)
+		
+		def metaMsDb = MetaMsDb.get(1)
+		assert metaMsDb.name == "database"
     }
 }
