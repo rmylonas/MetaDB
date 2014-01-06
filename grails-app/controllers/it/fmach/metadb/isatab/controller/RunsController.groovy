@@ -78,7 +78,7 @@ class RunsController {
 		def csvString = exporter.exportRandomizedRuns(assay)
 		
 		// hand a csv file to the browser
-		response.setHeader "Content-disposition", "attachment; filename=${assay.name}.csv"
+		response.setHeader "Content-disposition", "attachment; filename=${assay.shortName}.csv"
 		response.contentType = 'text/csv'
 		response.outputStream << csvString
 		response.outputStream.flush()

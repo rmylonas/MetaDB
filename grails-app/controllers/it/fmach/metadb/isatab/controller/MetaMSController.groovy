@@ -1,5 +1,6 @@
 package it.fmach.metadb.isatab.controller
 
+import it.fmach.metadb.instrument.export.ExportCsv
 import it.fmach.metadb.workflow.metams.MetaMsRunner
 
 class MetaMSController {
@@ -18,6 +19,19 @@ class MetaMSController {
 		flash.metaMsSubmissions = assay.metaMsSubmissions
 		
 	}
+	
+	
+	def downloadZip(){
+		// create a zip-file from the current workDir
+		
+		
+		// hand zip file to the browser
+		response.setHeader "Content-disposition", "attachment; filename=${assay.shortName}.csv"
+		response.contentType = 'text/zip'
+		response.outputStream << csvString
+		response.outputStream.flush()
+	}
+	
 	
 	def metaMsSubmission() {
 		

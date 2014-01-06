@@ -51,6 +51,7 @@
 	        <li><a href="${createLink(uri: '/runs/randomized')}">Randomized</a></li>
 	        <li><a href="${createLink(uri: '/runs/acquired')}">Acquired</a></li>
 	        <li><a href="${createLink(uri: '/metaMS')}">MetaMS</a></li>
+	        <li><a href="${createLink(uri: '/group')}">ManageGroup</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
