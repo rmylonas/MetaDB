@@ -17,16 +17,17 @@
 	</g:if>
 	
  <g:uploadForm action="uploadAssayNames" class="form-horizontal">
-		<div class="control-group">
+		<div class="form-group">
     		<label class="control-label" for="assayNames">Assay names</label>
 		    <div class="controls">
 		      <g:textArea name="assayNames" rows="30" cols="50"/>
 		    </div>
   		</div>
 				
-		<div class="control-group">
+		<div class="form-group">
 			<div class="controls">
 				<input onclick="$(this).button('loading')" data-loading-text="Uploading.." class="btn btn-primary" type="submit" value="Upload">
+				<g:link action="randomized" controller="runs" class="btn btn-warning">Cancel</g:link>
 			</div>
 		</div>
     </g:uploadForm>

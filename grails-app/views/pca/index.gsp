@@ -34,6 +34,7 @@
 		    </div>
 			<div class="form-group">
 				<input class="btn btn-primary" type="submit" value="Plot">
+				<g:link action="index" controller="metaMS" class="btn btn-warning">Cancel</g:link>
 			</div>
 		</div>
     </g:uploadForm>

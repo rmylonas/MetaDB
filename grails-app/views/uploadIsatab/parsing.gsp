@@ -65,6 +65,7 @@
 			
 			<div class="form-group">
 				<input onclick="$(this).button('loading')" data-loading-text="Inserting.." class="btn btn-primary" type="submit" value="Insert">
+				<g:link action="index" controller="uploadIsatab" class="btn btn-warning">Cancel</g:link>
 			</div>
 	  	</div> <!-- col-md-4 -->
 	  	

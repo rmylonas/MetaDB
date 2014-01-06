@@ -33,6 +33,7 @@
 			
 			<div class="form-group">
 				<button onclick="$(this).button('loading')" data-loading-text="Uploading.." class="btn btn-primary" type="submit" >Upload</button>
+				<g:link action="acquired" controller="runs" class="btn btn-warning">Cancel</g:link>
 			</div>
 			
 		</div> <!-- /col-xs-3 -->

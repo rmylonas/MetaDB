@@ -41,6 +41,7 @@
 			
 			<div class="form-group">
 				<input onclick="$(this).button('loading')" data-loading-text="Starting.." class="btn btn-primary" type="submit" value="Submit">
+				<g:link action="acquired" controller="runs" class="btn btn-warning">Cancel</g:link>
 			</div>
 	  	</div> <!-- col-md-4 -->
 	  	
