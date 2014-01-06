@@ -26,7 +26,7 @@ class ExportCsvTest {
 		def lines = csvString.split("\n")
 		assert 13 == lines.size()
 		
-		def entries = lines.getAt(1).split("\t")
+		def entries = lines.getAt(1).split(",")
 		assert 6 == entries.size()
 		assert "Sample_1_001" == entries[2]
 	}
@@ -43,7 +43,7 @@ class ExportCsvTest {
 		def lines = csvString.split("\n")
 		assert 13 == lines.size()
 		
-		def entries = lines.getAt(1).split("\t")
+		def entries = lines.getAt(1).split(",")
 		assert 2 == entries.size()
 		
 		assert "QC" == entries[1]

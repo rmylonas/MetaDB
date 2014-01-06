@@ -13,31 +13,57 @@ class RunsController {
 	def acquiredNamesInserter = new AcquiredNamesInserter()
 	def extractedFileInserter = new ExtractedFileInserter()
 	
-    def index() { 
+	
+	def index(){
+		// if a assay id is provided we set the assay to the session
 		String assayId = params['id']
 		
-		// if a assay id is provided we set the assay to the session
+		def assay
+		
 		if(assayId){
-			def assay = FEMAssay.get(assayId.toLong())
+			assay = FEMAssay.get(assayId.toLong())
 			session.assay = assay
 		}
+		
+		if(assay?.status == "acquired"){
+			redirect(action: 'acquired')
+		}else{
+			redirect(action: 'randomized')
+		}
+	}
+	
+	
+    def randomized() { 
+		String assayId = params['id']
 		
 		// if no assayId is given, we'll check if there is already an assay loaded
 		if(session.assay){
 			def assay = session.assay
 			assay.attach()
-			
-			switch(assay.status){
-				case "randomized":
-					flash.runs = assay.randomizedRuns
-					break
-				
-				default:
-					flash.runs = assay.acquiredRuns
-			}
-			render(view: "index")
+			flash.runs = assay.randomizedRuns
+		}else{
+			flash.error = "No assay is selected"
 		}
+			
+		render(view: "randomized")
 	}
+
+
+	def acquired(){		
+		String assayId = params['id']
+		
+		// if no assayId is given, we'll check if there is already an assay loaded
+		if(session.assay){
+			def assay = session.assay
+			assay.attach()
+			flash.runs = assay.acquiredRuns
+		}else{
+			flash.error = "No assay is selected"
+		}
+			
+		render(view: "acquired")
+	}	
+
 	
 	def downloadCsv(){	
 		def assay = session.assay

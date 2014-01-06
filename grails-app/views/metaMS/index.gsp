@@ -8,7 +8,7 @@
 
  <div class="container">
 	
-	 	<h4>MetaMs submissions</h4>
+	 	<h4>MetaMS submissions</h4>
 	
 	  	 <!-- Show errors -->
     <g:if test="${flash.error}">
@@ -33,7 +33,7 @@
             <tr>
               <th>Id</th>
               <th>Status</th>
-              <th>Selected</th>
+              <th>Selected runs</th>
               <th>Directory path</th>
               <th></th>
             </tr>
@@ -63,11 +63,11 @@
             			<!-- put the corresponding color to the status -->
             			<td>
             				<!-- params="[submissionId: ${submission.id}]" -->
-            				<g:link action="delete" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></g:link>
+            				<!-- <g:link action="delete" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></g:link> -->
             			<g:if test="${submission.status == 'done'}">
            					<g:link action="downloadRData" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-arrow-down"></span>  RData</g:link>
            					<g:link action="downloadCSV" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-arrow-down"></span>  CSV</g:link>
-           					<g:link action="plotPCA" class="btn btn-default btn-xs">PCA</g:link>
+           					<g:link action="index" controller="pca" id="${submission.id}" class="btn btn-default btn-xs">PCA</g:link>
                			</g:if>
                			</td>
 				</tr> 			

@@ -33,7 +33,7 @@ class MetaMSController {
 	}
 	
 	
-	def runMetaMS(){
+	def runMetaMS() {
 		
 		def minRt = params['minRt']
 		def maxRt = params['maxRt']

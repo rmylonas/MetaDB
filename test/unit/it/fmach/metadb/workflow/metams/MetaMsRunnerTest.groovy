@@ -56,6 +56,8 @@ class MetaMsRunnerTest {
 		// check assay was saved correctly
 		assert assay.workDir + "/pipeline/1" == assay.metaMsSubmissions.get(0).workDir
 		
+		println (assay.workDir)
+		
 	}
 	
 	
@@ -109,13 +111,17 @@ class MetaMsRunnerTest {
 	@Test
 	public void constructCommandTest(){
 		def runner = new MetaMsRunner(metaMsConfDir)
-		runner.workDir = "/some/path"
+		runner.workDir = "work/dir"
+		runner.metaMsSettingsDir = "setting/dir"
+		runner.metaMsDbDir = "db/dir"
+		runner.fileListPath = "filelist/dir"
 		
 		def creator = new TestDomainCreator()
 		def assay = creator.createExtractedRuns()
+		assay.workDir = runner.workDir
 
 		def command = runner.constructCommand(assay, null, null)
-		assert "Rscript resources/conf/metaMS/runMetaMS.R -i LC -p negative -f null -s some/path -o /some/path" == command
+		assert "Rscript resources/conf/metaMS/runMetaMS.R -i LC -p negative -f filelist/dir -s setting/dir/some/path -o work/dir" == command
 		
 		def commandWithRt = runner.constructCommand(assay, "1.234", "8.875")
 		

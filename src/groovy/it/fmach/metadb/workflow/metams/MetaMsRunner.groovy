@@ -18,6 +18,7 @@ class MetaMsRunner {
 	String workDir
 
 	private String fileListPath
+	private def factorExporter = new FactorExporter()
 
 	// constructer for tests
 	def MetaMsRunner(String metaMsDir){
@@ -54,6 +55,9 @@ class MetaMsRunner {
 		// construct the command and save it in a file
 		def command = constructCommand(assay, rtMin, rtMax)
 		new File(this.workDir + "/command.sh").withWriter{ it << command }
+		
+		// create a csv file containing the factors
+		factorExporter.exportFactorTable(selectedRuns, this.workDir + "/factors.csv")
 
 		// create and save this metaMsSubmission
 		def submissionName = this.currentMetaMsSubmissionName(assay)

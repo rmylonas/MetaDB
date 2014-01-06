@@ -1,0 +1,1 @@
+Rscript /Users/romanmylonas/FEM/MetaDbData/conf/metaMS/runMetaMS.R -i LC -f /Users/romanmylonas/FEM/MetaDbData/data/Nomacorc/nomacorc/pipeline/5/fileList.csv -s /Users/romanmylonas/FEM/MetaDbData/conf/metaMS/InstrumentSettings/Synapt.QTOF.RP.RData -o /Users/romanmylonas/FEM/MetaDbData/data/Nomacorc/nomacorc/pipeline/5

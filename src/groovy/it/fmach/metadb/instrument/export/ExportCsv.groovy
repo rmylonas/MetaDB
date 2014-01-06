@@ -1,6 +1,8 @@
 package it.fmach.metadb.instrument.export
 
+import it.fmach.metadb.helper.JsonConverter
 import it.fmach.metadb.isatab.model.FEMAssay;
+import it.fmach.metadb.isatab.model.FEMRun
 
 /**
  * Export randomized runs as a .csv file
@@ -9,12 +11,19 @@ import it.fmach.metadb.isatab.model.FEMAssay;
  */
 class ExportCsv {
 
+	private static String sep = ","
+	
+	def jsonConverter = new JsonConverter()
+	
 	String exportRandomizedRuns(FEMAssay assay){
-		
 		// throw an exception if there is no selected assay
 		if(! assay) throw new RuntimeException("Missing assay ")
 		
-		def sep = "\t"
+		this.exportRandomizedRuns(assay.randomizedRuns)
+	}
+	
+	
+	String exportRandomizedRuns(List<FEMRun> runs){		
 		def csv = new StringBuffer()
 		
 		// the header
@@ -24,10 +33,15 @@ class ExportCsv {
 		def sampleName = 'QC'
 		def k = 0
 		while(sampleName =~ /(?i)blank|QC|STDmix/){
-			sampleName = assay.randomizedRuns.get(k++).sample.name
+			FEMRun run = runs.get(k++)
+			run.attach()
+			sampleName = run.sample.name
 		}
 		
-		def factorList = parseFactor(assay.randomizedRuns.get(k).sample.factorJSON)
+		// the last index was the good one
+		k -= 1
+		runs.get(k).attach()
+		def factorList = jsonConverter.parseFactorJson(runs.get(k).sample.factorJSON)
 		header << (factorList[0]).join(sep)
 		
 		// for the samples, which do not have any factors (QC, blank and STDmix)
@@ -37,14 +51,14 @@ class ExportCsv {
 		csv << header.join(sep) << "\n"
 		
 		def i = 1
-		assay.randomizedRuns.each{ run ->			
+		runs.each{ run ->			
 			def line = []
 			line << run.msAssayName
 			line << run.sample.name
 			line << (run.sample.name ==~ /(?i)blank|QC|STDmix/ ? '' : run.sample.name + "_" + sprintf('%03d', i++))
 			
 			// try to parse the factors, but if there empty (null) we take the emptyFactorList
-			def factors = parseFactor(run.sample.factorJSON)
+			def factors = jsonConverter.parseFactorJson(run.sample.factorJSON)
 			if(! factors) factors = emptyFactorList
 			line << factors[1].join(sep)
 			
@@ -55,26 +69,6 @@ class ExportCsv {
 	}
 
 	
-	def parseFactor(String factorJSON){
-		def names = []
-		def vals = []
-		
-		//remove {} and ""
-		def clean = factorJSON.replace('{', '').replace('}', '').replace('"', '')
-		
-		// if there are no factors we return an empty list
-		if(! clean) return null
-		
-		def groups = clean.split(",")
-		
-		groups.each{
-			def entry = it.split(":")
-			names << entry[0]
-			def valToAdd = (entry.size() > 1) ? (entry[1]) : ('')
-			vals << valToAdd
-		}
-		
-		return [names, vals]
-	}
+	
 		
 }

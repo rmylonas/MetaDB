@@ -27,6 +27,6 @@ class RunsControllerTests {
 		   
 		params['id'] = 1
 		controller.index()
-		assert 4 == flash.runs.size()
+		assert 4 == session.assay.randomizedRuns.size()
     }
 }

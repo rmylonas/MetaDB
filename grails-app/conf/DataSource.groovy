@@ -5,7 +5,7 @@ dataSource {
     driverClassName = "com.mysql.jdbc.Driver"
     dialect = org.hibernate.dialect.MySQL5InnoDBDialect
     username = "root"
-    password = "1234"
+    password = ""
 }
 
 /*dataSource {

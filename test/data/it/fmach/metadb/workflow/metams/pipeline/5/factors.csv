@@ -1,0 +1,7 @@
+Assay name,Sample name,Sample code,Bottling Type,Bottling time,Wine
+A004_QC_RP_neg,QC,,,,
+A005_QC_RP_neg,QC,,,,
+A006_PO_102_01_RP_neg,PO_102,PO_102_001,O2,10,Pinot Gris
+A007_PO_084_02_RP_neg,PO_084,PO_084_002,O2,8,Pinot Gris
+A009_PN_083_04_RP_neg,PN_083,PN_083_003,N2,8,Pinot Gris
+A011_PN_116_06_RP_neg,PN_116,PN_116_004,N2,11,Pinot Gris
