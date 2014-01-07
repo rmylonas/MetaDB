@@ -46,12 +46,45 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="${createLink(uri: '/uploadIsatab')}">Upload</a></li>
-	        <li><a href="${createLink(uri: '/studies')}">Studies</a></li>
-	        <li><a href="${createLink(uri: '/runs/randomized')}">Randomized</a></li>
-	        <li><a href="${createLink(uri: '/runs/acquired')}">Acquired</a></li>
-	        <li><a href="${createLink(uri: '/metaMS')}">MetaMS</a></li>
-	        <li><a href="${createLink(uri: '/group')}">ManageGroup</a></li>
+          
+          <!-- New -->
+          	<li class="dropdown">
+              <a id="dropNew" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">New <b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropNew">
+             	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/uploadIsatab')}">Upload IsaTab file</a></li>
+              </ul>
+            </li>
+          
+            <!-- Load -->
+          	<li class="dropdown">
+              <a id="dropLoad" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Load <b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropLoad">
+             	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/studies')}">Studies</a></li>
+              </ul>
+            </li>
+            
+            <!-- View -->
+                <!-- if no assay is selected, don't show the menus -->
+            <g:if test="${session.assay}">
+          	<li class="dropdown">
+              <a id="dropView" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">View <b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropView">              
+             	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/runs/randomized')}">Planned runs</a></li>
+       	    	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/runs/acquired')}">Acquired runs</a></li>
+       	    	<li role="presentation" class="divider"></li>      	
+              	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/metaMS')}">MetaMS submissions</a></li>       	
+              </ul>
+            </li>
+            </g:if>
+            
+            <!-- Manage -->
+          	<li class="dropdown">
+              <a id="dropManage" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Manage <b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropManage">
+              	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/group')}">Groups and projects</a></li>       	
+              </ul>
+            </li>
+            
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -60,6 +93,16 @@
 		<g:layoutBody/>
 		
 		<r:layoutResources />
+		
+	
+	<!-- deactivate the View menu if no assay is selected 
+	<g:if test="! ${assay}">
+		<script>
+		$(function() {
+			$('#dropView').addClass('disabled');
+		});
+		</script>
+	</g:if> -->
 		
 	</body>
 </html>

@@ -20,7 +20,7 @@ class PCAPlotter {
 		
 		// through a runtime exception if return value is not 0
 		if(proc.exitValue() != 0){
-			throw new RuntimeException(proc.err.text)
+			throw new RuntimeException("plotPCA failed: " + proc.err.text)
 		}
 		
 		// otherwise return a list of all png-files in workDir
