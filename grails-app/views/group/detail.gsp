@@ -9,6 +9,7 @@
  <div class="container">
  
  <div class="container">
+ 	<g:link action="index" controller="group" class="btn btn-default btn-sm">Back</g:link>
     <h3>Group details</h3>
 
 	 <!-- Show errors -->
@@ -32,17 +33,16 @@
  		<div class="col-md-4">	 		 		
 	   		<div class="form-group">	
 				<label for="project">Name</label>
-				<input class="form-control" name="name" value="${flash.group.name}">
+				<input class="form-control" name="name" value="${session.group.name}">
 	   		</div> <!-- form-group -->
 	   		
 	   		<div class="form-group">	
 				<label for="project">Description</label>
-				<input class="form-control" name="description" value="${flash.group.description}">
+				<input class="form-control" name="description" value="${session.group.description}">
 	   		</div> <!-- form-group -->
 			
 			<div class="form-group">
 				<input class="btn btn-primary" type="submit" value="Update details">
-				<g:link action="index" controller="group" class="btn btn-warning">Cancel</g:link>
 			</div>
 	  	</div> <!-- col-md-4 -->
 	  	
@@ -63,11 +63,11 @@
           </thead>
           
           <tbody id="table">
-          <g:each in="${flash.group.projects}">
+          <g:each in="${session.group.projects}">
             	<tr>
             			<td><g:link action='projectDetail' params="${[id: it.id]}">${it.name}</g:link></td>
             			<td>${it.description}</td>
-            			<td><g:link action="delete" params="${[id: it.id]}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></g:link></td>
+            			<td><g:link action="deleteProject" params="${[id: it.id]}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></g:link></td>
 	 			</tr>
 		  </g:each>
 		  </tbody>
@@ -75,7 +75,6 @@
 	  </table>
 	  
 	  <g:link action="newProject" controller="group" class="btn btn-primary">New project</g:link>
-	  <g:link action="index" controller="group" class="btn btn-warning">Cancel</g:link>
 	 
 	</div> 
 	 
