@@ -16,7 +16,7 @@ class GroupController {
 	
 	def saveNewGroup(){
 		// save the new group
-		new FEMGroup(name: params.name, description: params.description).save(flush: true)
+		new FEMGroup(name: params.name, description: params.description).save(flush: true, failOnError: true)
 		flash.message = "New group was created"
 		redirect(action: 'index')
 	}
@@ -110,7 +110,7 @@ class GroupController {
 		def newProject = new FEMProject(name: params.name, description: params.description)
 		
 		// the group to add to
-		def group = session.group //FEMGroup.get(flash.groupId)
+		def group = FEMGroup.get(session.group.id)
 		
 		// save if valid
 		try{
@@ -124,7 +124,7 @@ class GroupController {
 		flash.message = "New project was created"
 		
 		// set current group
-		//flash.group = group
+		session.group = group
 		redirect(action: 'detail')
 	}
 	
