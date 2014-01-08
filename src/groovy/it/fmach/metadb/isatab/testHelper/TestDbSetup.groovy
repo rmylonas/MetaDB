@@ -35,7 +35,7 @@ class TestDbSetup {
 			new Instrument(name: "Synapt", 
 				metabolightsName: "SYNAPT HDMS (Waters)", 
 				methods: synaptMethods, 
-				polarities: polarities,
+				polarities: polarities.join(","),
 				chromatography: "LC"
 				).save(failOnError: true)
 			
@@ -52,7 +52,7 @@ class TestDbSetup {
 			new Instrument(name: "Xevo", 
 				metabolightsName: "Xevo TQ MS (Waters)", 
 				methods: xevoMethods, 
-				polarities: polarities,
+				polarities: polarities.join(","),
 				chromatography: "LC").save(failOnError: true)
 	
 			def tsqMethods = [
@@ -67,7 +67,7 @@ class TestDbSetup {
 			new Instrument(name: "TSQ", 
 				metabolightsName: "TSQ Quantum Ultra (Thermo Scientific)", 
 				methods: tsqMethods, 
-				polarities: polarities,
+				polarities: polarities.join(","),
 				chromatography: "GC").save(failOnError: true)
 
 			

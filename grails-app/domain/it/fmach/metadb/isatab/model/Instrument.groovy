@@ -7,12 +7,15 @@ class Instrument {
 	String bookingSystemName
 	String chromatography // either GC or LC
 	
+	String polarities // polarities separated by comma
+	
 	List methods
-	List polarities
-	static hasMany = [methods: InstrumentMethod, polarities: String]
+	
+	static hasMany = [methods: InstrumentMethod]
 	
     static constraints = {
 		bookingSystemName nullable: true
+		polarities nullable: true
 		name unique: true
 		metabolightsName unique: true
     }

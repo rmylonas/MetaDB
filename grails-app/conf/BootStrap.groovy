@@ -34,7 +34,7 @@ class BootStrap {
 			new Instrument(name: "Synapt", 
 							metabolightsName: "SYNAPT HDMS (Waters)", 
 							methods: synaptMethods, 
-							polarities: polarities,
+							polarities: polarities.join(","),
 							chromatography: "LC").save(flush: true, failOnError: true)
 			
 			def xevoMethods = [
@@ -51,7 +51,7 @@ class BootStrap {
 			new Instrument(name: "Xevo", 
 							metabolightsName: "Xevo TQ MS (Waters)", 
 							methods: xevoMethods, 
-							polarities: polarities,
+							polarities: polarities.join(","),
 							chromatography: "LC").save(flush: true, failOnError: true)	
 			
 			def tsqMethods = [
@@ -67,8 +67,7 @@ class BootStrap {
 			]
 			new Instrument(name: "TSQ", 
 				metabolightsName: "TSQ Quantum Ultra (Thermo Scientific)", 
-				methods: tsqMethods, 
-				polarities: polarities, 
+				methods: tsqMethods,
 				chromatography: "GC").save(flush: true, failOnError: true)
 			
 		}

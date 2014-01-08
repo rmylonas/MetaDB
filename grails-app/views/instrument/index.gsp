@@ -51,7 +51,7 @@
         
 	  </table>
 	  
-	  <g:link action="newInstrument" controller="group" class="btn btn-primary">New instrument</g:link>
+	  <g:link action="newInstrument" controller="instrument" class="btn btn-primary">New instrument</g:link>
 	    
 </div> <!-- /container -->
 
