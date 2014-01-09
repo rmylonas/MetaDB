@@ -30,7 +30,7 @@
 	  	<thead>
             <tr>
               <th>Name</th>
-              <th>MetaboLigths name</th>
+              <th>MetaboLights name</th>
               <th>BookingSystem name</th>
               <th>Chromatrography</th>
               <th></th>

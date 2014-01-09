@@ -48,7 +48,10 @@
 			
 			<div class="form-group">	
 				<label for="project">Chromatrography</label>
-				<input class="form-control" name="chromatography" value="${session.instrument.chromatography}">
+				<select class="form-control" name="chromatography" >
+					<option value="LC">LC</option>
+					<option value="GC">GC</option>
+				</select>
 	   		</div> <!-- form-group -->
 			
 			<div class="form-group">
@@ -84,7 +87,7 @@
         
 	  </table>
 	  
-	  <g:link action="newMethod" controller="group" class="btn btn-primary">New method</g:link>
+	  <g:link action="newMethod" controller="instrument" class="btn btn-primary">New method</g:link>
 	 
 	</div> 
 	 

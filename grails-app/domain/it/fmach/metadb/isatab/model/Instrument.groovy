@@ -17,7 +17,6 @@ class Instrument {
 		bookingSystemName nullable: true
 		polarities nullable: true
 		name unique: true
-		metabolightsName unique: true
     }
 	
 	static mapping = {
