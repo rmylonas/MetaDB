@@ -2,7 +2,9 @@ package it.fmach.metadb.isatab.controller
 
 import it.fmach.metadb.isatab.model.FEMGroup
 import it.fmach.metadb.isatab.model.FEMProject
+import grails.plugin.springsecurity.annotation.Secured
 
+@Secured(['ROLE_ADMIN'])
 class GroupController {
 	
 	def groupService

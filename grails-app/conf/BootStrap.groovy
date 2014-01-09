@@ -1,3 +1,6 @@
+import it.fmach.metadb.Role
+import it.fmach.metadb.User
+import it.fmach.metadb.UserRole
 import it.fmach.metadb.isatab.instrument.Polarity
 import it.fmach.metadb.isatab.model.Instrument
 import it.fmach.metadb.isatab.model.InstrumentMethod
@@ -7,6 +10,29 @@ import it.fmach.metadb.isatab.model.FEMProject
 class BootStrap {
 	
     def init = { servletContext ->
+
+		// create default user		
+		if(! User.count()){
+			// set the users
+			def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true, failOnError: true)
+			def userRole = new Role(authority: 'ROLE_USER').save(flush: true, failOnError: true)
+	  
+			def adminUser = new User(username: 'admin', password: '1234')
+			adminUser.save(flush: true, failOnError: true)
+			
+			def testUser = new User(username: 'roman', password: 'namor')
+			testUser.save(flush: true, failOnError: true)
+	  
+			UserRole.create(adminUser, adminRole, true)
+			UserRole.create(testUser, userRole, true)
+			
+			//new UserRole(user: adminUser, role: adminRole).save(flush: true, insert: true, failOnError: true)
+	  
+			assert User.count() == 2
+			assert Role.count() == 2
+			assert UserRole.count() == 2
+		}		
+		
 		// create the instruments
 		if (!Instrument.count()) {
 			

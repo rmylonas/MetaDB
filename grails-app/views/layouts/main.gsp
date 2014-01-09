@@ -77,6 +77,8 @@
             </li>
             </g:if>
             
+            
+            <sec:access expression="hasRole('ROLE_ADMIN')">
             <!-- Settings -->
           	<li class="dropdown">
               <a id="dropManage" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
@@ -85,13 +87,27 @@
                	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/instrument')}">Instrument and Methods</a></li>       	
               </ul>
             </li>
+            </sec:access>
             
           </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+          	<sec:access expression="hasRole('ROLE_ADMIN')">
+          		<li><p class="navbar-text">Administrator</p></li>
+          	</sec:access>
+          	<li><p class="navbar-text"><strong><sec:username/></strong></p></li>
+      		<li><a href="${createLink(uri: '/logout')}">Logout</a></li>
+      	  </ul>
+         	
+          
         </div><!--/.nav-collapse -->
+        
       </div>
     </div>
    	 	
 		<g:layoutBody/>
+		
+		 
 		
 		<r:layoutResources />
 		

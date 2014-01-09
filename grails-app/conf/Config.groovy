@@ -96,17 +96,22 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'it.fmach.metadb.U
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'it.fmach.metadb.UserRole'
 grails.plugin.springsecurity.authority.className = 'it.fmach.metadb.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	// no security
-	'/**':                              ['permitAll'],
-	
+	// provoke login
+	'/**':                            ['ROLE_USER', 'ROLE_ADMIN'],
+/*	
 	'/':                              ['permitAll'],
 	'/index':                         ['permitAll'],
-	'/index.gsp':                     ['permitAll'],
+	'/index.gsp':                     ['permitAll'],*/
 	'/**/js/**':                      ['permitAll'],
 	'/**/css/**':                     ['permitAll'],
 	'/**/images/**':                  ['permitAll'],
 	'/**/favicon.ico':                ['permitAll']
 ]
+
+// added by roman mylonas
+grails.plugin.springsecurity.logout.postOnly = false
+//grails.plugin.springsecurity.auth.loginFormUrl = '/login/auth'
+// errorPage = '/login/denied'
 
 metadb.isatab.metabolConfigFile = "/home/mylonasr/MetaDB/conf/MetaboLightsConfig20130507"
 metadb.dataPath = "/home/mylonasr/MetaDB/data"
