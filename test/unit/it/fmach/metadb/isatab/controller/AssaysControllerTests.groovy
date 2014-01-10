@@ -25,6 +25,6 @@ class AssaysControllerTests {
 		   
 		controller.index()
 		
-		assert 3 == flash.assays.size()
+		assert 3 == session.assays.size()
     }
 }

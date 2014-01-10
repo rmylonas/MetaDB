@@ -7,6 +7,23 @@
 <body>
 
  <div class="container">
+ 
+ 	 <!-- Show errors -->
+    <g:if test="${flash.error}">
+  		<div class="alert alert-block alert-danger">
+  			<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>Error: </strong>${flash.error}
+  		</div>
+	</g:if>
+	
+		<!-- Show message -->
+    <g:if test="${flash.message}">
+  		<div class="alert alert-block alert-success">
+  			<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>OK: </strong>${flash.message}
+  		</div>
+	</g:if>
+ 
     <h3>Assays ${(id?"from Study"+id:'')}</h3>
 
 	  <table class="table table-striped">
@@ -24,7 +41,7 @@
           </thead>
           
           <tbody>
-          <g:each var="assay" in="${flash.assays}">         	 
+          <g:each var="assay" in="${session.assays}">         	 
             	<tr>
             		<g:each in="${assay}">
             			<td><g:link controller='runs' params="${[id: it.id]}">${it.accessCode.code}</g:link></td>

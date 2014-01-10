@@ -34,4 +34,6 @@ class AssayServiceTests {
 		
 		assert 0 == assay.acquiredRuns.size()
     }
+	
+	
 }

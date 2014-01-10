@@ -6,6 +6,7 @@ import it.fmach.metadb.isatab.model.FEMStudy;
 class AssaysController {
 	
 	def springSecurityService
+	def assayService
 
     def index() {
 		String studyId = params['id']
@@ -13,20 +14,47 @@ class AssaysController {
 		// if a study id is provided we load only the concerning assays
 		if(studyId){
 			def study = FEMStudy.get(studyId.toLong())
-			flash.assays = study.assays
+			session.assays = study.assays
 		}else{
-			flash.assays = FEMAssay.list()
+			session.assays = FEMAssay.list()
 		}
 	}
 	
 	def allAssays() {
-		flash.assays = FEMAssay.list()
+		session.assays = FEMAssay.list()
 		render(view:"index")
 	}
 	
 	def myAssays() {
 		def currentUser = springSecurityService.getCurrentUser()
-		flash.assays = FEMAssay.findAllByOwner(currentUser)
+		session.assays = FEMAssay.findAllByOwner(currentUser)
 		render(view:"index")
 	}
+	
+	def delete(){
+		def assay = FEMAssay.get(params.id)
+		
+		// remove the selected entry from the session
+		def i = session.assays.iterator()
+		while (i.hasNext()) {
+			if (i.next().id == assay.id) {
+				i.remove()
+				break
+			}
+		}
+		
+		// delete selected assay
+		try{
+			assayService.delete(assay)
+		}catch(Exception e){
+			e.printStackTrace()
+			flash.error = e.message
+			redirect(action: 'index')
+			return
+		}
+		
+		flash.message = "Assay was deleted"
+		redirect(action: 'index')
+	}
+	
 }

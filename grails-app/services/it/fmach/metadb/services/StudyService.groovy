@@ -3,6 +3,18 @@ package it.fmach.metadb.services
 import it.fmach.metadb.isatab.model.FEMStudy
 
 class StudyService {
+	
+	def assayService
+	
+	def delete(FEMStudy study){
+		def assaySize = study.assays.size()
+		for(def i=0; i < assaySize; i++){
+			// delete the first entry till none is left
+			assayService.delete(study.assays.get(0))
+		}
+		
+		study.delete()
+	}
 
     def saveStudy(FEMStudy study) {
 		

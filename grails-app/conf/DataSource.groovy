@@ -45,7 +45,7 @@ environments {
     }
     production {
         dataSource {
-            dbCreate = "update"
+            dbCreate = "create-drop"	//"update"
             url = "jdbc:mysql://localhost/MetaDB"
             pooled = true
             properties {
