@@ -45,6 +45,7 @@ class FEMAssay {
 		metaMsSubmissions lazy: false
 		// acquiredRuns lazy: false
 		// randomizedRuns lazy: false
+		protocolJSON sqlType: 'text'
 	}
 	
 }

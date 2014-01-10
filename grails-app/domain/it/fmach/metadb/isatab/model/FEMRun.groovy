@@ -27,7 +27,7 @@ class FEMRun {
     }
 	
 	static mapping = {
-		protocolJSON sqlType: 'text'
+		
 	}
 	
 }

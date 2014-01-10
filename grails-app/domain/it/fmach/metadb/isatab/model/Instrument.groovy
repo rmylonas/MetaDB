@@ -7,7 +7,7 @@ class Instrument {
 	String bookingSystemName
 	String chromatography // either GC or LC
 	
-	String polarities // polarities separated by comma
+	// String polarities // polarities separated by comma
 	
 	List methods
 	
@@ -15,7 +15,7 @@ class Instrument {
 	
     static constraints = {
 		bookingSystemName nullable: true
-		polarities nullable: true
+		// polarities nullable: true
 		name unique: true
     }
 	

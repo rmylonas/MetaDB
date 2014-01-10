@@ -36,7 +36,7 @@ class BootStrap {
 		// create the instruments
 		if (!Instrument.count()) {
 			
-			def polarities = [Polarity.POSITIVE.metabolightsName, Polarity.NEGATIVE.metabolightsName, Polarity.ALTERNATING.metabolightsName]
+			// def polarities = [Polarity.POSITIVE.metabolightsName, Polarity.NEGATIVE.metabolightsName, Polarity.ALTERNATING.metabolightsName]
 			
 			def synaptMethods = [
 					new InstrumentMethod(name: 'untargeted RP', 
@@ -60,7 +60,7 @@ class BootStrap {
 			new Instrument(name: "Synapt", 
 							metabolightsName: "SYNAPT HDMS (Waters)", 
 							methods: synaptMethods, 
-							polarities: polarities.join(","),
+							//polarities: polarities.join(","),
 							chromatography: "LC").save(flush: true, failOnError: true)
 			
 			def xevoMethods = [
@@ -77,7 +77,7 @@ class BootStrap {
 			new Instrument(name: "Xevo", 
 							metabolightsName: "Xevo TQ MS (Waters)", 
 							methods: xevoMethods, 
-							polarities: polarities.join(","),
+							//polarities: polarities.join(","),
 							chromatography: "LC").save(flush: true, failOnError: true)	
 			
 			def tsqMethods = [
