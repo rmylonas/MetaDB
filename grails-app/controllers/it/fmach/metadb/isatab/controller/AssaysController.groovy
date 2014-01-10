@@ -4,6 +4,8 @@ import it.fmach.metadb.isatab.model.FEMAssay;
 import it.fmach.metadb.isatab.model.FEMStudy;
 
 class AssaysController {
+	
+	def springSecurityService
 
     def index() {
 		String studyId = params['id']
@@ -15,5 +17,16 @@ class AssaysController {
 		}else{
 			flash.assays = FEMAssay.list()
 		}
+	}
+	
+	def allAssays() {
+		flash.assays = FEMAssay.list()
+		render(view:"index")
+	}
+	
+	def myAssays() {
+		def currentUser = springSecurityService.getCurrentUser()
+		flash.assays = FEMAssay.findAllByOwner(currentUser)
+		render(view:"index")
 	}
 }

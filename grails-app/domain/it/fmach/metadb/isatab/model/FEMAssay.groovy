@@ -48,6 +48,9 @@ class FEMAssay {
 		// acquiredRuns lazy: false
 		// randomizedRuns lazy: false
 		protocolJSON sqlType: 'text'
+		
+		// show most recent ones first
+		sort id: "desc"
 	}
 	
 }

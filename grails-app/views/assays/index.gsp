@@ -17,7 +17,9 @@
               <th>Name</th>
               <th>Instrument</th>
               <th>Method</th>
-              <th>Polarity</th>   
+              <th>Polarity</th>
+              <th>Owner</th>
+              <th></th>
             </tr>
           </thead>
           
@@ -30,6 +32,23 @@
             			<td>${it.instrument.name}</td>
             			<td>${it.method.name}</td>
             			<td>${it.instrumentPolarity}</td>
+            			<td>${it.owner.username}</td>
+            			
+            			<!-- if we're a user, we only let you delete if its your own -->
+            			<sec:access expression="hasRole('ROLE_USER')">
+          					<g:if test="${it.owner.username == sec.username().toString()}">
+          						<td><g:link action="delete" params="${[id: it.id]}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></g:link></td>
+          					</g:if>
+          					<g:else>
+          						<td></td>
+          					</g:else>
+          				</sec:access>
+          				
+          				<!-- admin can delete everything -->
+          				<sec:access expression="hasRole('ROLE_ADMIN')">
+          					<td><g:link action="delete" params="${[id: it.id]}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></g:link></td>
+          				</sec:access>
+            			
             		</g:each>
 	 			</tr>	 		
 		  </g:each>

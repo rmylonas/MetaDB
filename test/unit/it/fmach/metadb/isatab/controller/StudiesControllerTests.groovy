@@ -28,7 +28,7 @@ class StudiesControllerTests {
 		def study = creator.createStudy()
        	study.save(flush: true)
 		   
-		controller.index()
+		controller.allStudies()
 		assert 1 == flash.studies.size
 		assert "study_id" == flash.studies.get(0).identifier
     }

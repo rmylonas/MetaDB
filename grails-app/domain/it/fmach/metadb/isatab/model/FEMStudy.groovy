@@ -35,6 +35,9 @@ class FEMStudy {
 	
 	static mapping = {
 		description sqlType: 'text'
+		
+		// show most recent ones first
+		sort id: "desc"
 	}
 	
 }
