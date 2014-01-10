@@ -3,6 +3,7 @@ package it.fmach.metadb.isatab.importer
 import java.util.List;
 
 
+import it.fmach.metadb.User
 import it.fmach.metadb.helper.UnZipper
 import it.fmach.metadb.isatab.model.FEMStudy;
 import it.fmach.metadb.isatab.model.ISAParsingInfo;
@@ -28,7 +29,7 @@ class IsatabImporterImpl implements IsatabImporter {
 	/**
 	 * @param configDir Directory containing xml files describing valid ISAtab structures (https://github.com/ISA-tools/ISAconfigurator)
 	 */
-	def IsatabImporterImpl(String configDir, String workDir){
+	def IsatabImporterImpl(String configDir, String workDir, User currentUser){
 		// check if configDir is valid, otherwise throw a runtime error
 		def folder = new File(configDir)
 		if( !folder.exists() ) {
@@ -41,7 +42,7 @@ class IsatabImporterImpl implements IsatabImporter {
 		
 		// set constructors
 		importer = new ISAtabFilesImporter(configDir)
-		converter = new ISAtoolsModelConverterImpl(workDir)
+		converter = new ISAtoolsModelConverterImpl(workDir, currentUser)
 	}
 	
 	

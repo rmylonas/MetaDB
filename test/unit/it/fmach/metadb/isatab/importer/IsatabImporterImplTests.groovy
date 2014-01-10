@@ -1,5 +1,6 @@
 package it.fmach.metadb.isatab.importer
 
+import it.fmach.metadb.User
 import it.fmach.metadb.isatab.instrument.Polarity;
 import it.fmach.metadb.isatab.model.AccessCode;
 import it.fmach.metadb.isatab.model.FEMAssay
@@ -19,11 +20,13 @@ import org.junit.*
 
 import grails.test.mixin.*
 
-@Mock([AccessCode, Instrument])
+@Mock([AccessCode, Instrument, User])
 class IsatabImporterImplTests {
-
+	
 	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"
-
+	static def currentUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
+		
+	
 	@Test
 	void testImportIsatabFile() {
 
@@ -31,6 +34,7 @@ class IsatabImporterImplTests {
 		def creator = new TestDbSetup()
 		creator.createInstrument()
 
+		
 		String configDir = rootDir + "MetaboLightsConfig20130507"
 		String isatabDir = rootDir + "Wine_Storage"
 		
@@ -38,7 +42,7 @@ class IsatabImporterImplTests {
 		workDir.delete();
 		workDir.mkdir();
 
-		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath())
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath(), currentUser)
 		FEMInvestigation investigation = importer.importIsatabFiles(isatabDir)
 		Boolean success = investigation.isaParsingInfo.success
 		assert success
@@ -102,7 +106,7 @@ class IsatabImporterImplTests {
 		workDir.delete();
 		workDir.mkdir();
 
-		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath())
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath(), currentUser)
 		FEMInvestigation investigation = importer.importIsatabFiles(isatabDir)
 
 		def ISAParsingInfo parsingInfo = investigation.isaParsingInfo
@@ -128,7 +132,7 @@ class IsatabImporterImplTests {
 		workDir.delete();
 		workDir.mkdir();
 		
-		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath())
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath(), currentUser)
 		FEMInvestigation investigation = importer.importIsatabZip(isatabDir)
 
 		Boolean success = investigation.isaParsingInfo.success
@@ -151,7 +155,7 @@ class IsatabImporterImplTests {
 		workDir.delete();
 		workDir.mkdir();
 
-		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath())
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath(), currentUser)
 		FEMInvestigation investigation = importer.importIsatabZip(isatabDir)
 
 		Boolean success = investigation.isaParsingInfo.success

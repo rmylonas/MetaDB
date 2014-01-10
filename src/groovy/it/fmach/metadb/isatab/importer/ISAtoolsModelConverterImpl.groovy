@@ -1,5 +1,6 @@
 package it.fmach.metadb.isatab.importer
 
+import it.fmach.metadb.User
 import it.fmach.metadb.isatab.model.FEMAssay
 import it.fmach.metadb.isatab.model.FEMRun
 import it.fmach.metadb.isatab.model.FEMSample
@@ -23,6 +24,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 	def protocolJSON
 	
 	String workDir
+	User currentUser
 	
 	// field-names which are parsed
 	static final def SAMPLE_NAME = "Sample Name"
@@ -34,13 +36,14 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 	static final def RUN_DERIVED_FILE= "Derived Spectral Data File"
 	static final def RUN_SCAN_POLARITY= "Parameter Value[Scan polarity]"
 	
-	ISAtoolsModelConverterImpl(String workDir){
+	ISAtoolsModelConverterImpl(String workDir, User currentUser){
 		// create map of available instruments and polarities
 		Instrument.list().each {inst->
 			instrumentMap[inst.metabolightsName] = inst
 		}
 		
-		this.workDir = workDir		
+		this.workDir = workDir
+		this.currentUser = currentUser
 	}
 	
 	@Override
@@ -54,7 +57,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			FEMStudy fEMStudy = new FEMStudy()
 			
 			fEMStudy.identifier = studyName.trim()
-			convertStudy(studyMap.get(studyName), fEMStudy)
+			this.convertStudy(studyMap.get(studyName), fEMStudy)
 	
 			studyList.add(fEMStudy)
 		}
@@ -70,10 +73,13 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		// set the workingDir
 		fEMStudy.workDir = this.workDir + "/" + fEMStudy.identifier
 		
-		 Map<String, FEMSample> sampleList = convertSampleList(iSAStudy)
+		 Map<String, FEMSample> sampleList = this.convertSampleList(iSAStudy)
 		
-		List<FEMAssay> assayList = convertAssayList(iSAStudy, sampleList)
+		List<FEMAssay> assayList = this.convertAssayList(iSAStudy, sampleList)
 		fEMStudy.assays = assayList
+		
+		// set the owner
+		fEMStudy.owner = this.currentUser
 	}
 	
 	private Map<String, FEMSample> convertSampleList(Study iSAStudy){
@@ -148,6 +154,9 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			
 			// and for the method we just take the first available
 			assay.method = instrument.methods[0]
+			
+			// set the owner
+			assay.owner = this.currentUser
 			
 			assay.accessCode = accessCodeGenerator.getNewCode()
 			assayList << assay

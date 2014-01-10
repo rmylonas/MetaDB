@@ -1,5 +1,7 @@
 package it.fmach.metadb.isatab.model
 
+import it.fmach.metadb.User
+
 class FEMStudy {
 
 	String identifier
@@ -14,6 +16,7 @@ class FEMStudy {
 	
 	List assays
 	
+	User owner
 	FEMProject project
 	FEMGroup group
 	

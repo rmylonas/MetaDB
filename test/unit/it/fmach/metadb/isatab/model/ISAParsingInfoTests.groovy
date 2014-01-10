@@ -1,6 +1,7 @@
 
 package it.fmach.metadb.isatab.model
 
+import it.fmach.metadb.User
 import it.fmach.metadb.isatab.importer.FEMInvestigation
 import it.fmach.metadb.isatab.importer.IsatabImporter
 import it.fmach.metadb.isatab.importer.IsatabImporterImpl
@@ -20,6 +21,7 @@ import org.junit.*
 @TestFor(ISAParsingInfo)
 class ISAParsingInfoTests {
 
+	static def currentUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
 	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"
 	String configDir = rootDir + "MetaboLightsConfig20130507"
 	
@@ -36,7 +38,7 @@ class ISAParsingInfoTests {
 		workDir.delete();
 		workDir.mkdir();
 
-		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath())
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath(), currentUser)
 		def investigation = importer.importIsatabFiles(isatabDir)
 		def parsingInfo = investigation.isaParsingInfo
 		parsingInfo.save(flush: true)
@@ -63,7 +65,7 @@ class ISAParsingInfoTests {
 		workDir.delete();
 		workDir.mkdir();
 
-		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath())
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath(), currentUser)
 		def investigation = importer.importIsatabFiles(isatabDir)
 		def parsingInfo = investigation.isaParsingInfo
 		

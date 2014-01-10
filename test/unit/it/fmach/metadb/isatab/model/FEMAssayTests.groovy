@@ -2,6 +2,7 @@ package it.fmach.metadb.isatab.model
 
 
 import grails.test.mixin.*
+import it.fmach.metadb.User
 import it.fmach.metadb.isatab.importer.IsatabImporter
 import it.fmach.metadb.isatab.importer.IsatabImporterImpl
 import it.fmach.metadb.isatab.testHelper.TestDbSetup
@@ -14,6 +15,7 @@ import org.junit.*
 @TestFor(FEMAssay)
 class FEMAssayTests {
 	
+	static def currentUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
 	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"
 	String configDir = rootDir + "MetaboLightsConfig20130507"
 	String isatabDir = rootDir + "Wine_Storage"
@@ -27,7 +29,7 @@ class FEMAssayTests {
 		workDir.delete();
 		workDir.mkdir();
 
-		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath())
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath(), currentUser)
 		def investigation = importer.importIsatabFiles(isatabDir)
 		
 		def assay = investigation.studyList.get(0).assays.get(0)

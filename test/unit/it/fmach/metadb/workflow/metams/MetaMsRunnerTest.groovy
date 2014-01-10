@@ -3,6 +3,7 @@ package it.fmach.metadb.workflow.metams
 import java.util.List;
 
 import grails.test.mixin.*
+import it.fmach.metadb.User
 import it.fmach.metadb.isatab.testHelper.TestDomainCreator
 
 import org.junit.*
@@ -19,6 +20,7 @@ import it.fmach.metadb.isatab.model.MetaMsDb
 @Mock([FEMStudy, FEMAssay, FEMRun, InstrumentMethod, Instrument, AccessCode, MetaMsSubmission, MetaMsDb])
 class MetaMsRunnerTest {
 	
+	static def currentUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
 	static String metaMsConfDir = "resources/conf/metaMS"
 	
 	@Test
@@ -39,6 +41,7 @@ class MetaMsRunnerTest {
 		tmpFile.delete()
 		tmpFile.mkdir()
 		assay.workDir = tmpFile.getAbsolutePath()
+		assay.owner = currentUser
 		assay.save(flash: true, failOnError: true)
 		
 		runner.runMetaMs(assay, selectedMsAssayNames, "1.2", "10.5")
@@ -67,6 +70,7 @@ class MetaMsRunnerTest {
 		
 		def creator = new TestDomainCreator()
 		def assay = creator.createExtractedRuns()
+		assay.owner = currentUser
 		
 //		assay.acquiredRuns.each{
 //			println(it.msAssayName)

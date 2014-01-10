@@ -3,6 +3,7 @@ package it.fmach.metadb.isatab.testHelper
 import java.util.Date;
 import java.util.List;
 
+import it.fmach.metadb.User
 import it.fmach.metadb.isatab.importer.AccessCodeGenerator
 import it.fmach.metadb.isatab.model.AccessCode;
 import it.fmach.metadb.isatab.model.FEMAssay
@@ -14,6 +15,8 @@ import it.fmach.metadb.isatab.model.InstrumentMethod;
 
 class TestDomainCreator {
 
+	static def currentUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
+	
 	/**
 	 * create a study object for unit-testing
 	 */
@@ -45,13 +48,14 @@ class TestDomainCreator {
 										instrumentPolarity: 'positive', 
 										runs: runList[j..(j+3)], 
 										randomizedRuns: runList[j..(j+3)],
-										instrument: this.createInstrument())
+										instrument: this.createInstrument(),
+										owner: currentUser)
 							)
 			j += 4
 		}
 		
 		// create study
-		def study = new FEMStudy(identifier: 'study_id', iSATabFilePath: '/path', assays: assayList)
+		def study = new FEMStudy(identifier: 'study_id', iSATabFilePath: '/path', assays: assayList, owner: currentUser)
 		
 		return study
 		
@@ -64,7 +68,7 @@ class TestDomainCreator {
 		def runList = []
 		for(i in 1..12){
 			runList.add(new FEMRun(msAssayName: "run_"+i, 
-									rowNumber: i, 
+									rowNumber: i,
 									scanPolarity: "positive", 
 									sample: new FEMSample(name: "Sample_"+i,
 															factorJSON: '{"Bottling Type":"O2","Bottling time":"5","Wine":"Muller Thurgau  "}')
@@ -77,6 +81,7 @@ class TestDomainCreator {
 			shortName: "shortname",
 			method: this.createMethod(),
 			instrumentPolarity: 'positive',
+			owner: currentUser,
 			randomizedRuns: runList)
 	}
 	

@@ -1,5 +1,6 @@
 package it.fmach.metadb.isatab.model
 
+import it.fmach.metadb.User
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,7 @@ class FEMAssay {
 	String workDir
 	String protocolJSON = "{}"
 	
+	User owner
 	Instrument instrument
 	InstrumentMethod method
 	String instrumentPolarity
