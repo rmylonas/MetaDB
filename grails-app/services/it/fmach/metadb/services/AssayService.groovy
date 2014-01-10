@@ -4,6 +4,10 @@ import it.fmach.metadb.isatab.model.FEMAssay;
 
 
 class AssayService {
+	
+	def delete(FEMAssay assay){
+		assay.delete()
+	}
 
 	def cleanAcquisitionRuns(FEMAssay assay){
 		def l = []

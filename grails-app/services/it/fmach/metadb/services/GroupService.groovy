@@ -12,6 +12,11 @@ class GroupService {
 		
 		if(studyList) throw new RuntimeException("Group [" + group.name + "] is used by some Studies. Please delete those Studies first.")
 		
+		// delete all the projects first
+		group.projects.each{
+			it.delete()
+		}
+		
 		group.delete()
     }
 	

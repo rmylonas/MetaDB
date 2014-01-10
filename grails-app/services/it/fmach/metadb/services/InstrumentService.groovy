@@ -12,6 +12,11 @@ class InstrumentService {
 		
 		if(assayList) throw new RuntimeException("Instrument [" + instrument.name + "] is used by some Assays. Please delete those Assays first.")
 		
+		// delete all methods belonging to this instrument
+		instrument.methods.each{
+			it.delete()
+		}
+		
 		instrument.delete()
     }
 	
