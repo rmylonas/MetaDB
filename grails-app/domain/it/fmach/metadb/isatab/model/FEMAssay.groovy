@@ -14,6 +14,7 @@ class FEMAssay {
 	Date dateCreated
 	String status = "initialized"
 	String workDir
+	String protocolJSON = "{}"
 	
 	Instrument instrument
 	InstrumentMethod method

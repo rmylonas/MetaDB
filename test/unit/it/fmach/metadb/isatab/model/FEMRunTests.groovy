@@ -50,7 +50,7 @@ class FEMRunTests {
 //		def loadedRun = FEMRun.findBySample(sample)
 		
 		def loadedRun = FEMRun.list().get(0)
-		String protocols = loadedRun.protocolJSON
-		assert protocols.contains("Phenolics")
+		String polarity = loadedRun.scanPolarity
+		assert polarity == "alternating"
     }
 }

@@ -6,7 +6,6 @@ class FEMRun {
 	Integer rowNumber
 	
 	//String sampleName
-	String protocolJSON = "{}"
 	String msAssayName = ""
 	String rawSpectraFilePath = ""
 	String derivedSpectraFilePath = ""

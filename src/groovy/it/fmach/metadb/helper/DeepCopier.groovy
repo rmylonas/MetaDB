@@ -22,7 +22,7 @@ class DeepCopier {
 		
 		// create new objects
 		newRun.rowNumber = new Integer(run.rowNumber)
-		newRun.protocolJSON = new String(run.protocolJSON)
+		// newRun.protocolJSON = new String(run.protocolJSON)
 		newRun.msAssayName = new String(run.msAssayName)
 		newRun.rawSpectraFilePath = new String(run.rawSpectraFilePath)
 		newRun.derivedSpectraFilePath = new String(run.derivedSpectraFilePath)

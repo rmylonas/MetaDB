@@ -20,6 +20,7 @@ import it.fmach.metadb.isatab.importer.AccessCodeGenerator
 class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 	def accessCodeGenerator = new AccessCodeGenerator()
 	def instrumentMap = [:]
+	def protocolJSON
 	
 	String workDir
 	
@@ -119,6 +120,10 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		def assayMap = iSAStudy.getAssays()
 		
 		assayMap.each{ k, v ->
+			
+			// reset the protocolJSON
+			this.protocolJSON = null
+			
 			def assay = new FEMAssay()
 			assay.name = k.trim()
 			assay.shortName = createShortAssayName(k)
@@ -129,6 +134,9 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			assay.instrument = instrument
 			
 			assay.runs = convertRunList(v, sampleList)
+			
+			// after extracting the runs, we should have a protocolJSON
+			assay.protocolJSON = this.protocolJSON
 			
 			// set the workDir of this assay
 			assay.workDir = this.workDir + "/" + iSAStudy.getStudyTitle().trim() + "/" + assay.shortName
@@ -206,10 +214,10 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			// add the last Map
 			if(tempMap) tempList << tempMap	
 			
-			// make a JSON text and add it to the run
+			// make a JSON text and put it into protocolJSON to store it afterwards in the assay
 			def builder = new groovy.json.JsonBuilder()
 			builder(tempList)
-			run.protocolJSON = builder.toString()
+			if(! this.protocolJSON) this.protocolJSON = builder.toString()
 			
 			runList.add(run)
 		}

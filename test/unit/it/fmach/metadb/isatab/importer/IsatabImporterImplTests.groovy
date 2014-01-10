@@ -77,7 +77,7 @@ class IsatabImporterImplTests {
 		// check run content
 		assert 90 == assay.runs.size()
 		FEMRun run = assay.runs.get(0)
-		assert run.protocolJSON.contains("MS:ACQUITY UPLC")
+		assert assay.protocolJSON.contains("MS:ACQUITY UPLC")
 		assert "Q034_01_00_R_MRM" == run.msAssayName
 		assert "0001_R" == run.sample.name
 		assert "T:experimentsXevo_Stefania_Maggio2013.PROData" == run.rawSpectraFilePath
