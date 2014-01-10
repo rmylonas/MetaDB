@@ -15,13 +15,15 @@ import it.fmach.metadb.workflow.randomization.RunRandomization;
 
 class UploadIsatabController {
 	
+	def springSecurityService
 	def studyService
 	def runRandomization = new RunRandomization()
 
     def index() { }
 	
 	def upload() {
-		IsatabImporter importer = new IsatabImporterImpl(grailsApplication.config.metadb.isatab.metabolConfigFile, grailsApplication.config.metadb.dataPath)
+		def currentUser = springSecurityService.getCurrentUser()
+		IsatabImporter importer = new IsatabImporterImpl(grailsApplication.config.metadb.isatab.metabolConfigFile, currentUser.workDir)
 		
 		def importFile
 		FEMInvestigation investigation

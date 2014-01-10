@@ -6,6 +6,7 @@ class User {
 
 	String username
 	String password
+	String workDir
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked

@@ -17,10 +17,10 @@ class BootStrap {
 			def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true, failOnError: true)
 			def userRole = new Role(authority: 'ROLE_USER').save(flush: true, failOnError: true)
 	  
-			def adminUser = new User(username: 'admin', password: '1234')
+			def adminUser = new User(username: 'admin', password: '1234', workDir: '/home/mylonasr/MetaDB/data/admin')
 			adminUser.save(flush: true, failOnError: true)
 			
-			def testUser = new User(username: 'roman', password: 'namor')
+			def testUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
 			testUser.save(flush: true, failOnError: true)
 	  
 			UserRole.create(adminUser, adminRole, true)

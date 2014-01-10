@@ -35,10 +35,30 @@ class IsatabImporterImpl implements IsatabImporter {
 			throw new RuntimeException("the ISAtab configuration folder [" + configDir + "] cannot be read")	
 		}
 		
+		// set and create workDir
 		this.workDir = workDir
+		this.createWorkDir(workDir)
+		
+		// set constructors
 		importer = new ISAtabFilesImporter(configDir)
 		converter = new ISAtoolsModelConverterImpl(workDir)
 	}
+	
+	
+	
+	/**
+	 * create workDir if it doesnt already exist
+	 * 
+	 * @param workDir
+	 * @return
+	 */
+	def createWorkDir(String workDir){
+		File folder = new File(workDir)
+		if(! folder.isDirectory()){
+			folder.mkdirs()	
+		}
+	}
+	
 	
 	/**
 	 * Imports an ISAtab directory and converts it into a Study object containing all information stored in our databases
