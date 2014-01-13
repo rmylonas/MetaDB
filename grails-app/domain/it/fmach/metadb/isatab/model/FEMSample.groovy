@@ -1,7 +1,6 @@
 package it.fmach.metadb.isatab.model
 
-class FEMSample {
-	
+class FEMSample {	
 	String name
 	String sourceName = ""
 	String organism = ""

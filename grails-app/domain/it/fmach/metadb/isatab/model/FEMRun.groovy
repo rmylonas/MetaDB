@@ -3,6 +3,8 @@ package it.fmach.metadb.isatab.model
 
 class FEMRun {
 	
+	static searchable = true
+	
 	Integer rowNumber
 	
 	//String sampleName

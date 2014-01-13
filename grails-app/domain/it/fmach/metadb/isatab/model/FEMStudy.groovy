@@ -3,7 +3,10 @@ package it.fmach.metadb.isatab.model
 import it.fmach.metadb.User
 
 class FEMStudy {
-
+	
+	// code used by the Searchable Grails plugin
+	static searchable = true
+	
 	String identifier
 	String title = ""
 	String description = ""

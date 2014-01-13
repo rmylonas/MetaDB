@@ -41,6 +41,7 @@ grails.project.dependency.resolution = {
 		mavenRepo "https://m2proxy.atlassian.com/repository/public"
 		mavenRepo "http://download.java.net/maven/2/"
 		mavenRepo 'http://repo.spring.io/milestone'
+		mavenRepo "http://repo.grails.org/grails/core"
     }
 
     dependencies {
@@ -55,6 +56,8 @@ grails.project.dependency.resolution = {
 		compile "javatar:javatar:2.5"
 		compile "net.sf.opencsv:opencsv:1.7"
 
+//		compile "org.compass-project:compass:2.2.0"
+//		compile "org.apache.lucene:lucene-core:4.6.0"
 //		compile "commons-lang:commons-lang:2.6"
 //		compile "xerces:xerces:2.4.0"
 //		compile "log4j:log4j:1.2.17"		
@@ -84,6 +87,8 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.3.2"
 
         compile ':cache:1.0.1'
+		
+		compile ":searchable:0.6.6"
     }
 }
 

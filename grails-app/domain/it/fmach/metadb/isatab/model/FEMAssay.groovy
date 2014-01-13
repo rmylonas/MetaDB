@@ -2,10 +2,13 @@ package it.fmach.metadb.isatab.model
 
 import it.fmach.metadb.User
 import java.util.Date;
-import java.util.List;
+import java.util.List
 
 class FEMAssay {
 
+	// code used by the Searchable Grails plugin
+	static searchable = true
+	
 	// the unique accessCode, used for the booking system
 	AccessCode accessCode 
 	
@@ -44,6 +47,7 @@ class FEMAssay {
 //	}
 	
 	static mapping = {
+		accessCode lazy: false
 		metaMsSubmissions lazy: false
 		// acquiredRuns lazy: false
 		// randomizedRuns lazy: false
