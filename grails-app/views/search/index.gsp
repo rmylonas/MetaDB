@@ -180,5 +180,16 @@
 	    
 </div> <!-- /container -->
 
+<script>
+
+$(function() {
+	$('#table tr td').each(function(i){
+		 // if id contains "popover", we add popover
+		 if(this.id){$(this).popover()}
+	});
+});
+
+</script>
+
 </body>
 </html>
