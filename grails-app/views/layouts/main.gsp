@@ -89,6 +89,7 @@
               <ul class="dropdown-menu" role="menu" aria-labelledby="dropManage">
               	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/group')}">Groups and Projects</a></li>       	
                	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/instrument')}">Instrument and Methods</a></li>       	
+              	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/user')}">Users</a></li>       	
               </ul>
             </li>
             </sec:access>
