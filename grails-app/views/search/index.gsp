@@ -10,11 +10,11 @@
 
 <div class="container">
 
-	<g:uploadForm action="index" class="form-horizontal">
+	<g:uploadForm action="index" class="form-horizontal" id="searchForm">
 	<div class="row">
 	  <div class="col-lg-4">
 	    <div class="input-group">
-	      <input type="text" class="form-control" name='searchTerm'>
+	      <input type="text" class="form-control" name='searchTerm' id='searchText'>
 	      <span class="input-group-btn">
 	        <button class="btn btn-default" type="submit">Search</button>
 	      </span>
@@ -77,6 +77,8 @@
               <th>Instrument</th>
               <th>Method</th>
               <th>Polarity</th>
+              <th>Group</th>
+              <th>Project</th>
               <th>Creation date</th>
               <th>Owner</th>
               <th></th>
@@ -92,6 +94,8 @@
             			<td>${it.instrument.name}</td>
             			<td>${it.method.name}</td>
             			<td>${it.instrumentPolarity}</td>
+            			<td>${it.group.name}</td>
+            			<td>${it.project.name}</td>
             			<td>${it.dateCreated}</td>
             			<td>${it.owner.username}</td>
             			
@@ -189,6 +193,8 @@ $(function() {
 		 // if id contains "popover", we add popover
 		 if(this.id){$(this).popover()}
 	});
+
+	$('#searchText').focus();
 });
 
 </script>

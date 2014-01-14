@@ -1,6 +1,7 @@
 package it.fmach.metadb.isatab.model
 
 class Instrument {
+	static searchable = [only: ['name']]
 	
 	String name
 	String metabolightsName

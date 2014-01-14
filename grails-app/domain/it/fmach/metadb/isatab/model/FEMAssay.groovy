@@ -1,13 +1,25 @@
 package it.fmach.metadb.isatab.model
 
 import it.fmach.metadb.User
+
 import java.util.Date;
 import java.util.List
 
 class FEMAssay {
 
 	// code used by the Searchable Grails plugin
-	static searchable = true
+	static searchable = {
+		accessCode(component: true)
+		shortName()
+		dateCreated()
+		owner(component: true)
+		instrument(component: true)
+		method(component: true)
+		instrumentPolarity()
+		project(component: true)
+		group(component: true)
+		except = ['name', 'description', 'status', 'workDir', 'protocolJSON', 'runs', 'randomizedRuns', 'acquiredRuns', 'metaMsSubmissions']
+	}
 	
 	// the unique accessCode, used for the booking system
 	AccessCode accessCode 
@@ -24,6 +36,8 @@ class FEMAssay {
 	Instrument instrument
 	InstrumentMethod method
 	String instrumentPolarity
+	FEMProject project
+	FEMGroup group
 	
 	List runs
 	List randomizedRuns
@@ -40,6 +54,8 @@ class FEMAssay {
 		workDir nullable: true
 		instrumentPolarity nullable: true
 		metaMsSubmissions nullable: true
+		group nullable: true
+		project nullable: true
     }
 	
 //	static mapping = {

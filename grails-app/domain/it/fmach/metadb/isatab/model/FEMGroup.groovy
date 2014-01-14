@@ -1,7 +1,8 @@
 package it.fmach.metadb.isatab.model
 
 class FEMGroup {
-
+	static searchable = [except: ['projects']]
+	
 	String name
 	String description
 	

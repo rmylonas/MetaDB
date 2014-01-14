@@ -2,6 +2,8 @@ package it.fmach.metadb
 
 class User {
 
+	static searchable = true
+	
 	transient springSecurityService
 
 	String username

@@ -5,8 +5,16 @@ import it.fmach.metadb.User
 class FEMStudy {
 	
 	// code used by the Searchable Grails plugin
-	static searchable = true
-	
+	static searchable = {
+		identifier()
+		title()
+		dateCreated()
+		owner(component: true)
+		project(component: true)
+		group(component: true)
+		except = ['description', 'workDir', 'originalFilename', 'assays']
+	}
+		
 	String identifier
 	String title = ""
 	String description = ""

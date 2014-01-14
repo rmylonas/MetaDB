@@ -35,6 +35,8 @@
               <th>Instrument</th>
               <th>Method</th>
               <th>Polarity</th>
+              <th>Group</th>
+              <th>Project</th>
               <th>Creation date</th>
               <th>Owner</th>
               <th></th>
@@ -50,6 +52,8 @@
             			<td>${it.instrument.name}</td>
             			<td>${it.method.name}</td>
             			<td>${it.instrumentPolarity}</td>
+            			<td>${it.group.name}</td>
+            			<td>${it.project.name}</td>
             			<td>${it.dateCreated}</td>
             			<td>${it.owner.username}</td>
             			

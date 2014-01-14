@@ -40,6 +40,14 @@
 
     </div> <!-- /container -->
 
+<script>
+
+$(function() {
+	$('#searchText').focus();
+});
+
+</script>
+
 
 </body>
 </html>

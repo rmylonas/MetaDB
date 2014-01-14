@@ -2,6 +2,8 @@ package it.fmach.metadb.isatab.model
 
 class FEMProject {
 
+	static searchable = true
+	
 	String name
 	String description
 	

@@ -70,6 +70,7 @@ class UploadIsatabController {
 		
 		session.investigation = investigation
 		session.groups = FEMGroup.list()
+		
 		// get the projects of first group by default and update using availableProjects (AJAX)
 		session.projects = session.groups.get(0).projects
 		
@@ -109,6 +110,10 @@ class UploadIsatabController {
 					}else{
 						runRandomization.noRandomization(assay)
 					}
+					
+					// set assay project and group
+					assay.project = study.project
+					assay.group = study.group
 				}
 				
 				// only insert study if there is at least one assay selected

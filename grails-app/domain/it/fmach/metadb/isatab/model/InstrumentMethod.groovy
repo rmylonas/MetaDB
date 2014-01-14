@@ -1,7 +1,8 @@
 package it.fmach.metadb.isatab.model
 
 class InstrumentMethod {
-
+	static searchable = [only: ['name']] 
+	
 	String name
 	String description
 	String tag
