@@ -7,6 +7,17 @@ class StudyService {
 	def assayService
 	
 	def delete(FEMStudy study){
+		
+		// in this case we also have to delete all samples
+		def sampleMap = [:]
+		
+		// get all samples belonging to those runs
+		study.assays.each{ assay ->
+			assay.randomizedRuns.each{ run ->
+				sampleMap[run.sample] = true
+			}		
+		}
+		
 		def assaySize = study.assays.size()
 		for(def i=0; i < assaySize; i++){
 			// delete the first entry till none is left
@@ -14,6 +25,11 @@ class StudyService {
 		}
 		
 		study.delete()
+		
+		// let's delete all samples
+		sampleMap.each{ sample, v ->
+			sample.delete()
+		}
 	}
 
     def saveStudy(FEMStudy study) {
