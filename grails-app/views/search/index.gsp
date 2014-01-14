@@ -77,6 +77,7 @@
               <th>Instrument</th>
               <th>Method</th>
               <th>Polarity</th>
+              <th>Creation date</th>
               <th>Owner</th>
               <th></th>
             </tr>
@@ -91,6 +92,7 @@
             			<td>${it.instrument.name}</td>
             			<td>${it.method.name}</td>
             			<td>${it.instrumentPolarity}</td>
+            			<td>${it.dateCreated}</td>
             			<td>${it.owner.username}</td>
             			
             			<!-- if we're a user, we only let you delete if its your own -->

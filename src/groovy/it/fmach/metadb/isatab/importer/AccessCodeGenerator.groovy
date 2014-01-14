@@ -21,8 +21,26 @@ class AccessCodeGenerator {
 	}
 	
 	String createNewCode(){
-		Random random = new Random()
-		return (random.nextInt(10 ** 4)).toString()
+		// get last AccessCode
+		def codes = AccessCode.withCriteria {
+			projections {
+				property "code"
+			}
+			maxResults(1)
+			order("id", "desc")
+		}
+		
+		def newCode = 1
+		
+		// if there is a code provided
+		if(codes){
+			def lastCode = codes[0].toInteger()
+			newCode = lastCode + 1
+		}
+		
+		// 4 digit code
+		return sprintf('%04d', newCode).toString()
+
 	}
 	
 	Boolean saveNewCode(String code){
