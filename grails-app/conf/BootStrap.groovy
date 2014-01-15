@@ -6,8 +6,12 @@ import it.fmach.metadb.isatab.model.Instrument
 import it.fmach.metadb.isatab.model.InstrumentMethod
 import it.fmach.metadb.isatab.model.FEMGroup
 import it.fmach.metadb.isatab.model.FEMProject
+import it.fmach.metadb.user.UserWorkDirGenerator;
+import org.codehaus.groovy.grails.commons.GrailsApplication
 
 class BootStrap {
+	
+	GrailsApplication grailsApplication
 	
     def init = { servletContext ->
 
@@ -17,16 +21,24 @@ class BootStrap {
 			def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true, failOnError: true)
 			def userRole = new Role(authority: 'ROLE_USER').save(flush: true, failOnError: true)
 	  
-			def adminUser = new User(username: 'admin', password: '1234', workDir: '/home/mylonasr/MetaDB/data/admin')
+			def adminDir = grailsApplication.config.metadb.dataPath + '/admin'
+			def adminUser = new User(username: 'admin', password: 'admin', workDir: adminDir)
 			adminUser.save(flush: true, failOnError: true)
 			
-			def testUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
+			def testUserDir = grailsApplication.config.metadb.dataPath + '/test'
+			def testUser = new User(username: 'test', password: 'test', workDir: testUserDir)
 			testUser.save(flush: true, failOnError: true)
 	  
 			UserRole.create(adminUser, adminRole, true)
 			UserRole.create(testUser, userRole, true)
 			
-			//new UserRole(user: adminUser, role: adminRole).save(flush: true, insert: true, failOnError: true)
+			// delete and create new directories
+			new File(adminDir).deleteDir()
+			new File(testUserDir).deleteDir()
+			
+			def dirGenerator = new UserWorkDirGenerator()
+			dirGenerator.createWorkDir(adminDir)
+			dirGenerator.createWorkDir(testUserDir)
 	  
 			assert User.count() == 2
 			assert Role.count() == 2

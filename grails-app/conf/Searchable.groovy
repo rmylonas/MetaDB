@@ -23,7 +23,7 @@
  * the previous "SearchableConfiguration.groovy"
  */
 searchable {
-
+	
     /**
      * The location of the Compass index
      *

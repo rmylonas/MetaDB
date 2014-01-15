@@ -23,7 +23,7 @@ class UploadIsatabController {
 	
 	def upload() {
 		def currentUser = springSecurityService.getCurrentUser()
-		IsatabImporter importer = new IsatabImporterImpl(grailsApplication.config.metadb.isatab.metabolConfigFile, currentUser.workDir, currentUser)
+		IsatabImporter importer = new IsatabImporterImpl(grailsApplication.config.metadb.isatab.metabolConfigFile, currentUser.workDir + "/data", currentUser)
 		
 		def importFile
 		FEMInvestigation investigation

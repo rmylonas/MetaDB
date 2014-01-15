@@ -18,16 +18,15 @@ class UserController {
 	}
 	
 	def saveNewUser(){
-		def userRole = (params['admin']) ? (Role.findByAuthority('ROLE_ADMIN')) :  (Role.findByAuthority('ROLE_USER'))
+		def userRole = (params['admin']) ? (Role.findByAuthority('ROLE_ADMIN')) : (Role.findByAuthority('ROLE_USER'))
 	
 		if(params['password'] != params['retypedPassword']){
 			flash.error = "Passwords are differing. Please retype"
 			redirect(action: 'newUser')
 		}
 		
-		println(userRole.authority)
-		
 		// create directories
+		
 		
 		def newUser = new User(username: params['name'], password: params['password'], workDir: params['workDir'])
 		

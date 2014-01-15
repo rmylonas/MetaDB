@@ -32,13 +32,18 @@ class IsatabImporterImpl implements IsatabImporter {
 	def IsatabImporterImpl(String configDir, String workDir, User currentUser){
 		// check if configDir is valid, otherwise throw a runtime error
 		def folder = new File(configDir)
-		if( !folder.exists() ) {
+		if( !folder.exists()) {
 			throw new RuntimeException("the ISAtab configuration folder [" + configDir + "] cannot be read")	
 		}
 		
+		// and check if workDir exists
+		def workDirCheck = new File(workDir)
+		if( !workDirCheck.exists()) {
+			throw new RuntimeException("Working directory [" + workDir + "] does not exist")
+		}
 		// set and create workDir
 		this.workDir = workDir
-		this.createWorkDir(workDir)
+		// this.createWorkDir(workDir)
 		
 		// set constructors
 		importer = new ISAtabFilesImporter(configDir)
