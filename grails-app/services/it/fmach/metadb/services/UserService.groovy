@@ -13,9 +13,13 @@ class UserService {
 		if(assayList) throw new RuntimeException("User [" + user.username + "] is owner of some Assays. Please delete those Assays first.")
 		
 		// delete this user
-		def userRoles = UserRole.findAllByUser(user)
-		userRoles*.delete()
+		this.deleteRole(user)
 		user.delete()
 		
     }
+	
+	def deleteRole(User user){
+		def userRoles = UserRole.findAllByUser(user)
+		userRoles*.delete()
+	}
 }

@@ -50,8 +50,13 @@
           				<g:else>
           					<td></td>
           				</g:else>
-                 		<td><g:link action="delete" params="${[id: it.id]}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></g:link></td>
-	 			</tr>
+          				<g:if test="${it.username != sec.username().toString()}">
+        					<td><g:link action="delete" params="${[id: it.id]}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></g:link></td>
+           				</g:if>
+          				<g:else>
+          					<td></td>
+          				</g:else>         				
+ 	 			</tr>
 		  </g:each>
 		  </tbody>
         
