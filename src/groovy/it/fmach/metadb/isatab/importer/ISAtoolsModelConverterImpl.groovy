@@ -71,7 +71,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		fEMStudy.description = iSAStudy.getStudyDesc().trim()
 		
 		// set the workingDir
-		fEMStudy.workDir = this.workDir + "/" + fEMStudy.identifier
+		fEMStudy.workDir = this.workDir + "/" + fEMStudy.identifier.replaceAll(/\s+/, '_')
 		
 		 Map<String, FEMSample> sampleList = this.convertSampleList(iSAStudy)
 		
