@@ -16,6 +16,7 @@ import it.fmach.metadb.workflow.randomization.RunRandomization;
 
 class UploadIsatabController {
 	
+	def isatabService
 	def springSecurityService
 	def studyService
 	def runRandomization = new RunRandomization()
@@ -67,7 +68,7 @@ class UploadIsatabController {
 			it.originalFilename = originalFilename
 			
 			// copy isatab files to the right place
-			this.copyIsatabFile(it)
+			isatabService.copyIsatabFile(it)
 		}
 		
 		// we currently only allow one study per isatab
@@ -89,7 +90,7 @@ class UploadIsatabController {
 		render(view: 'parsing')
 	}
 	
-//	def parsing() { }
+	def parsing() { }
 	
 	def insert() {
 		// look at all assays and store the selected ones
@@ -163,17 +164,6 @@ class UploadIsatabController {
 	def ajaxProjects(){
 		def group = FEMGroup.get(params.groupId)		
 		render group.projects as JSON
-	}
-	
-	
-	private def copyIsatabFile(FEMStudy study){
-		// move temp directory to right place
-		File workDir = new File(study.workDir)
-		workDir.mkdir()
-		File tempIsatabDir = new File(study.iSATabFilePath)
-		File newIsatabDir = new File(study.workDir + "/" + "isatab")
-		
-		tempIsatabDir.renameTo(newIsatabDir)
 	}
 	
 }

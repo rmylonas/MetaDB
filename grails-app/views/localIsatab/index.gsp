@@ -27,14 +27,6 @@
 	  		</div>
 	</g:if>
 	
-	<!-- Show warnings -->
-	<g:if test="${flash.warning}">
-	  		<div class="alert alert-block alert-warning">
-	  			<button type="button" class="close" data-dismiss="alert">&times;</button>
-	  			<strong>Warning: </strong>${flash.warning}
-	  		</div>
-	</g:if>
-	
 
 	
 	<g:uploadForm action="upload" role="form">

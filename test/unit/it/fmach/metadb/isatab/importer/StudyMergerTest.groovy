@@ -1,12 +1,9 @@
-
-
-
-
 package it.fmach.metadb.isatab.importer
 
 import it.fmach.metadb.User
 import it.fmach.metadb.isatab.model.AccessCode;
 import it.fmach.metadb.isatab.model.FEMAssay;
+import it.fmach.metadb.isatab.model.FEMSample;
 import it.fmach.metadb.isatab.model.FEMStudy;
 import it.fmach.metadb.isatab.model.Instrument;
 import it.fmach.metadb.isatab.testHelper.TestDbSetup
@@ -15,7 +12,7 @@ import org.junit.*
 
 import grails.test.mixin.*
 
-@Mock([FEMStudy, FEMAssay, AccessCode, Instrument, User])
+@Mock([FEMStudy, FEMAssay, FEMSample, AccessCode, Instrument, User])
 class StudyMergerTest {
 
 	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"

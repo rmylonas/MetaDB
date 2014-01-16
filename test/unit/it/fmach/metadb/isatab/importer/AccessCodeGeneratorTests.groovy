@@ -15,7 +15,6 @@ class AccessCodeGeneratorTests {
 		// create 5 codes
 		for(def i=0; i<5; i++){
 			AccessCode ac = acg.getNewCode()
-			println(ac.code)
 			ac.save(flush: true)
 		}
 		
