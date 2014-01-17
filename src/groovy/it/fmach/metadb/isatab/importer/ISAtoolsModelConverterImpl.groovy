@@ -145,7 +145,9 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			assay.protocolJSON = this.protocolJSON
 			
 			// set the workDir of this assay
-			assay.workDir = this.workDir + "/" + iSAStudy.getStudyTitle().trim() + "/" + assay.shortName
+			def studyDir = iSAStudy.getStudyTitle().trim().replaceAll(/\s+/, '_')
+			def assayDir = assay.shortName.replaceAll(/\s+/, '_')
+			assay.workDir = this.workDir + "/" + studyDir + "/" + assayDir
 			
 			//select the polarity
 			def polarity = assay.runs[0].scanPolarity

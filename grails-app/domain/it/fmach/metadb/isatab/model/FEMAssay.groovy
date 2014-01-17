@@ -12,6 +12,7 @@ class FEMAssay {
 		accessCode(component: true)
 		shortName()
 		dateCreated()
+		keywords()
 		owner(component: true)
 		instrument(component: true)
 		method(component: true)
@@ -31,6 +32,7 @@ class FEMAssay {
 	String status = "initialized"
 	String workDir
 	String protocolJSON = "{}"
+	String keywords = ""
 	
 	User owner
 	Instrument instrument
@@ -68,7 +70,7 @@ class FEMAssay {
 		// acquiredRuns lazy: false
 		// randomizedRuns lazy: false
 		protocolJSON sqlType: 'text'
-		
+		keywords sqlType: 'text'
 		// show most recent ones first
 		sort id: "desc"
 	}

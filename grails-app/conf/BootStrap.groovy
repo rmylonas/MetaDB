@@ -33,8 +33,8 @@ class BootStrap {
 			UserRole.create(testUser, userRole, true)
 			
 			// delete and create new directories
-			new File(adminDir).deleteDir()
-			new File(testUserDir).deleteDir()
+			//new File(adminDir).deleteDir()
+			//new File(testUserDir).deleteDir()
 			
 			def dirGenerator = new UserWorkDirGenerator()
 			dirGenerator.createWorkDir(adminDir)

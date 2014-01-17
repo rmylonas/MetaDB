@@ -31,7 +31,7 @@ class TestDomainCreator {
 			runList.add(new FEMRun(msAssayName: "assay_"+i, 
 									rowNumber: i, 
 									scanPolarity: "positive", 
-									sample: new FEMSample(name: "Sample_"+i)
+									sample: new FEMSample(name: "Sample_"+i, factorJSON: '{"Bottling Type":"N2","Bottling time":"10","Wine":"Pinot Gris"}')
 									)
 			)
 		}

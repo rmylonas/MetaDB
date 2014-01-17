@@ -56,13 +56,17 @@ function startMetaMs(){
     	</div>
     	
     	<!-- if the assay status is acquired, we can add the extracted files -->
-     	<div class="col-md-2">
-   		 	<g:link action="chooseExtracted" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-up"></span>  Extracted files</g:link>
-		</div>
- 		
- 		<!-- if the assay status is extracted, we can submit to MetaMS -->
-		<div class="col-md-2">
-   		 	<button class="btn btn-primary" onClick="startMetaMs()" >MetaMS</button>			
+     	<div class="btn-group">
+     		<div class="btn-group">
+			  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			    Add extracted files <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" role="menu">
+			    <li><g:link action="chooseExtracted">Upload ZIP file</g:link></li>
+			    <li><a href="#">Check local directory</a></li>
+			  </ul>
+			</div>
+   		 	<button class="btn btn-primary" onClick="startMetaMs()" >Start MetaMS</button>		
 		</div>
  
 	</div> <!-- row -->

@@ -8,6 +8,7 @@ class FEMStudy {
 	static searchable = {
 		identifier()
 		title()
+		keywords()
 		dateCreated()
 		owner(component: true)
 		project(component: true)
@@ -22,6 +23,7 @@ class FEMStudy {
 	String iSATabFilePath
 	String originalFilename = ""
 	String workDir
+	String keywords = ""
 	
 	Date dateCreated
 	
@@ -46,7 +48,7 @@ class FEMStudy {
 	
 	static mapping = {
 		description sqlType: 'text'
-		
+		keywords sqlType: 'text'
 		// show most recent ones first
 		sort id: "desc"
 	}

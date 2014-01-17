@@ -141,6 +141,9 @@ class UploadIsatabController {
 					insertedAssays += study.assays.size()
 					insertedStudies ++
 				}
+				
+				this.isatabService.createDirs(study)
+				this.isatabService.addKeywords(study)
 			}
 		
 		}catch(Exception e){
