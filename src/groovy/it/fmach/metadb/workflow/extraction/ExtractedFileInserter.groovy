@@ -10,6 +10,18 @@ class ExtractedFileInserter {
 	def unzipper = new UnZipper()
 	
 	
+	def addFromLocalFolder(FEMAssay assay){
+		def fileList = new File(assay.workDir + "/extractedFiles").list({d, f-> f ==~ /.*\.CDF/ } as FilenameFilter).toList()
+		
+		// add full name to fileList
+		fileList = fileList.collect{
+			assay.workDir + "/extractedFiles/" + it
+		}
+		
+		return this.addExtractedFiles(assay, fileList)
+	}
+	
+	
 	def addExtractedFilesZip(FEMAssay assay, String zipFilePath){
 		
 		// create the directories
@@ -47,6 +59,7 @@ class ExtractedFileInserter {
 		
 		// link the files to the run
 		fileList.each{ path ->
+			println(path)
 			def filename = path.split("/").last()
 			def found = false
 			

@@ -63,7 +63,7 @@ function startMetaMs(){
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
 			    <li><g:link action="chooseExtracted">Upload ZIP file</g:link></li>
-			    <li><a href="#">Check local directory</a></li>
+			    <li><g:link action="localExtractedUpload">Check local directory</g:link></li>
 			  </ul>
 			</div>
    		 	<button class="btn btn-primary" onClick="startMetaMs()" >Start MetaMS</button>		

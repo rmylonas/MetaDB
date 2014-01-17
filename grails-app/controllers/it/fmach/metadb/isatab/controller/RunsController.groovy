@@ -139,11 +139,57 @@ class RunsController {
 			flash.error = "No assay is selected"
 		}	
 		
-		render(view: "index")
+		render(view: "acquired")
 	}
 	
 	
 	def chooseExtracted(){}
+	
+	
+	def localExtractedUpload(){
+		
+		// attach the assay
+		def assay = session.assay
+		assay.attach()
+		
+		def nrFilesAdded
+			
+		// and process it
+	
+		def info = extractedFileInserter.addFromLocalFolder(assay)
+		
+		// flash a warning, if names were missing
+
+		def missingN = info[0]
+		def notFoundN = info[1]
+		nrFilesAdded = info[2]
+		
+		flash.warning = ''
+		
+		if(missingN){
+			flash.warning += "Following files were missing: <ul>"
+			
+			missingN.each{
+				flash.warning += "<li>" + it + "</it>"
+			}
+			
+			flash.warning += "</ul>"
+		}
+		
+		if(notFoundN){
+			flash.warning += "Following names were not found in database: <ul>"
+			
+			notFoundN.each{
+				flash.warning += "<li>" + it + "</it>"
+			}
+			
+			flash.warning += "</ul>"
+		}
+		
+		flash.message = nrFilesAdded + ' extracted files were added'
+		redirect(action: 'acquired')
+	}
+	
 	
 	def uploadExtracted(){
 		// attach the assay
