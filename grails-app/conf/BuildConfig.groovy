@@ -89,6 +89,7 @@ grails.project.dependency.resolution = {
         compile ':cache:1.0.1'
 		
 		compile ":searchable:0.6.6"
+		compile ":google-visualization:0.6.2"
     }
 }
 

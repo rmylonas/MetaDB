@@ -86,6 +86,14 @@
             <sec:access expression="hasRole('ROLE_ADMIN')">
             <!-- Settings -->
           	<li class="dropdown">
+              <a id="dropManage" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Statistics <b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropManage">
+              	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/statistics/group')}">Group</a></li>       	
+               	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/statistics/project')}">Project</a></li>
+              </ul>
+            </li>
+            
+            <li class="dropdown">
               <a id="dropManage" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dropManage">
               	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/group')}">Groups and Projects</a></li>       	
@@ -93,6 +101,7 @@
               	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/user')}">Users</a></li>       	
               </ul>
             </li>
+            
             </sec:access>
             
           </ul>
