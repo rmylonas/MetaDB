@@ -6,8 +6,6 @@
 </head>
 <body>
 
-
-
 <div class="container">
 
 	<g:uploadForm action="index" class="form-horizontal" id="searchForm">
@@ -24,14 +22,14 @@
 	    <div class="input-group">
 	      	<select class="form-control" name="level" >
 				<option value="Assay">Assay</option>
-				<option value="Study">Study</option>
+				<option value="Study" ${cookie(name:'studySelected')}>Study</option>
 			</select>
 	    </div><!-- /input-group -->
 	 </div><!-- /.col-lg-4 -->
 	  <div class="col-lg-2">
 		 <div class="checkbox">
 		    <label>
-		      <input type="checkbox" name="showAll"> Show all entries
+		      <input type="checkbox" name="showAll" ${cookie(name:'showAll')}> Show all users
 		    </label>
 	  	</div>
 	 </div><!-- /.col-lg-4 -->

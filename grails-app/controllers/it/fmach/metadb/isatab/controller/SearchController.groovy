@@ -2,6 +2,7 @@ package it.fmach.metadb.isatab.controller
 
 import it.fmach.metadb.isatab.model.FEMAssay;
 import it.fmach.metadb.isatab.model.FEMRun;
+import javax.servlet.http.Cookie
 
 class SearchController {
 	def searchService
@@ -50,6 +51,21 @@ class SearchController {
 					}
 					break
 			}
+			
+			
+			// set the cookies
+			def showAllCookieValue = (params['showAll']) ? ("checked") : ("")
+			
+			// study as default selected?
+			def studySelected = (params['level'] == "Study") ? ("selected") : ("")
+			
+			// save cookies (for 100 days)
+			Cookie levelCookie = new Cookie("studySelected", studySelected)
+			levelCookie.maxAge = 100 * 24 * 60 * 60
+			response.addCookie(levelCookie)
+			Cookie showAllCookie = new Cookie("showAll", showAllCookieValue)
+			showAllCookie.maxAge = 100 * 24 * 60 * 60
+			response.addCookie(showAllCookie)
 			
 		}
 		

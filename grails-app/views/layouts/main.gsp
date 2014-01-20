@@ -42,7 +42,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="${createLink(uri: '/search')}">MetaDB</a>
+          <a class="navbar-brand" href="${createLink(uri: '/search/index')}">MetaDB</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
