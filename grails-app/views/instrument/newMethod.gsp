@@ -69,7 +69,7 @@
 	   		
 	   		<div class="form-group">	
 				<label for="metaMsDb">MetaMS database</label>
-				<g:select class="form-control input" name="metaMsDb" optionValue="name" from="${flash.metaMsDb}" optionKey="id" />
+				<g:select class="form-control input" name="metaMsDb" optionValue="name" from="${session.metaMsDb}" optionKey="id" />
 	   		</div> <!-- form-group -->
 			
 			<div class="form-group">	

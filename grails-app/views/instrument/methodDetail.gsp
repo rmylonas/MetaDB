@@ -31,22 +31,22 @@
  		<div class="col-md-4">	 		 		
 	   		<div class="form-group">	
 				<label for="name">Name</label>
-				<input class="form-control" name="name" value="${flash.method.name}">
+				<input class="form-control" name="name" value="${session.method.name}">
 	   		</div> <!-- form-group -->
 	   		
 	   		<div class="form-group">	
 				<label for="description">Description</label>
-				<input class="form-control" name="description" value="${flash.method.description}">
+				<input class="form-control" name="description" value="${session.method.description}">
 	   		</div> <!-- form-group -->
 	   		
 	   		<div class="form-group">
 				<label for="tag">Tag at end of filenames</label>
-				<input class="form-control" name="tag" value="${flash.method.tag}">
+				<input class="form-control" name="tag" value="${session.method.tag}">
 	   		</div> <!-- form-group -->
 			
 			<div class="form-group checkbox">
 				<label>					
-					<g:if test="${flash.method.randomization}">
+					<g:if test="${session.method.randomization}">
 						<input type="checkbox" name="randomization" value="randomize" checked>
 					</g:if>
 					<g:else>
@@ -60,27 +60,27 @@
 			
 	   		<div class="form-group">	
 				<label for="startPattern">Randomization start pattern</label>
-				<input class="form-control" name="startPattern" value="${flash.method.startPattern}">
+				<input class="form-control" name="startPattern" value="${session.method.startPattern}">
 	   		</div> <!-- form-group -->
 	   		
 	   		<div class="form-group">	
 				<label for="repeatPattern">Randomization repeat pattern</label>
-				<input class="form-control" name="repeatPattern" value="${flash.method.repeatPattern}">
+				<input class="form-control" name="repeatPattern" value="${session.method.repeatPattern}">
 	   		</div> <!-- form-group -->
 			
 			<div class="form-group">	
 				<label for="endPattern">Randomization end pattern</label>
-				<input class="form-control" name="endPattern" value="${flash.method.endPattern}">
+				<input class="form-control" name="endPattern" value="${session.method.endPattern}">
 	   		</div> <!-- form-group -->
 	   		
 	   		<div class="form-group">	
 				<label for="metaMsDb">MetaMS database</label>
-				<g:select class="form-control input" name="metaMsDb" optionValue="name" from="${flash.metaMsDb}" optionKey="id" />
+				<g:select class="form-control input" name="metaMsDb" optionValue="name" from="${session.metaMsDb}" optionKey="id" />
 	   		</div> <!-- form-group -->
 			
 			<div class="form-group">	
 				<label for="metaMsParameterFile">MetaMS parameters filename</label>
-				<input class="form-control" name="metaMsParameterFile" value="${flash.method.metaMsParameterFile}">
+				<input class="form-control" name="metaMsParameterFile" value="${session.method.metaMsParameterFile}">
 	   		</div> <!-- form-group -->
 			
 			<div class="form-group">

@@ -38,7 +38,7 @@
           </thead>
           
           <tbody id="table">
-          <g:each in="${flash.instrumentList}">
+          <g:each in="${session.instrumentList}">
             	<tr>
             			<td><g:link action='detail' params="${[id: it.id]}">${it.name}</g:link></td>
             			<td>${it.metabolightsName}</td>

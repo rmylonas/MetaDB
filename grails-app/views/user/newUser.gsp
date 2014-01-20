@@ -38,7 +38,7 @@
 	   		
 	   		<div class="form-group">	
 				<label for="workDir">Data storage path</label>
-				<input class="form-control" name="workDir" value="${flash.workDir}">
+				<input class="form-control" name="workDir" value="${session.workDir}">
 	   		</div> <!-- form-group -->
 			
 			<div class="form-group checkbox">

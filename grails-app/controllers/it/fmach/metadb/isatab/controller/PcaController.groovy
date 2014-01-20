@@ -19,15 +19,15 @@ class PcaController {
 		assay.refresh()
 		
 		def exporter = new FactorExporter()
-		flash.factorList = exporter.getFactorNames(assay.acquiredRuns)
+		session.factorList = exporter.getFactorNames(assay.acquiredRuns)
 		
 		// load the workDir from the submission
 		def submission = MetaMsSubmission.get(submissionId)
-		flash.workDir = submission.workDir
+		session.workDir = submission.workDir
 	}
 	
 	def plotPCA(){
-		def workDir = flash.workDir
+		def workDir = session.workDir
 		def selectedFactor = params.factorSelection
 		
 		// create plotter object
@@ -44,12 +44,10 @@ class PcaController {
 			flash.error = e.message
 		}
 		
-		flash.plotFileList = plotFileList
+		session.plotFileList = plotFileList
 	}
 	
 	def displayPca = {
-		
-		println(params)
 		
 		def img = new FileInputStream(params.file)
 		response.contentType = 'image/png'

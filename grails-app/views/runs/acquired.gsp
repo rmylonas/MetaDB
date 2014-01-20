@@ -95,7 +95,7 @@ function startMetaMs(){
           <g:form name="runForm" controller="metaMS" action="metaMsSubmission">
           
           <tbody id="runTable">
-          <g:each var="run" in="${flash.runs}">
+          <g:each var="run" in="${session.runs}">
             		<tr>
             			<td><g:checkBox name="runSelection" value="${run.msAssayName}" checked="true" /></td>
             			<td>${run.rowNumber}</td>

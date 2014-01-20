@@ -40,7 +40,7 @@ class RunsController {
 		if(session.assay){
 			def assay = session.assay
 			assay.attach()
-			flash.runs = assay.randomizedRuns
+			session.runs = assay.randomizedRuns
 		}else{
 			flash.error = "No assay is selected"
 		}
@@ -56,7 +56,7 @@ class RunsController {
 		if(session.assay){
 			def assay = session.assay
 			assay.attach()
-			flash.runs = assay.acquiredRuns
+			session.runs = assay.acquiredRuns
 		}else{
 			flash.error = "No assay is selected"
 		}
@@ -133,7 +133,7 @@ class RunsController {
 			assayService.saveAssayWithAcquisitions(assay)
 			
 			// set the runs into flash
-			flash.runs = assay.acquiredRuns
+			session.runs = assay.acquiredRuns
 			
 		}else{
 			flash.error = "No assay is selected"

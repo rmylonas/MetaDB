@@ -21,31 +21,31 @@ class SearchController {
 			switch(level){
 			
 				case "Assay":
-					flash.studies = null	
+					session.studies = null	
 				
 					def assays = searchService.searchAssays(term, showAllEntries)
 					
 					if(assays.size() > 0){
 						assays.each {it.refresh()}
-						flash.assays = assays
+						session.assays = assays
 					}else{
-						flash.assays = []
+						session.assays = []
 						flash.warning = "Sorry, no matching assays found"
 					}
 					break
 
 								
 				case "Study":
-					flash.assays = null
+					session.assays = null
 				
 					def studies = searchService.searchStudies(term, showAllEntries)
 					
 					if(studies.size() > 0){
 						// re-attach all information (was only lazy loaded)
 						studies.each {it.refresh()}
-						flash.studies = studies
+						session.studies = studies
 					}else{
-						flash.studies = []
+						session.studies = []
 						flash.warning = "Sorry, no matching studies found"
 					}
 					break

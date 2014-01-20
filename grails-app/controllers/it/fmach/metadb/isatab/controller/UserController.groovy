@@ -12,12 +12,12 @@ class UserController {
 	
 	def index() {
 		// list all
-		flash.userList = User.list()
+		session.userList = User.list()
 	}
 	
 	def newUser(){
 		def currentUser = springSecurityService.getCurrentUser()
-		flash.workDir = grailsApplication.config.metadb.dataPath + "/"
+		session.workDir = grailsApplication.config.metadb.dataPath + "/"
 	}
 	
 	def saveNewUser(){
@@ -70,24 +70,24 @@ class UserController {
 	
 	def detail(){
 		// load this instrument if params.id is provided
-		if(params.id) flash.user = User.get(params.id)
+		if(params.id) session.user = User.get(params.id)
 
-		if(! flash.user) throw new RuntimeException("missing params.id")
+		if(! session.user) throw new RuntimeException("missing params.id")
 		
 		// check if admin
-		flash.isAdmin = (flash.user.getAuthorities().toList().get(0).authority == 'ROLE_ADMIN') ? ("checked") : null
+		session.isAdmin = (session.user.getAuthorities().toList().get(0).authority == 'ROLE_ADMIN') ? ("checked") : null
 	}
 	
 	def saveUserUpdate(){
 		// reload user
-		def user = flash.user
+		def user = session.user
 		user.refresh()
 		
 		def userRole = (params['admin']) ? (Role.findByAuthority('ROLE_ADMIN')) : (Role.findByAuthority('ROLE_USER'))
 		
 		// check if new password is ok
 		if(params['password'] != params['retypedPassword']){
-			flash.user = user
+			session.user = user
 			flash.error = "Passwords are differing. Please retype"
 			redirect(action: 'detail')
 			return
@@ -103,7 +103,7 @@ class UserController {
 				// create directories
 				dirGenerator.createWorkDir(params['workDir'])
 			}catch(Exception e){
-				flash.user = user
+				session.user = user
 				e.printStackTrace()
 				flash.error = e.message
 				redirect(action: 'detail')
@@ -121,7 +121,7 @@ class UserController {
 			userService.deleteRole(user)
 			UserRole.create(user, userRole, true)
 		}catch(Exception e){
-			flash.user = user
+			session.user = user
 			e.printStackTrace()
 			flash.error = e.message
 			redirect(action: 'detail')

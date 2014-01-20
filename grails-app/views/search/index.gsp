@@ -64,7 +64,7 @@
 	</g:if>
 	
 	
-	<g:if test="${flash.assays}">
+	<g:if test="${session.assays}">
 	
  	<h3>Assays</h3>
 
@@ -86,7 +86,7 @@
           </thead>
           
           <tbody>
-          <g:each var="assay" in="${flash.assays}">         	 
+          <g:each var="assay" in="${session.assays}">         	 
             	<tr>
             		<g:each in="${assay}">
             			<td><g:link controller='runs' params="${[id: it.id]}">${it.accessCode.code}</g:link></td>
@@ -123,7 +123,7 @@
 	  
 	  </g:if> <!-- / if flash.assays -->
 	  
-	  <g:if test="${flash.studies}">
+	  <g:if test="${session.studies}">
 	  
 	   <h3>Studies</h3>
 
@@ -144,7 +144,7 @@
           </thead>
           
           <tbody id="table">
-          <g:each var="study" in="${flash.studies}">
+          <g:each var="study" in="${session.studies}">
             	<tr>
             		<g:each in="${study}">
             			<td><g:link controller='assays' params="${[id: it.id]}">${it.identifier}</g:link></td>

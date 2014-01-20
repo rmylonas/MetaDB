@@ -10,7 +10,7 @@ class InstrumentController {
 	
 	def index() {
 		// list all instruments
-		flash.instrumentList = Instrument.list()
+		session.instrumentList = Instrument.list()
 	}
 
 	def newInstrument() {
@@ -61,17 +61,17 @@ class InstrumentController {
 	
 	def methodDetail(){
 		// load this method if params.id is provided
-		if(params.id) flash.method = InstrumentMethod.get(params.id)
+		if(params.id) session.method = InstrumentMethod.get(params.id)
 			
-		if(! flash.method) throw new RuntimeException("missing params.id")
+		if(! session.method) throw new RuntimeException("missing params.id")
 		
 		// and get all available MetaMsDBs
-		flash.metaMsDb = MetaMsDb.list()
+		session.metaMsDb = MetaMsDb.list()
 	}
 	
 	def newMethod(){		
 		// and get all available MetaMsDBs
-		flash.metaMsDb = MetaMsDb.list()
+		session.metaMsDb = MetaMsDb.list()
 	}
 	
 	def saveNewMethod(){
@@ -113,7 +113,7 @@ class InstrumentController {
 		def randomization = (params.randomization == "on") ? (true) : (false)
 		
 		// update the method
-		def method = InstrumentMethod.get(flash.method.id)
+		def method = InstrumentMethod.get(session.method.id)
 		method.name = params.name
 		method.description = params.description
 		method.tag = params.tag

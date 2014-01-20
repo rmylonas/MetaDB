@@ -38,7 +38,7 @@
           </thead>
           
           <tbody id="table">
-          <g:each in="${flash.userList}">
+          <g:each in="${session.userList}">
             	<tr>
             			<td><g:link action='detail' params="${[id: it.id]}">${it.username}</g:link></td>
             			<td>${it.workDir}</td>

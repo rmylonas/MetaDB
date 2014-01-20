@@ -23,7 +23,7 @@
  		<div class="col-md-4">	 		 		
 	   		<div class="form-group">	
 				<label for="name">Name</label>
-				<input class="form-control" name="name" value="${flash.user.username}">
+				<input class="form-control" name="name" value="${session.user.username}">
 	   		</div> <!-- form-group -->
 	   		
 	   		<div class="form-group">	
@@ -38,12 +38,12 @@
 	   		
 	   		<div class="form-group">	
 				<label for="workDir">Data storage path</label>
-				<input class="form-control" name="workDir" value="${flash.user.workDir}">
+				<input class="form-control" name="workDir" value="${session.user.workDir}">
 	   		</div> <!-- form-group -->
 			
 			<div class="form-group checkbox">
 				<label>					
-					<input type="checkbox" name="admin" ${flash.isAdmin}>					
+					<input type="checkbox" name="admin" ${session.isAdmin}>					
 					Administrator rights
 				</label>
 			</div>

@@ -16,7 +16,7 @@ class MetaMSController {
 		// re-attach the assay object to the session
 		assay.refresh()
 		
-		flash.metaMsSubmissions = assay.metaMsSubmissions
+		session.metaMsSubmissions = assay.metaMsSubmissions
 		
 	}
 	
@@ -35,14 +35,14 @@ class MetaMSController {
 	
 	def metaMsSubmission() {
 		
-		def runSelection = flash.runsSelection
+		def runSelection = session.runsSelection
 		
 		// in case we were not redericted from runMetaMS
-		if(! flash.runsSelection){
+		if(! session.runsSelection){
 			runSelection = params.list('runSelection')
 		}
 		
-		flash.runSelection = runSelection
+		session.runSelection = runSelection
 		flash.message = runSelection.size().toString() + " runs were selected"
 		
 	}
@@ -58,7 +58,7 @@ class MetaMSController {
 		if(minRt || maxRt){
 			if(! (maxRt.isDouble() && minRt.isDouble())){
 				flash.error = "invalid retention times [" + minRt + "] and/or [" + maxRt + "]"
-				flash.runsSelection = runSelection
+				session.runsSelection = runSelection
 				redirect(action: 'metaMsSubmission')
 				return
 			}

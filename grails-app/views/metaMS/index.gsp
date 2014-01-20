@@ -40,7 +40,7 @@
           </thead>
           
           <tbody id="submissionTable">
-          <g:each var="submission" in="${flash.metaMsSubmissions}">          	
+          <g:each var="submission" in="${session.metaMsSubmissions}">          	
                		<tr>	
             			<td>${submission.name}</td>
             			

@@ -30,7 +30,7 @@
 		<div class="col-md-4">					
 	 		<div class="form-group">
 	 			<label for="factorSelection">Color by</label>
-				<g:select class="form-control input" name="factorSelection" from="${flash.factorList}" />
+				<g:select class="form-control input" name="factorSelection" from="${session.factorList}" />
 		    </div>
 			<div class="form-group">
 				<input class="btn btn-primary" type="submit" value="Plot">
