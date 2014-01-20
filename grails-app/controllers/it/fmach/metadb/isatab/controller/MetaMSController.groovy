@@ -1,9 +1,13 @@
 package it.fmach.metadb.isatab.controller
 
 import it.fmach.metadb.instrument.export.ExportCsv
+import it.fmach.metadb.isatab.model.MetaMsSubmission
 import it.fmach.metadb.workflow.metams.MetaMsRunner
+import it.fmach.metadb.workflow.metams.MetaMsZipExporter
 
 class MetaMSController {
+	
+	def metaMsZipExporter = new MetaMsZipExporter()
 
     def index() {
 		
@@ -22,14 +26,35 @@ class MetaMSController {
 	
 	
 	def downloadZip(){
-		// create a zip-file from the current workDir
+		def submissionId = params.id
+		// load the workDir from the submission
+		def submission = MetaMsSubmission.get(submissionId)
+		println(submission.workDir)
 		
+		// create a zip-file from the current workDir
+		String tmpFilePath = metaMsZipExporter.createTempZip(submission.workDir)
+		println(tmpFilePath)
+		File file = new File(tmpFilePath)
 		
 		// hand zip file to the browser
-		response.setHeader "Content-disposition", "attachment; filename=${assay.shortName}.csv"
+/*		response.setHeader "Content-disposition", "attachment; filename=${assay.shortName}.csv"
 		response.contentType = 'text/zip'
 		response.outputStream << csvString
-		response.outputStream.flush()
+		response.outputStream.flush()*/
+		
+		if (file.exists()) {
+			def os = response.outputStream
+			response.setHeader("Content-Type", "application/zip")
+			response.setHeader("Content-disposition", "attachment;filename=${file.name}")
+	
+			def bytes = file.text.bytes
+			for(b in bytes) {
+			   os.write(b)
+			}
+	
+			os.flush()
+		 }
+		
 	}
 	
 	

@@ -65,7 +65,7 @@
             				<!-- params="[submissionId: ${submission.id}]" -->
             				<!-- <g:link action="delete" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></g:link> -->
             			<g:if test="${submission.status == 'done'}">
-           					<g:link action="downloadZip" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-arrow-down"></span>ZIP</g:link>
+           					<g:link action="downloadZip" id="${submission.id}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-arrow-down"></span>ZIP</g:link>
            					<g:link action="index" controller="pca" id="${submission.id}" class="btn btn-default btn-xs">PCA</g:link>
                			</g:if>
                			</td>
