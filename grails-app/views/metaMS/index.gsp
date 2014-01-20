@@ -33,6 +33,9 @@
             <tr>
               <th>Id</th>
               <th>Status</th>
+              <th>Comment</th>
+              <th>Min RT</th>
+              <th>Max RT</th>
               <th>Selected runs</th>
               <th>Directory path</th>
               <th></th>
@@ -57,6 +60,9 @@
 		               		</g:if>
 	            		</td>
             		
+            			<td>${submission.comment}</td>
+            			<td>${submission.rtMin}</td>
+            			<td>${submission.rtMax}</td>
             			<td>${submission.selectedRuns.size()}</td>
             			<td>${submission.workDir}</td>
             			

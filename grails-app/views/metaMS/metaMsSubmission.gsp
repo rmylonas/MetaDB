@@ -29,6 +29,11 @@
 	<g:uploadForm action="runMetaMS" class="form-horizontal">
 	 		
  		<div class="col-md-4">	 		 		
+ 			<div class="form-group">	
+				<label for="project">Description</label>
+				<input class="form-control" name="comment">
+	   		</div> <!-- form-group -->
+ 		
 	   		<div class="form-group">	
 				<label for="project">Minimal RT</label>
 				<input class="form-control" name="minRt">

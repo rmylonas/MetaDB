@@ -43,7 +43,7 @@ class MetaMsRunner {
 	 * @param rtMax
 	 * @return
 	 */
-	def runMetaMs(FEMAssay assay, List<String> selectedMsAssayNames, String rtMin, String rtMax){
+	def runMetaMs(FEMAssay assay, List<String> selectedMsAssayNames, String rtMin, String rtMax, String comment){
 		this.workDir = createWorkDir(assay)
 		
 		def selectedRuns = selectAcquiredRuns(assay, selectedMsAssayNames)
@@ -58,6 +58,7 @@ class MetaMsRunner {
 		
 		// create a csv file containing the factors
 		factorExporter.exportFactorTable(selectedRuns, this.workDir + "/factors.csv")
+		
 
 		// create and save this metaMsSubmission
 		def submissionName = this.currentMetaMsSubmissionName(assay)
@@ -65,8 +66,15 @@ class MetaMsRunner {
 													status: "running",
 													selectedRuns: selectedRuns,
 													command: '',
+													comment: comment,
 													name: submissionName)
 
+		// set retention times, if they are available
+		if(rtMin && rtMax){
+			metaMsSubmission.rtMin = rtMin as Double
+			metaMsSubmission.rtMax = rtMax as Double
+		}
+		
 		metaMsSubmission.save(flush: true, failOnError: true)
 		assay.addToMetaMsSubmissions(metaMsSubmission)
 		assay.save(flush: true, failOnError: true)

@@ -29,19 +29,12 @@ class MetaMSController {
 		def submissionId = params.id
 		// load the workDir from the submission
 		def submission = MetaMsSubmission.get(submissionId)
-		println(submission.workDir)
 		
 		// create a zip-file from the current workDir
 		String tmpFilePath = metaMsZipExporter.createTempZip(submission.workDir)
-		println(tmpFilePath)
 		File file = new File(tmpFilePath)
 		
-		// hand zip file to the browser
-/*		response.setHeader "Content-disposition", "attachment; filename=${assay.shortName}.csv"
-		response.contentType = 'text/zip'
-		response.outputStream << csvString
-		response.outputStream.flush()*/
-		
+		// hand zip file to the browser		
 		if (file.exists()) {
 			def os = response.outputStream
 			response.setHeader("Content-Type", "application/zip")
@@ -77,12 +70,13 @@ class MetaMSController {
 		
 		def minRt = params['minRt']
 		def maxRt = params['maxRt']
-		def runSelection = flash.runSelection		
+		def comment = params['comment']
+		def runSelection = session.runSelection		
 		
 		// check if RT's are valid
 		if(minRt || maxRt){
 			if(! (maxRt.isDouble() && minRt.isDouble())){
-				flash.error = "invalid retention times [" + minRt + "] and/or [" + maxRt + "]"
+				flash.error = "invalid retention times [" + minRt + "] : [" + maxRt + "]"
 				session.runsSelection = runSelection
 				redirect(action: 'metaMsSubmission')
 				return
@@ -104,7 +98,7 @@ class MetaMSController {
 		assay.attach()
 		
 		// start runner
-		runner.runMetaMs(assay, runSelection, minRt, maxRt)
+		runner.runMetaMs(assay, runSelection, minRt, maxRt, comment)
 		
 		flash.message = "started runMetaMS"
 		
