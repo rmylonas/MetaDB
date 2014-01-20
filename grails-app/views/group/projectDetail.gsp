@@ -33,12 +33,12 @@
  		<div class="col-md-4">	 		 		
 	   		<div class="form-group">	
 				<label for="project">Name</label>
-				<input class="form-control" name="name" value="${flash.project.name}">
+				<input class="form-control" name="name" value="${session.project.name}">
 	   		</div> <!-- form-group -->
 	   		
 	   		<div class="form-group">	
 				<label for="project">Description</label>
-				<input class="form-control" name="description" value="${flash.project.description}">
+				<input class="form-control" name="description" value="${session.project.description}">
 	   		</div> <!-- form-group -->
 			
 			<div class="form-group">

@@ -59,7 +59,6 @@ class ExtractedFileInserter {
 		
 		// link the files to the run
 		fileList.each{ path ->
-			println(path)
 			def filename = path.split("/").last()
 			def found = false
 			

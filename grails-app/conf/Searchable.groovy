@@ -32,7 +32,7 @@ searchable {
      * The default is "${user.home}/.grails/projects/${app.name}/searchable-index/${grails.env}"
      */
     compassConnection = new File(
-        "${userHome}/.grails/projects/${appName}/searchable-index/${grailsEnv}"
+        "/home/mylonasr/MetaDB/searchable-index/production/index"
     ).absolutePath
 
     /**

@@ -11,7 +11,7 @@ class GroupController {
 
     def index() { 
 		// list all groups
-		flash.groupList = FEMGroup.list()
+		session.groupList = FEMGroup.list()
 	}
 	
 	def newGroup() {}
@@ -72,9 +72,9 @@ class GroupController {
 	
 	def projectDetail(){
 		// load this group if params.id is provided
-		if(params.id) flash.project = FEMProject.get(params.id)
+		if(params.id) session.project = FEMProject.get(params.id)
 			
-		if(! flash.project) throw new RuntimeException("missing params.id")
+		if(! session.project) throw new RuntimeException("missing params.id")
 	}
 	
 	
@@ -93,7 +93,7 @@ class GroupController {
 	
 	def updateProject(){
 		// update the project settings
-		def project = FEMProject.get(flash.project.id)
+		def project = FEMProject.get(session.project.id)
 		
 		project.name = params.name
 		project.description = params.description

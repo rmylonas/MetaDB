@@ -37,7 +37,7 @@
           </thead>
           
           <tbody id="table">
-          <g:each in="${flash.groupList}">
+          <g:each in="${session.groupList}">
             	<tr>
             			<td><g:link action='detail' params="${[id: it.id]}">${it.name}</g:link></td>
             			<td>${it.description}</td>
