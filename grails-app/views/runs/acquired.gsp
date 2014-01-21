@@ -57,9 +57,10 @@ function startMetaMs(){
     	
     	<!-- if the assay status is acquired, we can add the extracted files -->
      	<div class="btn-group">
+     		<g:link class="btn btn-primary" action="downloadAcquiredCSV">Download CSV</g:link>
      		<div class="btn-group">
 			  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-			    Add extracted files <span class="caret"></span>
+			    Add processed files <span class="caret"></span>
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
 			    <li><g:link action="chooseExtracted">Upload ZIP file</g:link></li>
@@ -84,7 +85,6 @@ function startMetaMs(){
 	  	<thead>
             <tr>
               <th>Selected</th>
-              <th>Row nr</th>
               <th>Assay name</th>
               <th>Additional acquisition</th>
               <th>Status</th>
@@ -98,14 +98,13 @@ function startMetaMs(){
           <g:each var="run" in="${session.runs}">
             		<tr>
             			<td><g:checkBox name="runSelection" value="${run.msAssayName}" checked="true" /></td>
-            			<td>${run.rowNumber}</td>
             			<td>${run.msAssayName}</td>
             			<td></td>
             			
             			<!-- color the status -->
             			<td>
             			<g:if test="${run.status == 'extracted'}">
-            				<span class="label label-success">${run.status}</span>
+            				<span class="label label-success">processed</span>
 	               		</g:if>
 	               		<g:else>
 	               			<span class="label label-info">${run.status}</span>
@@ -118,7 +117,6 @@ function startMetaMs(){
 	 			<g:each var="additional" in="${run.additionalRuns}">
 	            		<tr>
 		 					<td><g:checkBox name="runSelection" value="${additional.msAssayName}" checked="true" /></td>
-	            			<td>${additional.rowNumber}</td>
 	            			<td>${additional.msAssayName}</td>
 	            			<td><span class="glyphicon glyphicon-ok"></span></td>
 	            			
