@@ -17,57 +17,55 @@ class SearchController {
 		// reset warning
 		flash.warning = null
 		
-		// if a search term is provided..
-		if(term){
-			switch(level){
+		switch(level){
+	
+			case "Assay":
+				session.studies = null	
 			
-				case "Assay":
-					session.studies = null	
+				def assays = searchService.searchAssays(term, showAllEntries)
 				
-					def assays = searchService.searchAssays(term, showAllEntries)
-					
-					if(assays.size() > 0){
-						assays.each {it.refresh()}
-						session.assays = assays
-					}else{
-						session.assays = []
-						flash.warning = "Sorry, no matching assays found"
-					}
-					break
-
-								
-				case "Study":
-					session.assays = null
+				if(assays.size() > 0){
+					assays.each {it.refresh()}
+					session.assays = assays
+				}else{
+					session.assays = []
+					flash.warning = "Sorry, no matching assays found"
+				}
+				break
+	
+							
+			case "Study":
+				session.assays = null
+			
+				def studies = searchService.searchStudies(term, showAllEntries)
 				
-					def studies = searchService.searchStudies(term, showAllEntries)
-					
-					if(studies.size() > 0){
-						// re-attach all information (was only lazy loaded)
-						studies.each {it.refresh()}
-						session.studies = studies
-					}else{
-						session.studies = []
-						flash.warning = "Sorry, no matching studies found"
-					}
-					break
-			}
-			
-			
-			// set the cookies
-			def showAllCookieValue = (params['showAll']) ? ("checked") : ("")
-			
-			// study as default selected?
-			def studySelected = (params['level'] == "Study") ? ("selected") : ("")
-			
-			// save cookies (for 100 days)
-			Cookie levelCookie = new Cookie("studySelected", studySelected)
-			levelCookie.maxAge = 100 * 24 * 60 * 60
-			response.addCookie(levelCookie)
-			Cookie showAllCookie = new Cookie("showAll", showAllCookieValue)
-			showAllCookie.maxAge = 100 * 24 * 60 * 60
-			response.addCookie(showAllCookie)
-			
+				if(studies.size() > 0){
+					// re-attach all information (was only lazy loaded)
+					studies.each {it.refresh()}
+					session.studies = studies
+				}else{
+					session.studies = []
+					flash.warning = "Sorry, no matching studies found"
+				}
+				break
 		}
+		
+		
+		// set the cookies
+		def showAllCookieValue = (params['showAll']) ? ("checked") : ("")
+		
+		// study as default selected?
+		def studySelected = (params['level'] == "Study") ? ("selected") : ("")
+		
+		// save cookies (for 100 days)
+		Cookie levelCookie = new Cookie("studySelected", studySelected)
+		levelCookie.maxAge = 100 * 24 * 60 * 60
+		response.addCookie(levelCookie)
+		Cookie showAllCookie = new Cookie("showAll", showAllCookieValue)
+		showAllCookie.maxAge = 100 * 24 * 60 * 60
+		response.addCookie(showAllCookie)
+			
+		
 		
 		render(view:"index")
 	}

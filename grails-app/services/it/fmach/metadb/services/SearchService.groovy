@@ -8,7 +8,14 @@ class SearchService {
 	def springSecurityService
 	
     def searchAssays(String term, Boolean showAll) {
-		def assays = FEMAssay.searchEvery(term)
+		
+		def assays 
+		
+		if(!term || term == "*"){
+			assays = FEMAssay.list()
+		}else{
+			assays = FEMAssay.searchEvery(term)
+		}
 
 		// we only return entries belonging to this user
 		if(! showAll){
@@ -34,7 +41,13 @@ class SearchService {
     }
 	
 	def searchStudies(String term, Boolean showAll) {
-		def studies = FEMStudy.searchEvery(term)
+		def studies 
+		
+		if(!term || term == "*"){
+			studies = FEMStudy.list()
+		}else{
+			studies = FEMStudy.searchEvery(term)
+		}
 
 		// we only return entries belonging to this user
 		if(! showAll){
