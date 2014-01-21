@@ -65,6 +65,25 @@ class RunsController {
 	}	
 
 	
+	def downloadAcquiredCSV(){
+		def assay = session.assay
+		if(assay == null){
+			flash.error = "No assay is selected"
+		}
+		
+		// re-attach the assay object to the session
+		assay.attach()
+		
+		def exporter = new ExportCsv()
+		def csvString = exporter.exportAcquiredRuns(assay)
+		
+		// hand a csv file to the browser
+		response.setHeader "Content-disposition", "attachment; filename=${assay.shortName}.csv"
+		response.contentType = 'text/csv'
+		response.outputStream << csvString
+		response.outputStream.flush()
+	}
+	
 	def downloadCsv(){	
 		def assay = session.assay
 		if(assay == null){
