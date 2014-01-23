@@ -85,12 +85,15 @@ class LocalIsatabImporterTest {
 		File isatabDir = new File(rootDir + "Wine_Storage")
 		
 		def workDir = File.createTempFile("test_localupload", "")
-		workDir.delete();
+		workDir.delete()
 		
 		def uploadDir = new File(workDir.absolutePath + "/upload")
-		//uploadDir.mkdir()
 		
 		FileUtils.copyDirectory(isatabDir, uploadDir)
+		
+		// create the data dir
+		def dataDir = new File(workDir.absolutePath + "/data")
+		dataDir.mkdir()
 		
 		return workDir.absolutePath
 	}

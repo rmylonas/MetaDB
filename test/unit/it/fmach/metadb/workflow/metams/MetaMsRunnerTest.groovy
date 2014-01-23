@@ -44,7 +44,7 @@ class MetaMsRunnerTest {
 		assay.owner = currentUser
 		assay.save(flash: true, failOnError: true)
 		
-		runner.runMetaMs(assay, selectedMsAssayNames, "1.2", "10.5")
+		runner.runMetaMs(assay, selectedMsAssayNames, "1.2", "10.5", "comment")
 		
 		// make sure metams is done
 		assay.refresh()
@@ -86,13 +86,13 @@ class MetaMsRunnerTest {
 		assay.save(flash: true, failOnError: true)
 		
 		// run the first time
-		runner.runMetaMs(assay, selectedMsAssayNames, "1.2", "10.5")
+		runner.runMetaMs(assay, selectedMsAssayNames, "1.2", "10.5", "comment")
 		
 		// make sure metams is done
 		Thread.sleep(500)
 		
 		// run the second time (without retention time restrictions)
-		runner.runMetaMs(assay, selectedMsAssayNames, null, null)
+		runner.runMetaMs(assay, selectedMsAssayNames, null, null, null)
 		
 		// make sure metams is done
 		Thread.sleep(500)

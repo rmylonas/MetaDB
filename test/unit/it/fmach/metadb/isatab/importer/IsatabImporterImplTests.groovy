@@ -143,6 +143,35 @@ class IsatabImporterImplTests {
 	}
 	
 	@Test
+	void testImportAgerZip() {
+		
+		// create instruments
+		def creator = new TestDbSetup()
+		creator.createInstrument()
+
+		String configDir = rootDir + "MetaboLightsConfig20130507"
+		String isatabDir = rootDir + "ager_test.zip"
+
+		def workDir = File.createTempFile("test_workdir", "")
+		workDir.delete();
+		workDir.mkdir();
+		
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath(), currentUser)
+		FEMInvestigation investigation = importer.importIsatabZip(isatabDir)
+
+		Boolean success = investigation.isaParsingInfo.success
+		assert success
+		assert 1 == investigation.studyList.size
+		def assay = investigation.studyList.get(0).assays.get(0)
+		
+		assay.runs.each{
+			println(it.sample.factorJSON)
+		}
+	}
+	
+	
+	
+	@Test
 	void testImportNomacorcZip() {
 		// create instruments
 		def creator = new TestDbSetup()
