@@ -81,6 +81,7 @@ class GroupController {
 	def updateGroup(){
 		// update the group settings
 		def group = session.group
+		group.refresh()
 		
 		group.name = params.name
 		group.description = params.description
