@@ -194,12 +194,6 @@ class MetaMsRunner {
 				if(selectedNamesHash[run.msAssayName]) selectedRuns << run
 			}
 
-			run.additionalRuns?.each{ additional ->
-				if(additional.status == "extracted"){
-					if(selectedNamesHash[additional.msAssayName]) selectedRuns << additional
-				}
-			}
-
 		}
 
 		return selectedRuns

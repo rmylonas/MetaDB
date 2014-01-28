@@ -99,7 +99,14 @@ function startMetaMs(){
             		<tr>
             			<td><g:checkBox name="runSelection" value="${run.msAssayName}" checked="true" /></td>
             			<td>${run.msAssayName}</td>
-            			<td></td>
+            			
+            			<!-- set flag if its an additional run -->
+            			<g:if test="${run.additionalRun == true}">
+            			<td><span class="glyphicon glyphicon-ok"></span></td>
+            			</g:if>
+		               	<g:else>
+		               	<td></td>
+		               	</g:else>
             			
             			<!-- color the status -->
             			<td>
@@ -113,26 +120,6 @@ function startMetaMs(){
             			
             			<td>${run.sample.name}</td>
 				</tr>
-	 			
-	 			<g:each var="additional" in="${run.additionalRuns}">
-	            		<tr>
-		 					<td><g:checkBox name="runSelection" value="${additional.msAssayName}" checked="true" /></td>
-	            			<td>${additional.msAssayName}</td>
-	            			<td><span class="glyphicon glyphicon-ok"></span></td>
-	            			
-	            			<!-- color status -->
-	            			<td>
-	            			<g:if test="${additional.status == 'extracted'}">
-            				<span class="label label-success">${additional.status}</span>
-		               		</g:if>
-		               		<g:else>
-		               			<span class="label label-info">${additional.status}</span>
-		               		</g:else>
-	            			</td>
-	            	
-	            			<td>${additional.sample.name}</td>
-					</tr>
-	 			</g:each>
 	 			
 		  </g:each>
 		  </tbody>

@@ -49,22 +49,12 @@ class AssayService {
 		
 	}
 
-	def cleanAcquisitionRuns(FEMAssay assay){
+	def cleanAcquisitionRuns(FEMAssay assay){		
 		def l = []
 		l += assay.acquiredRuns
 		
 		l.each { run ->
-			// don't forget to delete the additional runs as well!
-			if(run.additionalRuns){
-				def m = []
-				m += run.additionalRuns
-				m.each { additional ->
-					run.removeFromAdditionalRuns(additional)
-					additional.delete(flush: true)
-				}
-			}
-			
-			// and then we delete the runs
+			// delete the runs
 			assay.removeFromAcquiredRuns(run)
 			run.delete(flush: true)
 		}

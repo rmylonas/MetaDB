@@ -119,7 +119,14 @@ class RunsController {
 			assayService.cleanAcquisitionRuns(assay)
 			
 			// add acquiredRuns to assay
-			def missingNames = acquiredNamesInserter.addAcquiredAssayNames(assay, assayNameList)
+			def missingNames
+			try{
+				missingNames = acquiredNamesInserter.addAcquiredAssayNames(assay, assayNameList)
+			}catch(Exception e){
+				flash.error = e.message
+				redirect(action: 'assayNames')
+				return
+			}
 			
 			// flash a warning, if names were missing
 			if(missingNames){

@@ -10,7 +10,7 @@
  
      <!-- Show errors -->
     <g:if test="${flash.error}">
-  		<div class="alert alert-block alert-error">
+  		<div class="alert alert-block alert-danger">
   			<button type="button" class="close" data-dismiss="alert">&times;</button>
   			<strong>Error: </strong>${flash.error}
   		</div>

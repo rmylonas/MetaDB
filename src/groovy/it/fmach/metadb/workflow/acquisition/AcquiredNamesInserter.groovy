@@ -18,31 +18,38 @@ class AcquiredNamesInserter {
 	 * @return [listOfMissingNames, listOfNonMappedNames]
 	 */
 	
-	def assayNamePattern = ~/(.+?)_?(\d+)_(.+)/
+	//def assayNamePattern = ~/(.+?)_?(\d+)_(.+)/
 	
 	def addAcquiredAssayNames(FEMAssay assay, List<String> assayNames){
+		// list of acquired runs
 		def acquiredRuns = []
-		def missingNames = []
+		
+		// names which were not found
 		def namesNotFound = []
+		
+		// names that were found multiple times
+		def runNameAlready = []
 		
 		// construct a map of [samplenames:FEMRun]
 		// QC, STDmix and blank we only take ones and separately (in qualitySamples)
-		def runNameMap = [:]
 		def qualitySampleMap = [:]
-		def runFound = [:]
+		def sampleMap = [:]
 		
-		this.prepareRunNameMaps(assay.randomizedRuns, runNameMap, qualitySampleMap)
+		Set sampleFound = []
+		Set runFound = []
+		Set runNames = []
+		
+		this.prepareRunNameMaps(assay.randomizedRuns, qualitySampleMap, sampleMap, runNames)
 		
 		// look at all the assayNames
 		def i = 1
 		assayNames.each{ name ->
-			// separate the last _int part
-			def matcher = name =~ assayNamePattern
-			def idName = matcher ? matcher[0][3] : null
-			// def number = matcher[0][2]
+			// throw an exception if the run name is not unique
+			if(runNameAlready.contains(name)) throw new RuntimeException("[" + name + "] is used multiple times. Names have to be unique.")			
+			runNameAlready << name
 			
 			// if it is a QC, stdMix or blank, we just add a run with this name
-			def nameMatcher = idName =~ /(?i)(QC|STDmix|blank)_.*/
+			def nameMatcher = name =~ /(?i)(QC|STDmix|blank)_.*/
 			if(nameMatcher){
 				def lcName = (nameMatcher[0][1]).toLowerCase()									
 				acquiredRuns.add(
@@ -52,38 +59,22 @@ class AcquiredNamesInserter {
 				)
 			// if it's a sample
 			}else{
-				// if we can map the name
-				if(runNameMap[idName]){
-					
-					// if a run with same name is already added, we add it in "additionalRuns"
-					if(runFound[idName]){
-						FEMRun alreadyFound = runFound[idName]
-						
-						// prepare and add the additional run
-						FEMRun additionalRun = deepCopier.deepCopy(alreadyFound)
-						additionalRun.status = "acquired"
-						additionalRun.msAssayName = name.trim()
-						
-						if(alreadyFound.additionalRuns){
-							alreadyFound.additionalRuns << additionalRun
-						}else{
-							alreadyFound.additionalRuns = [additionalRun]
-						} 
-					}else{
-						FEMRun run = deepCopier.deepCopy(runNameMap[idName])
-						
-						// change the status and msAssayName
-						run.status = "acquired"
-						run.msAssayName = name.trim()
-						run.rowNumber = i
-						
-						acquiredRuns << run
-						runFound[idName] = run
-	//					runNameMap.remove(idName)
+				// let's look in the sample names
+				def newRun
+				sampleMap.each{ k , v ->
+					if(name.contains(k)){
+						// create a new run
+						newRun = this.copyRun(v, i, sampleFound, name)
+						runFound << v.msAssayName
 					}
+				}
+			
+				if(newRun){
+					acquiredRuns << newRun
 				}else{
 					namesNotFound << name
 				}
+				
 			}
 			
 			i++
@@ -94,8 +85,10 @@ class AcquiredNamesInserter {
 		assay.status = "acquired"
 		
 		// add missing names
-		runNameMap.each {name, run ->
-			if(! runFound[name]) missingNames << name
+		def missingNames = []
+		
+		runNames.each {name ->
+			if(! runFound.contains(name)) missingNames << name
 		}
 		
 		if(missingNames.size() == 0 && namesNotFound == 0){
@@ -107,7 +100,22 @@ class AcquiredNamesInserter {
 	}
 	
 	
-	private def prepareRunNameMaps(def runList, def runNameMap, def qualitySampleMap){
+	private def copyRun(FEMRun run, int i, Set sampleFound, String assayName){
+		FEMRun newRun = deepCopier.deepCopy(run)
+		
+		// change the status and msAssayName
+		newRun.status = "acquired"
+		newRun.msAssayName = assayName.trim()
+		newRun.rowNumber = i
+		
+		// if a run with same sample is already added, we add the tag "additionalRuns"
+		newRun.additionalRun = (sampleFound.contains(run.sample.name)) ? (true) : (false)
+		sampleFound << run.sample.name
+		
+		return newRun
+	}
+	
+	private def prepareRunNameMaps(def runList, def qualitySampleMap, def sampleMap, Set runNames){
 		runList.each{ run ->
 			def lcSampleName = run.sample.name.toLowerCase()
 			switch (lcSampleName){
@@ -124,9 +132,8 @@ class AcquiredNamesInserter {
 					break
 					
 				default:
-					def matcher = run.msAssayName =~ assayNamePattern
-					def idName = matcher ? matcher[0][3] : null
-					runNameMap[idName] = run
+					sampleMap[run.sample.name] = run
+					runNames << run.msAssayName
 			}
 		}
 	}

@@ -77,9 +77,6 @@ class ExportCsv {
 		// select the runs with status "extracted"
 		List<FEMRun> runs = []
 		assay.acquiredRuns.each{ run ->
-			run.additionalRuns.each{ additional ->
-				if(additional.status == "extracted") runs << additional
-			}
 			if(run.status == "extracted") runs << run
 		}
 		

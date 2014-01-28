@@ -16,14 +16,15 @@ class FEMRun {
 
 	FEMSample sample
 	
-	List additionalRuns
+	// is this run already represented by a sample?
+	Boolean additionalRun
 	
-	static hasMany = [additionalRuns: FEMRun]
-	
+	// static hasMany = [additionalRuns: FEMRun]
 	// static belongsTo = [fEMAssay: FEMAssay]
 	
     static constraints = {
-		additionalRuns nullable: true
+		//additionalRuns nullable: true
+		additionalRun nullable: true
     }
 	
 	static mapping = {
