@@ -31,21 +31,7 @@ class AssayService {
 		runs.each{ it.delete() }
 		randomizedRuns.each{ it.delete() }
 		metaMsSubmissions.each{ it.delete() }
-		
-		acquiredRuns.each { run ->
-			// don't forget to delete the additional runs as well!
-			if(run.additionalRuns){
-				def m = []
-				m += run.additionalRuns
-				m.each { additional ->
-					run.removeFromAdditionalRuns(additional)
-					additional.delete()
-				}
-			}
-			
-			// and then we delete the runs
-			run.delete(flush: true)
-		}
+		acquiredRuns.each { it.delete()	}
 		
 	}
 

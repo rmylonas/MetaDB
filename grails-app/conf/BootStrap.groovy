@@ -64,7 +64,7 @@ class BootStrap {
 						repeatPattern: '6.sample-1.QC',
 						endPattern: '1.STDmix-1.blank',
 						randomization: true),
-					new InstrumentMethod(name: 'Method development',
+					new InstrumentMethod(name: 'Import data (no randomization)',
 						tag: 'syn_md_RP',
 						randomization: false,
 						metaMsParameterFile: 'Synapt.QTOF.RP.RData')
@@ -82,7 +82,7 @@ class BootStrap {
 					repeatPattern: '3.sample-1.QC',
 					endPattern: '1.STDmix-5.blank',
 					randomization: true),
-				new InstrumentMethod(name: 'Method development',
+				new InstrumentMethod(name: 'Import data (no randomization)',
 					tag: 'xev_tar_RP',
 					randomization: false)
 			]	
@@ -99,7 +99,7 @@ class BootStrap {
 					repeatPattern: '3.sample-1.QC',
 					endPattern: '1.STDmix-5.blank',
 					randomization: true),
-				new InstrumentMethod(name: 'Method development',
+				new InstrumentMethod(name: 'Import data (no randomization)',
 					tag: 'xev_tar_RP',
 					randomization: false)
 			]
@@ -115,8 +115,8 @@ class BootStrap {
 			List fulvioProjects = [new FEMProject(name: 'Wine cellar'), new FEMProject(name: 'Nomacorc') ]
 			List urskaProjects = [new FEMProject(name: 'Ager melo')]
 				
-			def fulvioGroup = new FEMGroup(name: "Fulvio", projects:fulvioProjects).save(flush: true, failOnError: true)
-			def urskaGroup = new FEMGroup(name: "Urska", projects:urskaProjects).save(flush: true, failOnError: true)
+			def fulvioGroup = new FEMGroup(name: "DQAN QA", description: "Gruppo Ricerca Qualità Alimentare (Fulvio Mattivi)", projects:fulvioProjects).save(flush: true, failOnError: true)
+			def urskaGroup = new FEMGroup(name: "DQAN M", description: "Piattaforma Metabolomica (Urska Vrhovsek)", projects:urskaProjects).save(flush: true, failOnError: true)
 			
 		}
     }
