@@ -7,6 +7,7 @@ import it.fmach.metadb.isatab.model.FEMAssay;
 import it.fmach.metadb.isatab.model.FEMRun;
 import it.fmach.metadb.isatab.model.FEMSample
 import it.fmach.metadb.isatab.model.InstrumentMethod;
+import it.fmach.metadb.workflow.acquisition.AcquiredNamesInserter
 
 /**
  * @author mylonasr
@@ -28,16 +29,29 @@ import it.fmach.metadb.isatab.model.InstrumentMethod;
 class RunRandomization {
 	
 	def deepCopier = new DeepCopier()
+	def acquiredNamesInserter = new AcquiredNamesInserter()
 	
 	FEMAssay noRandomization(FEMAssay assay){
 		assay.randomizedRuns = assay.runs
 		
-		// set the status of every run to "randomized"
+		def acquiredRuns = []
+	
+		// set the status of every run to "randomized" or "acquired" if there is a msAssayName
 		assay.runs.each{
 			it.status = "randomized"
+			if(it.msAssayName){
+				it.status = "acquired"
+				acquiredRuns << it
+			}
 		}
 		
-		assay.status = "randomized"
+		if(acquiredRuns){
+			assay.status = "acquired"
+			assay.acquiredRuns = acquiredRuns
+		}else{
+			assay.status = "randomized"
+		}
+		
 		return assay
 	}
 
