@@ -55,15 +55,11 @@ class BootStrap {
 						tag: 'syn_untar_RP', 
 						startPattern: '1.blank-1.STDmix-4.QC', 
 						repeatPattern: '6.sample-1.QC', 
+						// according to Domenico:
+						// 6.sample-1.QC-6.sample-1.QC-1.STDmix
 						endPattern: '1.STDmix-1.blank',
 						randomization: true,
 						metaMsParameterFile: 'Synapt.QTOF.RP.RData'),
-					new InstrumentMethod(name: 'targeted RP',
-						tag: 'syn_tar_RP',
-						startPattern: '1.blank-1.STDmix-4.QC',
-						repeatPattern: '6.sample-1.QC',
-						endPattern: '1.STDmix-1.blank',
-						randomization: true),
 					new InstrumentMethod(name: 'Import data (no randomization)',
 						tag: 'syn_md_RP',
 						randomization: false,

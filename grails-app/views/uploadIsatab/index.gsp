@@ -54,7 +54,7 @@
 			
 			<div class="form-group">
 				<button onclick="$(this).button('loading')" data-loading-text="Uploading.." class="btn btn-primary" type="submit">Upload</button>
-				<g:link action="index" controller="studies" class="btn btn-warning">Cancel</g:link>
+				<g:link action="index" controller="search" class="btn btn-warning">Cancel</g:link>
 			</div>
 			
 		</div> <!-- /col-xs-3 -->

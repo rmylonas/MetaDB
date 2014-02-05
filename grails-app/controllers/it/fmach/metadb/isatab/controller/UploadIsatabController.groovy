@@ -51,6 +51,7 @@ class UploadIsatabController {
 					//flash.message = ('ISAtab file was succesfully processed')
 				}else{
 					flash.error = 'Parsing Error: sorry, your ISAtab file could not be parsed'
+					println(investigation.isaParsingInfo.errorMessage)
 					redirect(action: 'index')
 					return
 				}				

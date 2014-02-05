@@ -42,8 +42,8 @@ class IsatabService {
 			
 			// look in runs and samples for keywords
 			assay.randomizedRuns.each{ run ->
-				assayKeywords.add(run.msAssayName)
-				assayKeywords.add(run.sample.name)
+				//assayKeywords.add(run.msAssayName)
+				//assayKeywords.add(run.sample.name)
 				assayKeywords.add(run.sample.sourceName)
 				assayKeywords.add(run.sample.organism)
 				assayKeywords.add(run.sample.organismPart)
