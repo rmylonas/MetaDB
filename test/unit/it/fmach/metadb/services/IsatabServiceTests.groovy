@@ -30,8 +30,8 @@ class IsatabServiceTests {
 		
 		isatabService.addKeywords(study)
 		
-		assert 27 == study.keywords.split(" ").size()
-		assert study.keywords.contains("Sample_8")
+		assert 3 == study.keywords.split(" ").size()
+		assert study.keywords.contains("N2")
 		
 		
 		study.assays.each{

@@ -164,9 +164,6 @@ class IsatabImporterImplTests {
 		assert 1 == investigation.studyList.size
 		def assay = investigation.studyList.get(0).assays.get(0)
 		
-		assay.runs.each{
-			println(it.sample.factorJSON)
-		}
 	}
 	
 	

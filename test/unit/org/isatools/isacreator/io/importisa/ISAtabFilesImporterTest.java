@@ -19,7 +19,7 @@ public class ISAtabFilesImporterTest {
 	final static String rootDir = "test/data/org/isatools/isacreator/io/importisa/";
 	
 	@Test
-	public void testWineStorage() {
+	public void testWineStorage() {		
 		String configDir = rootDir + "MetaboLightsConfig20130507";
 		String isatabParentDir = rootDir + "Wine_Storage";
 		
