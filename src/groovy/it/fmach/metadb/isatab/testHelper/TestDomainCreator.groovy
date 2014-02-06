@@ -158,7 +158,8 @@ class TestDomainCreator {
 			shortName: "shortname",
 			method: this.createMethod(),
 			instrumentPolarity: 'positive', 
-			randomizedRuns: runList)
+			randomizedRuns: runList,
+			workDir: "myWorkDir")
 	}
 	
 	

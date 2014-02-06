@@ -17,9 +17,7 @@ class ExtractedFileInserterTest {
 	static String rootDir = "test/data/it/fmach/metadb/workflow/extraction/"
 	
 	@Test
-	public void addExtractedFilesZipTest() {
-		def inserter = new ExtractedFileInserter()
-		
+	public void addExtractedFilesZipTest() {		
 		def creator = new TestDomainCreator()
 		def assay = creator.createRandomizedRunsQCFirst()
 		
@@ -30,8 +28,8 @@ class ExtractedFileInserterTest {
 		// set a temporary working dir
 		File tmpFile = File.createTempFile("test_extraction_", Long.toString(System.nanoTime()))
 		tmpFile.delete()
-		tmpFile.mkdir()
-		assay.workDir = tmpFile.getAbsolutePath()
+		// tmpFile.mkdir()
+		def inserter = new ExtractedFileInserter(tmpFile.getAbsolutePath())
 		
 		// add the raw files
 		def info = inserter.addExtractedFilesZip(assay, rootDir + "extracted.zip")

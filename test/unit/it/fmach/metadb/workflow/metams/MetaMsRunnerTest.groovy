@@ -66,7 +66,6 @@ class MetaMsRunnerTest {
 	
 	@Test
 	public void runMetaMs2submissionsTest() {
-		def runner = new MetaMsRunner(metaMsConfDir)
 		
 		def creator = new TestDomainCreator()
 		def assay = creator.createExtractedRuns()
@@ -82,7 +81,8 @@ class MetaMsRunnerTest {
 		File tmpFile = File.createTempFile("test_metams_", Long.toString(System.nanoTime()))
 		tmpFile.delete()
 		tmpFile.mkdir()
-		assay.workDir = tmpFile.getAbsolutePath()
+		def runner = new MetaMsRunner(metaMsConfDir, "", "", tmpFile.getAbsolutePath())
+		assay.workDir = "myWorkDir"
 		assay.save(flash: true, failOnError: true)
 		
 		// run the first time
@@ -162,7 +162,6 @@ class MetaMsRunnerTest {
 	
 	@Test
 	public void createWorkDirTest() {
-		def runner = new MetaMsRunner(metaMsConfDir, "", "", "")
 		
 		def creator = new TestDomainCreator()
 		def assay = creator.createExtractedRuns()
@@ -171,6 +170,7 @@ class MetaMsRunnerTest {
 		File tmpFile = File.createTempFile("test_metams_", Long.toString(System.nanoTime()))
 		tmpFile.delete()
 		tmpFile.mkdir()
+		def runner = new MetaMsRunner(metaMsConfDir, "", "", tmpFile.getAbsolutePath())
 		
 		assay.workDir = "myWorkDir"
 		
