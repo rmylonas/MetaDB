@@ -37,7 +37,8 @@
 	   		</div> <!-- form-group -->
 	   		
 	   		<div class="form-group">	
-				<label for="workDir">Data storage path</label>
+				<label for="workDir">Data storage path </label>
+				<p class="help-block">Root directory: <em>${session.workDir}</em></p>
 				<input class="form-control" name="workDir" value="${session.user.workDir}">
 	   		</div> <!-- form-group -->
 			

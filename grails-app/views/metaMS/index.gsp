@@ -37,7 +37,7 @@
               <th>Min RT</th>
               <th>Max RT</th>
               <th>Selected runs</th>
-              <th>Directory path</th>
+              <!-- <th>Directory path</th> -->
               <th></th>
             </tr>
           </thead>
@@ -64,7 +64,7 @@
             			<td>${submission.rtMin}</td>
             			<td>${submission.rtMax}</td>
             			<td>${submission.selectedRuns.size()}</td>
-            			<td>${submission.workDir}</td>
+            			<!-- <td>${submission.workDir}</td>  -->
             			
             			<!-- put the corresponding color to the status -->
             			<td>

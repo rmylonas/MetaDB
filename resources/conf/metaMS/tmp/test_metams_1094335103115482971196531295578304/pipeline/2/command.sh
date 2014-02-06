@@ -1,0 +1,1 @@
+Rscript resources/conf/metaMS/runMetaMS.R -i LC -p negative -f /home/mylonasr/workspaces/MetaDB/resources/conf/metaMS/tmp/test_metams_1094335103115482971196531295578304/pipeline/2/fileList.csv -s null/some/path -o /home/mylonasr/workspaces/MetaDB/resources/conf/metaMS/tmp/test_metams_1094335103115482971196531295578304/pipeline/2

@@ -13,6 +13,7 @@ class UserController {
 	def index() {
 		// list all
 		session.userList = User.list()
+		session.workDir = grailsApplication.config.metadb.dataPath + "/"
 	}
 	
 	def newUser(){
@@ -34,7 +35,7 @@ class UserController {
 		
 		try{
 			// create directories
-			dirGenerator.createWorkDir(params['workDir'])
+			dirGenerator.createWorkDir(session.workDir + params['workDir'])
 			
 			// and save the user
 			newUser.save(flush: true, failOnError: true)
@@ -71,6 +72,7 @@ class UserController {
 	def detail(){
 		// load this instrument if params.id is provided
 		if(params.id) session.user = User.get(params.id)
+		session.workDir = grailsApplication.config.metadb.dataPath + "/"
 
 		if(! session.user) throw new RuntimeException("missing params.id")
 		

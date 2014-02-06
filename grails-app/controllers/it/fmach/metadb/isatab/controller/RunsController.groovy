@@ -11,7 +11,6 @@ class RunsController {
 	
 	def assayService
 	def acquiredNamesInserter = new AcquiredNamesInserter()
-	def extractedFileInserter = new ExtractedFileInserter()
 	
 	
 	def index(){
@@ -107,6 +106,7 @@ class RunsController {
 	
 	
 	def uploadAssayNames() {
+		
 		if(session.assay){
 			def assayNames = params["assayNames"]
 			List<String> assayNameList = assayNames.split("\n")
@@ -174,6 +174,8 @@ class RunsController {
 	
 	def localExtractedUpload(){
 		
+		def extractedFileInserter = new ExtractedFileInserter(grailsApplication.config.metadb.dataPath)
+		
 		// attach the assay
 		def assay = session.assay
 		assay.attach()
@@ -218,6 +220,8 @@ class RunsController {
 	
 	
 	def uploadExtracted(){
+		def extractedFileInserter = new ExtractedFileInserter(grailsApplication.config.metadb.dataPath)
+		
 		// attach the assay
 		def assay = session.assay
 		assay.attach()

@@ -10,6 +10,8 @@ class LocalIsatabController {
 	def isatabService
 	def studyMerger = new StudyMerger()
 	
+	def dataPath = grailsApplication.config.metadb.dataPath
+	
     def index() { 
 		def currentUser = springSecurityService.getCurrentUser()
 		def importer = new LocalIsatabImporter(grailsApplication.config.metadb.isatab.metabolConfigFile, currentUser.workDir, currentUser)

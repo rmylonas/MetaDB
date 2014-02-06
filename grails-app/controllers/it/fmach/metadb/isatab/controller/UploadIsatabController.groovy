@@ -25,8 +25,13 @@ class UploadIsatabController {
     def index() { }
 	
 	def upload() {
+		// application settings
+		def configFilePath = grailsApplication.config.metadb.isatab.metabolConfigFile
+		def applicationDataPath = grailsApplication.config.metadb.dataPath
+		
 		def currentUser = springSecurityService.getCurrentUser()
-		IsatabImporter importer = new IsatabImporterImpl(grailsApplication.config.metadb.isatab.metabolConfigFile, currentUser.workDir + "/data", currentUser)
+		def userDataPath = applicationDataPath + "/" + currentUser.workDir + "/data"
+		IsatabImporter importer = new IsatabImporterImpl(configFilePath, userDataPath, currentUser)
 		
 		def importFile
 		FEMInvestigation investigation

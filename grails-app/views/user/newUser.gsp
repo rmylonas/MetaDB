@@ -38,7 +38,8 @@
 	   		
 	   		<div class="form-group">	
 				<label for="workDir">Data storage path</label>
-				<input class="form-control" name="workDir" value="${session.workDir}">
+				<p class="help-block">Root directory: <em>${session.workDir}</em></p>
+				<input class="form-control" name="workDir" >
 	   		</div> <!-- form-group -->
 			
 			<div class="form-group checkbox">

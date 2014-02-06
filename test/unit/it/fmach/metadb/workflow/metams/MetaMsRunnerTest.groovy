@@ -24,9 +24,7 @@ class MetaMsRunnerTest {
 	static String metaMsConfDir = "resources/conf/metaMS"
 	
 	@Test
-	public void runMetaMsTest() {
-		def runner = new MetaMsRunner(metaMsConfDir)
-		
+	public void runMetaMsTest() {		
 		def creator = new TestDomainCreator()
 		def assay = creator.createExtractedRuns()
 		
@@ -40,7 +38,9 @@ class MetaMsRunnerTest {
 		File tmpFile = File.createTempFile("test_metams_", Long.toString(System.nanoTime()))
 		tmpFile.delete()
 		tmpFile.mkdir()
-		assay.workDir = tmpFile.getAbsolutePath()
+		
+		def runner = new MetaMsRunner(metaMsConfDir, "", "", tmpFile.getAbsolutePath())
+		assay.workDir = "myWorkDir"
 		assay.owner = currentUser
 		assay.save(flash: true, failOnError: true)
 		
@@ -59,7 +59,7 @@ class MetaMsRunnerTest {
 		// check assay was saved correctly
 		assert assay.workDir + "/pipeline/1" == assay.metaMsSubmissions.get(0).workDir
 		
-		println (assay.workDir)
+		
 		
 	}
 	
@@ -162,7 +162,7 @@ class MetaMsRunnerTest {
 	
 	@Test
 	public void createWorkDirTest() {
-		def runner = new MetaMsRunner(metaMsConfDir)
+		def runner = new MetaMsRunner(metaMsConfDir, "", "", "")
 		
 		def creator = new TestDomainCreator()
 		def assay = creator.createExtractedRuns()
@@ -171,15 +171,18 @@ class MetaMsRunnerTest {
 		File tmpFile = File.createTempFile("test_metams_", Long.toString(System.nanoTime()))
 		tmpFile.delete()
 		tmpFile.mkdir()
-		assay.workDir = tmpFile.getAbsolutePath()
 		
-		def workDir = runner.createWorkDir(assay)
+		assay.workDir = "myWorkDir"
 		
+		def workDir = runner.createWorkDir(tmpFile.getAbsolutePath(), assay)
+		
+		// check if directory is created
+		def newDir = new File(tmpFile.getAbsolutePath() + "/" + workDir)
+		assert newDir.isDirectory()
+		
+		// check path
 		assert assay.workDir + "/pipeline/1" == workDir
 	}
-	
-	
-	
 	
 }
 

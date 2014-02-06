@@ -1,0 +1,1 @@
+Rscript resources/conf/metaMS/runMetaMS.R -i LC -p negative -f /home/mylonasr/workspaces/MetaDB/resources/conf/metaMS/myWorkDir/pipeline/1/fileList.csv -s /some/path -o /home/mylonasr/workspaces/MetaDB/resources/conf/metaMS/myWorkDir/pipeline/1 -m 1.2 -x 10.5

@@ -15,6 +15,8 @@ class MetaMsRunner {
 	String metaMsDir
 	String metaMsDbDir
 	String metaMsSettingsDir
+	
+	String dataDir
 	String workDir
 
 	private String fileListPath
@@ -26,10 +28,11 @@ class MetaMsRunner {
 	}
 
 	// complete constructor
-	def MetaMsRunner(String metaMsDir, String metaMsDbDir, String metaMsSettingsDir){
+	def MetaMsRunner(String metaMsDir, String metaMsDbDir, String metaMsSettingsDir, String dataDir){
 		this.metaMsDir = metaMsDir
 		this.metaMsDbDir = metaMsDbDir
 		this.metaMsSettingsDir = metaMsSettingsDir
+		this.dataDir = dataDir
 	}
 	
 	/**
@@ -44,7 +47,8 @@ class MetaMsRunner {
 	 * @return
 	 */
 	def runMetaMs(FEMAssay assay, List<String> selectedMsAssayNames, String rtMin, String rtMax, String comment){
-		this.workDir = createWorkDir(assay)
+		def workDirRelative = createWorkDir(this.dataDir, assay)
+		this.workDir = this.dataDir + "/" + workDirRelative
 		
 		def selectedRuns = selectAcquiredRuns(assay, selectedMsAssayNames)
 
@@ -62,7 +66,7 @@ class MetaMsRunner {
 
 		// create and save this metaMsSubmission
 		def submissionName = this.currentMetaMsSubmissionName(assay)
-		def metaMsSubmission = new MetaMsSubmission(workDir: this.workDir,
+		def metaMsSubmission = new MetaMsSubmission(workDir: workDirRelative,
 													status: "running",
 													selectedRuns: selectedRuns,
 													command: '',
@@ -105,16 +109,16 @@ class MetaMsRunner {
 	}
 
 
-	def createWorkDir(FEMAssay assay){
+	def createWorkDir(String dataPath, FEMAssay assay){
 		// get the name of the current submission
 		def newId = this.currentMetaMsSubmissionName(assay)
 
 		// create the directory(s)
-		File newDir = new File(assay.workDir + "/pipeline/" + newId)
+		File newDir = new File(dataPath + "/" + assay.workDir + "/pipeline/" + newId)
 		newDir.delete()
 		newDir.mkdirs()
 
-		this.workDir = newDir.getAbsolutePath()
+		this.workDir = assay.workDir + "/pipeline/" + newId
 	}
 
 
@@ -172,7 +176,7 @@ class MetaMsRunner {
 	def prepareFileList(List<FEMRun> selectedRuns){
 		new File(this.fileListPath).withWriter { out ->
 			selectedRuns.each() { run ->
-				out.writeLine(run.derivedSpectraFilePath)
+				out.writeLine(this.dataDir + '/' + run.derivedSpectraFilePath)
 			}
 		}
 	}

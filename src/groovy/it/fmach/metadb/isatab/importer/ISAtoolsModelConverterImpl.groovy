@@ -71,7 +71,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		fEMStudy.description = iSAStudy.getStudyDesc().trim()
 		
 		// set the workingDir
-		fEMStudy.workDir = this.workDir + "/" + fEMStudy.identifier.replaceAll(/\s+/, '_')
+		fEMStudy.workDir = currentUser.workDir + "/data/" + fEMStudy.identifier.replaceAll(/\s+/, '_')
 		
 		 Map<String, FEMSample> sampleList = this.convertSampleList(iSAStudy)
 		
@@ -147,7 +147,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			// set the workDir of this assay
 			def studyDir = iSAStudy.getStudyTitle().trim().replaceAll(/\s+/, '_')
 			def assayDir = assay.shortName.replaceAll(/\s+/, '_')
-			assay.workDir = this.workDir + "/" + studyDir + "/" + assayDir
+			assay.workDir = currentUser.workDir + "/data/" + studyDir + "/" + assayDir
 			
 			//select the polarity
 			def polarity = assay.runs[0].scanPolarity

@@ -9,9 +9,15 @@ class ExtractedFileInserter {
 
 	def unzipper = new UnZipper()
 	
+	def applicationDataPath
+	
+	def ExtractedFileInserter(String applicationDataPath){
+		this.applicationDataPath = applicationDataPath
+	}
 	
 	def addFromLocalFolder(FEMAssay assay){
-		def fileList = new File(assay.workDir + "/extractedFiles").list({d, f-> f ==~ /.*\.CDF/ } as FilenameFilter).toList()
+		def extractedFilePath = this.applicationDataPath + '/' + assay.workDir + "/extractedFiles"
+		def fileList = new File(extractedFilePath).list({d, f-> f ==~ /.*\.CDF/ } as FilenameFilter).toList()
 		
 		// add full name to fileList
 		fileList = fileList.collect{
@@ -25,9 +31,9 @@ class ExtractedFileInserter {
 	def addExtractedFilesZip(FEMAssay assay, String zipFilePath){
 		
 		// create the directories
-		File workDir = new File(assay.workDir)
+		File workDir = new File(this.applicationDataPath + assay.workDir)
 		workDir.mkdir()
-		File extractedFileDir = new File(assay.workDir + "/extractedFiles")
+		File extractedFileDir = new File(this.applicationDataPath + assay.workDir + "/extractedFiles")
 		extractedFileDir.mkdir()
 		
 		// unzip and list all files

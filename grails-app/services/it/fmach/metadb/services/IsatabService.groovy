@@ -5,12 +5,16 @@ import it.fmach.metadb.isatab.model.FEMStudy;
 
 class IsatabService {
 
+	def grailsApplication
+	
     def copyIsatabFile(FEMStudy study){
+		def dataPath = grailsApplication.config.metadb.dataPath + '/'
+		
 		// move temp directory to right place
-		File workDir = new File(study.workDir)
+		File workDir = new File(dataPath + study.workDir)
 		workDir.mkdir()
 		File tempIsatabDir = new File(study.iSATabFilePath)
-		File newIsatabDir = new File(study.workDir + "/" + "isatab")
+		File newIsatabDir = new File(dataPath + study.workDir + "/" + "isatab")
 		study.iSATabFilePath = newIsatabDir
 		
 		tempIsatabDir.renameTo(newIsatabDir)
@@ -18,14 +22,16 @@ class IsatabService {
 	
 	
 	def createDirs(FEMStudy study){
+		def dataPath = grailsApplication.config.metadb.dataPath + '/'
+		
 		// create new directories
 		study.assays.each{
-			def workDir = new File(it.workDir)
+			def workDir = new File(dataPath + it.workDir)
 			//workDir.deleteDir()
 			
 			// create new ones
-			def extractedDir = new File(it.workDir + "/extractedFiles")
-			def pipelineDir = new File(it.workDir + "/pipeline")
+			def extractedDir = new File(dataPath + it.workDir + "/extractedFiles")
+			def pipelineDir = new File(dataPath + it.workDir + "/pipeline")
 			extractedDir.mkdirs()
 			pipelineDir.mkdir()
 		}		

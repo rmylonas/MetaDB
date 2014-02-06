@@ -86,8 +86,9 @@ class MetaMSController {
 		def metaMsDir = grailsApplication.config.metadb.conf.metams.script
 		def metaMsDbDir = grailsApplication.config.metadb.conf.metams.databases
 		def metaMsSettingsDir = grailsApplication.config.metadb.conf.metams.instrumentSettings
+		def dataDir = grailsApplication.config.metadb.dataPath
 		
-		def runner = new MetaMsRunner(metaMsDir, metaMsDbDir, metaMsSettingsDir)
+		def runner = new MetaMsRunner(metaMsDir, metaMsDbDir, metaMsSettingsDir, dataDir)
 		
 		def assay = session.assay
 		if(assay == null){

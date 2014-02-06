@@ -42,7 +42,7 @@
             	<tr>
             			<td><g:link action='detail' params="${[id: it.id]}">${it.username}</g:link></td>
             			<td>${it.workDir}</td>
-            			<td>${it.workDir + '/isatab'}         			
+            			<td>${session.workDir + it.workDir + '/isatab'}         			
             			<!-- show OK sign if the user is admin -->
             			<g:if test="${it.getAuthorities().toList().get(0).authority == 'ROLE_ADMIN'}">
      						<td><span class="glyphicon glyphicon-ok"></span></td>

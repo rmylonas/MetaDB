@@ -184,7 +184,8 @@ class TestDomainCreator {
 			method: this.createMethod(),
 			instrumentPolarity: 'negative', 
 			acquiredRuns: runList,
-			instrument: this.createInstrument())
+			instrument: this.createInstrument(),
+			workDir: "myWorkDir")
 	}
 
 	

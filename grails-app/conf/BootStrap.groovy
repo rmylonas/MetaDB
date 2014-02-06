@@ -20,21 +20,23 @@ class BootStrap {
 			// set the users
 			def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true, failOnError: true)
 			def userRole = new Role(authority: 'ROLE_USER').save(flush: true, failOnError: true)
-	  
-			def adminDir = grailsApplication.config.metadb.dataPath + '/admin'
-			def adminUser = new User(username: 'admin', password: 'admin', workDir: adminDir)
+			
+			def dataPath = grailsApplication.config.metadb.dataPath + "/"
+			def adminDir = dataPath + 'admin'
+			def testUserDir = dataPath + 'test'
+			
+			def adminUser = new User(username: 'admin', password: 'admin', workDir: 'admin')
 			adminUser.save(flush: true, failOnError: true)
 			
-			def testUserDir = grailsApplication.config.metadb.dataPath + '/test'
-			def testUser = new User(username: 'test', password: 'test', workDir: testUserDir)
+			def testUser = new User(username: 'test', password: 'test', workDir: 'test')
 			testUser.save(flush: true, failOnError: true)
-	  
+			
 			UserRole.create(adminUser, adminRole, true)
 			UserRole.create(testUser, userRole, true)
 			
 			// delete and create new directories
-			//new File(adminDir).deleteDir()
-			//new File(testUserDir).deleteDir()
+			 new File(adminDir).deleteDir()
+			 new File(testUserDir).deleteDir()
 			
 			def dirGenerator = new UserWorkDirGenerator()
 			dirGenerator.createWorkDir(adminDir)
@@ -52,9 +54,9 @@ class BootStrap {
 			
 			def synaptMethods = [
 					new InstrumentMethod(name: 'untargeted RP', 
-						tag: 'syn_untar_RP', 
-						startPattern: '1.blank-1.STDmix-4.QC', 
-						repeatPattern: '6.sample-1.QC', 
+						tag: 'syn_untar_RP',
+						startPattern: '1.blank-1.STDmix-4.QC',
+						repeatPattern: '6.sample-1.QC',
 						// according to Domenico:
 						// 6.sample-1.QC-6.sample-1.QC-1.STDmix
 						endPattern: '1.STDmix-1.blank',
