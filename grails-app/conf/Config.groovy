@@ -98,6 +98,7 @@ grails.plugin.springsecurity.authority.className = 'it.fmach.metadb.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	// provoke login
 	'/**':                            ['ROLE_USER', 'ROLE_ADMIN'],
+	'/organism/search':               ['permitAll'],
 /*	
 	'/':                              ['permitAll'],
 	'/index':                         ['permitAll'],
