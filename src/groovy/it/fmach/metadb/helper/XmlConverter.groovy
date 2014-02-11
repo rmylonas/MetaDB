@@ -13,11 +13,13 @@ class XmlConverter {
 		// loop over organism
 		organismList.each{
 			xml << '<preferredTerm id="' << it.id << '">' << "\n" 
-			xml << '<organism>' << it.name << '</organism>' << "\n" 
-			xml << '<alternativeNames>' << it.alternativeNames << '</alternativeNames>' << "\n"
-			xml << '<description>'
+			xml << '<token>' << it.name << '</token>' << "\n"
+			xml << "<comments>\n";
+			xml << '	<synonyms>' << it.alternativeNames << '</synonyms>' << "\n"
+			xml << '	<description>'
 			if(it.description) xml << it.description
-			xml << '</description>' << "\n"
+			xml << '	</description>' << "\n"
+			xml << "</comments>\n";
 			xml << '</preferredTerm>' << "\n"
 		}
 		
