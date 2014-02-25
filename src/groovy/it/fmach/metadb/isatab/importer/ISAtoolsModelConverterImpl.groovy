@@ -36,18 +36,17 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 	static final def RUN_DERIVED_FILE= "Derived Spectral Data File"
 	static final def RUN_SCAN_POLARITY= "Parameter Value[Scan polarity]"
 	
-	ISAtoolsModelConverterImpl(String workDir, User currentUser){
-		// create map of available instruments and polarities
-		Instrument.list().each {inst->
-			instrumentMap[inst.metabolightsName] = inst
-		}
-		
+	ISAtoolsModelConverterImpl(String workDir, User currentUser){		
 		this.workDir = workDir
 		this.currentUser = currentUser
 	}
 	
 	@Override
 	public List<FEMStudy> convertInvestigation(Investigation iSAInvestigation) {
+		// create map of available instruments and polarities
+		Instrument.list().each {inst->
+			instrumentMap[inst.metabolightsName] = inst
+		}
 		
 		List<FEMStudy> studyList = new ArrayList<FEMStudy>() 
 		

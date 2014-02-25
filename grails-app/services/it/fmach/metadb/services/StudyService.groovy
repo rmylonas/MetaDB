@@ -39,8 +39,9 @@ class StudyService {
 		
 		study.assays.each{ assay ->
 			// save the runs
-			assay.runs.each{ run ->			
+			assay.runs.each{ run ->
 				if(alreadySaved[run.sample] == null){
+					if(! run.sample) throw new RuntimeException("Sample missing for [" + run.rowNumber + ": " + run.msAssayName + "]")
 					run.sample.save(flush: true, failOnError: true)			
 					alreadySaved[run.sample] = true
 				}
