@@ -101,7 +101,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		// parse the fields of interest
 		for(i in 1..nrRows){
 			FEMSample sample = new FEMSample()
-			sample.name = sampleMatrix[i][headerMap[SAMPLE_NAME]].trim()
+			sample.name = sampleMatrix[i][headerMap[SAMPLE_NAME]].trim()			
 			sample.sourceName = sampleMatrix[i][headerMap[SAMPLE_SOURCE_NAME]].trim()
 			sample.organism = sampleMatrix[i][headerMap[SAMPLE_ORGANISM]].trim()
 			sample.organismPart = sampleMatrix[i][headerMap[SAMPLE_ORGANISM_PART]].trim()
@@ -113,7 +113,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			builder(tempMap)
 			
 			sample.factorJSON = builder.toString()
-			sampleList[sample.name] = sample
+			if(sample.name) sampleList[sample.name] = sample
 		}
 		
 		return sampleList
@@ -229,7 +229,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			builder(tempList)
 			if(! this.protocolJSON) this.protocolJSON = builder.toString()
 			
-			runList.add(run)
+			if(run.sample) runList.add(run)
 		}
 		
 		return runList

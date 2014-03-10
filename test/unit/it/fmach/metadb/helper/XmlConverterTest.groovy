@@ -17,8 +17,9 @@ class XmlConverterTest {
 		organismList << new Organism(name: 'panda', alternativeNames: 'sweet', description: 'so sweet!')
 		
 		def xmlConverter = new XmlConverter()
-		def organismXml = xmlConverter.organismToXml(organismList)
+		def organismXml = xmlConverter.organismToXml(organismList)		
 		assert organismXml.contains("<description>so sweet!</description>")
+		
 		
 	}
 	

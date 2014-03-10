@@ -26,6 +26,40 @@ class IsatabImporterImplTests {
 	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"
 	static def currentUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
 		
+	@Test
+	void testEmptyRows() {
+
+		// create instruments
+		def creator = new TestDbSetup()
+		creator.createInstrument()
+
+		
+		String configDir = rootDir + "MetaboLightsConfig20130507"
+		String isatabDir = rootDir + "empty_rows"
+		
+		def workDir = File.createTempFile("test_workdir", "")
+		workDir.delete();
+		workDir.mkdir();
+
+		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath(), currentUser)
+		FEMInvestigation investigation = importer.importIsatabFiles(isatabDir)
+		
+		Boolean success = investigation.isaParsingInfo.success
+		assert success
+
+		List<FEMStudy> studyList = investigation.studyList
+
+		// check study content
+		assert 1 == studyList.size()
+		FEMStudy study = studyList.get(0)
+
+		// check assay content
+		assert 1 == study.assays.size
+		FEMAssay assay = study.assays.get(0)
+
+		assert 2 == assay.runs.size()
+	}
+	
 	
 	@Test
 	void testImportIsatabFile() {
@@ -62,21 +96,6 @@ class IsatabImporterImplTests {
 		assert "a_wine_storage_metabolite profiling_mass spectrometry-5.txt" == assay.name
 		assert "wine_storage-5" == assay.shortName
 		assert "Xevo TQ MS (Waters)" == assay.instrument.metabolightsName
-
-		//		// check sample content
-		//		assert 224 == assay.samples.size()
-		//
-		//		FEMSample sample_1 = assay.samples.get(0)
-		//		assert "QC_H" == sample_1.name
-		//		assert 1 == sample_1.rowNumber
-		//		assert "NCBITaxon:Vitis vinifera" == sample_1.organism
-		//		assert "Wine" == sample_1.organismPart
-		//		assert sample_1.factorJSON.contains("QC")
-		//
-		//		FEMSample sample_3 = assay.samples.get(2)
-		//		assert "2401_H" == sample_3.name
-		//		assert 3 == sample_3.rowNumber
-		//		assert sample_3.factorJSON.contains("House")
 
 		// check run content
 		assert 90 == assay.runs.size()

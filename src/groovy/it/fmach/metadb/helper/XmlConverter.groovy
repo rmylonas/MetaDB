@@ -18,7 +18,7 @@ class XmlConverter {
 			xml << '	<synonyms>' << it.alternativeNames << '</synonyms>' << "\n"
 			xml << '	<description>'
 			if(it.description) xml << it.description
-			xml << '	</description>' << "\n"
+			xml << '</description>' << "\n"
 			xml << "</comments>\n";
 			xml << '</preferredTerm>' << "\n"
 		}
