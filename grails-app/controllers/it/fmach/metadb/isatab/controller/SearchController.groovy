@@ -1,16 +1,27 @@
 package it.fmach.metadb.isatab.controller
 
-import it.fmach.metadb.isatab.model.FEMAssay;
-import it.fmach.metadb.isatab.model.FEMRun;
+import it.fmach.metadb.isatab.model.FEMAssay
+import it.fmach.metadb.isatab.model.FEMStudy
+import it.fmach.metadb.isatab.model.FEMRun
 import javax.servlet.http.Cookie
 
 class SearchController {
 	def searchService
+	def springSecurityService
 	
     def index() {
 		def term = params['searchTerm']
 		def level = params['level']
 		
+		// if there is no term and level defined, we load all studies of this user
+		if(! term && ! level){
+			def currentUser = springSecurityService.getCurrentUser()
+			session.studies = FEMStudy.findAllByOwner(currentUser)
+			session.assays = null
+			render(view:"index")
+			return
+		}
+			
 		// show entries of all users?
 		def showAllEntries = (params['showAll']) ? (true) : (false)
 		
@@ -51,7 +62,7 @@ class SearchController {
 		}
 		
 		
-		// set the cookies
+/*		// set the cookies
 		def showAllCookieValue = (params['showAll']) ? ("checked") : ("")
 		
 		// study as default selected?
@@ -59,13 +70,12 @@ class SearchController {
 		
 		// save cookies (for 100 days)
 		Cookie levelCookie = new Cookie("studySelected", studySelected)
+		
 		levelCookie.maxAge = 100 * 24 * 60 * 60
 		response.addCookie(levelCookie)
 		Cookie showAllCookie = new Cookie("showAll", showAllCookieValue)
 		showAllCookie.maxAge = 100 * 24 * 60 * 60
-		response.addCookie(showAllCookie)
-			
-		
+		response.addCookie(showAllCookie)*/
 		
 		render(view:"index")
 	}

@@ -22,14 +22,16 @@
 	    <div class="input-group">
 	      	<select class="form-control" name="level" >
 				<option value="Assay">Assay</option>
-				<option value="Study" ${cookie(name:'studySelected')}>Study</option>
+				<!-- <option value="Study" ${cookie(name:'studySelected')}>Study</option>  -->
+				<option value="Study" selected>Study</option>
 			</select>
 	    </div><!-- /input-group -->
 	 </div><!-- /.col-lg-4 -->
 	  <div class="col-lg-2">
 		 <div class="checkbox">
 		    <label>
-		      <input type="checkbox" name="showAll" ${cookie(name:'showAll')}> Show all users
+		      <!-- <input type="checkbox" name="showAll" ${cookie(name:'showAll')}> Show all users -->
+		      <input type="checkbox" name="showAll"> Show all users
 		    </label>
 	  	</div>
 	 </div><!-- /.col-lg-4 -->
@@ -132,7 +134,7 @@
               <th>ID</th>
               <th>Title</th>
               <th>Description</th>
-              <th>Filename</th>
+              <!-- <th>Filename</th>  -->
               <th>Group</th>
               <th>Project</th>
               <th>Creation date</th>
@@ -152,7 +154,7 @@
             				  	...
               				  </g:if>
             			</td>
-            			<td>${it.originalFilename}</td>
+            			<!-- <td>${it.originalFilename}</td> -->
             			<td>${it.group.name}</td>
             			<td>${it.project.name}</td>
             			<td>${it.dateCreated}</td>
