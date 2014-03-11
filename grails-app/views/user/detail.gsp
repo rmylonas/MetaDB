@@ -42,12 +42,14 @@
 				<input class="form-control" name="workDir" value="${session.user.workDir}">
 	   		</div> <!-- form-group -->
 			
+			<sec:access expression="hasRole('ROLE_ADMIN')">
 			<div class="form-group checkbox">
 				<label>					
 					<input type="checkbox" name="admin" ${session.isAdmin}>					
 					Administrator rights
 				</label>
 			</div>
+			</sec:access>
 			
 			<!-- placeholder for layout reason -->
 			<div class="form-group checkbox">

@@ -82,10 +82,8 @@
             </li>
             </g:if>
             
-            
-            <sec:access expression="hasRole('ROLE_ADMIN')">
-            <!-- Settings -->
-          	<li class="dropdown">
+            <!-- Statistics -->
+            <li class="dropdown">
               <a id="dropManage" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Statistics <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dropManage">
               	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/statistics/group')}">Group</a></li>       	
@@ -93,20 +91,22 @@
               </ul>
             </li>
             
+            <!-- Settings -->
             <li class="dropdown">
               <a id="dropManage" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dropManage">
+              	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/user')}">Users</a></li>       	  
+             <sec:access expression="hasRole('ROLE_ADMIN')">            
               	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/group')}">Groups and Projects</a></li>       	
                	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/instrument')}">Instrument and Methods</a></li>       	
-              	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/user')}">Users</a></li>       	
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/organism')}">Organism onthologies</a></li>
+             </sec:access> 
               </ul>
             </li>
-            
-            </sec:access>
-            
           </ul>
           
+          
+		  <!-- Loged user -->    
           <ul class="nav navbar-nav navbar-right">
           	<sec:access expression="hasRole('ROLE_ADMIN')">
           		<li><p class="navbar-text">Administrator</p></li>

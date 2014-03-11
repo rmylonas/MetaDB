@@ -27,7 +27,7 @@
 
 	  <table class="table table-striped">
 	  
-	  	<thead>
+	  	  <thead>
             <tr>
               <th>Name</th>
               <th>Working directory</th>
@@ -38,6 +38,24 @@
           </thead>
           
           <tbody id="table">
+
+          <sec:access expression="hasRole('ROLE_USER')">
+          <g:each in="${session.userList}">
+          	<g:if test="${it.username == sec.username().toString()}">
+            	<tr>
+            			<td><g:link action='detail' params="${[id: it.id]}">${it.username}</g:link></td>
+            			<td>${it.workDir}</td>
+            			<td>${session.workDir + it.workDir + '/isatab'}         			
+						<td></td>
+          				<td></td>			
+ 	 			</tr>
+ 	 		</g:if>
+		  </g:each>
+		  </sec:access>
+
+
+          
+          <sec:access expression="hasRole('ROLE_ADMIN')">
           <g:each in="${session.userList}">
             	<tr>
             			<td><g:link action='detail' params="${[id: it.id]}">${it.username}</g:link></td>
@@ -58,11 +76,15 @@
           				</g:else>         				
  	 			</tr>
 		  </g:each>
+		  </sec:access>
+		  
 		  </tbody>
         
 	  </table>
 	  
-	  <g:link action="newUser" controller="user" class="btn btn-primary">New user</g:link>
+	  <sec:access expression="hasRole('ROLE_ADMIN')">
+	  	<g:link action="newUser" controller="user" class="btn btn-primary">New user</g:link>
+	  </sec:access>
 	    
 </div> <!-- /container -->
 
