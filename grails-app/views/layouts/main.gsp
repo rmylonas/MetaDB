@@ -52,7 +52,7 @@
               <a id="dropNew" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">New <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dropNew">
              	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/uploadIsatab')}">Upload IsaTab file</a></li>
-              	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/localIsatab')}">Check for IsaTab in upload folder</a></li>
+              	<!-- <li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/localIsatab')}">Check for IsaTab in upload folder</a></li>  -->
               </ul>
             </li>
           
