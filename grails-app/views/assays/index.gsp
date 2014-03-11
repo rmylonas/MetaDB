@@ -24,6 +24,23 @@
   		</div>
 	</g:if>
  
+	<!-- "Are you sure" popup when deleting data -->
+	<div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	   <div class="modal-dialog modal-sm">
+	      <div class="modal-content">
+	      
+	        <div class="modal-header">
+	          <h4 class="modal-title" id="mySmallModalLabel">Are you sure?</h4>
+	        </div>    
+	
+	      <div class="modal-body">
+	        <g:link action="delete" class="btn btn-danger">Delete</g:link>
+	        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+	      </div>
+	      </div><!-- /.modal-content -->
+	   </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+ 
     <h3>Assays ${(id?"from Study"+id:'')}</h3>
 
 	  <table class="table table-striped">
@@ -60,7 +77,7 @@
             			<!-- if we're a user, we only let you delete if its your own -->
             			<sec:access expression="hasRole('ROLE_USER')">
           					<g:if test="${it.owner.username == sec.username().toString()}">
-          						<td><g:link action="delete" params="${[id: it.id]}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></g:link></td>
+          						<td><button onclick="prepareModal('assay', ${it.id})" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></button></td>
           					</g:if>
           					<g:else>
           						<td></td>
@@ -69,7 +86,7 @@
           				
           				<!-- admin can delete everything -->
           				<sec:access expression="hasRole('ROLE_ADMIN')">
-          					<td><g:link action="delete" params="${[id: it.id]}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></g:link></td>
+          					<td><button onclick="prepareModal('assay', ${it.id})" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></button></td>
           				</sec:access>
             			
             		</g:each>
@@ -80,6 +97,19 @@
 	  </table>
 	    
 </div> <!-- /container -->
+
+<script>
+
+	function prepareModal(target, id){
+		// add the right id to the end of the delete link (in Modal)
+		var newLink = $( "a[href*='delete']" ).attr("href") + "/" + id;
+		$( "a[href*='delete']" ).attr("href", newLink);
+		$('#mySmallModalLabel').text("Are you sure you want to delete " + target + " #" + id + "?");
+		$('#myModal').modal();		
+	}
+
+</script>
+
 
 </body>
 </html>

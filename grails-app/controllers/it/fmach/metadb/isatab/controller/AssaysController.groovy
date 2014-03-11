@@ -49,12 +49,12 @@ class AssaysController {
 		}catch(Exception e){
 			e.printStackTrace()
 			flash.error = e.message
-			redirect(action: 'index')
+			redirect(uri: request.getHeader('referer') )
 			return
 		}
 		
 		flash.message = "Assay was deleted"
-		redirect(action: 'index')
+		redirect(uri: request.getHeader('referer') )
 	}
 	
 }
