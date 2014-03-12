@@ -119,3 +119,4 @@ metadb.dataPath = "/home/mylonasr/MetaDB/data"
 metadb.conf.metams.script = "/home/mylonasr/MetaDB/conf/metaMS"
 metadb.conf.metams.instrumentSettings = "/home/mylonasr/MetaDB/conf/metaMS/InstrumentSettings"
 metadb.conf.metams.databases = "/home/mylonasr/MetaDB/conf/metaMS/databases"
+metadb.showEntriesPerPage = 5

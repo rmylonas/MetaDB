@@ -33,14 +33,24 @@ class StudiesController {
 		render(view:"index")
 	}
 	
-    def allStudies() { 
-		session.studies = FEMStudy.list()
+    def allStudies() {
+		def showEntriesPerPage = grailsApplication.config.metadb.showEntriesPerPage
+		def myOffset = (params.offset) ? (params.offset) : (0)
+		def myMax = (params.max) ? (params.max) : (showEntriesPerPage)
+		
+		session.studies = FEMStudy.list(offset: myOffset, max: myMax)
+		session.totalEntries = FEMStudy.count()
 		render(view:"index")
 	}
 	
 	def myStudies() {
+		def showEntriesPerPage = grailsApplication.config.metadb.showEntriesPerPage
+		def myOffset = (params.offset) ? (params.offset) : (0)
+		def myMax = (params.max) ? (params.max) : (showEntriesPerPage)
 		def currentUser = springSecurityService.getCurrentUser()
-		session.studies = FEMStudy.findAllByOwner(currentUser)
+		
+		session.studies = FEMStudy.findAllByOwner(currentUser, [offset: myOffset, max: myMax])
+		session.totalEntries = FEMStudy.countByOwner(currentUser)
 		render(view:"index")
 	}
 	

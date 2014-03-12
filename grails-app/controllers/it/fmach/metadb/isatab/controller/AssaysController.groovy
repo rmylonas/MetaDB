@@ -21,13 +21,23 @@ class AssaysController {
 	}
 	
 	def allAssays() {
-		session.assays = FEMAssay.list()
+		def showEntriesPerPage = grailsApplication.config.metadb.showEntriesPerPage
+		def myOffset = (params.offset) ? (params.offset) : (0)
+		def myMax = (params.max) ? (params.max) : (showEntriesPerPage)
+		
+		session.assays = FEMAssay.list(offset: myOffset, max: myMax)
+		session.totalEntries = FEMAssay.count()
 		render(view:"index")
 	}
 	
 	def myAssays() {
+		def showEntriesPerPage = grailsApplication.config.metadb.showEntriesPerPage
+		def myOffset = (params.offset) ? (params.offset) : (0)
+		def myMax = (params.max) ? (params.max) : (showEntriesPerPage)
+		
 		def currentUser = springSecurityService.getCurrentUser()
-		session.assays = FEMAssay.findAllByOwner(currentUser)
+		session.assays = FEMAssay.findAllByOwner(currentUser, [offset: myOffset, max: myMax])
+		session.totalEntries = FEMAssay.countByOwner(currentUser)
 		render(view:"index")
 	}
 	

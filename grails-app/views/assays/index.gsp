@@ -95,6 +95,8 @@
 		  </tbody>
         
 	  </table>
+	  
+	  <g:myPaginate total="${session.totalEntries}" />
 	    
 </div> <!-- /container -->
 
