@@ -7,68 +7,72 @@ class SearchService {
 
 	def springSecurityService
 	
-    def searchAssays(String term, Boolean showAll) {
+    def searchAssays(String searchTerm, Boolean showAll, Integer myOffset, Integer myMax) {
 		
-		def assays 
+		def searchClosure
 		
-		if(!term || term == "*"){
-			assays = FEMAssay.list()
-		}else{
-			assays = FEMAssay.searchEvery(term)
-		}
-
-		// we only return entries belonging to this user
+		// add the user to the search term if necessary
 		if(! showAll){
-			// get the current user
 			def currentUser = springSecurityService.getCurrentUser()
 			
-			// remove assays from list which are from a different user
-			def assaySize = assays.size()
-			
-			for(def i=0; i < assaySize; i++){
-				def assay = assays[i]
-				// re-attach all information (was only lazy loaded)
-				assay.refresh()
-				if(assay.owner != currentUser){
-					assaySize --
-					i --
-					assays.remove(assay)
-				}
+			searchClosure = {
+					must(queryString(searchTerm))
+					must(term('FEMAssay.owner.username', currentUser.username))
+			}
+		}else{
+			searchClosure = {
+				must(queryString(searchTerm))
 			}
 		}
 		
-		return assays
+		def assays
+		def totalEntries
+		
+		if(!searchTerm || searchTerm == "*"){
+			assays = FEMAssay.list(offset: myOffset, max: myMax)
+			totalEntries = FEMAssay.count()
+		}else{
+			def answer = FEMAssay.search(searchClosure , [offset: myOffset, max: myMax, sort: "dateCreated", order: "desc"])
+			
+			assays = answer.results
+			totalEntries = answer.total
+		}
+		
+		return [assays, totalEntries]
+		
     }
 	
-	def searchStudies(String term, Boolean showAll) {
-		def studies 
+	def searchStudies(String searchTerm, Boolean showAll, Integer myOffset, Integer myMax) {
 		
-		if(!term || term == "*"){
-			studies = FEMStudy.list()
-		}else{
-			studies = FEMStudy.searchEvery(term)
-		}
-
-		// we only return entries belonging to this user
+		def searchClosure
+		
+		// add the user to the search term if necessary
 		if(! showAll){
-			// get the current user
 			def currentUser = springSecurityService.getCurrentUser()
 			
-			// remove studies from list which are from a different user
-			def studiesSize = studies.size()
-			
-			for(def i=0; i < studiesSize; i++){
-				def study = studies[i]
-				// re-attach all information (was only lazy loaded)
-				study.refresh()
-				if(study.owner != currentUser){
-					studiesSize --
-					i --
-					studies.remove(study)
-				}
+			searchClosure = {
+					must(queryString(searchTerm))
+					must(term('FEMStudy.owner.username', currentUser.username))
+			}
+		}else{
+			searchClosure = {
+				must(queryString(searchTerm))
 			}
 		}
 		
-		return studies
+		def studies
+		def totalEntries
+		
+		if(!searchTerm || searchTerm == "*"){
+			studies = FEMStudy.list(offset: myOffset, max: myMax)
+			totalEntries = FEMStudy.count()
+		}else{
+			def answer = FEMStudy.search(searchClosure , [offset: myOffset, max: myMax, sort: "dateCreated", order: "desc"])
+			
+			studies = answer.results
+			totalEntries = answer.total
+		}
+		
+		return [studies, totalEntries]
 	}
 }

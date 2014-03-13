@@ -111,6 +111,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
 // added by roman mylonas
 grails.plugin.springsecurity.logout.postOnly = false
+grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/search/index'
 //grails.plugin.springsecurity.auth.loginFormUrl = '/login/auth'
 // errorPage = '/login/denied'
 
@@ -119,4 +120,6 @@ metadb.dataPath = "/home/mylonasr/MetaDB/data"
 metadb.conf.metams.script = "/home/mylonasr/MetaDB/conf/metaMS"
 metadb.conf.metams.instrumentSettings = "/home/mylonasr/MetaDB/conf/metaMS/InstrumentSettings"
 metadb.conf.metams.databases = "/home/mylonasr/MetaDB/conf/metaMS/databases"
-metadb.showEntriesPerPage = 5
+
+// you also have to change this value in TwitterBootstrapTagLib: 46 
+metadb.showEntriesPerPage = 8

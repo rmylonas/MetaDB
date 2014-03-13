@@ -2,13 +2,13 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Runs</title>    
+    <title>Search</title>    
 </head>
 <body>
 
 <div class="container">
 
-	<g:uploadForm action="index" class="form-horizontal" id="searchForm">
+	<g:uploadForm action="index" class="form-horizontal">
 	<div class="row">
 	  <div class="col-lg-4">
 	    <div class="input-group">
@@ -200,6 +200,16 @@
 	  </table>
 	  
 	  </g:if> <!-- / if flash.studies -->
+
+		<!--  make correct pagination in case a search was done -->
+		<g:if test="${flash.lastSearchTerm}">
+	    	<g:myPaginate total="${session.totalEntries}" params='[searchTerm: "${flash.lastSearchTerm}", level: "${flash.lastLevel}", showAll: "${flash.lastShowAll}"]'/>
+	    </g:if>
+	    <g:else>
+	    	<g:myPaginate total="${session.totalEntries}" />
+	    </g:else>
+	    
+	    
 	    
 </div> <!-- /container -->
 
