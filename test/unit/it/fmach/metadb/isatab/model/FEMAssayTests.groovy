@@ -6,6 +6,7 @@ import it.fmach.metadb.User
 import it.fmach.metadb.isatab.importer.IsatabImporter
 import it.fmach.metadb.isatab.importer.IsatabImporterImpl
 import it.fmach.metadb.isatab.testHelper.TestDbSetup
+import org.codehaus.groovy.grails.io.support.ClassPathResource
 import org.junit.*
 
 /**
@@ -16,11 +17,15 @@ import org.junit.*
 class FEMAssayTests {
 	
 	static def currentUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
-	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"
+	static String rootDir = "resources/org/isatools/isacreator/io/importisa/"
 	String configDir = rootDir + "MetaboLightsConfig20130507"
 	String isatabDir = rootDir + "Wine_Storage"
 
     void testSaveAndLoadAssay() {
+
+		def isatabFilePath = new ClassPathResource(isatabDir).getFile().getAbsolutePath()
+		def configFilePath = new ClassPathResource(configDir).getFile().getAbsolutePath()
+
 		// create instruments
 		def creator = new TestDbSetup()
 		creator.createInstrument()
@@ -29,8 +34,8 @@ class FEMAssayTests {
 		workDir.delete();
 		workDir.mkdir();
 
-		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath(), currentUser)
-		def investigation = importer.importIsatabFiles(isatabDir)
+		IsatabImporter importer = new IsatabImporterImpl(configFilePath, workDir.getAbsolutePath(), currentUser)
+		def investigation = importer.importIsatabFiles(isatabFilePath)
 		
 		def assay = investigation.studyList.get(0).assays.get(0)
 		assay.accessCode = new AccessCode(code: "UniqueCode")

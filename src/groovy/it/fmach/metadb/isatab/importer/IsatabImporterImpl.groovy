@@ -74,7 +74,7 @@ class IsatabImporterImpl implements IsatabImporter {
 	 */
 	FEMInvestigation importIsatabFiles(String isatabDir){
 		def investigation = new FEMInvestigation()
-		
+				
 		importer.importFile(isatabDir)
 		
 		// get the errors if there are any

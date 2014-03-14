@@ -43,7 +43,7 @@ class TwitterBootstrapTagLib {
 		def maxsteps = (attrs.int('maxsteps') ?: 10)
 
 		if (!offset) offset = (attrs.int('offset') ?: 0)
-		if (!max) max = (attrs.int('max') ?: 8)
+		if (!max) max = (attrs.int('max') ?: 30)
 
 		def linkParams = [:]
 		if (attrs.params) linkParams.putAll(attrs.params)

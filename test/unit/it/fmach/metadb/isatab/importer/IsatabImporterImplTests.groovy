@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.codehaus.groovy.grails.io.support.ClassPathResource
 import org.junit.*
 
 import grails.test.mixin.*
@@ -23,7 +24,7 @@ import grails.test.mixin.*
 @Mock([AccessCode, Instrument, User])
 class IsatabImporterImplTests {
 	
-	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"
+	static String rootDir = "resources/org/isatools/isacreator/io/importisa/"
 	static def currentUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
 		
 	@Test
@@ -33,9 +34,8 @@ class IsatabImporterImplTests {
 		def creator = new TestDbSetup()
 		creator.createInstrument()
 
-		
-		String configDir = rootDir + "MetaboLightsConfig20130507"
-		String isatabDir = rootDir + "empty_rows"
+		def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
+		def isatabDir = new ClassPathResource(rootDir + "empty_rows").getFile().getAbsolutePath()
 		
 		def workDir = File.createTempFile("test_workdir", "")
 		workDir.delete();
@@ -68,9 +68,8 @@ class IsatabImporterImplTests {
 		def creator = new TestDbSetup()
 		creator.createInstrument()
 
-		
-		String configDir = rootDir + "MetaboLightsConfig20130507"
-		String isatabDir = rootDir + "Wine_Storage"
+		def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
+		def isatabDir = new ClassPathResource(rootDir + "Wine_Storage").getFile().getAbsolutePath()
 		
 		def workDir = File.createTempFile("test_workdir", "")
 		workDir.delete();
@@ -118,8 +117,8 @@ class IsatabImporterImplTests {
 	@Test
 	void testImportEmpty() {
 
-		String configDir = rootDir + "MetaboLightsConfig20130507"
-		String isatabDir = rootDir + "Empty"
+		def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
+		def isatabDir = new ClassPathResource(rootDir + "Empty").getFile().getAbsolutePath()
 		
 		def workDir = File.createTempFile("test_workdir", "")
 		workDir.delete();
@@ -143,9 +142,9 @@ class IsatabImporterImplTests {
 		// create instruments
 		def creator = new TestDbSetup()
 		creator.createInstrument()
-
-		String configDir = rootDir + "MetaboLightsConfig20130507"
-		String isatabDir = rootDir + "winecellar_archive.zip"
+		
+		def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
+		def isatabDir = new ClassPathResource(rootDir + "winecellar_archive.zip").getFile().getAbsolutePath()
 
 		def workDir = File.createTempFile("test_workdir", "")
 		workDir.delete();
@@ -168,8 +167,8 @@ class IsatabImporterImplTests {
 		def creator = new TestDbSetup()
 		creator.createInstrument()
 
-		String configDir = rootDir + "MetaboLightsConfig20130507"
-		String isatabDir = rootDir + "ager_test.zip"
+		def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
+		def isatabDir = new ClassPathResource(rootDir + "ager_test.zip").getFile().getAbsolutePath()
 
 		def workDir = File.createTempFile("test_workdir", "")
 		workDir.delete();
@@ -192,9 +191,9 @@ class IsatabImporterImplTests {
 		// create instruments
 		def creator = new TestDbSetup()
 		creator.createInstrument()
-
-		String configDir = rootDir + "MetaboLightsConfig20130507"
-		String isatabDir = rootDir + "nomacorc.zip"
+		
+		def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
+		def isatabDir = new ClassPathResource(rootDir + "nomacorc.zip").getFile().getAbsolutePath()
 
 		def workDir = File.createTempFile("test_workdir", "")
 		workDir.delete();
