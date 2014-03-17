@@ -118,14 +118,18 @@ class IsatabImporterImplTests {
 	void testImportEmpty() {
 
 		def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
-		def isatabDir = new ClassPathResource(rootDir + "Empty").getFile().getAbsolutePath()
+		//def isatabDir = new ClassPathResource(rootDir + "Empty").getFile().getAbsolutePath()
 		
 		def workDir = File.createTempFile("test_workdir", "")
 		workDir.delete();
 		workDir.mkdir();
+		
+		def isatabDir = File.createTempFile("empty_dir", "")
+		workDir.delete();
+		workDir.mkdir();
 
 		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath(), currentUser)
-		FEMInvestigation investigation = importer.importIsatabFiles(isatabDir)
+		FEMInvestigation investigation = importer.importIsatabFiles(isatabDir.getAbsolutePath())
 
 		def ISAParsingInfo parsingInfo = investigation.isaParsingInfo
 		Boolean success = parsingInfo.success
