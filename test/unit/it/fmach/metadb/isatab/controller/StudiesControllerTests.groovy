@@ -29,7 +29,8 @@ class StudiesControllerTests {
        	study.save(flush: true)
 		   
 		controller.allStudies()
-		assert 1 == session.studies.size
+		assert 1 == session.studies.size()
 		assert "study_id" == session.studies.get(0).identifier
+		
     }
 }

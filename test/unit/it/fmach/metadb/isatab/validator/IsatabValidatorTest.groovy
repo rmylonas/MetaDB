@@ -5,17 +5,18 @@ import it.fmach.metadb.isatab.importer.IsatabImporter
 import it.fmach.metadb.isatab.importer.IsatabImporterImpl
 import it.fmach.metadb.isatab.model.ISAParsingInfo;
 
+import org.codehaus.groovy.grails.io.support.ClassPathResource
 import org.junit.*
 
 class IsatabValidatorTest {
 
-	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"
-	String configDir = rootDir + "MetaboLightsConfig20130507";
+	static String rootDir = "resources/org/isatools/isacreator/io/importisa/"
+	def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
 	
 	@Test
 	void testValidIsatabFile() {
 		
-		String isatabParentDir = rootDir + "Wine_Storage";
+		def isatabParentDir = new ClassPathResource(rootDir + "Wine_Storage").getFile().getAbsolutePath()
 		
 		// validate
 		IsatabValidator validator = new IsatabValidatorImpl(configDir)
@@ -30,7 +31,7 @@ class IsatabValidatorTest {
 	@Test
 	void testInvalidIsatabFile() {
 		
-		String isatabParentDir = rootDir + "Invalid_Wine_Storage";
+		def isatabParentDir = new ClassPathResource(rootDir + "Invalid_Wine_Storage").getFile().getAbsolutePath()
 		
 		// validate
 		IsatabValidator validator = new IsatabValidatorImpl(configDir)

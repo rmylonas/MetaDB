@@ -9,17 +9,20 @@ import it.fmach.metadb.isatab.model.Instrument
 import it.fmach.metadb.isatab.model.AccessCode
 import grails.test.mixin.*
 
+import org.codehaus.groovy.grails.io.support.ClassPathResource
 import org.junit.*
 
 @Mock([FEMStudy, FEMAssay, FEMRun, InstrumentMethod, Instrument, AccessCode])
 class ExtractedFileInserterTest {
 
-	static String rootDir = "test/data/it/fmach/metadb/workflow/extraction/"
+	static String rootDir = "resources/it/fmach/metadb/workflow/extraction/"
 	
 	@Test
 	public void addExtractedFilesZipTest() {		
 		def creator = new TestDomainCreator()
 		def assay = creator.createRandomizedRunsQCFirst()
+		
+		def extractedZipDir = new ClassPathResource(rootDir + "extracted.zip").getFile().getAbsolutePath()
 		
 		// set the status to "acquired"
 		assay.status = "acquired"
@@ -32,7 +35,7 @@ class ExtractedFileInserterTest {
 		def inserter = new ExtractedFileInserter(tmpFile.getAbsolutePath())
 		
 		// add the raw files
-		def info = inserter.addExtractedFilesZip(assay, rootDir + "extracted.zip")
+		def info = inserter.addExtractedFilesZip(assay, extractedZipDir)
 		
 		assert assay.acquiredRuns.size()-3 == info[0].size()
 		assert "pipo.CDF" == info[1][0]

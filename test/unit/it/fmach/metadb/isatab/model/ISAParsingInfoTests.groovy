@@ -8,6 +8,7 @@ import it.fmach.metadb.isatab.importer.IsatabImporterImpl
 import it.fmach.metadb.isatab.testHelper.TestDbSetup
 import it.fmach.metadb.isatab.validator.IsatabValidator
 import it.fmach.metadb.isatab.validator.IsatabValidatorImpl
+import org.codehaus.groovy.grails.io.support.ClassPathResource
 import org.junit.Test
 
 import grails.test.mixin.*
@@ -22,9 +23,9 @@ import org.junit.*
 class ISAParsingInfoTests {
 
 	static def currentUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
-	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"
-	String configDir = rootDir + "MetaboLightsConfig20130507"
-	
+	static String rootDir = "resources/org/isatools/isacreator/io/importisa/"
+	def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
+		
 	@Test
     void testIsaParsingWithLoadingError() {
 		
@@ -32,14 +33,16 @@ class ISAParsingInfoTests {
 		def creator = new TestDbSetup()
 		creator.createInstrument()
 		
-		String isatabDir = rootDir + "Empty"
+		def isatabDir = File.createTempFile("empty_dir", "")
+		isatabDir.delete();
+		isatabDir.mkdir();
 		
 		def workDir = File.createTempFile("test_workdir", "")
 		workDir.delete();
 		workDir.mkdir();
 
 		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath(), currentUser)
-		def investigation = importer.importIsatabFiles(isatabDir)
+		def investigation = importer.importIsatabFiles(isatabDir.getAbsolutePath())
 		def parsingInfo = investigation.isaParsingInfo
 		parsingInfo.save(flush: true)
 		
@@ -59,7 +62,7 @@ class ISAParsingInfoTests {
 		def creator = new TestDbSetup()
 		creator.createInstrument()
 		
-		String isatabDir = rootDir + "Invalid_Wine_Storage"
+		def isatabDir = new ClassPathResource(rootDir + "Invalid_Wine_Storage").getFile().getAbsolutePath()
 		
 		def workDir = File.createTempFile("test_workdir", "")
 		workDir.delete();

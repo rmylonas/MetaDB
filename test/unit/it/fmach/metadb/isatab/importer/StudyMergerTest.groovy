@@ -8,6 +8,7 @@ import it.fmach.metadb.isatab.model.FEMStudy;
 import it.fmach.metadb.isatab.model.Instrument;
 import it.fmach.metadb.isatab.testHelper.TestDbSetup
 
+import org.codehaus.groovy.grails.io.support.ClassPathResource
 import org.junit.*
 
 import grails.test.mixin.*
@@ -15,7 +16,7 @@ import grails.test.mixin.*
 @Mock([FEMStudy, FEMAssay, FEMSample, AccessCode, Instrument, User])
 class StudyMergerTest {
 
-	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"
+	static String rootDir = "resources/org/isatools/isacreator/io/importisa/"
 	static def currentUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
 
 	@Test
@@ -24,8 +25,8 @@ class StudyMergerTest {
 		def creator = new TestDbSetup()
 		creator.createInstrument()
 		
-		String configDir = rootDir + "MetaboLightsConfig20130507"
-		String isatabDir = rootDir + "Wine_Storage"
+		def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
+		def isatabDir = new ClassPathResource(rootDir + "Wine_Storage").getFile().getAbsolutePath()
 		
 		def workDir = File.createTempFile("test_workdir", "")
 		workDir.delete();
@@ -63,8 +64,8 @@ class StudyMergerTest {
 		def creator = new TestDbSetup()
 		creator.createInstrument()
 		
-		String configDir = rootDir + "MetaboLightsConfig20130507"
-		String isatabDir = rootDir + "Wine_Storage"
+		def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
+		def isatabDir = new ClassPathResource(rootDir + "Wine_Storage").getFile().getAbsolutePath()
 		
 		def workDir = File.createTempFile("test_workdir", "")
 		workDir.delete();

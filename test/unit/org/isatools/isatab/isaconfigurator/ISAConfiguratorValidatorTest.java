@@ -1,24 +1,36 @@
 package org.isatools.isatab.isaconfigurator;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Level;
+import org.codehaus.groovy.grails.io.support.ClassPathResource;
 import org.isatools.isatab.gui_invokers.GUIISATABValidator;
 import org.isatools.isatab.gui_invokers.GUIInvokerResult;
 import org.isatools.tablib.utils.logging.TabLoggingEventWrapper;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class ISAConfiguratorValidatorTest {
 
-	final static String rootDir = "test/data/org/isatools/isacreator/io/importisa/";
+	final static String rootDir = "resources/org/isatools/isacreator/io/importisa/";
 		
 		 @Test
 		 public void testInvalidISAtab() {
-				String configDir = rootDir + "MetaboLightsConfig20130507";
-				String isatabParentDir = rootDir + "Invalid_Wine_Storage";
-			 
+				String configDir = null;
+				String isatabParentDir = null;
+				
+				
+				try {
+					configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath();
+					isatabParentDir = new ClassPathResource(rootDir + "Invalid_Wine_Storage").getFile().getAbsolutePath();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+						 
 		        ISAConfigurationSet.setConfigPath(configDir);
 		        
                 GUIISATABValidator validator = new GUIISATABValidator();
@@ -43,8 +55,17 @@ public class ISAConfiguratorValidatorTest {
 		 
 		 @Test
 		 public void testValidISAtab() {
-				String configDir = rootDir + "MetaboLightsConfig20130507";
-				String isatabParentDir = rootDir + "Wine_Storage";
+				String configDir = null;
+				String isatabParentDir = null;
+				
+				
+				try {
+					configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath();
+					isatabParentDir = new ClassPathResource(rootDir + "Wine_Storage").getFile().getAbsolutePath();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			 
 		        ISAConfigurationSet.setConfigPath(configDir);
 		        

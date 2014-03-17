@@ -11,6 +11,7 @@ import it.fmach.metadb.isatab.model.Instrument;
 import it.fmach.metadb.isatab.testHelper.TestDbSetup
 
 import org.apache.commons.io.FileUtils
+import org.codehaus.groovy.grails.io.support.ClassPathResource
 import org.junit.*
 
 import grails.test.mixin.*
@@ -19,9 +20,9 @@ import it.fmach.metadb.isatab.testHelper.TestDbSetup
 @Mock([FEMStudy, FEMAssay, AccessCode, Instrument, User])
 class LocalIsatabImporterTest {
 
-	static String rootDir = "test/data/org/isatools/isacreator/io/importisa/"
+	static String rootDir = "resources/org/isatools/isacreator/io/importisa/"
 	static def currentUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
-	static String configDir = rootDir + "MetaboLightsConfig20130507"
+	static def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
 	
 	@Test
 	void testCheckUploadFolder(){
@@ -82,7 +83,7 @@ class LocalIsatabImporterTest {
 		def creator = new TestDbSetup()
 		creator.createInstrument()
 		
-		File isatabDir = new File(rootDir + "Wine_Storage")
+		def isatabDir = new ClassPathResource(rootDir + "Wine_Storage").getFile()
 		
 		def workDir = File.createTempFile("test_localupload", "")
 		workDir.delete()

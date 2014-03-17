@@ -118,7 +118,6 @@ class IsatabImporterImplTests {
 	void testImportEmpty() {
 
 		def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
-		//def isatabDir = new ClassPathResource(rootDir + "Empty").getFile().getAbsolutePath()
 		
 		def workDir = File.createTempFile("test_workdir", "")
 		workDir.delete();
