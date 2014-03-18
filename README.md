@@ -19,12 +19,13 @@ git clone https://github.com/rmylonas/MetaDB
 ```
 grails test-app unit:
 ```
-They should all pass
+They should all pass..
 
-###### Prepare your configuration
-1. set correct folders in *grails-app/conf/Config.groovy*:
+##### Prepare your configuration
+###### set correct folders in *grails-app/conf/Config.groovy*:
+
 ```metadb.isatab.metabolConfigFile = [path to your ISAcreator configuration file]``` 
-this can be copied from *resources/conf/MetaboLightsConfig20130507* or taken from [MetaboLights](http://www.ebi.ac.uk/metabolights/).
+(configuration folder can be copied from *resources/conf/MetaboLightsConfig20130507* or taken from [MetaboLights](http://www.ebi.ac.uk/metabolights/))
 
 ```metadb.dataPath = [your data folder]``` (make sure this directory exists and is empty)
 
