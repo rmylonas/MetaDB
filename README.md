@@ -11,30 +11,61 @@ Following software has to be installed for proper functioning (other software ve
 
 ## Installation
 
-###### Get the code
+#### Get the code
 ```
 git clone https://github.com/rmylonas/MetaDB
 ```
-###### Run unit tests
+#### Run unit tests
 ```
 grails test-app unit:
 ```
 They should all pass..
 
-##### Prepare your configuration
-###### set correct folders in *grails-app/conf/Config.groovy*:
+#### Prepare your configuration
+##### set correct folders in *grails-app/conf/Config.groovy*:
 
 ```metadb.isatab.metabolConfigFile = [path to your ISAcreator configuration file]``` 
 (configuration folder can be copied from *resources/conf/MetaboLightsConfig20130507* or taken from [MetaboLights](http://www.ebi.ac.uk/metabolights/))
 
-```metadb.dataPath = [your data folder]``` (make sure this directory exists and is empty)
+```metadb.dataPath = "[your data folder]"``` (make sure this directory exists and is empty)
 
-2. set your database
+```metadb.conf.metams.script = "[R script folder]"``` (copy folder from *resources/conf/metaMS)
+
+```metadb.conf.metams.instrumentSettings = "[RData MetaMS instrument settings]"``` (copy folder from *resources/conf/instrumentSettings)
+
+```metadb.conf.metams.databases = "[RData MetaMS databases]"``` (copy folder from *resources/conf/databases)
 
 
+##### set your database settings in *grails-app/conf/DataSource.groovy*:
+Set user, password and the correct URL to your database. Make sure to create a database called *MetaMS*. That's also the place to change settings, in case you want to use PostgreSQL instead (look at Grails documentation for further info).
+```
+    url = "jdbc:mysql://localhost/MetaDB"
+    username = "root"
+    password = "1234"
+```
 
-###### Setup your environment
+##### set directory for search indexing in *grails-app/conf/Searchable.groovy*:
+Create and set directory, where MetaDB should save it's indexes
+```
+    compassConnection = new File(
+        "[path to indexes]"
+    ).absolutePath
+```
 
+##### create and deploy your war file
+
+create a *.war* file with your settings by executing following command from your MetaDB folder:
+```
+grails war
+```
+
+copy the *.war* file to your tomcat *webapps* folder. 
+
+access the main page and login as administrator
+```
+Username: admin
+Password: admin
+```
 
 
 ## User documentation
