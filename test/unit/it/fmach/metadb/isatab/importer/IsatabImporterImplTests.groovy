@@ -29,26 +29,26 @@ class IsatabImporterImplTests {
 		
 	@Test
 	void testEmptyRows() {
-
+		
 		// create instruments
 		def creator = new TestDbSetup()
 		creator.createInstrument()
-
+		
 		def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
 		def isatabDir = new ClassPathResource(rootDir + "empty_rows").getFile().getAbsolutePath()
 		
 		def workDir = File.createTempFile("test_workdir", "")
-		workDir.delete();
-		workDir.mkdir();
-
+		workDir.delete()
+		workDir.mkdir()
+		
 		IsatabImporter importer = new IsatabImporterImpl(configDir, workDir.getAbsolutePath(), currentUser)
 		FEMInvestigation investigation = importer.importIsatabFiles(isatabDir)
 		
 		Boolean success = investigation.isaParsingInfo.success
 		assert success
-
+		
 		List<FEMStudy> studyList = investigation.studyList
-
+		
 		// check study content
 		assert 1 == studyList.size()
 		FEMStudy study = studyList.get(0)

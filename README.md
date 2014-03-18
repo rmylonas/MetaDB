@@ -1,10 +1,21 @@
 MetaDB
 ======
-MetaDB is an open-source web application for metadata management and data processing of metabolomics data. 
+MetaDB is an open-source web application for metadata management and data processing of metabolomics data. It is based on [ISA tab](http://www.isa-tools.org/) as the input format. The analysis of untargeted data is done using the R package [MetaMS](https://github.com/rwehrens/metaMS).
 
 ## Prerequisites
+Following software has to be installed for proper functioning (other software versions may work, but were not tested):
+* Java 1.7
+* Tomcat 6
+* MySQL 5.5
+* Grails 2.2.3
 
 ## Installation
+
+###### Get the code
+
+```
+git clone https://github.com/rmylonas/MetaDB
+```
 
 ## User documentation
 
