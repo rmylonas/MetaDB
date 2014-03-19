@@ -1,6 +1,6 @@
 MetaDB
 ======
-MetaDB is an open-source web application for metadata management and data processing of metabolomics data. It is based on [ISA tab](http://www.isa-tools.org/) as the input format. The analysis of untargeted data is done using the R package [MetaMS](https://github.com/rwehrens/metaMS).
+MetaDB is an open-source web application for metadata management and data processing of metabolomics data. It is based on [ISA tab](http://www.isa-tools.org/) as the input format. The analysis of untargeted data is done using the R package [MetaMS](https://github.com/rwehrens/metaMS). This software is a project from Fondazione Edmund Mach. 
 
 ## Prerequisites
 Following software has to be installed for proper functioning (other software versions may work, but were not tested):
@@ -71,11 +71,16 @@ Password: admin
 
 #### Main workflow
 
-![MetaDB workflow](https://github.com/rmylonas/MetaDB/resources/markdown-resources/workflow.png "MetaDB workflow")
+![MetaDB workflow](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/workflow.png "MetaDB workflow")
 
-#### Start page
+ISAtab files for Metabolomics are best created with ISAcreator from [MetaboLights](http://www.ebi.ac.uk/metabolights/)). ISAtab files can be uploaded to **MetaDB** as a ZIP file. Data will be verified and selected data are imported to **MetaMS**. 
+Run sequences of selected Assays are randomized and can be exported as CSV files. CSV files are imported to your MS instruments for data acquisition. Acquired data is than again imported to **MetaMS**, where it can be further processed. The processing includes feature detection and identification against Compound databases. This part is done using the open source R library [MetaMS](https://github.com/rwehrens/metaMS).
 
-After login or when clicking on **MetaDB**, you are directed to the main search page. You can search for terms which appear in Studies or 
+#### Search page
+
+![MetaDB search page](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/search_page.png "MetaDB search page")
+
+After login or when clicking on **MetaDB**, you are redirected to the main search page. You can search for terms such as organism names or sample factors. You can either search on the level of *Studies* or *Assays* (look at the ISAtab documentation for more detailed information about the meaning of those terms). By checking the box *Show all users*, you can also search for entries created by other users.
 
 #### User management
 
