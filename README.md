@@ -107,19 +107,32 @@ When uploading, you have to choose your group, project and instrument method. If
 
 In order to be able to enter into the *View* menu, you first have to load your *Assay* of interest. To see the list of *Assays* you can either go from the *Search* page or from the *Load* page. By clicking on the *Access code*, you will automatically redirected to either the *Planned runs* or *Acquired runs* view, depending on the status of this *Assay*. 
 
-#### The 3 different views
+#### 3 different views
+
+From the menu *Views* you can access 3 different views:
 
 ##### Planned runs
 
+![MetaDB planned runs](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/planned_runs.png "MetaDB planned runs")
+
+This view shows the sequence of *Runs* as they were planned. You can download the CSV file of this sequence by pressing on the *Download CSV* button. This sequence can then be used to setup your instrument. 
+
+During the process of acquiring, you might change the sequences (e.g. add addiotional Quality Controls). You can change the order and add *QC* (quality controls), *STDmix* (standard mix) and *Blanks* as you want. **Attention: you have to make sure that every name is unique. Otherwise MetaDB won't be able to connect your files to the names.**
+
+![MetaDB add acquisitions](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/add_acquisition_sequence.png "MetaDB add acquisitions")
+
+Once you finished your acquisition, you can add your actual run sequence by clicking on *Add acquisition*. Juste copy paste the sequence (newline seperated) into the textfield. You will automatically be redirected to *Acquired runs*. This step can be repeated as many times as you want. 
 
 ##### Acquired runs
+
+![MetaDB acquired runs](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/acquired_runs.png "MetaDB acquired runs")
+
 
 
 ##### MetaMS submission
 
 
 #### MetaMS submission and PCA plots
-
 
 
 ### Statistics
@@ -145,6 +158,7 @@ The administrator has additional rights, like managing Instruments, Methods and 
 When creating a new User, you also have to indicate a foldername (typically same as username), which will be created automatically. 
 
 
+## Connection to *ISAcreator* via plugin
 
 
 
