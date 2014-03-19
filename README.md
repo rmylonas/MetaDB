@@ -67,6 +67,12 @@ Username: admin
 Password: admin
 ```
 
+##### installing R PCA package:
+If you want to use the PCA plotting option, you have to install the *PCA* library to your local **R** installation:
+```
+sudo R -e 'install.packages("./resources/R/PCA_0.0.2.1.tar.gz", repos = NULL, type="source")'
+```
+
 ## User documentation
 
 ### Main workflow
@@ -103,6 +109,13 @@ In order to be able to enter into the *View* menu, you first have to load your *
 
 #### The 3 different views
 
+##### Planned runs
+
+
+##### Acquired runs
+
+
+##### MetaMS submission
 
 
 #### MetaMS submission and PCA plots
