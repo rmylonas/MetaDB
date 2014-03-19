@@ -89,7 +89,7 @@ After login or when clicking on **MetaDB**, you are redirected to the main searc
 
 ![MetaDB upload page](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/upload_page.png "MetaDB upload page")
 
-ISAtab files can be uploaded as a ZIP file. **Attention: ** make sure to directly compress the ISAtab files, and not any folders. Compression done by *ISAcreator* will not work. Make sure that your Study identifier is unique and that your instrument and methods were created in **MetaDB**.
+ISAtab files can be uploaded as a ZIP file. **Attention: make sure to directly compress the ISAtab files, and not any folders. Compression done by _ISAcreator_ will not work.** Make sure that your Study identifier is unique and that your instrument and methods were created in **MetaDB**.
 
 Once uploaded, you can select the *Assays* you want to import. If you added any *Assay* to an existing ISAtab file and reload this file, they new *Assay* will appear for selection as well. Already imported *Assays* can not be changed. To change them, you first have to remove them and reimport the new versions. 
 
