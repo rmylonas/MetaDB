@@ -95,8 +95,17 @@ Once uploaded, you can select the *Assays* you want to import. If you added any 
 
 When uploading, you have to choose your group, project and instrument method. If your setting is missing, an user with administration rights has to insert your settings into **MetaDB**. Depending on your method, randomization of your run sequences will be done. 
 
-### Upload
+### Load and View
 
+#### Load an Assay
+
+In order to be able to enter into the *View* menu, you first have to load your *Assay* of interest. To see the list of *Assays* you can either go from the *Search* page or from the *Load* page. By clicking on the *Access code*, you will automatically redirected to either the *Planned runs* or *Acquired runs* view, depending on the status of this *Assay*. 
+
+#### The 3 different views
+
+
+
+#### MetaMS submission and PCA plots
 
 
 
@@ -104,7 +113,7 @@ When uploading, you have to choose your group, project and instrument method. If
 
 ![MetaDB statistics](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/statistics_runs.png "MetaDB statistics")
 
-On this page you can see some simple graphs about the usage of your resources by project.
+On this page you can see some simple statistics about the usage of your resources.
 
 ### User management
 
