@@ -29,11 +29,11 @@ They should all pass..
 
 ```metadb.dataPath = "[your data folder]"``` (make sure this directory exists and is empty)
 
-```metadb.conf.metams.script = "[R script folder]"``` (copy folder from *resources/conf/metaMS)
+```metadb.conf.metams.script = "[R script folder]"``` (copy folder from *resources/conf/metaMS*)
 
-```metadb.conf.metams.instrumentSettings = "[RData MetaMS instrument settings]"``` (copy folder from *resources/conf/instrumentSettings)
+```metadb.conf.metams.instrumentSettings = "[RData MetaMS instrument settings]"``` (copy folder from *resources/conf/instrumentSettings*)
 
-```metadb.conf.metams.databases = "[RData MetaMS databases]"``` (copy folder from *resources/conf/databases)
+```metadb.conf.metams.databases = "[RData MetaMS databases]"``` (copy folder from *resources/conf/databases*)
 
 
 ##### set your database settings in *grails-app/conf/DataSource.groovy*:
@@ -45,14 +45,14 @@ Set user, password and the correct URL to your database. Make sure to create a d
 ```
 
 ##### set directory for search indexing in *grails-app/conf/Searchable.groovy*:
-Create and set directory, where MetaDB should save it's indexes
+Create and set directory, where MetaDB can save it's indexes
 ```
     compassConnection = new File(
         "[path to indexes]"
     ).absolutePath
 ```
 
-##### create and deploy your war file
+##### create and deploy your war file:
 
 create a *.war* file with your settings by executing following command from your MetaDB folder:
 ```
@@ -67,8 +67,33 @@ Username: admin
 Password: admin
 ```
 
-
 ## User documentation
+
+#### Main workflow
+
+![MetaDB workflow](https://github.com/rmylonas/MetaDB/resources/markdown-resources/workflow.png "MetaDB workflow")
+
+#### Start page
+
+After login or when clicking on **MetaDB**, you are directed to the main search page. You can search for terms which appear in Studies or 
+
+#### User management
+
+Two users are created by default:
+```
+Username: test
+Password: test
+```
+and
+```
+Username: admin
+Password: admin
+```
+The administrator has additional rights, like managing Instruments, Methods and Projects. He is also allowed to delete entries from all users.
+
+When creating a new User, you also have to indicate a foldername (typically same as username), which will be created automatically. 
+
+
 
 ## Developer documentation
 
