@@ -111,7 +111,7 @@ In order to be able to enter into the *View* menu, you first have to load your *
 
 From the menu *Views* you can access 3 different views:
 
-##### Planned runs
+##### 1. Planned runs
 
 ![MetaDB planned runs](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/planned_runs.png "MetaDB planned runs")
 
@@ -123,17 +123,13 @@ During the process of acquiring, you might change the sequences (e.g. add addiot
 
 Once you finished your acquisition, you can add your actual run sequence by clicking on *Add acquisition*. Juste copy paste the sequence (newline seperated) into the textfield. You will automatically be redirected to *Acquired runs*. This step can be repeated as many times as you want. 
 
-##### Acquired runs
+##### 2. Acquired runs
 
 ![MetaDB acquired runs](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/acquired_runs.png "MetaDB acquired runs")
 
+In this view you can see the sequence you actually acquired. By pressing *Upload extracted files* you can add runs in *.CDF* format. You have to select 
 
-
-##### MetaMS submission
-
-
-#### MetaMS submission and PCA plots
-
+##### 3. MetaMS submission and PCA plots
 
 ### Statistics
 
@@ -141,7 +137,9 @@ Once you finished your acquisition, you can add your actual run sequence by clic
 
 On this page you can see some simple statistics about the usage of your resources.
 
-### User management
+### Settings
+
+#### Users
 
 Two users are created by default:
 ```
@@ -156,6 +154,16 @@ Password: admin
 The administrator has additional rights, like managing Instruments, Methods and Projects. He is also allowed to delete entries from all users.
 
 When creating a new User, you also have to indicate a foldername (typically same as username), which will be created automatically. 
+
+#### Groups and Projects
+
+You can manage groups and projects they belong to. This information is not part of ISA tab. You cannot remove any groups or projects which are used by any *Studies*.
+
+#### Instrument and Methods
+
+
+
+#### Organism onthologies
 
 
 ## Connection to *ISAcreator* via plugin
