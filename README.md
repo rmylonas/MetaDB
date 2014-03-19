@@ -11,17 +11,17 @@ Following software has to be installed for proper functioning (other software ve
 
 ## Installation
 
-#### Get the code
+### Get the code
 ```
 git clone https://github.com/rmylonas/MetaDB
 ```
-#### Run unit tests
+### Run unit tests
 ```
 grails test-app unit:
 ```
 They should all pass..
 
-#### Prepare your configuration
+### Prepare your configuration
 ##### set correct folders in *grails-app/conf/Config.groovy*:
 
 ```metadb.isatab.metabolConfigFile = [path to your ISAcreator configuration file]``` 
@@ -69,7 +69,7 @@ Password: admin
 
 ## User documentation
 
-#### Main workflow
+### Main workflow
 
 ![MetaDB workflow](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/workflow.png "MetaDB workflow")
 
@@ -79,13 +79,13 @@ Run sequences of selected Assays are randomized and can be exported as CSV files
 
 The processing includes feature detection and identification against Compound databases. This part is done using the open source R library [MetaMS](https://github.com/rwehrens/metaMS).
 
-#### Search page
+### Search
 
 ![MetaDB search page](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/search_page.png "MetaDB search page")
 
 After login or when clicking on **MetaDB**, you are redirected to the main search page. You can search for terms such as organism names or sample factors. You can either search on the level of *Studies* or *Assays* (look at the ISAtab documentation for more detailed information about the meaning of those terms). By checking the box *Show all users*, you can also search for entries created by other users.
 
-#### Upload page
+### Upload
 
 ![MetaDB upload page](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/upload_page.png "MetaDB upload page")
 
@@ -93,16 +93,20 @@ ISAtab files can be uploaded as a ZIP file. **Attention: make sure to directly c
 
 Once uploaded, you can select the *Assays* you want to import. If you added any *Assay* to an existing ISAtab file and reload this file, they new *Assay* will appear for selection as well. Already imported *Assays* can not be changed. To change them, you first have to remove them and reimport the new versions. 
 
-When uploading, you have to choose your group, project and instrument method. If your setting is missing, an user with administration rights has to insert your settings into **MetaDB**. Depending on your method, randomization will be done. 
+When uploading, you have to choose your group, project and instrument method. If your setting is missing, an user with administration rights has to insert your settings into **MetaDB**. Depending on your method, randomization of your run sequences will be done. 
+
+### Upload
 
 
-#### Statistics page
+
+
+### Statistics
 
 ![MetaDB statistics](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/statistics_runs.png "MetaDB statistics")
 
 On this page you can see some simple graphs about the usage of your resources by project.
 
-#### User management
+### User management
 
 Two users are created by default:
 ```
