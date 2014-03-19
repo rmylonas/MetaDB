@@ -74,13 +74,33 @@ Password: admin
 ![MetaDB workflow](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/workflow.png "MetaDB workflow")
 
 ISAtab files for Metabolomics are best created with ISAcreator from [MetaboLights](http://www.ebi.ac.uk/metabolights/)). ISAtab files can be uploaded to **MetaDB** as a ZIP file. Data will be verified and selected data are imported to **MetaMS**. 
-Run sequences of selected Assays are randomized and can be exported as CSV files. CSV files are imported to your MS instruments for data acquisition. Acquired data is than again imported to **MetaMS**, where it can be further processed. The processing includes feature detection and identification against Compound databases. This part is done using the open source R library [MetaMS](https://github.com/rwehrens/metaMS).
+
+Run sequences of selected Assays are randomized and can be exported as CSV files. CSV files are imported to your MS instruments for data acquisition. Acquired data is than again imported to **MetaMS**, where it can be further processed (**MetaDB** currently only supports *.CDF* files).
+
+The processing includes feature detection and identification against Compound databases. This part is done using the open source R library [MetaMS](https://github.com/rwehrens/metaMS).
 
 #### Search page
 
 ![MetaDB search page](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/search_page.png "MetaDB search page")
 
 After login or when clicking on **MetaDB**, you are redirected to the main search page. You can search for terms such as organism names or sample factors. You can either search on the level of *Studies* or *Assays* (look at the ISAtab documentation for more detailed information about the meaning of those terms). By checking the box *Show all users*, you can also search for entries created by other users.
+
+#### Upload page
+
+![MetaDB upload page](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/upload_page.png "MetaDB upload page")
+
+ISAtab files can be uploaded as a ZIP file. **Attention: ** make sure to directly compress the ISAtab files, and not any folders. Compression done by *ISAcreator* will not work. Make sure that your Study identifier is unique and that your instrument and methods were created in **MetaDB**.
+
+Once uploaded, you can select the *Assays* you want to import. If you added any *Assay* to an existing ISAtab file and reload this file, they new *Assay* will appear for selection as well. Already imported *Assays* can not be changed. To change them, you first have to remove them and reimport the new versions. 
+
+When uploading, you have to choose your group, project and instrument method. If your setting is missing, an user with administration rights has to insert your settings into **MetaDB**. Depending on your method, randomization will be done. 
+
+
+#### Statistics page
+
+![MetaDB statistics](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/statistics_runs.png "MetaDB statistics")
+
+On this page you can see some simple graphs about the usage of your resources by project.
 
 #### User management
 
@@ -97,6 +117,9 @@ Password: admin
 The administrator has additional rights, like managing Instruments, Methods and Projects. He is also allowed to delete entries from all users.
 
 When creating a new User, you also have to indicate a foldername (typically same as username), which will be created automatically. 
+
+
+
 
 
 
