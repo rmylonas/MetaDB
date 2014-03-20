@@ -57,14 +57,22 @@ function startMetaMs(){
     	
     	<!-- if the assay status is acquired, we can add the extracted files -->
      	<div class="btn-group">
-     		<g:link class="btn btn-primary" action="downloadAcquiredCSV">Download CSV</g:link>
      		<div class="btn-group">
 			  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-			    Add processed files <span class="caret"></span>
+			    Download <span class="caret"></span>
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
-			    <li><g:link action="chooseExtracted">Upload ZIP file</g:link></li>
-			    <li><g:link action="localExtractedUpload">Check local directory</g:link></li>
+			    <g:link class="btn btn-primary" action="downloadAcquiredCSV">CSV</g:link>
+			  </ul>
+			</div>
+     		<div class="btn-group">
+			  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			    Upload  <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" role="menu">
+			    <li><g:link action="chooseExtracted">Extracted files</g:link></li>
+			    <li><g:link action="chooseRaw">Raw files</g:link></li>
+			    <li><g:link action="chooseOtherData">Other data</g:link></li>
 			  </ul>
 			</div>
    		 	<button class="btn btn-primary" onClick="startMetaMs()" >Start MetaMS</button>		

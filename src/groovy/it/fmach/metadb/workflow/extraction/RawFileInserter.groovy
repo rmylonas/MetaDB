@@ -5,35 +5,37 @@ import it.fmach.metadb.helper.UnZipper
 import it.fmach.metadb.isatab.model.FEMAssay
 
 
-class ExtractedFileInserter {
+class RawFileInserter {
 
 	def unzipper = new UnZipper()
 	
 	def applicationDataPath
 	
-	def ExtractedFileInserter(String applicationDataPath){
+	def RawFileInserter(String applicationDataPath){
 		this.applicationDataPath = applicationDataPath
 	}
 	
 	def addFromLocalFolder(FEMAssay assay){
-		def extractedFilePath = this.applicationDataPath + '/' + assay.workDir + "/extractedFiles"
-		def fileList = []
+		def extractedFilePath = this.applicationDataPath + '/' + assay.workDir + "/rawFiles"
+		def dir = new File(extractedFilePath)
 		
-		// add full name to fileList		
-		extractedFilePath.eachFile{
-			fileList << assay.workDir + "/extractedFiles/" + it
+		def fileList
+		
+		// add full name to fileList
+		dir.eachFileRecurse (FileType.FILES) { file ->
+			fileList << assay.workDir + "/rawFiles/" + file
 		}
 		
-		return this.addExtractedFiles(assay, fileList)
+		return this.addRawFiles(assay, fileList)
 	}
 	
-	def addExtractedFilesZip(FEMAssay assay, String zipFilePath){
+	def addRawFilesZip(FEMAssay assay, String zipFilePath){
 		
 		// create the directories
 		def workDirPath = this.applicationDataPath + "/" + assay.workDir
 		File workDir = new File(workDirPath)
 		workDir.mkdirs()
-		File extractedFileDir = new File(workDirPath + "/extractedFiles")
+		File extractedFileDir = new File(workDirPath + "/rawFiles")
 		extractedFileDir.mkdir()
 		
 		// unzip and list all files
@@ -44,12 +46,11 @@ class ExtractedFileInserter {
 			fileList << it.getAbsolutePath()
 		}
 		
-		return this.addExtractedFiles(assay, fileList)		
+		return this.addRawFiles(assay, fileList)
 	}
 	
 	
-	
-	def addExtractedFiles(FEMAssay assay, List<String> fileList){
+	def addRawFiles(FEMAssay assay, List<String> fileList){
 		
 		if(! assay.acquiredRuns) throw new RuntimeException("This assay does not contain any acquiredRuns")
 		
@@ -71,8 +72,7 @@ class ExtractedFileInserter {
 			// look if we find the right name
 			for(def run: assay.acquiredRuns){
 				if(StringUtils.containsIgnoreCase(filename, run.msAssayName)){
-					run.derivedSpectraFilePath = path
-					run.status = "extracted"
+					run.rawSpectraFilePath = path
 					assayNameMap[run.msAssayName] = true
 					found = true
 					break
@@ -90,16 +90,6 @@ class ExtractedFileInserter {
 				nrFilesAdded ++
 			}
 		}
-		
-		// if all runs are status "extracted", the assay gets "extracted"
-		def status = "extracted"
-		for(def run: assay.acquiredRuns){
-			if(run.status != "extracted"){
-				status = "acquired"
-				break
-			} 
-		}
-		assay.status = status
 		
 		// return missing files and names if necessary
 		if(missingFiles || namesNotFound){

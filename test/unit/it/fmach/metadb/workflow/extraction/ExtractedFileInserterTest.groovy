@@ -17,6 +17,38 @@ class ExtractedFileInserterTest {
 
 	static String rootDir = "resources/it/fmach/metadb/workflow/extraction/"
 	
+	
+	@Test
+	public void addExtractedMzXMLZipTest() {
+		def creator = new TestDomainCreator()
+		def assay = creator.createRandomizedRunsQCFirst()
+		
+		def extractedZipDir = new ClassPathResource(rootDir + "extracted_mzXML.zip").getFile().getAbsolutePath()
+		
+		// set the status to "acquired"
+		assay.status = "acquired"
+		assay.acquiredRuns = assay.randomizedRuns
+		
+		// set a temporary working dir
+		File tmpFile = File.createTempFile("test_extraction_", Long.toString(System.nanoTime()))
+		tmpFile.delete()
+		// tmpFile.mkdir()
+		def inserter = new ExtractedFileInserter(tmpFile.getAbsolutePath())
+		
+		// add the raw files
+		def info = inserter.addExtractedFilesZip(assay, extractedZipDir)
+		
+		assert assay.acquiredRuns.size()-3 == info[0].size()
+		assert "pipo.mzXML" == info[1][0]
+		assert assay.acquiredRuns.get(0).derivedSpectraFilePath.contains("AA_001_QC_tag_01.mzXML")
+		assert "extracted" == assay.acquiredRuns.get(1).status
+		assert 3 == info[2]
+		
+		// the assay status should still be "acquired", since not all files were added
+		assert "acquired" == assay.status
+	}
+	
+	
 	@Test
 	public void addExtractedFilesZipTest() {		
 		def creator = new TestDomainCreator()

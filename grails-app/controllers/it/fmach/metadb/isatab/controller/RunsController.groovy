@@ -5,7 +5,7 @@ import it.fmach.metadb.isatab.model.FEMAssay
 import it.fmach.metadb.isatab.model.FEMRun
 import it.fmach.metadb.workflow.acquisition.AcquiredNamesInserter
 import it.fmach.metadb.workflow.extraction.ExtractedFileInserter
-
+import it.fmach.metadb.workflow.extraction.RawFileInserter
 
 class RunsController {
 	
@@ -169,6 +169,72 @@ class RunsController {
 	}
 	
 	
+	def chooseRaw(){}
+	
+	def uploadRaw(){
+		def rawFileInserter = new RawFileInserter(grailsApplication.config.metadb.dataPath)
+		
+		// attach the assay
+		def assay = session.assay
+		assay.attach()
+		
+		def nrFilesAdded
+		
+		// upload the file
+		def f = request.getFile('extractedFile')
+		
+		if (f.empty) {
+			flash.error = 'Uploaded zip file is empty'
+			redirect(action: 'index')
+			return
+		}else{
+			def importFile = File.createTempFile("raw_",".zip")
+			f.transferTo(importFile)
+			
+			// and process it
+			try{
+				def info = rawFileInserter.addRawFilesZip(assay, importFile.absolutePath)
+				
+				// flash a warning, if names were missing
+				def missingN = info[0]
+				def notFoundN = info[1]
+				nrFilesAdded = info[2]
+				
+				flash.warning = ''
+				
+				if(missingN){
+					flash.warning += "Following files were missing: <ul>"
+					
+					missingN.each{
+						flash.warning += "<li>" + it + "</it>"
+					}
+					
+					flash.warning += "</ul>"
+				}
+				
+				if(notFoundN){
+					flash.warning += "Following names were not found in database: <ul>"
+					
+					notFoundN.each{
+						flash.warning += "<li>" + it + "</it>"
+					}
+					
+					flash.warning += "</ul>"
+				}
+									
+			}catch(e){
+				e.printStackTrace()
+				flash.error = 'Exception occured: sorry, your ZIP file could not be added'
+				redirect(action: 'index')
+				return
+			}
+		}
+		
+		flash.message = nrFilesAdded + ' raw files were added'
+		redirect(action: 'index')
+	}
+	
+	
 	def chooseExtracted(){}
 	
 	
@@ -217,7 +283,6 @@ class RunsController {
 		flash.message = nrFilesAdded + ' extracted files were added'
 		redirect(action: 'acquired')
 	}
-	
 	
 	def uploadExtracted(){
 		def extractedFileInserter = new ExtractedFileInserter(grailsApplication.config.metadb.dataPath)
