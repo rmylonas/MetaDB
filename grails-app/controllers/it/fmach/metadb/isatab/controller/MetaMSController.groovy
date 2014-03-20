@@ -61,7 +61,7 @@ class MetaMSController {
 		}
 		
 		session.runSelection = runSelection
-		flash.message = runSelection.size().toString() + " runs were selected"
+		// flash.message = runSelection.size().toString() + " runs were selected"
 		
 	}
 	

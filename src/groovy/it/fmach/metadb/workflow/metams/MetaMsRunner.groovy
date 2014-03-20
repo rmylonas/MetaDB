@@ -176,7 +176,7 @@ class MetaMsRunner {
 	def prepareFileList(List<FEMRun> selectedRuns){
 		new File(this.fileListPath).withWriter { out ->
 			selectedRuns.each() { run ->
-				out.writeLine(this.dataDir + '/' + run.derivedSpectraFilePath)
+				out.writeLine(run.derivedSpectraFilePath)
 			}
 		}
 	}
