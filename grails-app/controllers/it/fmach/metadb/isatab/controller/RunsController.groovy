@@ -62,7 +62,7 @@ class RunsController {
 			
 		render(view: "acquired")
 	}	
-
+	
 	
 	def downloadAcquiredCSV(){
 		def assay = session.assay
@@ -103,7 +103,6 @@ class RunsController {
 	}
 	
 	def assayNames() {}
-	
 	
 	def uploadAssayNames() {
 		
@@ -169,9 +168,41 @@ class RunsController {
 	}
 	
 	
+	def chooseOtherData(){}
+	
+	def uploadOtherData(){		
+		
+		// attach the assay
+		def assay = session.assay
+		assay.attach()
+		
+		// upload the file
+		def dataPath = grailsApplication.config.metadb.dataPath
+		def otherDataPath = dataPath + "/" + assay.workDir + "/otherData"
+		File workDir = new File(otherDataPath)
+		workDir.mkdirs()
+		
+		def f = request.getFile('extractedFile')
+		def originalFilename = f.getOriginalFilename()
+		
+		if (f.empty) {
+			flash.error = 'Uploaded zip file is empty'
+			redirect(action: 'acquired')
+			return
+		}else{
+			File targetFile = new File(workDir.getAbsolutePath() + "/" + originalFilename)
+			f.transferTo(targetFile)
+		}
+		
+		flash.message = 'ZIP archive was added'
+		redirect(action: 'acquired')
+	}
+	
+	
 	def chooseRaw(){}
 	
 	def uploadRaw(){
+		
 		def rawFileInserter = new RawFileInserter(grailsApplication.config.metadb.dataPath)
 		
 		// attach the assay
@@ -185,7 +216,7 @@ class RunsController {
 		
 		if (f.empty) {
 			flash.error = 'Uploaded zip file is empty'
-			redirect(action: 'index')
+			redirect(action: 'acquired')
 			return
 		}else{
 			def importFile = File.createTempFile("raw_",".zip")
@@ -225,13 +256,13 @@ class RunsController {
 			}catch(e){
 				e.printStackTrace()
 				flash.error = 'Exception occured: sorry, your ZIP file could not be added'
-				redirect(action: 'index')
+				redirect(action: 'acquired')
 				return
 			}
 		}
 		
 		flash.message = nrFilesAdded + ' raw files were added'
-		redirect(action: 'index')
+		redirect(action: 'acquired')
 	}
 	
 	
@@ -298,7 +329,7 @@ class RunsController {
 		
 		if (f.empty) {
 			flash.error = 'Uploaded zip file is empty'
-			redirect(action: 'index')
+			redirect(action: 'acquired')
 			return
 		}else{
 			def importFile = File.createTempFile("extracted_",".zip")
@@ -339,13 +370,13 @@ class RunsController {
 			}catch(e){
 				e.printStackTrace()
 				flash.error = 'Exception occured: sorry, your ZIP file could not be added'
-				redirect(action: 'index')
+				redirect(action: 'acquired')
 				return
 			}
 		}
 		
 		flash.message = nrFilesAdded + ' extracted files were added'
-		redirect(action: 'index')
+		redirect(action: 'acquired')
 	}	
 	
 }

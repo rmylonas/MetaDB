@@ -62,7 +62,7 @@ function startMetaMs(){
 			    Download <span class="caret"></span>
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
-			    <g:link class="btn btn-primary" action="downloadAcquiredCSV">CSV</g:link>
+			    <li><g:link action="downloadAcquiredCSV">CSV</g:link></li>
 			  </ul>
 			</div>
      		<div class="btn-group">

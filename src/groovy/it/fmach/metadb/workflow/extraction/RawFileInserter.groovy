@@ -1,12 +1,15 @@
 package it.fmach.metadb.workflow.extraction
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
+
 import it.fmach.metadb.helper.UnZipper
 import it.fmach.metadb.isatab.model.FEMAssay
 
 
 class RawFileInserter {
-
+	
 	def unzipper = new UnZipper()
 	
 	def applicationDataPath
@@ -99,4 +102,5 @@ class RawFileInserter {
 		return [null, null, nrFilesAdded]
 	}
 	
+
 }
