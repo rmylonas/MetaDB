@@ -31,9 +31,10 @@ class ExtractedFileInserter {
 	def addExtractedFilesZip(FEMAssay assay, String zipFilePath){
 		
 		// create the directories
-		File workDir = new File(this.applicationDataPath + assay.workDir)
+		def workDirPath = this.applicationDataPath + "/" + assay.workDir
+		File workDir = new File(workDirPath)
 		workDir.mkdir()
-		File extractedFileDir = new File(this.applicationDataPath + assay.workDir + "/extractedFiles")
+		File extractedFileDir = new File(workDirPath + "/extractedFiles")
 		extractedFileDir.mkdir()
 		
 		// unzip and list all files
