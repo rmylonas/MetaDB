@@ -77,7 +77,7 @@ class ExportCsv {
 		// select the runs with status "extracted"
 		List<FEMRun> runs = []
 		assay.acquiredRuns.each{ run ->
-			if(run.status == "extracted") runs << run
+			runs << run
 		}
 		
 		this.exportAcquiredRuns(runs)
@@ -88,7 +88,7 @@ class ExportCsv {
 		def csv = new StringBuffer()
 		
 		// the header
-		def header = ["Row No.", "Sample Name", "Parameter Value [Scan polarity]", "MS Assay Name", "Derived Spectral Data File"]
+		def header = ["Row No.", "Sample Name", "Parameter Value [Scan polarity]", "MS Assay Name", "Derived Spectral Data File", "Raw Spectral Data File", "status"]
 		
 		// parse the factor names from first entry which is not blank, QC or STDmix
 		def sampleName = 'QC'
@@ -119,6 +119,8 @@ class ExportCsv {
 			line << run.scanPolarity
 			line << run.msAssayName
 			line << run.derivedSpectraFilePath
+			line << run.rawSpectraFilePath
+			line << run.status
 			
 			// try to parse the factors, but if there empty (null) we take the emptyFactorList
 			def factors = jsonConverter.parseFactorJson(run.sample.factorJSON)
