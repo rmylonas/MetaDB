@@ -59,20 +59,20 @@ function startMetaMs(){
      	<div class="btn-group">
      		<div class="btn-group">
 			  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-			    Download <span class="caret"></span>
-			  </button>
-			  <ul class="dropdown-menu" role="menu">
-			    <li><g:link action="downloadAcquiredCSV">CSV</g:link></li>
-			  </ul>
-			</div>
-     		<div class="btn-group">
-			  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 			    Upload  <span class="caret"></span>
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
 			    <li><g:link action="chooseExtracted">Extracted files</g:link></li>
 			    <li><g:link action="chooseRaw">Raw files</g:link></li>
 			    <li><g:link action="chooseOtherData">Other data</g:link></li>
+			  </ul>
+			</div>
+			<div class="btn-group">
+			  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			    Download <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" role="menu">
+			    <li><g:link action="downloadAcquiredCSV">CSV</g:link></li>
 			  </ul>
 			</div>
    		 	<button class="btn btn-primary" onClick="startMetaMs()" >Start MetaMS</button>		
