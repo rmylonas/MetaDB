@@ -1,6 +1,7 @@
 package it.fmach.metadb.isatab.controller
 
 import it.fmach.metadb.isatab.model.FEMStudy
+import it.fmach.metadb.export.StudyZipExporter
 
 class StudiesController {
 	
@@ -57,20 +58,25 @@ class StudiesController {
 	
 	def downloadZip(){
 		
-		def submissionId = params.id
-		// load the workDir from the submission
-		def submission = MetaMsSubmission.get(submissionId)
+		def studyId = params.id
+		// load the workDir from the study
+		def study = FEMStudy.get(studyId)
+		def dataDir = grailsApplication.config.metadb.dataPath + "/" + study.workDir
 		
 		// create a zip-file from the current workDir
-		String tmpFilePath = metaMsZipExporter.createTempZip(submission.workDir)
+		// zip the test folder
+		def zipper = new StudyZipExporter()
+		String tmpFilePath = zipper.createTempZip(dataDir)
 		File file = new File(tmpFilePath)
+		
+		println(tmpFilePath)
 		
 		// hand zip file to the browser
 		if (file.exists()) {
 			def os = response.outputStream
 			response.setHeader("Content-Type", "application/zip")
 			response.setHeader("Content-disposition", "attachment;filename=${file.name}")
-	
+			
 			def bytes = file.text.bytes
 			for(b in bytes) {
 			   os.write(b)

@@ -1,4 +1,4 @@
-package it.fmach.metadb.instrument.export
+package it.fmach.metadb.export
 
 import it.fmach.metadb.export.ExportCsv;
 import it.fmach.metadb.isatab.testHelper.TestDomainCreator

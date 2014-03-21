@@ -55,6 +55,7 @@ grails.project.dependency.resolution = {
 		compile "net.sf.opencsv:opencsv:2.0"
 		compile "javatar:javatar:2.5"
 		compile "net.sf.opencsv:opencsv:1.7"
+		compile 'org.apache.ant:ant:1.8.2'
 
 //		compile "org.compass-project:compass:2.2.0"
 //		compile "org.apache.lucene:lucene-core:4.6.0"
