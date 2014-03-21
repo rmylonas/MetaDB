@@ -157,6 +157,7 @@
               <th>Creation date</th>
               <th>Owner</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           
@@ -176,6 +177,9 @@
             			<td>${it.project.name}</td>
             			<td>${it.dateCreated}</td>
             			<td>${it.owner.username}</td>
+            			
+            				<!-- ZIP download button -->
+ 						<td><g:link controller='studies' action="downloadZip" id="${it.id}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-arrow-down"></span>ZIP</g:link></td>            			
             			
             			<!-- if we're a user, we only let you delete if its your own -->
             			<sec:access expression="hasRole('ROLE_USER')">

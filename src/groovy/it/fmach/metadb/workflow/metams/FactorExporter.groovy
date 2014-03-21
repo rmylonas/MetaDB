@@ -1,7 +1,7 @@
 package it.fmach.metadb.workflow.metams
 
+import it.fmach.metadb.export.ExportCsv;
 import it.fmach.metadb.helper.JsonConverter
-import it.fmach.metadb.instrument.export.ExportCsv
 import it.fmach.metadb.isatab.model.FEMRun
 
 class FactorExporter {

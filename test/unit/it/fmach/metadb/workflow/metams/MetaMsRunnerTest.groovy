@@ -57,7 +57,7 @@ class MetaMsRunnerTest {
 		assert 2 == metaMsSubmission.selectedRuns.size()
 		
 		// check assay was saved correctly
-		assert assay.workDir + "/pipeline/1" == assay.metaMsSubmissions.get(0).workDir
+		assert tmpFile.getAbsolutePath() + "/" +  assay.workDir + "/pipeline/1" == assay.metaMsSubmissions.get(0).workDir
 		
 		
 		
@@ -106,8 +106,8 @@ class MetaMsRunnerTest {
 		assert "2" == assay.metaMsSubmissions.get(1).name
 		
 		// check the paths
-		assert assay.workDir + "/pipeline/1" == assay.metaMsSubmissions.get(0).workDir
-		assert assay.workDir + "/pipeline/2" == assay.metaMsSubmissions.get(1).workDir
+		assert  tmpFile.getAbsolutePath() + "/"  + assay.workDir +"/pipeline/1" == assay.metaMsSubmissions.get(0).workDir
+		assert tmpFile.getAbsolutePath() + "/" + assay.workDir +"/pipeline/2" == assay.metaMsSubmissions.get(1).workDir
 		
 	}
 	

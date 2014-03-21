@@ -28,6 +28,5 @@ class MetaMsZipExporter {
 		zipFile.close()
 		
 		return zipFileName
-	}
-	
+	}	
 }

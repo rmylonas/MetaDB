@@ -1,6 +1,6 @@
 package it.fmach.metadb.isatab.controller
 
-import it.fmach.metadb.instrument.export.ExportCsv
+import it.fmach.metadb.export.ExportCsv;
 import it.fmach.metadb.isatab.model.FEMAssay
 import it.fmach.metadb.isatab.model.FEMRun
 import it.fmach.metadb.workflow.acquisition.AcquiredNamesInserter

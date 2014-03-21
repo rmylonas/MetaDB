@@ -1,6 +1,6 @@
 package it.fmach.metadb.instrument.export
 
-import it.fmach.metadb.instrument.export.ExportCsv
+import it.fmach.metadb.export.ExportCsv;
 import it.fmach.metadb.isatab.testHelper.TestDomainCreator
 import it.fmach.metadb.isatab.model.FEMAssay
 import it.fmach.metadb.isatab.model.FEMStudy
@@ -9,6 +9,7 @@ import it.fmach.metadb.isatab.model.InstrumentMethod
 import it.fmach.metadb.isatab.model.Instrument
 import it.fmach.metadb.isatab.model.AccessCode
 import grails.test.mixin.*
+
 import org.junit.*
 
 @Mock([FEMStudy, FEMAssay, FEMRun, InstrumentMethod, Instrument, AccessCode])
