@@ -66,7 +66,7 @@ class MetaMsRunner {
 
 		// create and save this metaMsSubmission
 		def submissionName = this.currentMetaMsSubmissionName(assay)
-		def metaMsSubmission = new MetaMsSubmission(workDir: workDirRelative,
+		def metaMsSubmission = new MetaMsSubmission(workDir: this.workDir,
 													status: "running",
 													selectedRuns: selectedRuns,
 													command: '',

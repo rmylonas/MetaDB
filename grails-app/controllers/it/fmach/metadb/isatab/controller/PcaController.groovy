@@ -23,7 +23,7 @@ class PcaController {
 		
 		// load the workDir from the submission
 		def submission = MetaMsSubmission.get(submissionId)
-		session.workDir = grailsApplication.config.metadb.dataPath + '/' + submission.workDir
+		session.workDir = submission.workDir
 	}
 	
 	def plotPCA(){
