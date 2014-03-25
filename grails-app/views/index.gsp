@@ -27,10 +27,10 @@
 			</select>
 	    </div><!-- /input-group -->
 	 </div><!-- /.col-lg-4 -->
-	  <div class="col-lg-2">
+	  <div class="col-lg-3">
 		 <div class="checkbox">
 		    <label>
-		      <input type="checkbox" name="showAll" > Show all users
+		      <input type="checkbox" name="showAll" > Show data from all users
 		    </label>
 	  	</div>
 	 </div><!-- /.col-lg-4 -->

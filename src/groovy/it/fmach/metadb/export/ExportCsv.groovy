@@ -44,10 +44,14 @@ class ExportCsv {
 		k -= 1
 		runs.get(k).attach()
 		def factorList = jsonConverter.parseFactorJson(runs.get(k).sample.factorJSON)
-		header << (factorList[0]).join(sep)
+		def emptyFactorList = []
 		
-		// for the samples, which do not have any factors (QC, blank and STDmix)
-		def emptyFactorList = [null, Collections.nCopies(factorList[0].size(), '') ] 
+		if(factorList){
+			header << (factorList[0]).join(sep)
+			
+			// for the samples, which do not have any factors (QC, blank and STDmix)
+			emptyFactorList = [null, Collections.nCopies(factorList[0].size(), '') ]
+		}
 		
 		// print the header
 		csv << header.join(sep) << "\n"
@@ -62,7 +66,7 @@ class ExportCsv {
 			// try to parse the factors, but if there empty (null) we take the emptyFactorList
 			def factors = jsonConverter.parseFactorJson(run.sample.factorJSON)
 			if(! factors) factors = emptyFactorList
-			line << factors[1].join(sep)
+			if(factors) line << factors[1].join(sep)
 			
 			csv << line.join(sep) << "\n"
 		}
