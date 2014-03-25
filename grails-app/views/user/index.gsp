@@ -31,9 +31,8 @@
             <tr>
               <th>Name</th>
               <th>Working directory</th>
-              <th>Isatab directory</th>
               <th>Admin</th>
-              <td></td>
+              <th></th>
             </tr>
           </thead>
           
@@ -44,23 +43,19 @@
           	<g:if test="${it.username == sec.username().toString()}">
             	<tr>
             			<td><g:link action='detail' params="${[id: it.id]}">${it.username}</g:link></td>
-            			<td>${it.workDir}</td>
-            			<td>${session.workDir + it.workDir + '/isatab'}         			
+            			<td>${session.workDir + it.workDir}</td>		
 						<td></td>
           				<td></td>			
  	 			</tr>
  	 		</g:if>
 		  </g:each>
 		  </sec:access>
-
-
-          
+   
           <sec:access expression="hasRole('ROLE_ADMIN')">
           <g:each in="${session.userList}">
             	<tr>
             			<td><g:link action='detail' params="${[id: it.id]}">${it.username}</g:link></td>
-            			<td>${it.workDir}</td>
-            			<td>${session.workDir + it.workDir + '/isatab'}         			
+            			<td>${session.workDir + it.workDir}         			
             			<!-- show OK sign if the user is admin -->
             			<g:if test="${it.getAuthorities().toList().get(0).authority == 'ROLE_ADMIN'}">
      						<td><span class="glyphicon glyphicon-ok"></span></td>
