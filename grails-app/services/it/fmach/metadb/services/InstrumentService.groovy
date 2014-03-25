@@ -20,10 +20,13 @@ class InstrumentService {
 		instrument.delete()
     }
 	
-	def deleteMethod(Instrument instrument, InstrumentMethod instrumentMethod) {
+	def deleteMethod(InstrumentMethod instrumentMethod) {
 		// let's complain if the method is used by some assays
 		def assayList = FEMAssay.findByMethod(instrumentMethod)
 		if(assayList) throw new RuntimeException("Method [" + instrumentMethod.name + "] is used by some Assays. Please delete those Assays first.")
+		
+		// load corresponding instrument
+		def instrument = Instrument.findAll("from Instrument a where :methods in elements(methods)",[methods:instrumentMethod]).get(0)
 		
 		// and delete
 		instrument.removeFromMethods(instrumentMethod)

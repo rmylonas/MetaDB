@@ -152,5 +152,24 @@ class InstrumentController {
 		flash.message = "Instrument was deleted"
 		redirect(action: 'index')
 	}
+	
+	
+	def deleteMethod(){
+		// delete selected instrument
+		def method = InstrumentMethod.get(params.id)
+		
+		try{
+			instrumentService.deleteMethod(method)
+		}catch(Exception e){
+			e.printStackTrace()
+			flash.error = e.message
+			redirect(action: 'index')
+			return
+		}
+		
+		flash.message = "Method was deleted"
+		redirect(action: 'index')
+		
+	}
 
 }
