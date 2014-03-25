@@ -85,6 +85,12 @@ Run sequences of selected Assays are randomized and can be exported as CSV files
 
 The processing includes feature detection and identification against Compound databases. This part is done using the open source R library [MetaMS](https://github.com/rwehrens/metaMS).
 
+### Login
+
+![MetaDB login page](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/login_page.png "MetaDB login page")
+
+Login using your credentials. See the **User management** section for further details on how to create and manage users. 
+
 ### Search
 
 ![MetaDB search page](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/search_page.png "MetaDB search page")
@@ -127,9 +133,17 @@ Once you finished your acquisition, you can add your actual run sequence by clic
 
 ![MetaDB acquired runs](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/acquired_runs.png "MetaDB acquired runs")
 
-In this view you can see the sequence you actually acquired. By pressing *Upload extracted files* you can add runs in *.CDF* format. You have to select 
+In this view you can see the sequence you actually acquired. Runs can have to different status: *acquired* and *processed*. A blue *acquired* means, that this run is ment to be acquired, but the extracted file (CDF or mzXML) weren't added yet. 
+
+Extracted files can be added by uploading a ZIP file containing files in *CDF* or *mzXML* format (click on *Upload* -> *Extracted files*). Since the *Assay name* is unique, files are automatically connected to the relevant run. Once an extracted file was succesfully added to a run, its status changes to a green *processed*. 
+
+Runs of untargeted data, with status *processed*, can be further submited to MetaMS for feature detection and PCA visualization. See the next section for details.
+
+To get the acquired runs back to your ISAtab file, you can download your data as a CSV file (click on *Download* -> *CSV*). From the CSV file you can copy/paste your data into your ISAtab file.
 
 ##### 3. MetaMS submission and PCA plots
+
+![MetaDB acquired runs](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/acquired_runs.png "MetaDB acquired runs")
 
 ### Statistics
 

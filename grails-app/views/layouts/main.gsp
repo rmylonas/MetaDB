@@ -12,7 +12,16 @@
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        margin-bottom: 60px;
       }
+      #footer {
+		  position: fixed;
+		  bottom: 0;
+		  width: 100%;
+		  /* Set the fixed height of the footer here */
+		  height: 40px;
+		  background-color: #f5f5f5;
+	  }
     </style>
     <%--
     <link href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}" rel="stylesheet">
@@ -31,6 +40,9 @@
 		<r:layoutResources />
 	</head>
 	<body>
+	
+	<!-- Wrap all page content here -->
+    <div id="wrap">
 	
 	<!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -136,6 +148,19 @@
 		});
 		</script>
 	</g:if> -->
+	
+	<!-- wrap -->
+	</div>
 		
 	</body>
+	
+
+	<div id="footer">
+      <div class="container">
+			<p class="muted credit">developed by <a href="http://www.fmach.it">Fondazione Edmund Mach</a>
+			<img src="${resource(dir: 'img', file: 'poweredByISAtools.png')}"/>
+			</p>
+      </div>
+    </div>
+	
 </html>

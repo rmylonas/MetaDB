@@ -2,6 +2,8 @@ package it.fmach.metadb.isatab.controller
 
 import it.fmach.metadb.isatab.model.FEMStudy
 import it.fmach.metadb.export.StudyZipExporter
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
 
 class StudiesController {
 	
@@ -72,18 +74,30 @@ class StudiesController {
 		println(tmpFilePath)
 		
 		// hand zip file to the browser
-		if (file.exists()) {
-			def os = response.outputStream
-			response.setHeader("Content-Type", "application/zip")
-			response.setHeader("Content-disposition", "attachment;filename=${file.name}")
+		//if (file.exists()) {
+		
+		
+		def os = response.outputStream
+		response.setContentType('APPLICATION/OCTET-STREAM')
+		//response.setHeader("Content-Type", "application/zip")
+		response.setHeader("Content-disposition", "attachment;filename=${file.name}")
+		
+		ZipOutputStream zip = new ZipOutputStream(os)
+		
+		def zipFile = new ZipEntry(tmpFilePath)
+		zip.putNextEntry(zipFile)
+		zip.write(bytes)
+		
+		zip.close()
 			
-			def bytes = file.text.bytes
-			for(b in bytes) {
-			   os.write(b)
-			}
-	
-			os.flush()
-		 }
+//			def bytes = file.text.bytes
+//			for(b in bytes) {
+//			   zip.write(b)
+//			}
+//	
+//			os.flush()
+			
+		// }
 			
 	}
 	
