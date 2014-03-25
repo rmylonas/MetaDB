@@ -44,6 +44,9 @@ class AssaysController {
 	def delete(){
 		def assay = FEMAssay.get(params.id)
 		
+		// delete the workDir
+		new File(grailsApplication.config.metadb.dataPath + "/" + assay.workDir).deleteDir()
+		
 		// remove the selected entry from the session
 		def i = session.assays.iterator()
 		while (i.hasNext()) {

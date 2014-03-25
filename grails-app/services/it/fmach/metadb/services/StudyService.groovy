@@ -4,9 +4,13 @@ import it.fmach.metadb.isatab.model.FEMStudy
 
 class StudyService {
 	
+	def grailsApplication
 	def assayService
 	
 	def delete(FEMStudy study){
+		
+		// first we delete the whole workingDir
+		new File(grailsApplication.config.metadb.dataPath + "/" + study.workDir).deleteDir()
 		
 		// in this case we also have to delete all samples
 		def sampleMap = [:]
@@ -30,6 +34,7 @@ class StudyService {
 		sampleMap.each{ sample, v ->
 			sample.delete()
 		}
+		
 	}
 
     def saveStudy(FEMStudy study) {

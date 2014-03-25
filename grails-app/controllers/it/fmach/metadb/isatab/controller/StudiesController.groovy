@@ -10,7 +10,7 @@ class StudiesController {
 	def springSecurityService
 	def studyService
 
-	def delete(){
+	def delete(){	
 		def study = FEMStudy.get(params.id)
 		
 		// remove the selected entry from the session
@@ -33,8 +33,9 @@ class StudiesController {
 		}
 		
 		flash.message = "Study was deleted"
-		render(view:"index")
+		render(view:"index")	
 	}
+	
 	
     def allStudies() {
 		def showEntriesPerPage = grailsApplication.config.metadb.showEntriesPerPage
@@ -46,6 +47,7 @@ class StudiesController {
 		render(view:"index")
 	}
 	
+	
 	def myStudies() {
 		def showEntriesPerPage = grailsApplication.config.metadb.showEntriesPerPage
 		def myOffset = (params.offset) ? (params.offset) : (0)
@@ -54,12 +56,11 @@ class StudiesController {
 		
 		session.studies = FEMStudy.findAllByOwner(currentUser, [offset: myOffset, max: myMax])
 		session.totalEntries = FEMStudy.countByOwner(currentUser)
-		render(view:"index")
+		render(view:"index")	
 	}
 	
 	
-	def downloadZip(){
-		
+	def downloadZip(){	
 		def studyId = params.id
 		// load the workDir from the study
 		def study = FEMStudy.get(studyId)
@@ -71,28 +72,11 @@ class StudiesController {
 		String tmpFilePath = zipper.createTempZip(dataDir)
 		File file = new File(tmpFilePath)
 		
-		println(tmpFilePath)
-		
-		// hand zip file to the browser
-		//if (file.exists()) {
-		
-		
 		def os = response.outputStream
-		//response.setContentType('APPLICATION/OCTET-STREAM')
 		response.setHeader("Content-Type", "application/zip")
 		response.setHeader("Content-disposition", "attachment;filename=${file.name}")
 		
-		response.outputStream << file.newInputStream()
-			
-//			def bytes = file.text.bytes
-//			for(b in bytes) {
-//			   zip.write(b)
-//			}
-//	
-//			os.flush()
-			
-		// }
-			
+		response.outputStream << file.newInputStream()		
 	}
 	
 	
