@@ -78,17 +78,11 @@ class StudiesController {
 		
 		
 		def os = response.outputStream
-		response.setContentType('APPLICATION/OCTET-STREAM')
-		//response.setHeader("Content-Type", "application/zip")
+		//response.setContentType('APPLICATION/OCTET-STREAM')
+		response.setHeader("Content-Type", "application/zip")
 		response.setHeader("Content-disposition", "attachment;filename=${file.name}")
 		
-		ZipOutputStream zip = new ZipOutputStream(os)
-		
-		def zipFile = new ZipEntry(tmpFilePath)
-		zip.putNextEntry(zipFile)
-		zip.write(bytes)
-		
-		zip.close()
+		response.outputStream << file.newInputStream()
 			
 //			def bytes = file.text.bytes
 //			for(b in bytes) {

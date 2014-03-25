@@ -67,7 +67,11 @@ Username: admin
 Password: admin
 ```
 
-##### installing R PCA package:
+##### installing R packages:
+
+
+
+
 If you want to use the PCA plotting option, you have to install the *PCA* library to your local **R** installation:
 ```
 sudo R -e 'install.packages("./resources/R/PCA_0.0.2.1.tar.gz", repos = NULL, type="source")'
