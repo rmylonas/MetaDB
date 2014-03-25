@@ -49,8 +49,8 @@
 			<div class="form-group">	
 				<label for="project">Chromatrography</label>
 				<select class="form-control" name="chromatography" >
-					<option value="LC">LC</option>
-					<option value="GC">GC</option>
+					<option value="LC" >LC</option>
+					<option value="GC" ${(session.instrument.chromatography == 'GC') ? ('selected="selected"') : ('') }>GC</option>
 				</select>
 	   		</div> <!-- form-group -->
 			
@@ -61,7 +61,7 @@
 	  	
     </g:uploadForm>
  </div>  
- 
+
  <div class="container">
     <h3>Methods</h3>
     

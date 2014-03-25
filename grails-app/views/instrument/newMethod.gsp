@@ -54,17 +54,17 @@
 			
 	   		<div class="form-group">	
 				<label for="startPattern">Randomization start pattern</label>
-				<input class="form-control" name="startPattern" >
+				<input class="form-control" name="startPattern" value="1.blank-1.STDmix-4.QC">
 	   		</div> <!-- form-group -->
 	   		
 	   		<div class="form-group">	
 				<label for="repeatPattern">Randomization repeat pattern</label>
-				<input class="form-control" name="repeatPattern" >
+				<input class="form-control" name="repeatPattern" value="6.sample-1.QC">
 	   		</div> <!-- form-group -->
 			
 			<div class="form-group">	
 				<label for="endPattern">Randomization end pattern</label>
-				<input class="form-control" name="endPattern" >
+				<input class="form-control" name="endPattern" value="1.STDmix-1.blank">
 	   		</div> <!-- form-group -->
 	   		
 	   		<div class="form-group">	

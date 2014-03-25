@@ -31,7 +31,7 @@
  		<div class="col-md-4">	 		 		
 	   		<div class="form-group">	
 				<label for="name">Name</label>
-				<input class="form-control" name="name" value="${session.method.name}">
+				<input class="form-control" name="name" value="${(session.method.name)}">
 	   		</div> <!-- form-group -->
 	   		
 	   		<div class="form-group">	

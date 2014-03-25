@@ -110,7 +110,7 @@ class InstrumentController {
 	
 	def updateMethod(){
 		// create boolean parameter for randomization
-		def randomization = (params.randomization == "on") ? (true) : (false)
+		def randomization = (params.randomization == "randomize") ? (true) : (false)
 		
 		// update the method
 		def method = InstrumentMethod.get(session.method.id)
