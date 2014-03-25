@@ -157,9 +157,10 @@
 
 	<div id="footer">
       <div class="container">
-			<p class="muted credit">developed by <a href="http://www.fmach.it">Fondazione Edmund Mach</a>
-			<img src="${resource(dir: 'img', file: 'poweredByISAtools.png')}"/>
-			</p>
+		<p class="muted credit">developed by
+			<a href="http://www.fmach.it"><img height="40" src="${resource(dir: 'img', file: 'FEMlogo.png')}"/></a>
+			<a href="http://www.isa-tools.org/"><img src="${resource(dir: 'img', file: 'poweredByISAtools.png')}"/></a>
+		</p>
       </div>
     </div>
 	
