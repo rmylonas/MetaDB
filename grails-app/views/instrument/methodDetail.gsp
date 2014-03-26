@@ -79,7 +79,7 @@
 	   		</div> <!-- form-group -->
 			
 			<div class="form-group">	
-				<label for="metaMsParameterFile">MetaMS parameters filename</label>
+				<label for="metaMsParameterFile">MetaMS settings name</label>
 				<input class="form-control" name="metaMsParameterFile" value="${session.method.metaMsParameterFile}">
 	   		</div> <!-- form-group -->
 			

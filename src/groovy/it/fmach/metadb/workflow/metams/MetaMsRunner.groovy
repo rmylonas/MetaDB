@@ -149,8 +149,8 @@ class MetaMsRunner {
 		if(assay.method.metaMsDb) command += " -d " + this.metaMsDbDir + "/" + assay.method.metaMsDb
 
 		// add the instrument settings (throw exception if not available)		
-		if(! assay.method.metaMsParameterFile) throw new RuntimeException("missing metaMsParameterFile information in assay method")
-		command += " -s " + this.metaMsSettingsDir + "/" + assay.method.metaMsParameterFile
+		if(! assay.method.metaMsParameterFile) throw new RuntimeException("missing metaMsSetting information in assay method")
+		command += " -s " + assay.method.metaMsParameterFile
 
 		// output to workdir
 		command += " -o " + this.workDir

@@ -1,5 +1,6 @@
-library("getopt")
-
+library(getopt)
+library(metaMS)
+data(FEMsettings)
 
 #get options, using the spec as defined by the enclosed list.
 #we read the options from the default: commandArgs(TRUE).
@@ -38,8 +39,10 @@ files <- read.csv(opt$fileList, header=FALSE)
 files <- as.vector(files[,1])
 
 # load settings
-loaded.obj <- load(opt$setting)
-eval(parse(text = paste0("instr.setting <- ", loaded.obj[1]) ) )
+instr.setting <- switch(opt$setting,
+               Synapt.NP = Synapt.NP,
+               Synapt.RP = Synapt.RP,
+               TSQXLS.GC = TSQXLS.GC)
 
 # load database
 database = NULL
@@ -56,8 +59,6 @@ rt.range <- NULL
 if ( !is.null(opt$minRt) & !is.null(opt$maxRt) ) { rt.range <- c(opt$minRt, opt$maxRt) }
 
 # run metaMS
-library("metaMS")
-
 if( opt$instrument == "GC" ){
 	# run GC
 	out <- runGC(files, settings = instr.setting, rtrange = rt.range, DB = database)
@@ -70,3 +71,5 @@ if( opt$instrument == "GC" ){
 }
 
 save(out, file=paste0(opt$output, "/result.RData"))
+
+out$PeakList
