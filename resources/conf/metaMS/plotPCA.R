@@ -77,5 +77,5 @@ for(i in 1:nrow(DM)){
 png(paste0(opt$workdir, "/PCA.png"))
 mypca <- PCA(scale(DM, scale=FALSE))
 scoreplot(mypca,  col=mycol)
-legend("bottomright", mylabels, pch=rep(1, length(mylabels.colors)), col=mylabels.colors)
+# legend("bottomright", mylabels, pch=rep(1, length(mylabels.colors)), col=mylabels.colors)
 dev.off()
