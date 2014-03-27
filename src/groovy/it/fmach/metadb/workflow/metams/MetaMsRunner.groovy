@@ -59,6 +59,8 @@ class MetaMsRunner {
 		// construct the command and save it in a file
 		def command = constructCommand(assay, rtMin, rtMax)
 		new File(this.workDir + "/command.sh").withWriter{ it << command }
+
+		println(command)
 		
 		// create a csv file containing the factors
 		factorExporter.exportFactorTable(selectedRuns, this.workDir + "/factors.csv")
@@ -83,16 +85,50 @@ class MetaMsRunner {
 		assay.addToMetaMsSubmissions(metaMsSubmission)
 		assay.save(flush: true, failOnError: true)
 		metaMsSubmission.discard()
-		def submissionId = metaMsSubmission.id
-
+		def submissionId = metaMsSubmission.id	
+		
+		// STDout file
+		def fwOut = new FileWriter(this.workDir + "/stdout.log")
+		def fwErr = new FileWriter(this.workDir + "/stderr.log")
+		
 		// we execute the script in a separate thread
 		Thread.start{
 			def proc = command.execute()
+			
+			BufferedReader stdOut = new BufferedReader(new InputStreamReader(proc.getInputStream()))
+			BufferedReader stdErr = new BufferedReader(new InputStreamReader(proc.getErrorStream()))
+			
+			// create a Thread which writes the StdOut
+			Thread.start{
+				def line
+				
+				try{
+					while ((line = stdOut.readLine()) != null) {
+						fwOut.append(line + "\n")
+						fwOut.flush()
+					}
+					
+				}catch(Exception e){/* everything is ok, since stream is closed before finishing*/}
+			
+				fwOut.close()
+			}
+			
+			// create a Thread which writes the StdErr
+			Thread.start{
+				def line
+				
+				try{
+					while ((line = stdErr.readLine()) != null) {
+						fwErr.append(line + "\n")
+						fwErr.flush()
+					}
+					
+				}catch(Exception e){/* everything is ok, since stream is closed before finishing*/}
+			
+				fwErr.close()
+			}
+			
 			proc.waitFor()
-
-			// write stdout and stderr
-			new File(this.workDir + "/stdout.log").withWriter{ it << proc.in.text }
-			new File(this.workDir + "/stderr.log").withWriter{ it << proc.err.text }
 
 			// save the right status once we're finished
 			//metaMsSubmission.refresh()

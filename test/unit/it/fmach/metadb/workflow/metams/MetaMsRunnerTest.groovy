@@ -21,48 +21,7 @@ import it.fmach.metadb.isatab.model.MetaMsDb
 class MetaMsRunnerTest {
 	
 	static def currentUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
-	static String metaMsConfDir = "resources/conf/metaMS"
-	
-	@Test
-	public void runMetaMsTest() {		
-		def creator = new TestDomainCreator()
-		def assay = creator.createExtractedRuns()
-		
-//		assay.acquiredRuns.each{
-//			println(it.msAssayName)
-//		}
-		
-		def selectedMsAssayNames = ['run_2', 'run_3']
-		
-		// create temporary workdir
-		File tmpFile = File.createTempFile("test_metams_", Long.toString(System.nanoTime()))
-		tmpFile.delete()
-		tmpFile.mkdir()
-		
-		def runner = new MetaMsRunner(metaMsConfDir, "", "", tmpFile.getAbsolutePath())
-		assay.workDir = "myWorkDir"
-		assay.owner = currentUser
-		assay.save(flash: true, failOnError: true)
-		
-		runner.runMetaMs(assay, selectedMsAssayNames, "1.2", "10.5", "comment")
-		
-		// make sure metams is done
-		assay.refresh()
-		Thread.sleep(500)
-		
-		def metaMsSubmission = MetaMsSubmission.get(1)
-		
-		// submission fails because the CDF files are missing
-		assert "failed"	== metaMsSubmission.status
-		assert 2 == metaMsSubmission.selectedRuns.size()
-		
-		// check assay was saved correctly
-		assert tmpFile.getAbsolutePath() + "/" +  assay.workDir + "/pipeline/1" == assay.metaMsSubmissions.get(0).workDir
-		
-		
-		
-	}
-	
+	static String metaMsConfDir = "resources/conf/metaMS"	
 	
 	@Test
 	public void runMetaMs2submissionsTest() {
@@ -124,7 +83,7 @@ class MetaMsRunnerTest {
 		assay.workDir = runner.workDir
 
 		def command = runner.constructCommand(assay, null, null)
-		assert "Rscript resources/conf/metaMS/runMetaMS.R -i LC -p negative -f filelist/dir -s setting/dir/some/path -o work/dir" == command
+		assert "Rscript resources/conf/metaMS/runMetaMS.R -i LC -p negative -f filelist/dir -s some/path -o work/dir" == command
 		
 		def commandWithRt = runner.constructCommand(assay, "1.234", "8.875")
 		

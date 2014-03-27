@@ -157,7 +157,7 @@
 
 	<div id="footer">
       <div class="container">
-	      <div class="col-md-2">
+	      <div class="col-md-2 col-md-offset-4">
 				<a href="http://www.fmach.it"><img height="40" src="${resource(dir: 'img', file: 'FEMlogo.png')}"/></a>
 		  </div>
 		  <div class="col-md-2">
