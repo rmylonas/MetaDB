@@ -106,4 +106,17 @@ class MetaMSController {
 		redirect(action: 'index')
 	}
 	
+	
+	def details(){
+		def submissionId = params.id
+		
+		def submission = MetaMsSubmission.get(submissionId)
+		def stdOutString = new File(submission.workDir + "/stdout.log").text
+		def stdErrString = new File(submission.workDir + "/stderr.log").text
+		def commandString = new File(submission.workDir + "/command.sh").text
+		
+		[stdOut: stdOutString, stdErr: stdErrString, command: commandString]
+	}
+	
+	
 }

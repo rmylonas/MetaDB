@@ -44,8 +44,8 @@
           
           <tbody id="submissionTable">
           <g:each var="submission" in="${session.metaMsSubmissions}">          	
-               		<tr>	
-            			<td>${submission.name}</td>
+               		<tr>
+               			<td><g:link action="details" params="${[id: submission.id]}">${submission.name}</g:link></td>
             			
             			<!-- put the corresponding color to the status -->
             			<td>
