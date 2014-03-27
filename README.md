@@ -8,6 +8,7 @@ Following software has to be installed for proper functioning (other software ve
 * Tomcat 6
 * MySQL 5.5
 * Grails 2.2.3
+* R 3.0.1
 
 ## Installation
 
@@ -69,10 +70,14 @@ Password: admin
 
 ##### installing R packages:
 
+Install MetaMS from Bioconductor:
+
+```
+TODO
+```
 
 
-
-If you want to use the PCA plotting option, you have to install the *PCA* library to your local **R** installation:
+For PCA plotting, you install the *PCA* library to your local **R** installation:
 ```
 sudo R -e 'install.packages("./resources/R/PCA_0.0.2.1.tar.gz", repos = NULL, type="source")'
 ```

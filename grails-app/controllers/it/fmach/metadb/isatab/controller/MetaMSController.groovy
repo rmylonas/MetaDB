@@ -35,18 +35,12 @@ class MetaMSController {
 		File file = new File(tmpFilePath)
 		
 		// hand zip file to the browser		
-		if (file.exists()) {
-			def os = response.outputStream
-			response.setHeader("Content-Type", "application/zip")
-			response.setHeader("Content-disposition", "attachment;filename=${file.name}")
-	
-			def bytes = file.text.bytes
-			for(b in bytes) {
-			   os.write(b)
-			}
-	
-			os.flush()
-		 }
+		
+		def os = response.outputStream
+		response.setHeader("Content-Type", "application/zip")
+		response.setHeader("Content-disposition", "attachment;filename=${file.name}")
+		
+		response.outputStream << file.newInputStream()
 		
 	}
 	
