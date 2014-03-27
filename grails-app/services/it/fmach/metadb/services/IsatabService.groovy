@@ -1,5 +1,7 @@
 package it.fmach.metadb.services
 
+import org.apache.commons.io.FileUtils
+
 import it.fmach.metadb.helper.JsonConverter;
 import it.fmach.metadb.isatab.model.FEMStudy;
 
@@ -17,7 +19,8 @@ class IsatabService {
 		File newIsatabDir = new File(dataPath + study.workDir + "/" + "isatab")
 		study.iSATabFilePath = newIsatabDir
 		
-		tempIsatabDir.renameTo(newIsatabDir)
+		FileUtils.copyDirectory(tempIsatabDir, newIsatabDir)
+		tempIsatabDir.deleteDir()
 	}
 	
 	
