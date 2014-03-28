@@ -20,13 +20,11 @@ class RawFileInserter {
 	
 	def addFromLocalFolder(FEMAssay assay){
 		def extractedFilePath = this.applicationDataPath + '/' + assay.workDir + "/rawFiles"
-		def dir = new File(extractedFilePath)
 		
-		def fileList
+		def fileList = []
 		
-		// add full name to fileList
-		dir.eachFileRecurse (FileType.FILES) { file ->
-			fileList << assay.workDir + "/rawFiles/" + file
+		new File(extractedFilePath).eachFile{
+			fileList << it
 		}
 		
 		return this.addRawFiles(assay, fileList)
@@ -76,7 +74,7 @@ class RawFileInserter {
 		
 		// link the files to the run
 		fileList.each{ path ->
-			def filename = path.split("/").last()
+			def filename = path.absolutePath.split("/").last()
 			def found = false
 			
 			// look if we find the right name

@@ -12,6 +12,9 @@ class RunsController {
 	def assayService
 	def acquiredNamesInserter = new AcquiredNamesInserter()
 	
+	// ***************************************************
+	// Show either randomized or acquired runs
+	// ***************************************************
 	
 	def index(){
 		// if a assay id is provided we set the assay to the session
@@ -63,6 +66,9 @@ class RunsController {
 		render(view: "acquired")
 	}	
 	
+	// ***************************************************
+	// Download CSV
+	// ***************************************************
 	
 	def downloadAcquiredCSV(){
 		def assay = session.assay
@@ -101,6 +107,11 @@ class RunsController {
 		response.outputStream << csvString
 		response.outputStream.flush()
 	}
+	
+	
+	// ***************************************************
+	// Add new Assay names
+	// ***************************************************
 	
 	def assayNames() {}
 	
@@ -168,6 +179,10 @@ class RunsController {
 	}
 	
 	
+	// ***************************************************
+	// Upload other data
+	// ***************************************************
+	
 	def chooseOtherData(){}
 	
 	def uploadOtherData(){		
@@ -199,7 +214,59 @@ class RunsController {
 	}
 	
 	
+	
+	// ***************************************************
+	// Upload raw files
+	// ***************************************************
+	
 	def chooseRaw(){}
+	
+	def localRawUpload(){
+		
+		def rawFileInserter = new RawFileInserter(grailsApplication.config.metadb.dataPath)
+		
+		// attach the assay
+		def assay = session.assay
+		assay.attach()
+		
+		def nrFilesAdded
+			
+		// and process it
+	
+		def info = rawFileInserter.addFromLocalFolder(assay)
+		
+		// flash a warning, if names were missing
+
+		def missingN = info[0]
+		def notFoundN = info[1]
+		nrFilesAdded = info[2]
+		
+		flash.warning = ''
+		
+		if(missingN){
+			flash.warning += "Following files were missing: <ul>"
+			
+			missingN.each{
+				flash.warning += "<li>" + it + "</it>"
+			}
+			
+			flash.warning += "</ul>"
+		}
+		
+		if(notFoundN){
+			flash.warning += "Following names were not found in database: <ul>"
+			
+			notFoundN.each{
+				flash.warning += "<li>" + it + "</it>"
+			}
+			
+			flash.warning += "</ul>"
+		}
+		
+		flash.message = nrFilesAdded + ' raw files were added'
+		redirect(action: 'acquired')
+	}
+	
 	
 	def uploadRaw(){
 		
@@ -266,8 +333,11 @@ class RunsController {
 	}
 	
 	
-	def chooseExtracted(){}
+	// ***************************************************
+	// Upload extracted files
+	// ***************************************************
 	
+	def chooseExtracted(){}
 	
 	def localExtractedUpload(){
 		

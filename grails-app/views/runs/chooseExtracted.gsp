@@ -17,7 +17,7 @@
 	</g:if>
 	
 	 <g:uploadForm action="uploadExtracted" role="form">
-		<div class="col-xs-4">
+		<div class="col-md-4">
 			<div class="form-group">
 		    	<label for="extractedInput">ZIP file containing extracted spectra files</label>
 				<input name="extractedFile" class="form-control" type="file" style="display:none">
@@ -36,9 +36,14 @@
 				<g:link action="acquired" controller="runs" class="btn btn-warning">Cancel</g:link>
 			</div>
 			
-		</div> <!-- /col-xs-3 -->
+		</div> <!-- /col-xs-4 -->
 		
     </g:uploadForm>
+    
+    <div class="col-md-4 col-md-offset-4">
+    	<h5><strong>Update from local directory</strong> <em>${session.assay.workDir + "/extractedFiles"}</em></h5>
+    	<g:link action="localExtractedUpload" controller="runs" data-loading-text="Updating.." class="btn btn-primary">Update</g:link>
+    </div>
 	    
 </div> <!-- /container -->
 

@@ -20,8 +20,8 @@ class ExtractedFileInserter {
 		def fileList = []
 		
 		// add full name to fileList		
-		extractedFilePath.eachFile{
-			fileList << assay.workDir + "/extractedFiles/" + it
+		new File(extractedFilePath).eachFile{
+			fileList << it
 		}
 		
 		return this.addExtractedFiles(assay, fileList)
@@ -70,7 +70,7 @@ class ExtractedFileInserter {
 		
 		// link the files to the run
 		fileList.each{ path ->
-			def filename = path.split("/").last()
+			def filename = path.absolutePath.split("/").last()
 			def found = false
 			
 			// look if we find the right name

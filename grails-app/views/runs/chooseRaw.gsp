@@ -17,7 +17,7 @@
 	</g:if>
 	
 	 <g:uploadForm action="uploadRaw" role="form">
-		<div class="col-xs-4">
+		<div class="col-md-4">
 			<div class="form-group">
 		    	<label for="extractedInput">ZIP file containing raw files or directories</label>
 				<input name="extractedFile" class="form-control" type="file" style="display:none">
@@ -37,6 +37,11 @@
 			</div>
 			
 		</div> <!-- /col-xs-3 -->
+		
+		<div class="col-md-4 col-md-offset-4">
+	    	<h5><strong>Update from local directory</strong> <em>${session.assay.workDir + "/rawFiles"}</em></h5>
+	    	<g:link action="localRawUpload" controller="runs" data-loading-text="Updating.." class="btn btn-primary">Update</g:link>
+	    </div>
 		
     </g:uploadForm>
 	    
