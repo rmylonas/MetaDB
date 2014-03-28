@@ -53,6 +53,13 @@ class RawFileInserter {
 	}
 	
 	
+	
+	
+	/**
+	 * @param assay
+	 * @param fileList
+	 * @return [missingFiles, namesNotFound, nrFilesAdded]
+	 */
 	def addRawFiles(FEMAssay assay, List<String> fileList){
 		
 		if(! assay.acquiredRuns) throw new RuntimeException("This assay does not contain any acquiredRuns")

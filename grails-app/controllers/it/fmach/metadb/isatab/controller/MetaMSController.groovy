@@ -34,14 +34,12 @@ class MetaMSController {
 		String tmpFilePath = metaMsZipExporter.createTempZip(submission.workDir)
 		File file = new File(tmpFilePath)
 		
-		// hand zip file to the browser		
-		
+		// hand zip file to the browser
 		def os = response.outputStream
 		response.setHeader("Content-Type", "application/zip")
 		response.setHeader("Content-disposition", "attachment;filename=${file.name}")
 		
 		response.outputStream << file.newInputStream()
-		
 	}
 	
 	
@@ -61,6 +59,8 @@ class MetaMSController {
 	
 	
 	def runMetaMS() {
+		
+		def identification = (params.identification == "on") ? (true) : (false)
 		
 		def minRt = params['minRt']
 		def maxRt = params['maxRt']
@@ -93,7 +93,7 @@ class MetaMSController {
 		assay.attach()
 		
 		// start runner
-		runner.runMetaMs(assay, runSelection, minRt, maxRt, comment)
+		runner.runMetaMs(assay, runSelection, minRt, maxRt, comment, identification)
 		
 		flash.message = "started runMetaMS"
 		

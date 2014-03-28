@@ -112,6 +112,9 @@ class InstrumentController {
 		// create boolean parameter for randomization
 		def randomization = (params.randomization == "randomize") ? (true) : (false)
 		
+		def metaMsDb
+		if(params.metaMsDb) metaMsDb = MetaMsDb.get(params.metaMsDb)
+		
 		// update the method
 		def method = InstrumentMethod.get(session.method.id)
 		method.name = params.name
@@ -120,6 +123,7 @@ class InstrumentController {
 		method.startPattern = params.startPattern
 		method.repeatPattern = params.repeatPattern
 		method.endPattern = params.endPattern
+		method.metaMsDb = metaMsDb
 		method.metaMsParameterFile = params.metaMsParameterFile
 		method.randomization = randomization
 

@@ -46,7 +46,7 @@ class MetaMsRunner {
 	 * @param rtMax
 	 * @return
 	 */
-	def runMetaMs(FEMAssay assay, List<String> selectedMsAssayNames, String rtMin, String rtMax, String comment){
+	def runMetaMs(FEMAssay assay, List<String> selectedMsAssayNames, String rtMin, String rtMax, String comment, Boolean identification){
 		def workDirRelative = createWorkDir(this.dataDir, assay)
 		this.workDir = this.dataDir + "/" + workDirRelative
 		
@@ -57,10 +57,8 @@ class MetaMsRunner {
 		this.prepareFileList(selectedRuns)
 		
 		// construct the command and save it in a file
-		def command = constructCommand(assay, rtMin, rtMax)
+		def command = constructCommand(assay, rtMin, rtMax, identification)
 		new File(this.workDir + "/command.sh").withWriter{ it << command }
-
-		println(command)
 		
 		// create a csv file containing the factors
 		factorExporter.exportFactorTable(selectedRuns, this.workDir + "/factors.csv")
@@ -167,7 +165,7 @@ class MetaMsRunner {
 	}
 
 
-	def constructCommand(FEMAssay assay, String minRt, String maxRt){
+	def constructCommand(FEMAssay assay, String minRt, String maxRt, Boolean identification){
 		// call the rscript
 		def command = 'Rscript ' + this.metaMsDir + '/runMetaMS.R'
 
@@ -181,8 +179,8 @@ class MetaMsRunner {
 		// add the fileList
 		command += " -f " + this.fileListPath
 
-		// add the database if not null
-		if(assay.method.metaMsDb) command += " -d " + this.metaMsDbDir + "/" + assay.method.metaMsDb
+		// add the database if user asks for DB identification and DB is not null
+		if(identification && assay.method.metaMsDb) command += " -d " + assay.method.metaMsDb.rDataPath
 
 		// add the instrument settings (throw exception if not available)		
 		if(! assay.method.metaMsParameterFile) throw new RuntimeException("missing metaMsSetting information in assay method")

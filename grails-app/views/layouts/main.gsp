@@ -111,6 +111,7 @@
              <sec:access expression="hasRole('ROLE_ADMIN')">            
               	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/group')}">Groups and Projects</a></li>       	
                	<li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/instrument')}">Instrument and Methods</a></li>       	
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/metaMSSettings')}">MetaMS</a></li>       	
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/organism')}">Organism onthologies</a></li>
              </sec:access> 
               </ul>

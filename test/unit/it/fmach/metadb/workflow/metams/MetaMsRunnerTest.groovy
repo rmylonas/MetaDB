@@ -45,13 +45,13 @@ class MetaMsRunnerTest {
 		assay.save(flash: true, failOnError: true)
 		
 		// run the first time
-		runner.runMetaMs(assay, selectedMsAssayNames, "1.2", "10.5", "comment")
+		runner.runMetaMs(assay, selectedMsAssayNames, "1.2", "10.5", "comment", false)
 		
 		// make sure metams is done
 		Thread.sleep(500)
 		
 		// run the second time (without retention time restrictions)
-		runner.runMetaMs(assay, selectedMsAssayNames, null, null, null)
+		runner.runMetaMs(assay, selectedMsAssayNames, null, null, null, false)
 		
 		// make sure metams is done
 		Thread.sleep(500)
@@ -82,13 +82,14 @@ class MetaMsRunnerTest {
 		def assay = creator.createExtractedRuns()
 		assay.workDir = runner.workDir
 
-		def command = runner.constructCommand(assay, null, null)
+		def command = runner.constructCommand(assay, null, null, false)
 		assert "Rscript resources/conf/metaMS/runMetaMS.R -i LC -p negative -f filelist/dir -s some/path -o work/dir" == command
 		
-		def commandWithRt = runner.constructCommand(assay, "1.234", "8.875")
+		def commandWithRt = runner.constructCommand(assay, "1.234", "8.875", false)
 		
 		assert commandWithRt.contains("-m 1.234 -x 8.875")
 	}
+	
 	
 	
 	@Test

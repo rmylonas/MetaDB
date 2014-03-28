@@ -124,6 +124,51 @@ class TestDomainCreator {
 	}
 	
 	
+	FEMAssay createMarynkasRuns(){
+		def accessCodeGenerator = new AccessCodeGenerator()
+		
+		// create runs
+		def runList = []
+		
+		runList.add(new FEMRun(msAssayName: "solv_130827185620",
+			rowNumber: 1,
+			scanPolarity: "positive",
+			sample: new FEMSample(name: "Solvent", factorJSON: '{}')
+			)
+		)
+		
+		runList.add(new FEMRun(msAssayName: "JALI108_DietB_V3",
+			rowNumber: 2,
+			scanPolarity: "positive",
+			sample: new FEMSample(name: "JALI108_DietB_V3", factorJSON: '{}')
+			)
+		)
+		
+		runList.add(new FEMRun(msAssayName: "Creat55_Cinn11_130828044500",
+			rowNumber: 3,
+			scanPolarity: "positive",
+			sample: new FEMSample(name: "Creat55", factorJSON: '{}')
+			)
+		)
+		
+		runList.add(new FEMRun(msAssayName: "JALI015_DietC_V2_130829010454",
+			rowNumber: 4,
+			scanPolarity: "positive",
+			sample: new FEMSample(name: "ALI015_DietC_V2", factorJSON: '{}')
+			)
+		)
+		
+		// create assay
+		def assay = new FEMAssay(accessCode: accessCodeGenerator.getNewCode(),
+			name: "randomized_assay",
+			shortName: "shortname",
+			method: this.createMethod(),
+			instrumentPolarity: 'positive',
+			randomizedRuns: runList,
+			workDir: "myWorkDir")
+		
+	}
+	
 	
 	FEMAssay createRandomizedRunsQCFirst(){
 		def accessCodeGenerator = new AccessCodeGenerator()

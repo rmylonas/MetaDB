@@ -108,5 +108,31 @@ class ExtractedFileInserterTest {
 		// the assay status should still be "acquired", since not all files were added
 		assert "acquired" == assay.status
 	}
+	
+	
+	@Test
+	public void addMarynkasFilesTest() {
+		def inserter = new ExtractedFileInserter()
+		
+		def creator = new TestDomainCreator()
+		def assay = creator.createMarynkasRuns()
+		
+		// set the status to "acquired"
+		assay.status = "acquired"
+		assay.acquiredRuns = assay.randomizedRuns
+		
+		// a list of (imaginary) extracted files
+		def extractedFiles = ["solv_130827185620.mzXML", "JALI108_DietB_V3.mzXML", "Creat55_Cinn11_130828044500.mzdata", "JALI015_DietC_V2_130829010454.mzXML", "pipo.CDF"]
+		
+		// add the raw files : info = [missingFiles, namesNotFound, nrFilesAdded]
+		def info = inserter.addExtractedFiles(assay, extractedFiles)
+		
+		assert 0 == info[0].size()
+		assert "pipo.CDF" == info[1][0]
+		assert "solv_130827185620.mzXML" == assay.acquiredRuns.get(0).derivedSpectraFilePath
+		assert "extracted" == assay.acquiredRuns.get(1).status
+		assert 4 == info[2]
+		assert "extracted" == assay.status
+	}
 
 }

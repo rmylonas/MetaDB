@@ -26,31 +26,22 @@
   		</div>
 	</g:if>
 	
-	<h3>Standard output</h3> 
-	
-	<div class="container">
-		${stdOut}
-	</div>
-	
-	
-	<h3>Standard error</h3> 
-	
-	<div class="container">
-		${stdErr}
-	</div>
-	
-	
 	<h3>Command line</h3> 
-	
 	<div class="container">
 		${command}
 	</div>
 	
+	<h3>Standard error</h3> 
+	<div class="container">
+		${stdErr}
+	</div>
+	
+	<h3>Standard output</h3> 
+	<div class="container">
+		${stdOut}
+	</div>
 
 </div> <!-- /container -->
-
-
-  
 
 </body>
 </html>

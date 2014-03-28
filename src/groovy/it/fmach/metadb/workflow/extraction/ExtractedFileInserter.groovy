@@ -49,6 +49,11 @@ class ExtractedFileInserter {
 	
 	
 	
+	/**
+	 * @param assay
+	 * @param fileList
+	 * @return [missingFiles, namesNotFound, nrFilesAdded]
+	 */
 	def addExtractedFiles(FEMAssay assay, List<String> fileList){
 		
 		if(! assay.acquiredRuns) throw new RuntimeException("This assay does not contain any acquiredRuns")
