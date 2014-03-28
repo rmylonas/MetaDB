@@ -33,11 +33,12 @@ class IsatabService {
 			//workDir.deleteDir()
 			
 			// create new ones
-			def extractedDir = new File(dataPath + it.workDir + "/extractedFiles")
-			def pipelineDir = new File(dataPath + it.workDir + "/pipeline")
-			extractedDir.mkdirs()
-			pipelineDir.mkdir()
-		}		
+			new File(dataPath + it.workDir + "/extractedFiles").mkdirs()
+			new File(dataPath + it.workDir + "/rawFiles").mkdirs()
+			new File(dataPath + it.workDir + "/otherData").mkdirs()
+			new File(dataPath + it.workDir + "/pipeline").mkdirs()
+		}
+		
 	}
 	
 	

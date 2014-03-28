@@ -19,13 +19,9 @@ class UserWorkDirGenerator {
 		}
 		
 		// and create the directories
-		File isatabDir = new File(path + "/isatab")
-		File uploadDir = new File(path + "/upload")
-		File storedDir = new File(path + "/data")
-		
-		isatabDir.mkdirs()
-		uploadDir.mkdir()
-		storedDir.mkdir()
+		// new File(path + "/isatab").mkdirs()
+		// new File(path + "/upload").mkdirs()
+		new File(path + "/data").mkdirs()
 		
 		return path
 	}

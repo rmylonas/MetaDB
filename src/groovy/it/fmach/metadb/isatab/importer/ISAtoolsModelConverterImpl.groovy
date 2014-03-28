@@ -74,7 +74,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 		
 		 Map<String, FEMSample> sampleList = this.convertSampleList(iSAStudy)
 		
-		List<FEMAssay> assayList = this.convertAssayList(iSAStudy, sampleList)
+		List<FEMAssay> assayList = this.convertAssayList(iSAStudy, sampleList, fEMStudy.workDir)
 		fEMStudy.assays = assayList
 		
 		// set the owner
@@ -120,7 +120,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 
 	}
 	
-	private List<FEMAssay> convertAssayList(Study iSAStudy, Map<String, FEMSample> sampleList){
+	private List<FEMAssay> convertAssayList(Study iSAStudy, Map<String, FEMSample> sampleList, String workDir){
 		List<FEMAssay> assayList = new ArrayList<FEMAssay>()		
 		def assayMap = iSAStudy.getAssays()
 		
@@ -144,9 +144,8 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			assay.protocolJSON = this.protocolJSON
 			
 			// set the workDir of this assay
-			def studyDir = iSAStudy.getStudyTitle().trim().replaceAll(/\s+/, '_')
 			def assayDir = assay.shortName.replaceAll(/\s+/, '_')
-			assay.workDir = currentUser.workDir + "/data/" + studyDir + "/" + assayDir
+			assay.workDir = workDir + "/" + assayDir
 			
 			//select the polarity
 			def polarity = assay.runs[0].scanPolarity

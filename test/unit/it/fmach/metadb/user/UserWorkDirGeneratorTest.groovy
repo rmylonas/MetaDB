@@ -14,7 +14,7 @@ class UserWorkDirGeneratorTest {
 		def workDir = dirGenerator.createWorkDir(tempDir.absolutePath)
 		
 		// check if isatab directory was created
-		def isatabDir = new File(workDir + "/isatab")
+		def isatabDir = new File(workDir + "/data")
 		assert isatabDir.exists()
 	}
 	
