@@ -70,8 +70,10 @@
           
             <!-- Load -->
           	<li class="dropdown">
-              <a id="dropLoad" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Load <b class="caret"></b></a>
+              <a id="dropLoad" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Search <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dropLoad">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/search')}">Search all</a></li>
+                <li role="presentation" class="divider"></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/assays/myAssays')}">My assays</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="${createLink(uri: '/studies/myStudies')}">My studies</a></li>
                 <li role="presentation" class="divider"></li>
