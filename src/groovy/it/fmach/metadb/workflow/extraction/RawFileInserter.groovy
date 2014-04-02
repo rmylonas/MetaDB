@@ -6,6 +6,8 @@ import org.apache.commons.lang.StringUtils;
 
 import it.fmach.metadb.helper.UnZipper
 import it.fmach.metadb.isatab.model.FEMAssay
+import static groovy.io.FileType.ANY
+import org.apache.commons.io.FilenameUtils
 
 
 class RawFileInserter {
@@ -19,12 +21,18 @@ class RawFileInserter {
 	}
 	
 	def addFromLocalFolder(FEMAssay assay){
-		def extractedFilePath = this.applicationDataPath + '/' + assay.workDir + "/rawFiles"
+		def extractedFilePath = this.applicationDataPath + '/' + assay.workDir
+		
+		// we're only interested in the study-dir
+		// def studyPath = FilenameUtils.getFullPathNoEndSeparator(extractedFilePath)
 		
 		def fileList = []
 		
-		new File(extractedFilePath).eachFile{
-			fileList << it
+		// look for folders with name "raw" all over the 
+		new File(extractedFilePath).eachFileRecurse(ANY) {
+			if(it.name.toLowerCase().endsWith('.raw')) {
+				fileList << it
+			}
 		}
 		
 		return this.addRawFiles(assay, fileList)
@@ -36,7 +44,7 @@ class RawFileInserter {
 		def workDirPath = this.applicationDataPath + "/" + assay.workDir
 		File workDir = new File(workDirPath)
 		workDir.mkdirs()
-		File extractedFileDir = new File(workDirPath + "/rawFiles")
+		File extractedFileDir = new File(workDirPath + "/Data")
 		extractedFileDir.mkdir()
 		
 		// unzip and list all files

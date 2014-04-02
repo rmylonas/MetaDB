@@ -41,7 +41,7 @@
     </g:uploadForm>
     
     <div class="col-md-4 col-md-offset-4">
-    	<h5><strong>Update from local directory</strong> <em>${session.assay.workDir + "/extractedFiles"}</em></h5>
+    	<h5><strong>Look for <em>.CDF .mzData .mzXML</em> files</strong> <em>${session.assay.workDir}</em></h5>
     	<g:link action="localExtractedUpload" controller="runs" data-loading-text="Updating.." class="btn btn-primary">Update</g:link>
     </div>
 	    

@@ -33,8 +33,8 @@ class IsatabService {
 			//workDir.deleteDir()
 			
 			// create new ones
-			new File(dataPath + it.workDir + "/extractedFiles").mkdirs()
-			new File(dataPath + it.workDir + "/rawFiles").mkdirs()
+			new File(dataPath + it.workDir + "/NETcdf").mkdirs()
+			new File(dataPath + it.workDir + "/Data").mkdirs()
 			new File(dataPath + it.workDir + "/otherData").mkdirs()
 			new File(dataPath + it.workDir + "/pipeline").mkdirs()
 		}
