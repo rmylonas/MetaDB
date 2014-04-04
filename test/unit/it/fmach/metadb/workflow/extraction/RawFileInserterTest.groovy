@@ -18,7 +18,7 @@ class RawFileInserterTest {
 	static String rootDir = "resources/it/fmach/metadb/workflow/extraction/"
 	
 	@Test
-	public void addExtractedFilesZipTest() {
+	public void addRawFilesZipTest() {
 		
 		def creator = new TestDomainCreator()
 		def assay = creator.createRandomizedRunsQCFirst()

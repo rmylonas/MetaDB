@@ -46,11 +46,12 @@
 			
 			<div class="form-group checkbox">
 				<label>					
-					<input type="checkbox" name="identification" checked>					
-					Run identification
+					<input type="checkbox" name="identification" >					
+					Feature annotation
 				</label>
 			</div>
 			
+			<div class="form-group"></div>
 			
 			<div class="form-group">
 				<input onclick="$(this).button('loading')" data-loading-text="Starting.." class="btn btn-primary" type="submit" value="Submit">

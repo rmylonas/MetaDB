@@ -27,15 +27,34 @@
 	</g:if>
 	
 	<g:uploadForm action="plotPCA" class="form-horizontal">
-		<div class="col-md-4">					
+		<div class="col-md-4">	
+						
 	 		<div class="form-group">
 	 			<label for="factorSelection">Color by</label>
 				<g:select class="form-control input" name="factorSelection" from="${session.factorList}" />
 		    </div>
+			
+			<div class="form-group checkbox">
+				<label>					
+					<input type="checkbox" name="sqrtScaling" checked>					
+					Square root scaling
+				</label>
+			</div>
+			
+			<div class="form-group checkbox">
+				<label>					
+					<input type="checkbox" name="sumNorm" checked>					
+					Normalize features (divide by total intensity sum)
+				</label>
+			</div>
+			
+			<div class="form-group"> </div>
+			
 			<div class="form-group">
 				<input class="btn btn-primary" type="submit" value="Plot">
 				<g:link action="index" controller="metaMS" class="btn btn-warning">Cancel</g:link>
 			</div>
+			
 		</div>
     </g:uploadForm>
 	

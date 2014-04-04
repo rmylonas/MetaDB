@@ -3,7 +3,8 @@ package it.fmach.metadb.workflow.extraction
 import org.apache.commons.lang.StringUtils;
 import it.fmach.metadb.helper.UnZipper
 import it.fmach.metadb.isatab.model.FEMAssay
-
+import static groovy.io.FileType.FILES
+import org.apache.commons.io.FilenameUtils
 
 class ExtractedFileInserter {
 
@@ -16,12 +17,19 @@ class ExtractedFileInserter {
 	}
 	
 	def addFromLocalFolder(FEMAssay assay){
-		def extractedFilePath = this.applicationDataPath + '/' + assay.workDir + "/extractedFiles"
+		def extractedFilePath = this.applicationDataPath + '/' + assay.workDir
+		
+		// we're only interested in the study-dir
+		// def studyPath = FilenameUtils.getFullPathNoEndSeparator(extractedFilePath)
+		
 		def fileList = []
 		
-		// add full name to fileList		
-		new File(extractedFilePath).eachFile{
-			fileList << it
+		// look for files ending with ".cdf" ".mzxml" or ".mzdata"
+		new File(extractedFilePath).eachFileRecurse(FILES) {
+			def s = it.name.toLowerCase()
+			if(s.endsWith('.cdf') || s.endsWith('.mzxml') || s.endsWith('.mzdata')) {
+				fileList << it
+			}
 		}
 		
 		return this.addExtractedFiles(assay, fileList)

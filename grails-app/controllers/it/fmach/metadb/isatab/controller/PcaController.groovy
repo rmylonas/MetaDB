@@ -29,6 +29,8 @@ class PcaController {
 	def plotPCA(){
 		def workDir = session.workDir
 		def selectedFactor = params.factorSelection
+		def sqrtScaling = (params.sqrtScaling == "on") ? (true) : (false)
+		def sumNorm = (params.sumNorm == "on") ? (true) : (false)
 		
 		// create plotter object
 		def metaMsDir = grailsApplication.config.metadb.conf.metams.script
@@ -38,7 +40,7 @@ class PcaController {
 		def plotFileList
 		
 		try{
-			plotFileList = plotter.plotPCA(workDir, selectedFactor)
+			plotFileList = plotter.plotPCA(workDir, selectedFactor, sqrtScaling, sumNorm)
 		}catch(RuntimeException e){
 			e.printStackTrace()
 			flash.error = e.message

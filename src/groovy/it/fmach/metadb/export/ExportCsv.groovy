@@ -34,7 +34,7 @@ class ExportCsv {
 		// parse the factor names from first entry which is not blank, QC or STDmix
 		def sampleName = 'QC'
 		def k = 0
-		while(sampleName =~ /(?i)blank|QC|STDmix/){
+		while(sampleName =~ /(?i)blank|QC|STDmix/ && k < runs.size){
 			FEMRun run = runs.get(k++)
 			run.attach()
 			sampleName = run.sample.name

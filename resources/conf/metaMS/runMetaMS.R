@@ -72,4 +72,4 @@ if( opt$instrument == "GC" ){
 
 save(out, file=paste0(opt$output, "/result.RData"))
 
-out$PeakList
+write.csv(out$PeakTable, file=paste0(opt$output, "/PeakTable.csv"))

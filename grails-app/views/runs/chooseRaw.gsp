@@ -39,7 +39,7 @@
 		</div> <!-- /col-xs-3 -->
 		
 		<div class="col-md-4 col-md-offset-4">
-	    	<h5><strong>Update from local directory</strong> <em>${session.assay.workDir + "/rawFiles"}</em></h5>
+	    	<h5><strong>Look for <em>.raw</em> files and folders</strong> <em>${session.assay.workDir}</em></h5>
 	    	<g:link action="localRawUpload" controller="runs" data-loading-text="Updating.." class="btn btn-primary">Update</g:link>
 	    </div>
 		
