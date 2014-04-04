@@ -44,7 +44,7 @@ class RawFileInserter {
 		def workDirPath = this.applicationDataPath + "/" + assay.workDir
 		File workDir = new File(workDirPath)
 		workDir.mkdirs()
-		File extractedFileDir = new File(workDirPath + "/Data")
+		File extractedFileDir = new File(workDirPath + "/rawFiles")
 		extractedFileDir.mkdir()
 		
 		// unzip and list all files
