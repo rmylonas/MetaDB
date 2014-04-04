@@ -41,7 +41,7 @@ class ExtractedFileInserter {
 		def workDirPath = this.applicationDataPath + "/" + assay.workDir
 		File workDir = new File(workDirPath)
 		workDir.mkdirs()
-		File extractedFileDir = new File(workDirPath + "/NETcdf")
+		File extractedFileDir = new File(workDirPath + "/extractedFiles")
 		extractedFileDir.mkdir()
 		
 		// unzip and list all files
