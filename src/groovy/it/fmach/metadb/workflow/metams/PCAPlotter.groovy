@@ -12,9 +12,13 @@ class PCAPlotter {
 		this.metaMsDir = metaMsDir
 	}
 	
-	def plotPCA(String workDir, String factor){
-		def command = this.constructCommand(workDir, factor)
+	def plotPCA(String workDir, String factor, Boolean sqrtScaling, Boolean sumNorm){
 		
+		// construct command line and write to file
+		def command = this.constructCommand(workDir, factor, sqrtScaling, sumNorm)
+		new File(workDir + "/PCA_plot_command.txt").withWriter{ it << command }
+		
+		// execute command
 		def proc = command.execute()
 		proc.waitFor()
 		
@@ -41,7 +45,7 @@ class PCAPlotter {
 	}
 	
 	
-	def constructCommand(String workDir, String factor){
+	def constructCommand(String workDir, String factor, Boolean sqrtScaling, Boolean sumNorm){
 		// call the rscript
 		def command = 'Rscript ' + this.metaMsDir + '/plotPCA.R'
 
@@ -53,6 +57,10 @@ class PCAPlotter {
 		
 		// set factor
 		command += " -f " + factor
+		
+		// set scaling and normalization if necessary
+		if(sqrtScaling) command += " -s"
+		if(sumNorm) command += " -n"
 
 		return command
 	}
