@@ -145,7 +145,7 @@ class ISAtoolsModelConverterImpl implements ISAtoolsModelConverter {
 			
 			// set the workDir of this assay
 			def assayDir = assay.shortName.replaceAll(/\s+/, '_')
-			assay.workDir = workDir + "/" + assayDir + ".PRO"
+			assay.workDir = workDir + "/" + assayDir
 			
 			//select the polarity
 			def polarity = assay.runs[0].scanPolarity
