@@ -44,6 +44,9 @@ instr.setting <- switch(opt$setting,
                Synapt.RP = Synapt.RP,
                TSQXLS.GC = TSQXLS.GC)
 
+# hardcode snthresh=4
+# instr.setting@PeakPicking$snthresh <- 6
+
 # load database
 database = NULL
 if(! is.null(opt$database)){
@@ -72,4 +75,5 @@ if( opt$instrument == "GC" ){
 
 save(out, file=paste0(opt$output, "/result.RData"))
 
+# write a csv file of the results
 write.csv(out$PeakTable, file=paste0(opt$output, "/PeakTable.csv"))

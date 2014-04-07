@@ -36,14 +36,14 @@
 			
 			<div class="form-group checkbox">
 				<label>					
-					<input type="checkbox" name="sqrtScaling" checked>					
+					<input type="checkbox" name="sqrtScaling" >					
 					Square root scaling
 				</label>
 			</div>
 			
 			<div class="form-group checkbox">
 				<label>					
-					<input type="checkbox" name="sumNorm" checked>					
+					<input type="checkbox" name="sumNorm" >					
 					Normalize features (divide by total intensity sum)
 				</label>
 			</div>

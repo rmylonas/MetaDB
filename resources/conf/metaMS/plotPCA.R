@@ -5,6 +5,8 @@ library("PCA")
 #we read the options from the default: commandArgs(TRUE).
 spec = matrix(c(
 	'help' , 'h', 0, "logical",
+	'sqrtScaling' , 's', 0, "locigal",
+	'sumNorm' , 'n' , 0 , "locigal", 
 	'workdir', 'w', 1, "character",
 	'factor', 'f', 1, "character"
 ), byrow=TRUE, ncol=4);
@@ -73,9 +75,42 @@ for(i in 1:nrow(DM)){
 	}
 }
 
+# normalization and scalingi
+if(! is.null(opt$sumNorm)){ DM <- DM/rowSums(DM) }
+
+if(! is.null(opt$sqrtScaling)){
+	mypca <- PCA(scale(sqrt(DM)))
+}else{
+	mypca <- PCA(scale(DM, scale=FALSE))
+}
+
 # plot the PCA
-png(paste0(opt$workdir, "/PCA.png"))
-mypca <- PCA(scale(DM, scale=FALSE))
+png(paste0(opt$workdir, "/1_PCA.png"), width=600, height=600)
 scoreplot(mypca,  col=mycol)
-# legend("bottomright", mylabels, pch=rep(1, length(mylabels.colors)), col=mylabels.colors)
+legend("bottomright", mylabels, pch=rep(1, length(mylabels.colors)), col=mylabels.colors)
 dev.off()
+
+# plot the PCA
+png(paste0(opt$workdir, "/2_PCA_pairplot.png"), width = 900, height = 900)
+pairs(scores(mypca)[,1:4], col = mycol)
+dev.off()
+
+
+# plot changes in rowSums
+png(paste0(opt$workdir, "/3_rowSums.png"), width=600, height=600)
+plot(rowSums(DM), col=mycol, type="b")
+dev.off()
+
+
+png(paste0(opt$workdir, "/4_PCA_names.png"), width=600, height=600)
+scoreplot(mypca,  col=mycol, show.names=TRUE)
+dev.off()
+
+
+# png(paste0(opt$workdir, "/5_PCA_biplot.png"), width=600, height=600)
+# biplot(mypca, show.names="loadings")
+# dev.off()
+
+
+
+

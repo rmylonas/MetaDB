@@ -8,6 +8,8 @@
 
  <div class="container">
 	
+	<g:link action="index" class="btn btn-default btn-sm">Back</g:link>
+	
 	<h2>MetaMS details</h2>
 	
 	  	 <!-- Show errors -->
