@@ -23,7 +23,7 @@ class FEMRun {
 	// static belongsTo = [fEMAssay: FEMAssay]
 	
     static constraints = {
-		//additionalRuns nullable: true
+		// additionalRuns nullable: true
 		additionalRun nullable: true
     }
 	

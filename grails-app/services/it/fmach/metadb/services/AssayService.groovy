@@ -36,12 +36,25 @@ class AssayService {
 	}
 
 	def cleanAcquisitionRuns(FEMAssay assay){		
-		def l = []
-		l += assay.acquiredRuns
 		
+		// delete all MetaMsSubmissions connected to this assay
+		def l = []
+		l += assay.metaMsSubmissions
+		
+		l.each { metaMs ->
+			assay.removeFromMetaMsSubmissions(metaMs)
+			metaMs.delete(flush: true, failOnError: true)
+			
+		}
+		
+		l = []
+		l += assay.acquiredRuns
+
 		l.each { run ->
-			// delete the runs
+			// remove runs from assay
 			assay.removeFromAcquiredRuns(run)
+			
+			// and delete the run
 			run.delete(flush: true)
 		}
 	}
