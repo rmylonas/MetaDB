@@ -1,5 +1,7 @@
 library(getopt)
 library(metaMS)
+library(snow)
+
 data(FEMsettings)
 
 #get options, using the spec as defined by the enclosed list.
@@ -43,9 +45,6 @@ instr.setting <- switch(opt$setting,
                Synapt.NP = Synapt.NP,
                Synapt.RP = Synapt.RP,
                TSQXLS.GC = TSQXLS.GC)
-
-# hardcode snthresh=4
-# instr.setting@PeakPicking$snthresh <- 6
 
 # load database
 database = NULL

@@ -75,13 +75,13 @@ for(i in 1:nrow(DM)){
 	}
 }
 
-# normalization and scalingi
+# normalization and scaling
 if(! is.null(opt$sumNorm)){ DM <- DM/rowSums(DM) }
 
 if(! is.null(opt$sqrtScaling)){
-	mypca <- PCA(scale(sqrt(DM)))
+	mypca <- PCA(scale(sqrt(DM), scale=FALSE))
 }else{
-	mypca <- PCA(scale(DM, scale=FALSE))
+	mypca <- PCA(scale(DM))
 }
 
 # plot the PCA
@@ -107,9 +107,9 @@ scoreplot(mypca,  col=mycol, show.names=TRUE)
 dev.off()
 
 
-# png(paste0(opt$workdir, "/5_PCA_biplot.png"), width=600, height=600)
-# biplot(mypca, show.names="loadings")
-# dev.off()
+png(paste0(opt$workdir, "/5_PCA_biplot.png"), width=600, height=600)
+biplot(mypca, show.names="loadings")
+dev.off()
 
 
 
