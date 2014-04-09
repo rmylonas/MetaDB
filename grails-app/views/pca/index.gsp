@@ -44,7 +44,7 @@
 			<div class="form-group checkbox">
 				<label>					
 					<input type="checkbox" name="sumNorm" >					
-					Row scaling (divide by total intensity sum)
+					TIC normalization
 				</label>
 			</div>
 			
