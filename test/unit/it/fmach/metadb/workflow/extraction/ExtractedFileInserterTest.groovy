@@ -92,14 +92,14 @@ class ExtractedFileInserterTest {
 		assay.acquiredRuns = assay.randomizedRuns
 		
 		// a list of (imaginary) extracted files
-		def extractedFiles = ["AA_001_QC_tag_01.CDF", "AA_23_Sample_1_tag_01.CDF", "AA_33_Sample_2_tag_01.CDF", "pipo.CDF"]
+		def extractedFiles = [new File("/test/AA_001_QC_tag_01.CDF"), new File("/test/AA_23_Sample_1_tag_01.CDF"), new File("/test/AA_33_Sample_2_tag_01.CDF"), new File("/test/pipo.CDF")]
 		
 		// add the raw files	
 		def info = inserter.addExtractedFiles(assay, extractedFiles)
 		
 		assert assay.acquiredRuns.size()-3 == info[0].size()
 		assert "pipo.CDF" == info[1][0]
-		assert "AA_001_QC_tag_01.CDF" == assay.acquiredRuns.get(0).derivedSpectraFilePath
+		assert "/test/AA_001_QC_tag_01.CDF" == assay.acquiredRuns.get(0).derivedSpectraFilePath
 		assert "extracted" == assay.acquiredRuns.get(1).status
 		assert 3 == info[2]
 		
@@ -122,14 +122,14 @@ class ExtractedFileInserterTest {
 		assay.acquiredRuns = assay.randomizedRuns
 		
 		// a list of (imaginary) extracted files
-		def extractedFiles = ["solv_130827185620.mzXML", "JALI108_DietB_V3.mzXML", "Creat55_Cinn11_130828044500.mzdata", "JALI015_DietC_V2_130829010454.mzXML", "pipo.CDF"]
+		def extractedFiles = [new File("/test/solv_130827185620.mzXML"), new File("/test/JALI108_DietB_V3.mzXML"), new File("/test/Creat55_Cinn11_130828044500.mzdata"), new File("/test/JALI015_DietC_V2_130829010454.mzXML"), new File("/test/pipo.CDF")]
 		
 		// add the raw files : info = [missingFiles, namesNotFound, nrFilesAdded]
 		def info = inserter.addExtractedFiles(assay, extractedFiles)
 		
 		assert 0 == info[0].size()
 		assert "pipo.CDF" == info[1][0]
-		assert "solv_130827185620.mzXML" == assay.acquiredRuns.get(0).derivedSpectraFilePath
+		assert "/test/solv_130827185620.mzXML" == assay.acquiredRuns.get(0).derivedSpectraFilePath
 		assert "extracted" == assay.acquiredRuns.get(1).status
 		assert 4 == info[2]
 		assert "extracted" == assay.status

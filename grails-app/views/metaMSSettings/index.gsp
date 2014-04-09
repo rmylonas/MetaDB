@@ -49,7 +49,7 @@
         
 	  </table>
 	  
-	  <g:link action="newDb" class="btn btn-primary">New method</g:link>
+	  <g:link action="newDb" class="btn btn-primary">New database</g:link>
 	    
 </div> <!-- /container -->
 

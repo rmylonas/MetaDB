@@ -48,8 +48,13 @@ class ExtractedFileInserter {
 		unzipper.unzip(zipFilePath, extractedFileDir.getAbsolutePath())
 		
 		def fileList = []
-		extractedFileDir.eachFile{
-			fileList << it.getAbsolutePath()
+		
+		// look for files ending with ".cdf" ".mzxml" or ".mzdata"
+		new File(extractedFileDir.getAbsolutePath()).eachFileRecurse(FILES) {
+			def s = it.name.toLowerCase()
+			if(s.endsWith('.cdf') || s.endsWith('.mzxml') || s.endsWith('.mzdata')) {
+				fileList << it
+			}
 		}
 		
 		return this.addExtractedFiles(assay, fileList)		

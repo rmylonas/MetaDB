@@ -51,8 +51,10 @@ class RawFileInserter {
 		unzipper.unzip(zipFilePath, extractedFileDir.getAbsolutePath())
 		
 		def fileList = []
-		extractedFileDir.eachFile{
-			fileList << it.getAbsolutePath()
+		new File(extractedFileDir.getAbsolutePath()).eachFileRecurse(ANY) {
+			if(it.name.toLowerCase().endsWith('.raw')) {
+				fileList << it
+			}
 		}
 		
 		return this.addRawFiles(assay, fileList)

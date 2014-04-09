@@ -39,7 +39,7 @@ class AssayService {
 		
 		// delete all MetaMsSubmissions connected to this assay
 		def l = []
-		l += assay.metaMsSubmissions
+		if(assay.metaMsSubmissions) l += assay.metaMsSubmissions
 		
 		l.each { metaMs ->
 			assay.removeFromMetaMsSubmissions(metaMs)

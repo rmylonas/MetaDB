@@ -57,14 +57,14 @@ class RawFileInserterTest {
 		assay.acquiredRuns = assay.randomizedRuns
 		
 		// a list of (imaginary) extracted files
-		def extractedFiles = ["solv_130827185620.raw", "JALI108_DietB_V3.raw", "Creat55_Cinn11_130828044500.raw", "JALI015_DietC_V2_130829010454.data", "pipo.CDF"]
+		def extractedFiles = [new File("/test/solv_130827185620.raw"), new File("/test/JALI108_DietB_V3.raw"), new File("/test/Creat55_Cinn11_130828044500.raw"), new File("/test/JALI015_DietC_V2_130829010454.data"), new File("/test/pipo.CDF")]
 		
 		// add the raw files : info = [missingFiles, namesNotFound, nrFilesAdded]
 		def info = inserter.addRawFiles(assay, extractedFiles)
 		
 		assert 0 == info[0].size()
 		assert "pipo.CDF" == info[1][0]
-		assert "solv_130827185620.raw" == assay.acquiredRuns.get(0).rawSpectraFilePath
+		assert "/test/solv_130827185620.raw" == assay.acquiredRuns.get(0).rawSpectraFilePath
 		assert 4 == info[2]
 	}
 
