@@ -41,7 +41,7 @@ class PCAPlotter {
 		  list << file.getAbsolutePath()
 		}
 		
-		return list
+		return list.sort()
 	}
 	
 	
