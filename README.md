@@ -1,9 +1,9 @@
 MetaDB
 ======
-MetaDB is an open-source web application for metadata management and data processing of metabolomics data. It is based on [ISA tab](http://www.isa-tools.org/) as the input format. The analysis of untargeted data is done using the R package [MetaMS](https://github.com/rwehrens/metaMS). This software is a project from Fondazione Edmund Mach. 
+MetaDB is an open-source web application for Metabolomics metadata management and data processing. It is based on [ISA tab](http://www.isa-tools.org/) as metadata input format. The analysis of untargeted data is done using the R package [MetaMS](https://github.com/rwehrens/metaMS). This software is a project of Fondazione Edmund Mach. 
 
 ## Prerequisites
-Following software has to be installed for proper functioning (other software versions may work, but were not tested):
+The following software are needed for proper functioning (MetaDB may also work with other software versions, but was not tested):
 * Java 1.7
 * Tomcat 6
 * MySQL 5.5
@@ -88,39 +88,46 @@ sudo R -e 'install.packages("./resources/R/PCA_0.0.2.1.tar.gz", repos = NULL, ty
 
 ![MetaDB workflow](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/workflow.png "MetaDB workflow")
 
-ISAtab files for Metabolomics are best created with ISAcreator from [MetaboLights](http://www.ebi.ac.uk/metabolights/)). ISAtab files can be uploaded to **MetaDB** as a ZIP file. Data will be verified and selected data are imported to **MetaMS**. 
+ISAtab files for Metabolomics should be created with ISAcreator from [MetaboLights](http://www.ebi.ac.uk/metabolights/)). ISAtab files can be uploaded to **MetaDB** as a ZIP file. Selected Assays are imported to **MetaMS**. 
 
-Run sequences of selected Assays are randomized and can be exported as CSV files. CSV files are imported to your MS instruments for data acquisition. Acquired data is than again imported to **MetaMS**, where it can be further processed (**MetaDB** currently only supports *.CDF* files).
+MetaDB takes care of the randomization of the given samples. The randomized sample list can be exported in a CSV format and afterwards be imported into the propriatary MS instrument software. Acquired data is imported back to **MetaMS**, where it can be further processed (**MetaDB** currently supports *.CDF*, *.MzXML* and *.MzData* files).
 
-The processing includes feature detection and identification against Compound databases. This part is done using the open source R library [MetaMS](https://github.com/rwehrens/metaMS).
+The data processing is based on the open source R library [MetaMS](https://github.com/rwehrens/metaMS). The processing includes feature detection and identification against Compound databases.
 
 ### Login
 
 ![MetaDB login page](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/login_page.png "MetaDB login page")
 
-Login using your credentials. See the **User management** section for further details on how to create and manage users. 
+Login using your credentials. To test the software, you can use the Test user:
+
+```
+Username: test
+Password: test
+```
+
+See the **User management** section for further details on how to create and manage users. 
 
 ### Search
 
 ![MetaDB search page](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/search_page.png "MetaDB search page")
 
-After login or when clicking on **MetaDB**, you are redirected to the main search page. You can search for terms such as organism names or sample factors. You can either search on the level of *Studies* or *Assays* (look at the ISAtab documentation for more detailed information about the meaning of those terms). By checking the box *Show all users*, you can also search for entries created by other users.
+After login, or when clicking on **MetaDB**, you are redirected to the main search page. You can search for terms such as organism names or sample factors. You can either search on the level of *Studies* or *Assays* (look at the ISAtab documentation for more detailed information about the meaning of those terms). By checking the box *Show all users*, you can also search for entries created by other users.
 
 ### Upload
 
 ![MetaDB upload page](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/upload_page.png "MetaDB upload page")
 
-ISAtab files can be uploaded as a ZIP file. **Attention: make sure to directly compress the ISAtab files, and not any folders. Compression done by _ISAcreator_ will not work.** Make sure that your Study identifier is unique and that your instrument and methods were created in **MetaDB**.
+ISAtab files can be uploaded in the ZIP format. **Attention: make sure to directly compress the ISAtab files, and not any folders containing these files. Compression done by _ISAcreator_ will not work.** Make sure that your Study identifier is unique and that your instrument and methods exist in **MetaDB**.
 
-Once uploaded, you can select the *Assays* you want to import. If you added any *Assay* to an existing ISAtab file and reload this file, they new *Assay* will appear for selection as well. Already imported *Assays* can not be changed. To change them, you first have to remove them and reimport the new versions. 
+Once uploaded, you can select the *Assays* you want to import. If you added any *Assay* to an existing ISAtab file and reload this file again, they new *Assay* will appear for selection as well. Already imported *Assays* can not be changed. To change them, you first have to remove them and reimport the new versions. 
 
-When uploading, you have to choose your group, project and instrument method. If your setting is missing, an user with administration rights has to insert your settings into **MetaDB**. Depending on your method, randomization of your run sequences will be done. 
+When uploading, you have to choose your group, project and instrument method. If your setting is missing, an user with administration rights has to insert your settings into **MetaDB**. Depending on your method, randomization of your samples will be done while imported. 
 
 ### Load and View
 
 #### Load an Assay
 
-In order to be able to enter into the *View* menu, you first have to load your *Assay* of interest. To see the list of *Assays* you can either go from the *Search* page or from the *Load* page. By clicking on the *Access code*, you will automatically redirected to either the *Planned runs* or *Acquired runs* view, depending on the status of this *Assay*. 
+In order to be able to enter into the *View* menu, you first have to load your *Assay* of interest. To see the list of *Assays* you can either go from the *Search* page or from the *Load* page. By clicking on the *Access code* you will redirected to the *Planned runs* view. 
 
 #### 3 different views
 
@@ -130,13 +137,13 @@ From the menu *Views* you can access 3 different views:
 
 ![MetaDB planned runs](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/planned_runs.png "MetaDB planned runs")
 
-This view shows the sequence of *Runs* as they were planned. You can download the CSV file of this sequence by pressing on the *Download CSV* button. This sequence can then be used to setup your instrument. 
+This view shows the sequence of *Runs* as they were planned. If your import method is conifgurated to do the randomization for you, this sequence will differ from the one in the original ISAtab file. You can download the CSV file of this sequence by pressing on the *Download CSV* button. This sequence can then be used to setup your MS instrument using the propriatary instrument management software.
 
-During the process of acquiring, you might change the sequences (e.g. add addiotional Quality Controls). You can change the order and add *QC* (quality controls), *STDmix* (standard mix) and *Blanks* as you want. **Attention: you have to make sure that every name is unique. Otherwise MetaDB won't be able to connect your files to the names.**
+During the process of acquiring, you might change the sequences (e.g. add addiotional Quality Controls). You can change the order and add *QC* (quality controls), *STDmix* (standard mix) and *Blanks* as you want. **Attention: you have to make sure that every name is unique. Otherwise MetaDB won't be able to connect your raw files to the assay names.**
 
 ![MetaDB add acquisitions](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/add_acquisition_sequence.png "MetaDB add acquisitions")
 
-Once you finished your acquisition, you can add your actual run sequence by clicking on *Add acquisition*. Juste copy paste the sequence (newline seperated) into the textfield. You will automatically be redirected to *Acquired runs*. This step can be repeated as many times as you want. 
+Once you finished acquiring your data on your MS instrument, you can add the final list of runs by clicking on *Add acquisition*. Juste copy paste the list of your run names (newline seperated) into the textfield. You will automatically be redirected to *Acquired runs*. This step can be repeated as many times as you want, in case you have to add some further runs to your Assay. 
 
 ##### 2. Acquired runs
 

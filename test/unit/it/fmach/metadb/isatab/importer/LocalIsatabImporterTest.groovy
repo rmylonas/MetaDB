@@ -22,7 +22,7 @@ class LocalIsatabImporterTest {
 
 	static String rootDir = "resources/org/isatools/isacreator/io/importisa/"
 	static def currentUser = new User(username: 'roman', password: 'namor', workDir: '/home/mylonasr/MetaDB/data/roman')
-	static def configDir = new ClassPathResource(rootDir + "MetaboLightsConfig20130507").getFile().getAbsolutePath()
+	static def configDir = new ClassPathResource("resources/MetaboLightsConfig20130507").getFile().getAbsolutePath()
 	
 	@Test
 	void testCheckUploadFolder(){
@@ -36,12 +36,15 @@ class LocalIsatabImporterTest {
 	
 	@Test
 	void testImportIsatabFile(){
+println("conf: " + configDir)
+
+
 		// setup test
 		def workDir = this.setupTest()
 		
 		def importer = new LocalIsatabImporter(configDir, workDir, currentUser)
 		def investigation = importer.importIsatabFile()
-		
+
 		Boolean success = investigation.isaParsingInfo.success
 		assert success
 
