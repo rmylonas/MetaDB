@@ -119,7 +119,7 @@ After login, or when clicking on **MetaDB**, you are redirected to the main sear
 
 ISAtab files can be uploaded in the ZIP format. **Attention: make sure to directly compress the ISAtab files, and not any folders containing these files. Compression done by _ISAcreator_ will not work.** Make sure that your Study identifier is unique and that your instrument and methods exist in **MetaDB**.
 
-Once uploaded, you can select the *Assays* you want to import. If you added any *Assay* to an existing ISAtab file and reload this file again, they new *Assay* will appear for selection as well. Already imported *Assays* can not be changed. To change them, you first have to remove them and reimport the new versions. 
+Once uploaded, you can select the *Assays* you want to import. If you added any *Assay* to an existing ISAtab file and reload this file again, the new *Assay* will appear for selection as well. Already imported *Assays* can not be changed. To change them, you first have to remove them and reimport the new versions. 
 
 When uploading, you have to choose your group, project and instrument method. If your setting is missing, an user with administration rights has to insert your settings into **MetaDB**. Depending on your method, randomization of your samples will be done while imported. 
 
@@ -137,29 +137,32 @@ From the menu *Views* you can access 3 different views:
 
 ![MetaDB planned runs](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/planned_runs.png "MetaDB planned runs")
 
-This view shows the sequence of *Runs* as they were planned. If your import method is conifgurated to do the randomization for you, this sequence will differ from the one in the original ISAtab file. You can download the CSV file of this sequence by pressing on the *Download CSV* button. This sequence can then be used to setup your MS instrument using the propriatary instrument management software.
+This view shows the sequence of MS acquisitions as they were planned. If your import method is conifgurated to do the randomization for you, this sequence will differ from the one in the original ISAtab file. You can download a CSV file containing the planned MS acquisition names by pressing on the *Download CSV* button. This sequence can then be used to setup your MS instrument using your propriatary instrument management software.
 
-During the process of acquiring, you might change the sequences (e.g. add addiotional Quality Controls). You can change the order and add *QC* (quality controls), *STDmix* (standard mix) and *Blanks* as you want. **Attention: you have to make sure that every name is unique. Otherwise MetaDB won't be able to connect your raw files to the assay names.**
+During the process of acquiring, you might have to change the sequences and number of MS acquisitions (e.g. add addiotional Quality Controls). You can change the order and add *QC* (quality controls), *STDmix* (standard mix) and *Blanks* as you want. **Attention: you have to make sure that every name is unique. Otherwise MetaDB won't be able to connect your raw files to the assay names.**
 
 ![MetaDB add acquisitions](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/add_acquisition_sequence.png "MetaDB add acquisitions")
 
-Once you finished acquiring your data on your MS instrument, you can add the final list of runs by clicking on *Add acquisition*. Juste copy paste the list of your run names (newline seperated) into the textfield. You will automatically be redirected to *Acquired runs*. This step can be repeated as many times as you want, in case you have to add some further runs to your Assay. 
+Once you finished acquiring your data on your MS instrument, you can add the final list of runs by clicking on *Add acquisition*. Juste copy paste the list of your MS assay names (newline seperated) into the textfield. You will automatically be redirected to *Acquired runs*. This step can be repeated as many times as you want, in case you have to add some further runs to your Assay. 
 
 ##### 2. Acquired runs
 
 ![MetaDB acquired runs](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/acquired_runs.png "MetaDB acquired runs")
 
-In this view you can see the sequence you actually acquired. Runs can have to different status: *acquired* and *processed*. A blue *acquired* means, that this run is ment to be acquired, but the extracted file (CDF or mzXML) weren't added yet. 
+In this view you can see the sequence you actually acquired. Runs can have two different status: *acquired* and *processed*. A blue *acquired* means, that this run was acquired, but the extracted file (CDF or mzXML) weren't added yet. 
 
 Extracted files can be added by uploading a ZIP file containing files in *CDF* or *mzXML* format (click on *Upload* -> *Extracted files*). Since the *Assay name* is unique, files are automatically connected to the relevant run. Once an extracted file was succesfully added to a run, its status changes to a green *processed*. 
 
-Runs of untargeted data, with status *processed*, can be further submited to MetaMS for feature detection and PCA visualization. See the next section for details.
+Runs of status *processed* can be further submited to MetaMS for feature detection and PCA visualization. Please see the next section for details.
 
-To get the acquired runs back to your ISAtab file, you can download your data as a CSV file (click on *Download* -> *CSV*). From the CSV file you can copy/paste your data into your ISAtab file.
+To get the final list of acquired runs back to your ISAtab file, you can download your data as a CSV file (click on *Download* -> *CSV*). From the CSV file you can copy/paste your data into your ISAtab file.
 
 ##### 3. MetaMS submission and PCA plots
 
-![MetaDB acquired runs](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/acquired_runs.png "MetaDB acquired runs")
+![MetaMS submission](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/metams_submission.png "MetaMS submission")
+
+ Runs of status *Processed* can be submitted to MetaMS for feature detection and PCA visualizatdion. From the view *Acquired runs* you can check the runs you want to submit, and then start a MetaMS submission by clicking on the *Start MetaMS* button. Only runs for which a valid extracted file is available will actually be submitted to MetaMS. On the page which shows up you can select 
+
 
 ### Statistics
 
