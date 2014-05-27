@@ -161,14 +161,9 @@ To get the final list of acquired runs back to your ISAtab file, you can downloa
 
 ![MetaMS submission](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/metams_submission.png "MetaMS submission")
 
- Runs of status *Processed* can be submitted to MetaMS for feature detection and PCA visualizatdion. From the view *Acquired runs* you can check the runs you want to submit, and then start a MetaMS submission by clicking on the *Start MetaMS* button. Only runs for which a valid extracted file is available will actually be submitted to MetaMS. On the page which shows up you can select 
+ Acquired runs can be submitted to MetaMS for feature detection and PCA visualizatdion. From the view *Acquired runs* you can check *Processed* runs you want to submit, and then start a MetaMS submission by clicking on the *Start MetaMS* button. You can set a description, limit the retention time window and activate feature annotation. For feature annotation, a database has to be installed (look in the *Settings -> MetaMS* for more details). 
 
-
-### Statistics
-
-![MetaDB statistics](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/statistics_runs.png "MetaDB statistics")
-
-On this page you can see some simple statistics about the usage of your resources.
+ Once started, the status of MetaMS submissions can be observed from the MetaMS view. You can see more details by clicking on the submission itself. After having finished, the results can be visualized using PCA plots or a ZIP file containing results in CSV and RData format can be downloaded. 
 
 ### Settings
 
@@ -190,17 +185,32 @@ When creating a new User, you also have to indicate a foldername (typically same
 
 #### Groups and Projects
 
-You can manage groups and projects they belong to. This information is not part of ISA tab. You cannot remove any groups or projects which are used by any *Studies*.
+You can manage groups and projects. This allows you to better classify your data.
+
+Groups are typically different work entities, such as different laboratories or different customers. Projects allows you to organize your entries according to common topics.
+
+Both information, Groups and Projects, which are neither parsed from ISA tab, nor kept when exporting. This information is mainly used to organize your data in your laboratory.
+
 
 #### Instrument and Methods
 
+All your instruments have to be specified in this settings. 
+
+#### MetaMS
 
 
 #### Organism onthologies
 
 
-## Connection to *ISAcreator* via plugin
+#### Usage statistics
 
+![MetaDB statistics](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/statistics_runs.png "MetaDB statistics")
+
+On this page you can see some simple statistics about the usage of your resources.
+
+
+
+## Connection to *ISAcreator* via plugin
 
 
 
