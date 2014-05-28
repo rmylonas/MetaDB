@@ -88,11 +88,24 @@ sudo R -e 'install.packages("./resources/R/PCA_0.0.2.1.tar.gz", repos = NULL, ty
 
 ![MetaDB workflow](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/workflow.png "MetaDB workflow")
 
-ISAtab files for Metabolomics should be created with ISAcreator from [MetaboLights](http://www.ebi.ac.uk/metabolights/)). ISAtab files can be uploaded to **MetaDB** as a ZIP file. Selected Assays are imported to **MetaMS**. 
+ISAtab files for Metabolomics should be created with ISAcreator from [MetaboLights](http://www.ebi.ac.uk/metabolights/)). ISAtab files can be uploaded to **MetaDB** as a ZIP file. Selected Assays are then imported to **MetaMS**. 
 
-MetaDB takes care of the randomization of the given samples. The randomized sample list can be exported in a CSV format and afterwards be imported into the propriatary MS instrument software. Acquired data is imported back to **MetaMS**, where it can be further processed (**MetaDB** currently supports *.CDF*, *.MzXML* and *.MzData* files).
+MetaDB takes care of the randomization of the given samples. The randomized sample list can be exported in a CSV format and afterwards be used to setup your MS acquisition. Acquired runs are imported back to **MetaMS**, where they can be further processed (**MetaDB** currently supports *.CDF*, *.MzXML* and *.MzData* files).
 
-The data processing is based on the open source R library [MetaMS](https://github.com/rwehrens/metaMS). The processing includes feature detection and identification against Compound databases.
+The data processing is based on the open source R library [MetaMS](https://github.com/rwehrens/metaMS). The processing includes feature detection and identification against compound databases.
+
+### Detailed workflow
+
+This section contains a detailed description of the typical steps to follow when performing an experiment. 
+
+#### ISAtab creation
+
+#### MS data acquisition and conversion
+
+#### Data processing and visualization
+
+#### Data submission to public repositories
+
 
 ### Login
 
@@ -121,7 +134,7 @@ ISAtab files can be uploaded in the ZIP format. **Attention: make sure to direct
 
 Once uploaded, you can select the *Assays* you want to import. If you added any *Assay* to an existing ISAtab file and reload this file again, the new *Assay* will appear for selection as well. Already imported *Assays* can not be changed. To change them, you first have to remove them and reimport the new versions. 
 
-When uploading, you have to choose your group, project and instrument method. If your setting is missing, an user with administration rights has to insert your settings into **MetaDB**. Depending on your method, randomization of your samples will be done while imported. 
+When uploading, you have to choose group, project and instrument method. If your setting is missing, an user with administration rights has to insert your settings into **MetaDB**. Depending on your method, randomization of your samples will be done while imported. 
 
 ### Load and View
 
@@ -187,14 +200,16 @@ When creating a new User, you also have to indicate a foldername (typically same
 
 You can manage groups and projects. This allows you to better classify your data.
 
-Groups are typically different work entities, such as different laboratories or different customers. Projects allows you to organize your entries according to common topics.
+Groups are typically different work entities, such as laboratory sections. Projects allow you to organize your entries according to common topics.
 
-Both information, Groups and Projects, which are neither parsed from ISA tab, nor kept when exporting. This information is mainly used to organize your data in your laboratory.
+Both information, Groups and Projects, are neither parsed from ISA tab, nor kept when exporting. This information is mainly used to better organize your data.
 
 
 #### Instrument and Methods
 
-All your instruments have to be specified in this settings. 
+All your instruments have to be specified before importing data from ISAtab files. Please make sure that your *ISAtab name* corresponds to the instrument name indicated in the ISAtab files you upload. 
+
+For every instrument you can add as many *Methods* as you want. 
 
 #### MetaMS
 
