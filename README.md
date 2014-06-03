@@ -100,7 +100,21 @@ This section contains a detailed description of the typical steps to follow when
 
 #### ISAtab creation
 
+Before starting your experiment, an ISAtab file containing the metadata information of your experiment(s) has to be created. To assure compatibility, ISAtab files should be created using MetaboLights (version ???). *Investigation*, *Studies* and *Assays* have to be created as described in the [MetaboLights documentation](http://www.ebi.ac.uk/metabolights/???). 
+
+While entering the *Assay* informations, you can leave free the MSAcquisitionNames(??). *MetaDB* will take care of sample randomization and adding standard mixes and blanks (see section *Instrument and Methods* for further details). 
+
+After all relevant metadata was entered and saved, the folder containing the ISAtab files can be zipped and uploaded to *MetaDB*. Make sure to directly zip the files and not the superfolder. The uploaded ISAtab will be validated against the installed validation setting (???).
+
+##### Future improvements
+
+ISAtab creation directly from within *MetaDB*.
+
 #### MS data acquisition and conversion
+
+After data upload, samples will be randomized and blanks and standard mixes added to the final acquisition sequence. The created acquisition sequence can be exported as an Excel (.csv) file. This format can be imported or copy-pasted into, to our knowledge, all MS instrument ?? software. By using this acquisition sequence, you assure proper MSAcquisitionNames(??) naming, which is important for further data-processing.
+
+During the acquition step you might be obliged to repeat certain parts or add additional blank injections. Since unique MSAcquisitionNames(??) are essantial for proper filename mapping, additional injections should have a unique name
 
 #### Data processing and visualization
 
