@@ -114,7 +114,12 @@ ISAtab creation directly from within *MetaDB*.
 
 After data upload, samples will be randomized and blanks and standard mixes added to the final acquisition sequence. The created acquisition sequence can be exported as an Excel (.csv) file. This format can be imported or copy-pasted into, to our knowledge, all MS instrument ?? software. By using this acquisition sequence, you assure proper MSAcquisitionNames(??) naming, which is important for further data-processing.
 
-During the acquition step you might be obliged to repeat certain parts or add additional blank injections. Since unique MSAcquisitionNames(??) are essantial for proper filename mapping, additional injections should have a unique name
+During the acquisition step you might be obliged to repeat certain parts or add additional blank injections. Since unique MSAcquisitionNames(??) are essantial for proper filename mapping, additional injections should have a unique name. This can for instance be acheaved by adding a *_2* tag at the end of every MSAcquisitionName you want to repeat. 
+
+Once you finished your acquisition, you have to load back the final acquisition to *MetaDB*. This is done in two consecutive steps. First by indicating the final order and naming of your acquisitions, and second by uploading raw and extracted files ??. 
+
+For the final naming, *MetaDB* expects a list of all MSAcquisitionNames(??) in the right order. This list can be copy/pasted directly from the MS instrument ?? software, or alternatively from an Excel sheet. This step can be repeated as much as needed. This allows you to change or repeat some of the acquisition, in case 
+
 
 #### Data processing and visualization
 
