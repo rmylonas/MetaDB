@@ -108,7 +108,8 @@ After all relevant metadata was entered and saved, the folder containing the ISA
 
 ##### Future improvements
 
-ISAtab creation directly from within *MetaDB*.
+- ISAtab creation directly from within *MetaDB*. 
+- Editing of ISAtab information. 
 
 #### MS data acquisition and conversion
 
@@ -118,13 +119,33 @@ During the acquisition step you might be obliged to repeat certain parts or add 
 
 Once you finished your acquisition, you have to load back the final acquisition to *MetaDB*. This is done in two consecutive steps. First by indicating the final order and naming of your acquisitions, and second by uploading raw and extracted files ??. 
 
-For the final naming, *MetaDB* expects a list of all MSAcquisitionNames(??) in the right order. This list can be copy/pasted directly from the MS instrument ?? software, or alternatively from an Excel sheet. This step can be repeated as much as needed. This allows you to change or repeat some of the acquisition, in case 
+For the final naming, *MetaDB* expects a list of all MSAcquisitionNames(??) in same order as you acquired your samples. This list can be copy/pasted directly from the MS instrument ?? software, or alternatively from an Excel sheet. This step can be repeated as much as needed. This allows you to change or repeat some of the acquisition, in case their quality was not satisfactional in the first place. 
 
+Spectra have to be packed into a ZIP archive and uploaded trough the Web-interface. Alternatively, if lab scientists and *MetaDB* have access to a shared disk, files can directly be copied into the relevant directory. Extracted files have to be created manually using the specific option of the MS instrument software, or using external tools like [Proteowizard](http://???). 
+
+##### Future improvements
+
+To avoid manual transformation and upload of data, a Daemon could be developed, which takes care of this step. A simple user interface which let's you choose file locations to observe and some other settings would be enough. It could be linked to [Proteowizard](http://???) which takes care of raw spectra file extraction. 
 
 #### Data processing and visualization
 
+Once extracted files are added (indicated by a green *Extracted* tag), data can be processed using *MetaMS*. 
+
+- choosing data to process
+- starting data processing
+- data processing options
+
+- basic visualization for quality control using PCA plots
+
+##### Future improvements
+- edit *MetaMS* submission parameters directly trough the web-interface
+
 #### Data submission to public repositories
 
+
+
+##### Future improvements
+- direct ZIP creation for upload
 
 ### Login
 
