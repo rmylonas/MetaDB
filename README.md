@@ -129,10 +129,10 @@ To avoid manual transformation and upload of data, a Daemon could be developed, 
 
 #### Data processing and visualization
 
-Once extracted files are added (indicated by a green *Extracted* tag), data can be processed using *MetaMS*. 
+Once extracted files are added (indicated by a blue *processed* tag), data can be analyzed using *MetaMS*. Runs are selected from the user interface and a description can be added. The retention time can be restricted (e.g. ignoring the first and last minutes for the analysis) and feature annotation can be activated, in case there is a valid database installed. 
 
-- choosing data to process
-- starting data processing
+After data processing is finished, data can be visualized to check their quality. When the data processing is finished, R and Excel files containing the results, can be downloaded. There are 5 different plots available. 3 of them a variations of PCA plots.
+
 - data processing options
 
 - basic visualization for quality control using PCA plots
