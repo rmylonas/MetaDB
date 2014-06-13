@@ -131,11 +131,20 @@ To avoid manual transformation and upload of data, a Daemon could be developed, 
 
 Once extracted files are added (indicated by a blue *processed* tag), data can be analyzed using *MetaMS*. Runs are selected from the user interface and a description can be added. The retention time can be restricted (e.g. ignoring the first and last minutes for the analysis) and feature annotation can be activated, in case there is a valid database installed. 
 
-After data processing is finished, data can be visualized to check their quality. When the data processing is finished, R and Excel files containing the results, can be downloaded. There are 5 different plots available. 3 of them a variations of PCA plots.
+After data processing is finished, the experiment can be visualized for quality control. Data can be colored according to factors defined in the ISAtab file. Data can be normalized using square root scaling (Ref??) and TIC normalization. There are 5 different plots available. 3 variations of PCA plots, a ?? plot and a plot showing the total intensity sum of every MS run. 
 
-- data processing options
+![PCA plot](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/PCA_1.png "PCA plot")
+One can see a good seperation for the factor *Variety* and the quality controls (a mixture of all samples) are located well in the middle of this PCA plot. 
 
-- basic visualization for quality control using PCA plots
+![PCA plot showing 4 PC](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/PCA_2.png "4 PC plot")
+Sometimes the first 2 PC do not show the factors you are looking for. This might be due to the fact, that the first two PC's show artifacts, such as different sample handling or time of acquisition. Showing the first 4 PC is also interesting in the situation where you have many different factors (which might be a sign of a bad experimental design though..).
+
+![PCA plot with names](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/PCA_3.png "PCA plot with names")
+This PCA plot is exactly the same as the first one, except for that the dot's are replaced by the *MS Assay Name's*. This can be useful if the experiment contains outliers which have to be identified. 
+
+
+
+RData and Excel files containing the results, can be downloaded for further visualization and statistical analysis. 
 
 ##### Future improvements
 - edit *MetaMS* submission parameters directly trough the web-interface
