@@ -129,9 +129,9 @@ To avoid manual transformation and upload of data, a Daemon could be developed, 
 
 #### Data processing and visualization
 
-Once extracted files are added (indicated by a blue *processed* tag), data can be analyzed using *MetaMS*. Runs are selected from the user interface and a description can be added. The retention time can be restricted (e.g. ignoring the first and last minutes for the analysis) and feature annotation can be activated, in case there is a valid database installed. 
+Once extracted files are added (indicated by a blue *processed* tag), data can be analyzed using *MetaMS*. Runs are selected from the user interface and a description can be added. The retention time can be restricted (e.g. ignoring the first and last minutes for the analysis) and feature annotation can be activated, in case there is a valid database installed. Data can be processed using different settings, as many times as desired. 
 
-After data processing is finished, the experiment can be visualized for quality control. Data can be colored according to factors defined in the ISAtab file. Data can be normalized using square root scaling (Ref??) and TIC normalization. There are 5 different plots available. 3 variations of PCA plots, a ?? plot and a plot showing the total intensity sum of every MS run. 
+After data processing is finished, the experiment can be visualized for quality control. Data can be colored according to factors defined in the ISAtab file. Data can be normalized using square root scaling (Ref ??) and TIC normalizationn (Ref ??). There are 5 different plots available. 3 variations of PCA plots, a ?? plot and a plot showing the total intensity sum of every MS run. 
 
 ![PCA plot](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/PCA_1.png "PCA plot")
 One can see a good seperation for the factor *Variety* and the quality controls (a mixture of all samples) are located well in the middle of this PCA plot. 
@@ -140,18 +140,20 @@ One can see a good seperation for the factor *Variety* and the quality controls 
 Sometimes the first 2 PC do not show the factors you are looking for. This might be due to the fact, that the first two PC's show artifacts, such as different sample handling or time of acquisition. Showing the first 4 PC is also interesting in the situation where you have many different factors (which might be a sign of a bad experimental design though..).
 
 ![PCA plot with names](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/PCA_3.png "PCA plot with names")
-This PCA plot is exactly the same as the first one, except for that the dot's are replaced by the *MS Assay Name's*. This can be useful if the experiment contains outliers which have to be identified. 
+This is again a plot of the first 2 PC, except for that the dot's are replaced by the *MS Assay Name's*. This can be useful if outliesrs in an experiment have to be identified. 
 
+![Intensity sum plot](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/Intensity_sum_plot.png "Intensity sum plot"). This plot shows the sum of intenisities of all features together. It gives an indication weither there was a shift in the experiments. 
 
+![Importance_plot.png ??](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/Importance_plot.png "Importance plot"). This plot visualizes the features with the biggest variation. The direction of arrow shows by which PC they are predominantly seperated. 
 
-RData and Excel files containing the results, can be downloaded for further visualization and statistical analysis. 
+RData and Excel files containing the results, can be downloaded for further visualization and statistical analysis. Please have a look at MetaMS documentation (Ref ??) for further details about data structure of the resulting files. 
 
 ##### Future improvements
 - edit *MetaMS* submission parameters directly trough the web-interface
 
 #### Data submission to public repositories
 
-
+Before submission to a public data repository, such as *MetaboLights*, the final ISAtab file including the data has to be constructed. For this purpose data has to be loaded back to *ISATab creator*. 
 
 ##### Future improvements
 - direct ZIP creation for upload
