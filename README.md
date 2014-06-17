@@ -146,16 +146,17 @@ This is again a plot of the first 2 PC, except for that the dot's are replaced b
 
 ![Importance_plot.png ??](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/Importance_plot.png "Importance plot"). This plot visualizes the features with the biggest variation. The direction of arrow shows by which PC they are predominantly seperated. 
 
-RData and Excel files containing the results, can be downloaded for further visualization and statistical analysis. Please have a look at MetaMS documentation (Ref ??) for further details about data structure of the resulting files. 
+RData and CSV files containing containing the results can be downloaded for further visualization and statistical analysis. Please have a look at MetaMS documentation (Ref ??) for further details about data structure of the resulting files. 
 
 ##### Future improvements
 - edit *MetaMS* submission parameters directly trough the web-interface
 
 #### Data submission to public repositories
 
-Before submission to a public data repository, such as *MetaboLights*, the final ISAtab file including the data has to be constructed. For this purpose data has to be loaded back to *ISATab creator*. 
+Before submission to a public data repository, such as *MetaboLights*, the final ISAtab file including the data has to be constructed. For this purpose data has to be loaded from *MetaDB* back to *ISATab creator*. Currently you download a CSV file containing all relevant columns, which can be copied to the ISATab creator. Raw spectral data files can be re-downloaded in a ZIP compressed format, if required. The links to the files might have to be adapted in *ISATab creator* according to their location on your local hard drive. 
 
 ##### Future improvements
+- download of modified ISATab file
 - direct ZIP creation for upload
 
 ### Login
@@ -273,7 +274,6 @@ For every instrument you can add as many *Methods* as you want.
 ![MetaDB statistics](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/statistics_runs.png "MetaDB statistics")
 
 On this page you can see some simple statistics about the usage of your resources.
-
 
 
 ## Connection to *ISAcreator* via plugin
