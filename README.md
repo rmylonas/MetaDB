@@ -2,6 +2,9 @@ MetaDB
 ======
 MetaDB is an open-source web application for Metabolomics metadata management and data processing. It is based on [ISA tab](http://www.isa-tools.org/) as metadata input format. The analysis of untargeted data is done using the R package [MetaMS](https://github.com/rwehrens/metaMS). This software is a project of Fondazione Edmund Mach. 
 
+
+# Installation
+
 ## Prerequisites
 The following software are needed for proper functioning (MetaDB may also work with other software versions, but was not tested):
 * Java 1.7
@@ -10,19 +13,17 @@ The following software are needed for proper functioning (MetaDB may also work w
 * Grails 2.2.3
 * R 3.0.1
 
-## Installation
-
-### Get the code
+## Get the code
 ```
 git clone https://github.com/rmylonas/MetaDB
 ```
-### Run unit tests
+## Run unit tests
 ```
 grails test-app unit:
 ```
 They should all pass..
 
-### Prepare your configuration
+## Prepare your configuration
 ##### set correct folders in *grails-app/conf/Config.groovy*:
 
 ```metadb.isatab.metabolConfigFile = [path to your ISAcreator configuration file]``` 
@@ -53,14 +54,14 @@ Create and set directory, where MetaDB can save it's indexes
     ).absolutePath
 ```
 
-##### create and deploy your war file:
+##### create and deploy war file:
 
-create a *.war* file with your settings by executing following command from your MetaDB folder:
+create a *.war* file with your settings by executing following command from MetaDB folder:
 ```
 grails war
 ```
 
-copy the *.war* file to your tomcat *webapps* folder. 
+copy the *.war* file to your local tomcat *webapps* folder. 
 
 access the main page and login as administrator
 ```
@@ -68,7 +69,7 @@ Username: admin
 Password: admin
 ```
 
-##### installing R packages:
+## install R packages
 
 Install MetaMS from Bioconductor:
 
@@ -77,28 +78,24 @@ TODO
 ```
 
 
-For PCA plotting, you install the *PCA* library to your local **R** installation:
+For PCA plotting, install the *PCA* library to your local **R** installation:
 ```
 sudo R -e 'install.packages("./resources/R/PCA_0.0.2.1.tar.gz", repos = NULL, type="source")'
 ```
 
-## User documentation
+# Workflow
 
-### Main workflow
+## Overview
 
 ![MetaDB workflow](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/workflow.png "MetaDB workflow")
 
 ISAtab files for Metabolomics should be created with ISAcreator from [MetaboLights](http://www.ebi.ac.uk/metabolights/)). ISAtab files can be uploaded to **MetaDB** as a ZIP file. Selected Assays are then imported to **MetaMS**. 
 
-MetaDB takes care of the randomization of the given samples. The randomized sample list can be exported in a CSV format and afterwards be used to setup your MS acquisition. Acquired runs are imported back to **MetaMS**, where they can be further processed (**MetaDB** currently supports *.CDF*, *.MzXML* and *.MzData* files).
+MetaDB takes care of the randomization of given samples. The randomized sample list can be exported in a CSV format and afterwards be used to setup your MS acquisition. Acquired runs are imported back to **MetaMS**, where they can be further processed (**MetaDB** currently supports *.CDF*, *.MzXML* and *.MzData* files).
 
-The data processing is based on the open source R library [MetaMS](https://github.com/rwehrens/metaMS). The processing includes feature detection and identification against compound databases.
+The data processing is based on the open source R library [MetaMS](https://github.com/rwehrens/metaMS). The processing includes feature detection and identification against compound databases, followed by some visualizations for data quality control. 
 
-### Detailed workflow
-
-This section contains a detailed description of the typical steps to follow when performing an experiment. 
-
-#### ISAtab creation
+## ISAtab creation
 
 Before starting your experiment, an ISAtab file containing the metadata information of your experiment(s) has to be created. To assure compatibility, ISAtab files should be created using MetaboLights (version ???). *Investigation*, *Studies* and *Assays* have to be created as described in the [MetaboLights documentation](http://www.ebi.ac.uk/metabolights/???). 
 
@@ -111,7 +108,7 @@ After all relevant metadata was entered and saved, the folder containing the ISA
 - ISAtab creation directly from within *MetaDB*. 
 - Editing of ISAtab information. 
 
-#### MS data acquisition and conversion
+## MS data acquisition and conversion
 
 After data upload, samples will be randomized and blanks and standard mixes added to the final acquisition sequence. The created acquisition sequence can be exported as an Excel (.csv) file. This format can be imported or copy-pasted into, to our knowledge, all MS instrument ?? software. By using this acquisition sequence, you assure proper MSAcquisitionNames(??) naming, which is important for further data-processing.
 
@@ -127,7 +124,7 @@ Spectra have to be packed into a ZIP archive and uploaded trough the Web-interfa
 
 To avoid manual transformation and upload of data, a Daemon could be developed, which takes care of this step. A simple user interface which let's you choose file locations to observe and some other settings would be enough. It could be linked to [Proteowizard](http://???) which takes care of raw spectra file extraction. 
 
-#### Data processing and visualization
+## Data processing and visualization
 
 Once extracted files are added (indicated by a blue *processed* tag), data can be analyzed using *MetaMS*. Runs are selected from the user interface and a description can be added. The retention time can be restricted (e.g. ignoring the first and last minutes for the analysis) and feature annotation can be activated, in case there is a valid database installed. Data can be processed using different settings, as many times as desired. 
 
@@ -151,7 +148,7 @@ RData and CSV files containing containing the results can be downloaded for furt
 ##### Future improvements
 - edit *MetaMS* submission parameters directly trough the web-interface
 
-#### Data submission to public repositories
+## Data submission to public repositories
 
 Before submission to a public data repository, such as *MetaboLights*, the final ISAtab file including the data has to be constructed. For this purpose data has to be loaded from *MetaDB* back to *ISATab creator*. Currently you download a CSV file containing all relevant columns, which can be copied to the ISATab creator. Raw spectral data files can be re-downloaded in a ZIP compressed format, if required. The links to the files might have to be adapted in *ISATab creator* according to their location on your local hard drive. 
 
@@ -159,7 +156,10 @@ Before submission to a public data repository, such as *MetaboLights*, the final
 - download of modified ISATab file
 - direct ZIP creation for upload
 
-### Login
+
+# User documentation
+
+## Login
 
 ![MetaDB login page](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/login_page.png "MetaDB login page")
 
@@ -172,13 +172,13 @@ Password: test
 
 See the **User management** section for further details on how to create and manage users. 
 
-### Search
+## Search
 
 ![MetaDB search page](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/search_page.png "MetaDB search page")
 
 After login, or when clicking on **MetaDB**, you are redirected to the main search page. You can search for terms such as organism names or sample factors. You can either search on the level of *Studies* or *Assays* (look at the ISAtab documentation for more detailed information about the meaning of those terms). By checking the box *Show all users*, you can also search for entries created by other users.
 
-### Upload
+## Upload
 
 ![MetaDB upload page](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/upload_page.png "MetaDB upload page")
 
@@ -188,17 +188,17 @@ Once uploaded, you can select the *Assays* you want to import. If you added any 
 
 When uploading, you have to choose group, project and instrument method. If your setting is missing, an user with administration rights has to insert your settings into **MetaDB**. Depending on your method, randomization of your samples will be done while imported. 
 
-### Load and View
+## Load and View
 
-#### Load an Assay
+### Load an Assay
 
 In order to be able to enter into the *View* menu, you first have to load your *Assay* of interest. To see the list of *Assays* you can either go from the *Search* page or from the *Load* page. By clicking on the *Access code* you will redirected to the *Planned runs* view. 
 
-#### 3 different views
+### 3 different views
 
 From the menu *Views* you can access 3 different views:
 
-##### 1. Planned runs
+#### 1. Planned runs
 
 ![MetaDB planned runs](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/planned_runs.png "MetaDB planned runs")
 
@@ -210,7 +210,7 @@ During the process of acquiring, you might have to change the sequences and numb
 
 Once you finished acquiring your data on your MS instrument, you can add the final list of runs by clicking on *Add acquisition*. Juste copy paste the list of your MS assay names (newline seperated) into the textfield. You will automatically be redirected to *Acquired runs*. This step can be repeated as many times as you want, in case you have to add some further runs to your Assay. 
 
-##### 2. Acquired runs
+#### 2. Acquired runs
 
 ![MetaDB acquired runs](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/acquired_runs.png "MetaDB acquired runs")
 
@@ -222,7 +222,7 @@ Runs of status *processed* can be further submited to MetaMS for feature detecti
 
 To get the final list of acquired runs back to your ISAtab file, you can download your data as a CSV file (click on *Download* -> *CSV*). From the CSV file you can copy/paste your data into your ISAtab file.
 
-##### 3. MetaMS submission and PCA plots
+#### 3. MetaMS submission and PCA plots
 
 ![MetaMS submission](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/metams_submission.png "MetaMS submission")
 
@@ -230,9 +230,9 @@ To get the final list of acquired runs back to your ISAtab file, you can downloa
 
  Once started, the status of MetaMS submissions can be observed from the MetaMS view. You can see more details by clicking on the submission itself. After having finished, the results can be visualized using PCA plots or a ZIP file containing results in CSV and RData format can be downloaded. 
 
-### Settings
+## Settings
 
-#### Users
+### Users
 
 Two users are created by default:
 ```
@@ -248,7 +248,7 @@ The administrator has additional rights, like managing Instruments, Methods and 
 
 When creating a new User, you also have to indicate a foldername (typically same as username), which will be created automatically. 
 
-#### Groups and Projects
+### Groups and Projects
 
 You can manage groups and projects. This allows you to better classify your data.
 
@@ -257,19 +257,19 @@ Groups are typically different work entities, such as laboratory sections. Proje
 Both information, Groups and Projects, are neither parsed from ISA tab, nor kept when exporting. This information is mainly used to better organize your data.
 
 
-#### Instrument and Methods
+### Instrument and Methods
 
 All your instruments have to be specified before importing data from ISAtab files. Please make sure that your *ISAtab name* corresponds to the instrument name indicated in the ISAtab files you upload. 
 
 For every instrument you can add as many *Methods* as you want. 
 
-#### MetaMS
+### MetaMS
+
+	
+### Organism onthologies
 
 
-#### Organism onthologies
-
-
-#### Usage statistics
+### Usage statistics
 
 ![MetaDB statistics](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/statistics_runs.png "MetaDB statistics")
 
@@ -279,8 +279,7 @@ On this page you can see some simple statistics about the usage of your resource
 ## Connection to *ISAcreator* via plugin
 
 
-
-## Developer documentation
+# Developer documentation
 
 ## License
 
