@@ -88,7 +88,7 @@ sudo R -e 'install.packages("./resources/R/PCA_0.0.2.1.tar.gz", repos = NULL, ty
 
 ![MetaDB workflow](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/workflow.png "MetaDB workflow")
 
-ISAtab files for Metabolomics should be created with ISAcreator from [MetaboLights](http://www.ebi.ac.uk/metabolights/)). ISAtab files can be uploaded to **MetaDB** as a ZIP file. Selected Assays are then imported to **MetaMS**. 
+ISAtab files for Metabolomics are best created with ISAcreator from [MetaboLights](http://www.ebi.ac.uk/metabolights/)). ISAtab files can be uploaded to **MetaDB** as a ZIP file. Selected Assays are then imported to **MetaMS**. 
 
 MetaDB takes care of the randomization of the given samples. The randomized sample list can be exported in a CSV format and afterwards be used to setup your MS acquisition. Acquired runs are imported back to **MetaMS**, where they can be further processed (**MetaDB** currently supports *.CDF*, *.MzXML* and *.MzData* files).
 
@@ -146,16 +146,17 @@ This is again a plot of the first 2 PC, except for that the dot's are replaced b
 
 ![Importance_plot.png ??](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/Importance_plot.png "Importance plot"). This plot visualizes the features with the biggest variation. The direction of arrow shows by which PC they are predominantly seperated. 
 
-RData and Excel files containing the results, can be downloaded for further visualization and statistical analysis. Please have a look at MetaMS documentation (Ref ??) for further details about data structure of the resulting files. 
+RData and CSV files containing containing the results can be downloaded for further visualization and statistical analysis. Please have a look at MetaMS documentation (Ref ??) for further details about data structure of the resulting files. 
 
 ##### Future improvements
 - edit *MetaMS* submission parameters directly trough the web-interface
 
 #### Data submission to public repositories
 
-Before submission to a public data repository, such as *MetaboLights*, the final ISAtab file including the data has to be constructed. For this purpose data has to be loaded back to *ISATab creator*. 
+Before submission to a public data repository, such as *MetaboLights*, the final ISAtab file including the data has to be constructed. For this purpose data has to be loaded from *MetaDB* back to *ISATab creator*. Currently you download a CSV file containing all relevant columns, which can be copied to the ISATab creator. Raw spectral data files can be re-downloaded in a ZIP compressed format, if required. The links to the files might have to be adapted in *ISATab creator* according to their location on your local hard drive. 
 
 ##### Future improvements
+- download of modified ISATab file
 - direct ZIP creation for upload
 
 ### Login
@@ -264,8 +265,15 @@ For every instrument you can add as many *Methods* as you want.
 
 #### MetaMS
 
+For feature detection and annotation, the R package MetaMS is used. This package gives the possibility to add your own database of compounds which are used for the annotation of detected features. Such a database has to be constructed as a specific R object and saved as an RData file. Please see MetaMS documentation for further details about how to construct a database.
+
+From this interface you simply indicate the local path to your database.
 
 #### Organism onthologies
+
+From the Organism onthology interface, you can define new onthologies for your ISATab creator. Please make sure to install  and configure the necessary ISATab creator plugin as described in *Connection to ISATab creator via plugin*. 
+
+Organisms which are added using this interface, will get available as proposed organisms when searching for onthologies in ISATab creator. Alternative names work like keywords, and will make show up the relevant entries. 
 
 
 #### Usage statistics
@@ -275,8 +283,7 @@ For every instrument you can add as many *Methods* as you want.
 On this page you can see some simple statistics about the usage of your resources.
 
 
-
-## Connection to *ISAcreator* via plugin
+## Connection to *ISATab creator* via plugin
 
 
 
