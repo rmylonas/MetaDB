@@ -263,15 +263,11 @@ All your instruments have to be specified before importing data from ISAtab file
 
 For every instrument you can add as many *Methods* as you want. 
 
-<<<<<<< HEAD
-#### MetaMS
+### MetaMS
 
 For feature detection and annotation, the R package MetaMS is used. This package gives the possibility to add your own database of compounds which are used for the annotation of detected features. Such a database has to be constructed as a specific R object and saved as an RData file. Please see MetaMS documentation for further details about how to construct a database.
 
 From this interface you simply indicate the local path to your database.
-=======
-### MetaMS
->>>>>>> d4d3d4b21e927265bbbd650abc4f2af4498b3e3b
 
 	
 ### Organism onthologies
