@@ -273,8 +273,6 @@ Organisms which are added using this interface, will get available as proposed o
 
 On this page you can see some simple statistics about the usage of your resources.
 
-# Developer documentation
-
 ## License
 
 For all code derived from ISAcreator, the following CPAL licence applies:
