@@ -2,7 +2,6 @@ MetaDB
 ======
 MetaDB is an open-source web application for Metabolomics metadata management and data processing. It is based on [ISA tab](http://www.isa-tools.org/) as metadata input format. The analysis of untargeted data is done using the R package [MetaMS](https://github.com/rwehrens/metaMS). This software is a project of Fondazione Edmund Mach. 
 
-
 # Installation
 
 ## Prerequisites
@@ -97,38 +96,31 @@ The data processing is based on the open source R library [MetaMS](https://githu
 
 ## ISAtab creation
 
-Before starting your experiment, an ISAtab file containing the metadata information of your experiment(s) has to be created. To assure compatibility, ISAtab files should be created using MetaboLights (version ???). *Investigation*, *Studies* and *Assays* have to be created as described in the [MetaboLights documentation](http://www.ebi.ac.uk/metabolights/???). 
+Before starting your experiment, an ISAtab file containing the metadata information of your experiment(s) has to be created. To assure compatibility, ISAtab files should be created using MetaboLights. *Investigation*, *Studies* and *Assays* have to be created as described in the [MetaboLights documentation](http://www.ebi.ac.uk/metabolights/). 
 
-While entering the *Assay* informations, you can leave free the MSAcquisitionNames(??). *MetaDB* will take care of sample randomization and adding standard mixes and blanks (see section *Instrument and Methods* for further details). 
+While entering the *Assay* informations, you can leave free the field *MS Assay Names*. *MetaDB* will take care of sample randomization and adding standard mixes and blanks (see section *Instrument and Methods* for further details). 
 
-After all relevant metadata was entered and saved, the folder containing the ISAtab files can be zipped and uploaded to *MetaDB*. Make sure to directly zip the files and not the superfolder. The uploaded ISAtab will be validated against the installed validation setting (???).
+After all relevant metadata was entered and saved, the folder containing the ISAtab files can be zipped and uploaded to *MetaDB*. Make sure to directly zip the files and not the superfolder. The uploaded ISAtab will be validated against the installed validation setting.
 
-##### Future improvements
-
-- ISAtab creation directly from within *MetaDB*. 
-- Editing of ISAtab information. 
 
 ## MS data acquisition and conversion
 
-After data upload, samples will be randomized and blanks and standard mixes added to the final acquisition sequence. The created acquisition sequence can be exported as an Excel (.csv) file. This format can be imported or copy-pasted into, to our knowledge, all MS instrument ?? software. By using this acquisition sequence, you assure proper MSAcquisitionNames(??) naming, which is important for further data-processing.
+After data upload, samples will be randomized and blanks and standard mixes added to the final acquisition sequence. The created acquisition sequence can be exported as an Excel (.csv) file. This format can be imported or copy-pasted into, to our knowledge, all MS instrument software. By using this acquisition sequence, you assure proper *MS Assay Name's*, which is important for further data-processing.
 
-During the acquisition step you might be obliged to repeat certain parts or add additional blank injections. Since unique MSAcquisitionNames(??) are essantial for proper filename mapping, additional injections should have a unique name. This can for instance be acheaved by adding a *_2* tag at the end of every MSAcquisitionName you want to repeat. 
+During the acquisition step you might be obliged to repeat certain parts or add additional blank injections. Since unique *MS Assay Name's* are essantial for proper filename mapping, additional injections should have a unique name. This can for instance be acheaved by adding a *_2* tag at the end of every *MS Assay Name* you want to repeat. 
 
-Once you finished your acquisition, you have to load back the final acquisition to *MetaDB*. This is done in two consecutive steps. First by indicating the final order and naming of your acquisitions, and second by uploading raw and extracted files ??. 
+Once you finished your acquisition, you have to load back the final acquisition to *MetaDB*. This is done in two consecutive steps. First by indicating the final order and naming of your acquisitions, and second by uploading raw and extracted files. 
 
-For the final naming, *MetaDB* expects a list of all MSAcquisitionNames(??) in same order as you acquired your samples. This list can be copy/pasted directly from the MS instrument ?? software, or alternatively from an Excel sheet. This step can be repeated as much as needed. This allows you to change or repeat some of the acquisition, in case their quality was not satisfactional in the first place. 
+For the final naming, *MetaDB* expects a list of all *MS Assay Name* in same order as you acquired your samples. This list can be copy/pasted directly from the MS instrument control software, or alternatively from an Excel sheet. This step can be repeated as much as needed. This allows you to change or repeat some of the acquisition, in case their quality was not satisfactional in the first place. 
 
-Spectra have to be packed into a ZIP archive and uploaded trough the Web-interface. Alternatively, if lab scientists and *MetaDB* have access to a shared disk, files can directly be copied into the relevant directory. Extracted files have to be created manually using the specific option of the MS instrument software, or using external tools like [Proteowizard](http://???). 
+Spectra have to be packed into a ZIP archive and uploaded trough the Web-interface. Alternatively, if lab scientists and *MetaDB* have access to a shared disk, files can directly be copied into the relevant directory. Extracted files have to be created manually using the specific option of the MS instrument software, or using external tools like [Proteowizard](http://proteowizard/sourceforge.net/). 
 
-##### Future improvements
-
-To avoid manual transformation and upload of data, a Daemon could be developed, which takes care of this step. A simple user interface which let's you choose file locations to observe and some other settings would be enough. It could be linked to [Proteowizard](http://???) which takes care of raw spectra file extraction. 
 
 ## Data processing and visualization
 
 Once extracted files are added (indicated by a blue *processed* tag), data can be analyzed using *MetaMS*. Runs are selected from the user interface and a description can be added. The retention time can be restricted (e.g. ignoring the first and last minutes for the analysis) and feature annotation can be activated, in case there is a valid database installed. Data can be processed using different settings, as many times as desired. 
 
-After data processing is finished, the experiment can be visualized for quality control. Data can be colored according to factors defined in the ISAtab file. Data can be normalized using square root scaling (Ref ??) and TIC normalizationn (Ref ??). There are 5 different plots available. 3 variations of PCA plots, a ?? plot and a plot showing the total intensity sum of every MS run. 
+After data processing is finished, the experiment can be visualized for quality control. Data can be colored according to factors defined in the ISAtab file. Data can be normalized using square root scaling and TIC normalizationn. There are 5 different plots available. 3 variations of PCA plots, an importance plot and a plot showing the total intensity sum of every MS run. 
 
 ![PCA plot](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/PCA_1.png "PCA plot")
 One can see a good seperation for the factor *Variety* and the quality controls (a mixture of all samples) are located well in the middle of this PCA plot. 
@@ -141,20 +133,13 @@ This is again a plot of the first 2 PC, except for that the dot's are replaced b
 
 ![Intensity sum plot](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/Intensity_sum_plot.png "Intensity sum plot"). This plot shows the sum of intenisities of all features together. It gives an indication weither there was a shift in the experiments. 
 
-![Importance_plot.png ??](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/Importance_plot.png "Importance plot"). This plot visualizes the features with the biggest variation. The direction of arrow shows by which PC they are predominantly seperated. 
+![Importance_plot.png](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/Importance_plot.png "Biplot"). This plot visualizes the features with the biggest variation. The direction of arrow shows by which PC they are predominantly seperated. 
 
-RData and CSV files containing containing the results can be downloaded for further visualization and statistical analysis. Please have a look at MetaMS documentation (Ref ??) for further details about data structure of the resulting files. 
-
-##### Future improvements
-- edit *MetaMS* submission parameters directly trough the web-interface
+RData and CSV files containing containing the results can be downloaded for further visualization and statistical analysis. Please have a look at [MetaMS documenetation](https://github.com/rwehrens/metaMS) for further details about data structure of the resulting files. 
 
 ## Data submission to public repositories
 
 Before submission to a public data repository, such as *MetaboLights*, the final ISAtab file including the data has to be constructed. For this purpose data has to be loaded from *MetaDB* back to *ISATab creator*. Currently you download a CSV file containing all relevant columns, which can be copied to the ISATab creator. Raw spectral data files can be re-downloaded in a ZIP compressed format, if required. The links to the files might have to be adapted in *ISATab creator* according to their location on your local hard drive. 
-
-##### Future improvements
-- download of modified ISATab file
-- direct ZIP creation for upload
 
 
 # User documentation
@@ -261,14 +246,20 @@ Both information, Groups and Projects, are neither parsed from ISA tab, nor kept
 
 All your instruments have to be specified before importing data from ISAtab files. Please make sure that your *ISAtab name* corresponds to the instrument name indicated in the ISAtab files you upload. 
 
-For every instrument you can add as many *Methods* as you want. 
+For every instrument you can add as many *Methods* as you want. For each *Method* there are a certain number fields to set:
+- Name: the name shown in the interface
+- Tag at end of filenames: this tag will be added to every *MS Assay Name* automatically created by *MetaDB*
+- Randomization start pattern: here you can change the geometry of randomized seqeunces generated. *5.blank-1.STDmix-2.QC* means that at the beginning of every sequences there will be 5 blank injections, followed by 1 standart mix and 2 quality controls.
+- Randomization repeat pattern: here the sequence randomization pattern is defined. *3.sample-1.QC* means that after every 3 randomized samples, there will be one quality control.
+- Randomization end pattern: the sequence add the end. *1.STDmix-5.blank* means that after all sequences were randomized, an additional standard mix followed by 5 blank injections will be added.
+- MetaMS database: any installed MetaMS database can be selected.
+- MetaMS settings name: the name of the MetaMS setting. The R objects containing the corresponding settings have to be placed in the MetaDB configuration directory under *conf/metaMS/InstrumentSettings/*.
 
 ### MetaMS
 
 For feature detection and annotation, the R package MetaMS is used. This package gives the possibility to add your own database of compounds which are used for the annotation of detected features. Such a database has to be constructed as a specific R object and saved as an RData file. Please see MetaMS documentation for further details about how to construct a database.
 
 From this interface you simply indicate the local path to your database.
-
 	
 ### Organism onthologies
 
@@ -276,16 +267,11 @@ From the Organism onthology interface, you can define new onthologies for your I
 
 Organisms which are added using this interface, will get available as proposed organisms when searching for onthologies in ISATab creator. Alternative names work like keywords, and will make show up the relevant entries. 
 
-
 ### Usage statistics
 
 ![MetaDB statistics](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/statistics_runs.png "MetaDB statistics")
 
 On this page you can see some simple statistics about the usage of your resources.
-
-
-## Connection to *ISATab creator* via plugin
-
 
 # Developer documentation
 
