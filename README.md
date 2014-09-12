@@ -3,9 +3,33 @@ MetaDB
 MetaDB is an open-source web application for Metabolomics metadata management and data processing. It is based on [ISA tab](http://www.isa-tools.org/) as metadata input format. The analysis of untargeted data is done using the R package [MetaMS](https://github.com/rwehrens/metaMS). This software is a project of Fondazione Edmund Mach. 
 
 
-# Workflow
+# Overview
 
-## Overview
+1. Workflow
+	* Introduction
+	* ISAtab creation
+	* MS data acquisition and conversion
+	* Data processing and visualization
+	* Data submission to public repositories
+2. User documentation
+	* Access
+	* Login
+	* Search
+	* Upload
+	* Load and View
+	* Settings
+3. Installation instructions
+	* Prerequisites
+	* Get the code
+	* Run unit tests
+	* Prepare your configuration
+	* Install R packages
+4. License
+
+
+# 1. Workflow
+
+## Introduction
 
 ![MetaDB workflow](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/workflow.png "MetaDB workflow")
 
@@ -63,7 +87,7 @@ RData and CSV files containing containing the results can be downloaded for furt
 Before submission to a public data repository, such as *MetaboLights*, the final ISAtab file including the data has to be constructed. For this purpose data has to be loaded from *MetaDB* back to *ISATab creator*. Currently you download a CSV file containing all relevant columns, which can be copied to the ISATab creator. Raw spectral data files can be re-downloaded in a ZIP compressed format, if required. The links to the files might have to be adapted in *ISATab creator* according to their location on your local hard drive. 
 
 
-# User documentation
+# 2. User documentation
 
 ## Access
 
@@ -202,7 +226,7 @@ Organisms which are added using this interface, will get available as proposed o
 On this page you can see some simple statistics about the usage of your resources.
 
 
-# Installation from source code
+# 3. Installation instructions
 
 ## Prerequisites
 The following software are needed for proper functioning (MetaDB may also work with other software versions, but was not tested):
@@ -278,7 +302,7 @@ sudo R -e 'install.packages("./resources/R/PCA_0.0.2.1.tar.gz", repos = NULL, ty
 ```
 
 
-# License
+# 4. License
 
 For all code derived from ISAcreator, the following CPAL licence applies:
 
