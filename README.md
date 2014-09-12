@@ -67,7 +67,7 @@ Before submission to a public data repository, such as *MetaboLights*, the final
 
 ## Access
 
-MetaDB can be accessed using a web browser under by the following URL (you might have to adapt the server adress):
+After installation MetaDB can be accessed using a web browser by following URL (you might have to adapt the server adress):
 ```
 http://localhost:8080/MetaDB
 ```
