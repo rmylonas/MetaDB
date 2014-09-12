@@ -18,7 +18,7 @@ MetaDB is an open-source web application for Metabolomics metadata management an
 	* Upload
 	* Load and View
 	* Settings
-3. Installation instructions
+3. Installation
 	* Prerequisites
 	* Get the code
 	* Run unit tests
@@ -226,7 +226,7 @@ Organisms which are added using this interface, will get available as proposed o
 On this page you can see some simple statistics about the usage of your resources.
 
 
-# 3. Installation instructions
+# 3. Installation
 
 ## Prerequisites
 The following software are needed for proper functioning (MetaDB may also work with other software versions, but was not tested):
