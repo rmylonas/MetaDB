@@ -2,85 +2,6 @@ MetaDB
 ======
 MetaDB is an open-source web application for Metabolomics metadata management and data processing. It is based on [ISA tab](http://www.isa-tools.org/) as metadata input format. The analysis of untargeted data is done using the R package [MetaMS](https://github.com/rwehrens/metaMS). This software is a project of Fondazione Edmund Mach. 
 
-# Installation
-
-## Prerequisites
-The following software are needed for proper functioning (MetaDB may also work with other software versions, but was not tested):
-* Java 1.7
-* Tomcat 6
-* MySQL 5.5
-* Grails 2.2.3
-* R 3.0.1
-
-## Get the code
-```
-git clone https://github.com/rmylonas/MetaDB
-```
-## Run unit tests
-```
-grails test-app unit:
-```
-They should all pass..
-
-## Prepare your configuration
-##### set correct folders in *grails-app/conf/Config.groovy*:
-
-```metadb.isatab.metabolConfigFile = [path to your ISAcreator configuration file]``` 
-(configuration folder can be copied from *resources/conf/MetaboLightsConfig20130507* or taken from [MetaboLights](http://www.ebi.ac.uk/metabolights/))
-
-```metadb.dataPath = "[your data folder]"``` (make sure this directory exists and is empty)
-
-```metadb.conf.metams.script = "[R script folder]"``` (copy folder from *resources/conf/metaMS*)
-
-```metadb.conf.metams.instrumentSettings = "[RData MetaMS instrument settings]"``` (copy folder from *resources/conf/instrumentSettings*)
-
-```metadb.conf.metams.databases = "[RData MetaMS databases]"``` (copy folder from *resources/conf/databases*)
-
-
-##### set your database settings in *grails-app/conf/DataSource.groovy*:
-Set user, password and the correct URL to your database. Make sure to create a database called *MetaMS*. That's also the place to change settings, in case you want to use PostgreSQL instead (look at Grails documentation for further info).
-```
-    url = "jdbc:mysql://localhost/MetaDB"
-    username = "root"
-    password = "1234"
-```
-
-##### set directory for search indexing in *grails-app/conf/Searchable.groovy*:
-Create and set directory, where MetaDB can save it's indexes
-```
-    compassConnection = new File(
-        "[path to indexes]"
-    ).absolutePath
-```
-
-##### create and deploy war file:
-
-create a *.war* file with your settings by executing following command from MetaDB folder:
-```
-grails war
-```
-
-copy the *.war* file to your local tomcat *webapps* folder. 
-
-access the main page and login as administrator
-```
-Username: admin
-Password: admin
-```
-
-## install R packages
-
-Install MetaMS from Bioconductor:
-
-```
-TODO
-```
-
-
-For PCA plotting, install the *PCA* library to your local **R** installation:
-```
-sudo R -e 'install.packages("./resources/R/PCA_0.0.2.1.tar.gz", repos = NULL, type="source")'
-```
 
 # Workflow
 
@@ -143,6 +64,13 @@ Before submission to a public data repository, such as *MetaboLights*, the final
 
 
 # User documentation
+
+## Access
+
+MetaDB can be accessed using a web browser under by the following URL (you might have to adapt the server adress):
+```
+http://localhost:8080/MetaDB
+```
 
 ## Login
 
@@ -247,13 +175,13 @@ Both information, Groups and Projects, are neither parsed from ISA tab, nor kept
 All your instruments have to be specified before importing data from ISAtab files. Please make sure that your *ISAtab name* corresponds to the instrument name indicated in the ISAtab files you upload. 
 
 For every instrument you can add as many *Methods* as you want. For each *Method* there are a certain number fields to set:
-- Name: the name shown in the interface
-- Tag at end of filenames: this tag will be added to every *MS Assay Name* automatically created by *MetaDB*
-- Randomization start pattern: here you can change the geometry of randomized seqeunces generated. *5.blank-1.STDmix-2.QC* means that at the beginning of every sequences there will be 5 blank injections, followed by 1 standart mix and 2 quality controls.
-- Randomization repeat pattern: here the sequence randomization pattern is defined. *3.sample-1.QC* means that after every 3 randomized samples, there will be one quality control.
-- Randomization end pattern: the sequence add the end. *1.STDmix-5.blank* means that after all sequences were randomized, an additional standard mix followed by 5 blank injections will be added.
-- MetaMS database: any installed MetaMS database can be selected.
-- MetaMS settings name: the name of the MetaMS setting. The R objects containing the corresponding settings have to be placed in the MetaDB configuration directory under *conf/metaMS/InstrumentSettings/*.
+- **Name**: the name shown in the interface
+- **Tag at end of filenames**: this tag will be added to every *MS Assay Name* automatically created by *MetaDB*
+- **Randomization start pattern**: here you can change the geometry of randomized seqeunces generated. *5.blank-1.STDmix-2.QC* means that at the beginning of every sequences there will be 5 blank injections, followed by 1 standart mix and 2 quality controls.
+- **Randomization repeat pattern**: here the sequence randomization pattern is defined. *3.sample-1.QC* means that after every 3 randomized samples, there will be one quality control.
+- **Randomization end pattern**: the sequence add the end. *1.STDmix-5.blank* means that after all sequences were randomized, an additional standard mix followed by 5 blank injections will be added.
+- **MetaMS database**: any installed MetaMS database can be selected.
+- **MetaMS settings name**: the name of the MetaMS setting. The R objects containing the corresponding settings have to be placed in the MetaDB configuration directory under *conf/metaMS/InstrumentSettings/*.
 
 ### MetaMS
 
@@ -273,7 +201,84 @@ Organisms which are added using this interface, will get available as proposed o
 
 On this page you can see some simple statistics about the usage of your resources.
 
-## License
+
+# Installation from source code
+
+## Prerequisites
+The following software are needed for proper functioning (MetaDB may also work with other software versions, but was not tested):
+* Java 1.7
+* Tomcat 6
+* MySQL 5.5
+* Grails 2.2.3
+* R 3.0.1
+
+## Get the code
+```
+git clone https://github.com/rmylonas/MetaDB
+```
+## Run unit tests
+```
+grails test-app unit:
+```
+They should all pass..
+
+## Prepare your configuration
+##### set correct folders in *grails-app/conf/Config.groovy*:
+
+```metadb.isatab.metabolConfigFile = [path to your ISAcreator configuration file]``` 
+(configuration folder can be copied from *resources/conf/MetaboLightsConfig20130507* or taken from [MetaboLights](http://www.ebi.ac.uk/metabolights/))
+
+```metadb.dataPath = "[your data folder]"``` (make sure this directory exists and is empty)
+
+```metadb.conf.metams.script = "[R script folder]"``` (copy folder from *resources/conf/metaMS*)
+
+```metadb.conf.metams.instrumentSettings = "[RData MetaMS instrument settings]"``` (copy folder from *resources/conf/instrumentSettings*)
+
+```metadb.conf.metams.databases = "[RData MetaMS databases]"``` (copy folder from *resources/conf/databases*)
+
+
+##### set your database settings in *grails-app/conf/DataSource.groovy*:
+Set user, password and the correct URL to your database. Make sure to create a database called *MetaMS*. That's also the place to change settings, in case you want to use PostgreSQL instead (look at Grails documentation for further info).
+```
+    url = "jdbc:mysql://localhost/MetaDB"
+    username = "root"
+    password = "1234"
+```
+
+##### set directory for search indexing in *grails-app/conf/Searchable.groovy*:
+Create and set directory, where MetaDB can save it's indexes
+```
+    compassConnection = new File(
+        "[path to indexes]"
+    ).absolutePath
+```
+
+##### create and deploy war file:
+
+create a *.war* file with your settings by executing following command from MetaDB folder:
+```
+grails war
+```
+
+copy the *.war* file to your local tomcat *webapps* folder. 
+
+access the main page and login as administrator
+```
+Username: admin
+Password: admin
+```
+
+## install R packages
+
+Install MetaMS from Bioconductor. 
+
+For PCA plotting, install the *PCA* library to your local **R** installation:
+```
+sudo R -e 'install.packages("./resources/R/PCA_0.0.2.1.tar.gz", repos = NULL, type="source")'
+```
+
+
+# License
 
 For all code derived from ISAcreator, the following CPAL licence applies:
 
