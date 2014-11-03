@@ -80,6 +80,9 @@ This is again a plot of the first 2 PC, except for that the dot's are replaced b
 
 ![Importance_plot.png](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/Importance_plot.png "Biplot"). This plot visualizes the features with the biggest variation. The direction of arrow shows by which PC they are predominantly seperated. 
 
+![RSD_plot.png](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/RSD_plot.png "RSD"). The Relative Standard Deviation (RSD) plot of the QC injections gives an overall idea of the acquisition quality. 
+
+
 RData and CSV files containing containing the results can be downloaded for further visualization and statistical analysis. Please have a look at [MetaMS documenetation](https://github.com/rwehrens/metaMS) for further details about data structure of the resulting files. 
 
 ## Data submission to public repositories
@@ -163,7 +166,7 @@ To get the final list of acquired runs back to your ISAtab file, you can downloa
 
 ![MetaMS submission](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/metams_submission.png "MetaMS submission")
 
- Acquired runs can be submitted to MetaMS for feature detection and PCA visualizatdion. From the view *Acquired runs* you can check *Processed* runs you want to submit, and then start a MetaMS submission by clicking on the *Start MetaMS* button. You can set a description, limit the retention time window and activate feature annotation. For feature annotation, a database has to be installed (look in the *Settings -> MetaMS* for more details). 
+ Acquired runs can be submitted to MetaMS for feature detection and PCA visualization. From the view *Acquired runs* you can check *Processed* runs you want to submit, and then start a MetaMS submission by clicking on the *Start MetaMS* button. You can set a description, limit the retention time window and activate feature annotation. For feature annotation, a database has to be installed (look in the *Settings -> MetaMS* for more details). 
 
  Once started, the status of MetaMS submissions can be observed from the MetaMS view. You can see more details by clicking on the submission itself. After having finished, the results can be visualized using PCA plots or a ZIP file containing results in CSV and RData format can be downloaded. 
 
