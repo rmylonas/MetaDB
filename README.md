@@ -76,11 +76,14 @@ Sometimes the first 2 PC do not show the factors you are looking for. This might
 ![PCA plot with names](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/PCA_3.png "PCA plot with names")
 This is again a plot of the first 2 PC, except for that the dot's are replaced by the *MS Assay Name's*. This can be useful if outliesrs in an experiment have to be identified. 
 
-![Intensity sum plot](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/Intensity_sum_plot.png "Intensity sum plot"). This plot shows the sum of intenisities of all features together. It gives an indication weither there was a shift in the experiments. 
+![Intensity sum plot](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/Intensity_sum_plot.png "Intensity sum plot") 
+This plot shows the sum of intenisities of all features together. It gives an indication weither there was a shift in the experiments. 
 
-![Importance_plot.png](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/Importance_plot.png "Biplot"). This plot visualizes the features with the biggest variation. The direction of arrow shows by which PC they are predominantly seperated. 
+![Importance_plot.png](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/Importance_plot.png "Biplot")
+This plot visualizes the features with the biggest variation. The direction of arrow shows by which PC they are predominantly seperated. 
 
-![RSD_plot.png](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/RSD_plot.png "RSD"). The Relative Standard Deviation (RSD) plot of the QC injections gives an overall idea of the acquisition quality. 
+![RSD_plot.png](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/RSD_plot.png "RSD")
+The Relative Standard Deviation (RSD) plot of the QC injections gives an overall idea of the acquisition quality. 
 
 
 RData and CSV files containing containing the results can be downloaded for further visualization and statistical analysis. Please have a look at [MetaMS documenetation](https://github.com/rwehrens/metaMS) for further details about data structure of the resulting files. 
