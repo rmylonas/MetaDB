@@ -1,7 +1,5 @@
 library(getopt)
 library(metaMS)
-library(snow)
-
 data(FEMsettings)
 
 #get options, using the spec as defined by the enclosed list.
@@ -36,6 +34,14 @@ if ( !is.null(opt$help) | is.null(opt$instrument) | is.null(opt$fileList) | is.n
   q(status=1);
 }
 
+# print R library versions to the dedicated log file
+print("R library versions")
+sessionInfo()
+library_version_file <- file(paste0(opt$output, "/R_library_versions.log"))
+writeLines(capture.output(sessionInfo()), library_version_file)
+close(library_version_file)
+
+
 # load files
 files <- read.csv(opt$fileList, header=FALSE)
 files <- as.vector(files[,1])
@@ -45,6 +51,9 @@ instr.setting <- switch(opt$setting,
                Synapt.NP = Synapt.NP,
                Synapt.RP = Synapt.RP,
                TSQXLS.GC = TSQXLS.GC)
+
+# hardcode snthresh=4
+# instr.setting@PeakPicking$snthresh <- 6
 
 # load database
 database = NULL
