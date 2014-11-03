@@ -23,6 +23,10 @@ if ( !is.null(opt$help) | is.null(opt$workdir)) {
   q(status=1);
 }
 
+
+print("R library versions:")
+sessionInfo()
+
 # load results
 load(paste0(opt$workdir, "/result.RData"))
 
@@ -75,13 +79,27 @@ for(i in 1:nrow(DM)){
 	}
 }
 
+
+# plot RSD
+png(paste0(opt$workdir, "/6_RSD.png"), width=600, height=600)
+QC.cols <- grep("_QC_", colnames(out$PeakTable))
+rt.idx <- which(colnames(out$PeakTable) == "rt")
+qc.intensities <- out$PeakTable[,QC.cols]
+head(qc.intensities)
+rsds <- 100*apply(qc.intensities, 1, function(x) sd(x)/mean(x))
+head(rsds)
+head(apply(qc.intensities, 1, sd))
+head(apply(qc.intensities, 1, mean))
+hist(rsds, main="QC samples", xlab = "RSD (%)")
+dev.off()
+
 # normalization and scaling
 if(! is.null(opt$sumNorm)){ DM <- DM/rowSums(DM) }
 
 if(! is.null(opt$sqrtScaling)){
-	mypca <- PCA(scale(sqrt(DM), scale=FALSE))
+	mypca <- PCA(scale(sqrt(DM)))
 }else{
-	mypca <- PCA(scale(DM))
+	mypca <- PCA(scale(DM, scale=FALSE))
 }
 
 # plot the PCA
@@ -101,12 +119,12 @@ png(paste0(opt$workdir, "/3_rowSums.png"), width=600, height=600)
 plot(rowSums(DM), col=mycol, type="b")
 dev.off()
 
-
+# plot PCA with names
 png(paste0(opt$workdir, "/4_PCA_names.png"), width=600, height=600)
 scoreplot(mypca,  col=mycol, show.names=TRUE)
 dev.off()
 
-
+# plot bi-plot
 png(paste0(opt$workdir, "/5_PCA_biplot.png"), width=600, height=600)
 biplot(mypca, show.names="loadings")
 dev.off()
