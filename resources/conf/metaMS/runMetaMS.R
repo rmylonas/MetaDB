@@ -34,7 +34,7 @@ if ( !is.null(opt$help) | is.null(opt$instrument) | is.null(opt$fileList) | is.n
   q(status=1);
 }
 
-# print R library versions to the dedicated log file
+
 print("R library versions")
 sessionInfo()
 library_version_file <- file(paste0(opt$output, "/R_library_versions.log"))
@@ -50,16 +50,22 @@ files <- as.vector(files[,1])
 instr.setting <- switch(opt$setting,
                Synapt.NP = Synapt.NP,
                Synapt.RP = Synapt.RP,
-               TSQXLS.GC = TSQXLS.GC)
+               TSQXLS.GC = TSQXLS.GC, 
+		0
+		)
 
-# hardcode snthresh=4
-# instr.setting@PeakPicking$snthresh <- 6
+
+# if there was no valid in the list we try to load the file
+if( is.numeric(instr.setting) ){
+	loaded.obj <- load(opt$setting)
+	eval(parse(text = paste0("instr.setting <- ", loaded.obj[1]) ) )
+}
 
 # load database
 database = NULL
 if(! is.null(opt$database)){
-	loaded.obj <- load(opt$database)
-	eval(parse(text = paste0("database <- ", loaded.obj[1]) ) )
+	loaded.obj.2 <- load(opt$database)
+	eval(parse(text = paste0("database <- ", loaded.obj.2[1]) ) )
 }
 
 #set some reasonable defaults for the options that are needed,
