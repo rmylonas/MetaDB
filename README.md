@@ -65,6 +65,8 @@ Spectra have to be packed into a ZIP archive and uploaded trough the Web-interfa
 
 Once extracted files are added (indicated by a blue *processed* tag), data can be analyzed using *MetaMS*. Runs are selected from the user interface and a description can be added. The retention time can be restricted (e.g. ignoring the first and last minutes for the analysis) and feature annotation can be activated, in case there is a valid database installed. Data can be processed using different settings, as many times as desired. 
 
+Because version information of libraries used are fundamental for data reproducibility, this information is stored in a dedicated *R_library_versions.log* file. Here you can find the version of R and all loaded libraries (e.g. from the *metaMS* package).
+
 After data processing is finished, the experiment can be visualized for quality control. Data can be colored according to factors defined in the ISAtab file. Data can be normalized using square root scaling and TIC normalizationn. There are 5 different plots available. 3 variations of PCA plots, an importance plot and a plot showing the total intensity sum of every MS run. 
 
 ![PCA plot](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/PCA_1.png "PCA plot")
@@ -172,6 +174,8 @@ To get the final list of acquired runs back to your ISAtab file, you can downloa
  Acquired runs can be submitted to MetaMS for feature detection and PCA visualization. From the view *Acquired runs* you can check *Processed* runs you want to submit, and then start a MetaMS submission by clicking on the *Start MetaMS* button. You can set a description, limit the retention time window and activate feature annotation. For feature annotation, a database has to be installed (look in the *Settings -> MetaMS* for more details). 
 
  Once started, the status of MetaMS submissions can be observed from the MetaMS view. You can see more details by clicking on the submission itself. After having finished, the results can be visualized using PCA plots or a ZIP file containing results in CSV and RData format can be downloaded. 
+
+Beside the result files the ZIP also contains a *R_library_versions.log* file. Here you can find the version of R and all loaded libraries (e.g. from the *metaMS* package).
 
 ## Settings
 
