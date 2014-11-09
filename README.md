@@ -216,8 +216,8 @@ For every instrument you can add as many *Methods* as you want. For each *Method
 - **Randomization start pattern**: here you can change the geometry of randomized seqeunces generated. *5.blank-1.STDmix-2.QC* means that at the beginning of every sequences there will be 5 blank injections, followed by 1 standart mix and 2 quality controls.
 - **Randomization repeat pattern**: here the sequence randomization pattern is defined. *3.sample-1.QC* means that after every 3 randomized samples, there will be one quality control.
 - **Randomization end pattern**: the sequence add the end. *1.STDmix-5.blank* means that after all sequences were randomized, an additional standard mix followed by 5 blank injections will be added.
-- **MetaMS database**: any installed MetaMS database can be selected. Please refer to the following section *MetaMS databases* for further information how to install databases.
-- **MetaMS settings name**: the name of the MetaMS setting. There are 3 default settings which are loaded from the *metaMS* package (Synapt.NP, Synapt.RP and TSQXLS.GC). In case you want to use your proper *metaMS* settings, you can indicate the absolute path to your .RData file. This file has to contain an R object with the *metaMS* settings (please refer to its documentation for further information).
+- **MetaMS database**: any installed MetaMS database can be selected. Please refer to the following section *MetaMS databases* for further information on how to install databases.
+- **MetaMS settings name**: the name of the MetaMS setting. There are 3 available default settings (Synapt.NP, Synapt.RP and TSQXLS.GC). In case you want to use your proper *metaMS* parameters, you can activate it by indicating the absolute path to your .RData file. This file has to contain an R object with the *metaMS* settings (please refer to *metaMS* documentation for further information).
 
 ### MetaMS databases
 
