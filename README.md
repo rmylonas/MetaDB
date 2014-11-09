@@ -65,7 +65,7 @@ Spectra have to be packed into a ZIP archive and uploaded trough the Web-interfa
 
 Once extracted files are added (indicated by a blue *processed* tag), data can be analyzed using *MetaMS*. Runs are selected from the user interface and a description can be added. The retention time can be restricted (e.g. ignoring the first and last minutes for the analysis) and feature annotation can be activated, in case there is a valid database installed. Data can be processed using different settings, as many times as desired. 
 
-Because version information of libraries used are fundamental for data reproducibility, this information is stored in a dedicated *R_library_versions.log* file. Here you can find the version of R and all loaded libraries (e.g. from the *metaMS* package).
+Detailed information on external libraries used for data processing is fundamental for reproducibility. Therefore this information is stored in a dedicated *R_library_versions.log* file. Here you can find the version of R and all loaded libraries (e.g. from the *metaMS* package).
 
 After data processing is finished, the experiment can be visualized for quality control. Data can be colored according to factors defined in the ISAtab file. Data can be normalized using square root scaling and TIC normalizationn. There are 5 different plots available. 3 variations of PCA plots, an importance plot and a plot showing the total intensity sum of every MS run. 
 
