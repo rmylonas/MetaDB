@@ -169,9 +169,11 @@ To get the final list of acquired runs back to your ISAtab file, you can downloa
 
 #### 3. MetaMS submission and PCA plots
 
-![MetaMS submission](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/metams_submission.png "MetaMS submission")
+![MetaMS submission parameters](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/metams_submission_parameters.png "MetaMS submission parameters")
 
  Acquired runs can be submitted to MetaMS for feature detection and PCA visualization. From the view *Acquired runs* you can check *Processed* runs you want to submit, and then start a MetaMS submission by clicking on the *Start MetaMS* button. You can set a description, limit the retention time window and activate feature annotation. For feature annotation, a database has to be installed (look in the *Settings -> MetaMS* for more details). 
+
+![MetaMS submission](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/metams_submission.png "MetaMS submission")
 
  Once started, the status of MetaMS submissions can be observed from the MetaMS view. You can see more details by clicking on the submission itself. After having finished, the results can be visualized using PCA plots or a ZIP file containing results in CSV and RData format can be downloaded. 
 
@@ -214,12 +216,14 @@ For every instrument you can add as many *Methods* as you want. For each *Method
 - **Randomization start pattern**: here you can change the geometry of randomized seqeunces generated. *5.blank-1.STDmix-2.QC* means that at the beginning of every sequences there will be 5 blank injections, followed by 1 standart mix and 2 quality controls.
 - **Randomization repeat pattern**: here the sequence randomization pattern is defined. *3.sample-1.QC* means that after every 3 randomized samples, there will be one quality control.
 - **Randomization end pattern**: the sequence add the end. *1.STDmix-5.blank* means that after all sequences were randomized, an additional standard mix followed by 5 blank injections will be added.
-- **MetaMS database**: any installed MetaMS database can be selected.
-- **MetaMS settings name**: the name of the MetaMS setting. The R objects containing the corresponding settings have to be placed in the MetaDB configuration directory under *conf/metaMS/InstrumentSettings/*.
+- **MetaMS database**: any installed MetaMS database can be selected. Please refer to the following section *MetaMS databases* for further information how to install databases.
+- **MetaMS settings name**: the name of the MetaMS setting. There are 3 default settings which are loaded from the *metaMS* package (Synapt.NP, Synapt.RP and TSQXLS.GC). In case you want to use your proper *metaMS* settings, you can indicate the absolute path to your .RData file. This file has to contain an R object with the *metaMS* settings (please refer to its documentation for further information).
 
-### MetaMS
+### MetaMS databases
 
 For feature detection and annotation, the R package MetaMS is used. This package gives the possibility to add your own database of compounds which are used for the annotation of detected features. Such a database has to be constructed as a specific R object and saved as an RData file. Please see MetaMS documentation for further details about how to construct a database.
+
+![MetaMS database configuration](https://github.com/rmylonas/MetaDB/raw/master/resources/markdown-resources/add_metams_configuration.png "MetaMS database configuration")
 
 From this interface you simply indicate the local path to your database.
 	
