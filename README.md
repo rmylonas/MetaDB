@@ -227,11 +227,11 @@ For feature detection and annotation, the R package MetaMS is used. This package
 
 From this interface you simply indicate the local path to your database.
 	
-### Organism onthologies
+### Organism ontologies
 
-From the Organism onthology interface, you can define new onthologies for your ISATab creator. Please make sure to install  and configure the necessary ISATab creator plugin as described in *Connection to ISATab creator via plugin*. 
+From the Organism ontology interface, you can define new ontologies for your ISATab creator. Please make sure to install  and configure the necessary ISATab creator plugin as described in *Connection to ISATab creator via plugin*. 
 
-Organisms which are added using this interface, will get available as proposed organisms when searching for onthologies in ISATab creator. Alternative names work like keywords, and will make show up the relevant entries. 
+Organisms which are added using this interface, will get available as proposed organisms when searching for ontologies in ISATab creator. Alternative names work like keywords, and will make show up the relevant entries. 
 
 ### Usage statistics
 
